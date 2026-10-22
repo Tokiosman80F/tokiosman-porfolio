@@ -1540,3 +1540,10 @@ Follow-up (§41): navbar animation bugs (user: "not working properly"), found by
 2. It grew out of / shrank into the tray's left edge when appearing / hiding. Now it is placed instantly and fades in, slides only between links while visible, and fades out in place.
 3. The logo dot never animated: Tailwind v4 moves elements with the separate `translate` / `scale` / `rotate` properties, but the transition listed `transform`. Now `transition-[translate,scale,rotate,background-color]`.
 Re-measured: About 63 → Work 4 → Services 130 → FAQ 221 px, each matching its link; logo dot 0° → 45° over ~200ms. axe 0, build passes, detector clean.
+
+## 42. Floating WhatsApp button (2026-10-23)
+
+New `components/layout/WhatsAppButton.tsx` (server, CSS only), rendered after the footer in `app/page.tsx`. Links to `https://wa.me/8801987556588?text=…` (message and label in `content/site.ts` `whatsappButton`), new tab. Footer "Back to top" no longer stretches full-width on mobile (`self-start`).
+
+Live check (CDP): href and pre-filled text correct, logo loads, 24px from the corner at 1440, label opens on hover (58 → 191px wide). At 375 it floats over content passing beneath while scrolling (normal for a floating button); nothing is covered at the end of the page. axe 0 (375 / 768 / 1440); build passes; detector clean. Not committed.
+Follow-up (§42): button moved inside the `<footer>` landmark (axe `region`: it was outside every landmark); fixed positioning, so it looks the same.

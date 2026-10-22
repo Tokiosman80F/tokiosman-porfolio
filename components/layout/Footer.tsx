@@ -5,6 +5,7 @@ import { footer, type FooterColumn, type FooterLink } from "@/content/footer";
 import { site } from "@/content/site";
 import { cn } from "@/lib/utils";
 import Logo from "./Logo";
+import { WhatsAppButton } from "./WhatsAppButton";
 
 // Simple footer (docs/footer.md): brand column + Navigate / Services / Contact, then a bottom bar, on white.
 // Contact rows lead with a logo tile (brand logos from public/logos, generic icons where there's
@@ -129,13 +130,15 @@ export default function Footer() {
           </p>
           <p>{footer.builtWith}</p>
           {/* "#top" scrolls to the top of the document (HTML spec); no id needed */}
-          <a href="#top" className="inline-flex items-center gap-1 text-ink-black transition-colors hover:underline">
+          <a href="#top" className="inline-flex items-center gap-1 self-start md:self-auto text-ink-black transition-colors hover:underline">
             {footer.backToTop}
             <ArrowUp aria-hidden className="size-3.5" />
           </a>
         </div>
       </Container>
       <TileBand />
+      {/* Fixed to the viewport corner; lives in the footer landmark with the other contact links */}
+      <WhatsAppButton />
     </footer>
   );
 }
