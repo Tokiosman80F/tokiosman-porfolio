@@ -145,7 +145,7 @@
 
 @layer base {
   html {
-    scroll-padding-top: 5rem; /* fixed h-20 header: anchor jumps land below it */
+    scroll-padding-top: 5rem; /* floating navbar (0.75–1rem + 3.5rem): anchor jumps land below it */
   }
 
   body {

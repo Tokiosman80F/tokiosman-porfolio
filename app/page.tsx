@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <>
       <Header />
-      <main className="min-h-screen w-full bg-white pt-20">
+      <main className="min-h-screen w-full bg-white">
         <div className="flex w-full flex-col">
           <Hero />
           <Pricing />

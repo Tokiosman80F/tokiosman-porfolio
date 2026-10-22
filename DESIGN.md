@@ -93,18 +93,18 @@ Legacy per-size family aliases (`font-headline-sm`, `font-body-md`, `font-mono-m
 - **Page padding:** `px-page-pad-mobile` (1.25rem) → `lg:px-page-pad-desktop` (3rem). No tablet step.
 - **Section rhythm:** `py-unit-16 lg:py-unit-24` (4rem → 6rem), `border-b border-border-hairline`, `bg-white`. Final CTA uses `py-unit-24` at all sizes.
 - **Section header:** always `components/ui/SectionHeader` (eyebrow, title, lead, optional aside, `align="center"` for centred sections). Eyebrow → title → lead are one tight group (`gap-unit-4`, 16px); the header sits `mb-unit-12 lg:mb-unit-16` (48 → 64px) above the content. The aside ends the row on md+, bottom-aligned with the lead, and hugs its content when stacked.
-- **Hero sticky notes:** hang off the sides of the lead + CTA column (`right-full` / `left-full`, `mr/ml-unit-12`), visible at `xl` only, so they never cover the h1.
+- **Hero (reference `docs/landing page .png`):** centred column under the floating navbar (`pt-32 lg:pt-40`), `HeroArt` on plain white (no grid, no BeamBackground, no side guides: removed at the user's request). `HeroArt` is an inline token-coloured SVG (`components/sections/HeroArt.tsx`), the site's answer to the reference's mountain photo: a "mountain range" of wireframe browser windows, faint paper ones behind and white ink-bordered ones with hard offset shadows in front, peaking on both sides with an open valley for the headline, plus a signal-blue design-tool selection with a cursor and a "Signature" label, and a palette card. Its two badges are a live activity feed (`components/sections/HeroArtBadges.tsx`, client; messages in `content/hero.ts` `art`): the canary cursor tag (left) and the white status card with a green check (right) each step to the next message every 20s, the right one 10s out of phase; the swap is instant (no entrance animation, at the user's request). Each badge sizes to its message (monospace: 6px per glyph, "→" counts as 2), and the feed pauses off screen and in background tabs; with reduced motion it stays on the first message. It fades out with a mask (black 40% → transparent 75%) and shows from `xl` only (narrower, the valley is too small for the headline). The h1 is `max-w-4xl text-balance` so its widest line stays inside the valley. Eyebrow, h1 with highlight, lead, primary + glow CTAs, then the client row: mono label + grid (2 → 3 → 6) of initial tiles (`size-9 rounded-md border bg-white`) + display-font names. No sticky notes.
 - **Spacing tokens:** `unit-{1,2,3,4,6,8,12,16,24,32}` = N × 0.25rem, identical to Tailwind's default numeric scale (both are used; aliases removed in Phase 4). `gutter` = 1.5rem.
 - **Grids:** `lg:grid-cols-12` with 7/5 and 5/2/5 splits; `md:grid-cols-12` 3/9 and 5/3/4; card grids `md:grid-cols-2 lg:grid-cols-3`; gaps mostly `gap-unit-6`.
 - **Breakpoints:** Tailwind defaults (`sm` 640, `md` 768, `lg` 1024). Nav appears at `md`; headline sizes switch at `md`; padding at `lg`.
-- **Header:** fixed, `h-20`, white, hairline bottom border; main has `pt-20`.
+- **Header (floating navbar):** fixed bar that hovers over the page, `top 0.75rem (sm: 1rem)`, `h-14 max-w-3xl rounded-xl border-hairline bg-white shadow-sm`: logo (`sm`) | mono uppercase links separated by canary dots (eyebrow-dot style) | primary `sm` CTA, with `border-dotted border-border-strong` dividers between the zones (md+). Below md: logo + CTA + menu toggle; the menu opens as a dropdown card under the bar. The wrapper is `pointer-events-none` so only the bar captures clicks. No page top padding; `scroll-padding-top: 5rem` keeps anchors clear of the bar.
 
 ## Elevation & Depth
 
 - **Tier 0:** `bg-white` page.
 - **Tier 1 (cards):** `bg-paper-card border border-border-hairline shadow-sm`; interactive cards add `hover:border-ink-black`.
 - **Tier 2 (tactile):** `border-ink-black` + hard offset shadow: `shadow-offset-sm` (2px, small CTAs, highlights), `shadow-offset-md` (3px), `shadow-offset-lg` (4px: primary CTAs, paper sticky note, FAQ card hover). All `0` blur, ink color.
-- **Sticky note (canary):** `shadow-note` (`3px 4px 12px rgb(0 0 0 / 0.08)`), rotated `-3deg`; paper note `+2deg`; both `hover:rotate-0`.
+- **Sticky note (canary):** `shadow-note` (`3px 4px 12px rgb(0 0 0 / 0.08)`), rotated `-3deg`; paper note `+2deg`; both `hover:rotate-0`. Currently unused (the hero notes were removed in the landing redesign).
 - **Glow:** `shadow-glow` / `shadow-glow-hover`, blue ring buttons only.
 - Tailwind `shadow-xs/sm/md/lg/inner` are used inside mock UIs.
 
@@ -136,6 +136,8 @@ Tailwind default radii plus one token. **Decision (Q3): keep the rounded-square 
 
 ### Highlight word
 
+`renderHighlighted()` glues punctuation that directly follows a box ("close deals" + ",") to it with `whitespace-nowrap`, so the comma can't wrap onto the next line alone.
+
 Inline box inside headings: `px-2 border border-ink-black rounded-sm shadow-offset-sm`, canary/green/blue fill, optional `-rotate-3` / `rotate-2`.
 
 ### Cards
@@ -156,7 +158,7 @@ Inline box inside headings: `px-2 border border-ink-black rounded-sm shadow-offs
 
 ### Backgrounds
 
-Hero and AI+Human sections: 4rem hairline grid (`#E5E4DE`, 40% opacity) + animated SVG light beams (SMIL) + a `from-surface` fade. Built once as `components/ui/BeamBackground` (put it first inside a `relative overflow-hidden` section; the content wrapper needs `relative`).
+Hero and AI+Human sections: 4rem hairline grid (`#E5E4DE`, 40% opacity) + animated SVG light beams (SMIL) + a `from-surface` fade. Hero now uses `HeroArt` instead; AI + Human still uses `components/ui/BeamBackground`. Built once as `components/ui/BeamBackground` (put it first inside a `relative overflow-hidden` section; the content wrapper needs `relative`).
 
 ### States
 
@@ -165,7 +167,7 @@ Hover = ink border / text-ink-black / underline / offset shadow; active = press-
 ### Motion
 
 - **Reveal** (`components/ui/Reveal`, client): renders the grid element itself; its direct children fade in and rise 12px, 0.4s easeOut, 60ms stagger, once, when the group scrolls into view. Used on the Work, Services, Testimonials and FAQ grids only. Nothing above the fold animates.
-- **Mobile menu:** CSS transitions only. Opens with a 0.2s fade and the links dropping 8px; closes with a 0.15s fade.
+- **Mobile menu:** CSS transitions only. A dropdown card under the floating bar (`rounded-xl border shadow-lg`); opens with a 0.2s fade and the links dropping 8px; closes with a 0.15s fade.
 - **Reduced motion:** `MotionProvider` (`MotionConfig reducedMotion="user"`) wraps the app; Reveal and the menu also check it, so nothing is hidden and nothing moves.
 - Keep new motion subtle (≈0.3–0.5s, ≈8–16px, once). Hover/press stays CSS.
 - **Process tiles** (`components/sections/ProcessTiles.tsx`, client): each tile plays through its states once when ≥40% in view, then rests; clicking or tapping a control, or hovering or focusing the tile, hands control to the visitor. Nothing loops on its own. The chip traces (`trace-flow`) animate only on hover or focus-within. With reduced motion nothing autoplays (deploy shows "Live", search shows the full query) and transitions are off. **Never branch the first render on `useReducedMotion()`**: it differs between server and client and breaks hydration; apply the reduced-motion state in an effect.

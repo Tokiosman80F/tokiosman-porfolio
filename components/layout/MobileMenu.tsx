@@ -65,7 +65,7 @@ export default function MobileMenu({ links }: { links: NavLink[] }) {
         aria-controls={PANEL_ID}
         aria-label={open ? "Close menu" : "Open menu"}
         onClick={() => setOpen((v) => !v)}
-        className="inline-flex size-10 items-center justify-center rounded-xs border border-border-hairline bg-paper-card text-ink-black transition-colors hover:border-ink-black"
+        className="inline-flex size-10 items-center justify-center rounded-md border border-border-hairline bg-paper-card text-ink-black transition-colors hover:border-ink-black"
       >
         {open ? <X aria-hidden className="size-6" /> : <Menu aria-hidden className="size-6" />}
       </button>
@@ -73,7 +73,8 @@ export default function MobileMenu({ links }: { links: NavLink[] }) {
         ref={panelRef}
         id={PANEL_ID}
         className={cn(
-          "fixed inset-x-0 top-20 bottom-0 overflow-y-auto border-t border-border-hairline bg-white px-page-pad-mobile",
+          // Dropdown card under the floating navbar (bar bottom = 0.75rem + 3.5rem), same width as the bar
+          "fixed inset-x-page-pad-mobile top-[4.75rem] max-h-[calc(100dvh-6rem)] overflow-y-auto rounded-xl border border-border-hairline bg-white px-unit-4 shadow-lg",
           "motion-reduce:transition-none",
           // Opening doesn't transition visibility, so the panel is focusable when the effect focuses its first link.
           open
@@ -90,7 +91,7 @@ export default function MobileMenu({ links }: { links: NavLink[] }) {
         >
           <ul>
             {links.map(({ label, href }) => (
-              <li key={href} className="border-b border-border-hairline">
+              <li key={href} className="border-b border-border-hairline last:border-b-0">
                 <a
                   href={href}
                   onClick={() => setOpen(false)}

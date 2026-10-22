@@ -1,21 +1,41 @@
 import type { HighlightedText } from "@/components/ui/Highlight";
 
+// Source: docs/hero-content.md (case is set by CSS; the words are verbatim).
 export const hero = {
-  eyebrow: "INDEPENDENT DESIGN PRACTICE · B2B & AI FOUNDERS",
+  eyebrow: "Full-stack developer · Next.js × CRM × AI",
   title: [
-    "We build ",
-    { highlight: "Signature", color: "canary" },
-    " Design Styles for B2B software companies.",
+    "I build websites that ",
+    { highlight: "close deals", color: "canary" },
+    ", not just look good.",
   ] satisfies HighlightedText,
-  lead: "Brand identity, web architecture, design systems, and product interfaces — crafted from scratch around your specific market positioning. Not a template. Not a trend. AI-proof.",
+  lead: "Next.js sites and web apps connected to your CRM, payments, and bookings, so every visitor becomes a lead and every lead lands in your pipeline. Designed, built, and launched by me.",
   primary: { label: "See Pricing", href: "#pricing" },
   secondary: { label: "Selected Work", href: "#work" },
-  // Desktop-only sticky notes (hidden below xl).
-  memo: { label: "MEMO // #01", quote: "Sameness is the single biggest threat to software.", source: "— 9-Day Sprint Law" },
-  note: { label: "DEV-READY ARCHIVE", text: "Figma + Claude Skills checked into your codebase. No lock-in." },
-  // PLACEHOLDER — must be replaced or removed before launch: unverified social-proof claim and client wordmarks.
   trustedBy: {
-    label: "Trusted by founders from Stripe, Rippling, Salesforce & Sequoia backed AI",
-    clients: ["SONORA", "PULSE", "DIMMO", "WISER", "KUHNIC", "MAVEN"],
+    label: "Clients & companies I've built for",
+    clients: ["PICTURE TV", "REDUXIFY", "LOGIC MATRIX", "WEBERMELON", "EASYGROWDIGITAL"],
+  },
+  // Live activity feed inside the decorative hero illustration (HeroArt): each badge cycles every 20s.
+  art: {
+    // Left: cursor tag (build activity)
+    cursorTags: [
+      "New lead → Zoho CRM",
+      "Form synced → HubSpot",
+      "Booking confirmed → Calendar",
+      "Bug fixed → #142",
+      "AI chatbot trained on docs",
+      "Email automation triggered",
+      "Next.js 13 → 15 migrated",
+    ],
+    // Right: status card; each line gets a drawn green check (the ✓ isn't part of the text)
+    statuses: [
+      "Stripe payment received",
+      "Deployed to production",
+      "Security check passed",
+      "Lighthouse score 98",
+      "SEO audit complete",
+      "Mobile responsive: all breakpoints",
+      "SSL certificate active",
+    ],
   },
 };

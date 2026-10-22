@@ -24,7 +24,7 @@ export function Eyebrow({ dot = "canary", animate = "none", className, children,
       {...props}
     >
       <span aria-hidden className={cn("size-2 rounded-pill", dots[dot], animations[animate])} />
-      <span className="font-mono text-mono-tag font-semibold tracking-widest text-ink-charcoal uppercase">{children}</span>
+      <span className="font-mono text-mono-tag font-semibold tracking-widest text-balance text-ink-charcoal uppercase">{children}</span>
     </div>
   );
 }

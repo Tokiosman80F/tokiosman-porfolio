@@ -1367,3 +1367,47 @@ Rebuilt to the user's reference (`docs/testimonial.png`). Quotes, names, roles a
 Carousel test (headless Edge, CDP, 1440 and 375): first card's left edge = heading's left edge (73px / 20px); dot 4 and dot 6 scroll to their cards and set `aria-current`; scrolling back resets the dot; 6× ArrowRight on the focused track scrolls it and the dot follows; page `scrollX` stays 0; 0 console errors.
 
 Checks: eslint 0, tsc, `next build` pass; axe 0 violations (section at 375 / 768 / 1440, full page at 375 / 1440); no page-level horizontal overflow; detector clean. Not committed (user reviews first).
+
+## 31. Landing hero + floating navbar (2026-10-22)
+
+Rebuilt to the user's reference (`docs/landing page .png`) in the site's design system (Space Grotesk uppercase h1, canary highlight, ink/glow buttons, beams). Copy unchanged.
+
+| Change | Notes |
+|---|---|
+| `components/layout/Header.tsx` | Floating rounded bar: logo / dot-separated links / CTA with dotted dividers. Removed the static "active" underline on Work (no scroll-spy existed) and the unlabeled green status dot |
+| `components/layout/MobileMenu.tsx` | Panel is now a dropdown card under the bar (was a full-screen sheet under a full-width header); toggle `rounded-md` |
+| `components/sections/Hero.tsx` | Top padding clears the bar; dotted container-edge guides; client row as initial tiles in a balanced grid; sticky notes removed |
+| `content/hero.ts` | `memo` / `note` (sticky-note copy) deleted |
+| `app/page.tsx` | `main` loses `pt-20` (the hero runs under the floating bar) |
+
+Behaviour test (CDP): anchor to `#work` lands at 80px, bar bottom at 72px; 375 menu opens with focus on "Work" and scroll lock, tapping "FAQ" closes it, releases the lock and lands `#faq` at 80px; 0 console errors.
+
+Checks: eslint 0, tsc, `next build` pass; axe full page 0 violations at 375 / 768 / 1440; no horizontal overflow; detector clean. Not committed.
+
+Follow-up: the hero's dotted side guides were removed at the user's request (`Hero.tsx`, `DESIGN.md`).
+
+Follow-up: hero image. No photo (user: "don't use the mountain image"); new `components/sections/HeroArt.tsx`, an inline SVG in the design tokens (wireframe-window "mountain range" with sticky note, selection + cursor, palette card), replacing BeamBackground in the hero (AI + Human keeps it). Hidden below md. Checks: tsc, eslint, build pass; axe 0 at 375 / 1440; no overflow.
+
+Follow-up: hero background grid removed at the user's request (`Hero.tsx`, `DESIGN.md`).
+
+Follow-up: HeroArt's canary sticky note (above-left of the headline) removed at the user's request.
+
+## 32. Landing hero content (2026-10-22)
+
+Source: `docs/hero-content.md` (main headline, not the shorter alternative). Old hero copy removed (eyebrow, "We build Signature Design Styles…", lead, "Trusted by…" label, the 6 placeholder logos).
+
+| Change | Notes |
+|---|---|
+| `content/hero.ts` | Badge, headline with "close deals" highlighted, subheadline, client strip label + 5 clients (PICTURE TV, REDUXIFY, LOGIC MATRIX, WEBERMELON, EASYGROWDIGITAL), `art` labels. Buttons unchanged (See Pricing →, Selected Work ↓). Placeholder comment removed |
+| `content/navigation.ts` | Links WORK · ABOUT · SERVICES · FAQ ("About" → `#manifesto`, the AI + Human section, until an About section exists); CTA "Book a call" → `site.bookingUrl`, new tab (`external` flag on `NavLink`) |
+| `components/layout/Header.tsx` | Opens external CTA in a new tab + sr-only note |
+| `components/sections/HeroArt.tsx` | Cursor tag "New lead → Zoho CRM" (replaces "Signature"); "Stripe payment received" card with a drawn check (replaces the colour swatches); shows from `xl` (was `md`) |
+| `components/sections/Hero.tsx` | h1 `max-w-4xl text-balance` (the longer headline ran into the art); client strip as a centred wrap (5 names of very different lengths) |
+| `components/ui/Highlight.tsx` | `renderHighlighted()` keeps punctuation right after a box glued to it (the comma after "close deals" was wrapping onto its own line). Other headings unaffected (their boxes are followed by a space) |
+| `components/ui/Eyebrow.tsx` | `text-balance` on the label ("× AI" was orphaned on mobile) |
+
+Checks: eslint 0, tsc, `next build` pass; axe full page 0 violations at 375 / 768 / 1024 / 1280 / 1440; no horizontal overflow. Not committed.
+
+Follow-up: hero badges as a live activity feed. New `components/sections/HeroArtBadges.tsx` (client `CursorTag` / `StatusCard`, rendered inside HeroArt's SVG); 7 + 7 messages in `content/hero.ts` (`art.cursorTags`, `art.statuses`; the ✓ is the drawn check). Every 2s, right badge offset 1s; widths fit each message (browser-measured: 8px padding; "→" renders 2 glyphs wide). Tested (CDP, 1440): all 14 messages cycle in order and loop; reduced motion stays on message 1; paused off screen; 0 console errors. eslint, build pass; axe 0 at 375 / 1440.
+
+Follow-up: hero badge feed slowed to every 20s (right badge offset 10s) and the per-message `tile-in` entrance removed (read as blinking), at the user's request.
