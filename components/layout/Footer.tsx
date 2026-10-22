@@ -3,10 +3,40 @@ import { ArrowUp, CalendarDays, Globe, MapPin } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { footer, type FooterColumn, type FooterLink } from "@/content/footer";
 import { site } from "@/content/site";
+import { cn } from "@/lib/utils";
 import Logo from "./Logo";
 
-// Simple footer (docs/footer.md): brand column + Navigate / Services / Contact, then a bottom bar.
-// Contact rows lead with a logo tile (brand logos from public/logos, generic icons where there's no brand).
+// Simple footer (docs/footer.md): brand column + Navigate / Services / Contact, then a bottom bar, on white.
+// Contact rows lead with a logo tile (brand logos from public/logos, generic icons where there's
+// no brand). It closes with a mosaic of the About card's yellow blocks: hover a tile and it lights up, then
+// fades back slowly, so the pointer leaves a glowing trail (CSS only, nothing moves on its own).
+
+// Deterministic mosaic (no Math.random: server and client must render the same pattern).
+// ~1 in 7 tiles solid canary, ~1 in 4 mid, the rest soft, as on the About card.
+const TILES = 160;
+const tone = (i: number) => {
+  const k = (i * 37 + Math.floor(i / 9) * 11) % 13;
+  return k < 2 ? "border-ink-black/15 bg-canary-yellow" : k < 5 ? "bg-canary-yellow/45" : "bg-canary-yellow/20";
+};
+
+function TileBand() {
+  return (
+    <div aria-hidden className="h-28 overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_45%)] sm:h-36">
+      <div className="mx-auto grid max-w-page grid-cols-[repeat(auto-fill,minmax(2.75rem,1fr))] gap-2 px-page-pad-mobile lg:px-page-pad-desktop">
+        {Array.from({ length: TILES }, (_, i) => (
+          <span
+            key={i}
+            className={cn(
+              // slow fade back (1s), instant light-up on hover
+              "aspect-square rounded-lg border border-transparent transition-colors duration-1000 hover:border-ink-black hover:bg-canary-yellow hover:duration-0",
+              tone(i),
+            )}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
 
 const linkClass = "font-sans text-body-sm text-on-surface-variant transition-colors hover:text-ink-black";
 const icons = { globe: Globe, calendar: CalendarDays };
@@ -105,6 +135,7 @@ export default function Footer() {
           </a>
         </div>
       </Container>
+      <TileBand />
     </footer>
   );
 }

@@ -1510,3 +1510,7 @@ Removed with the old footer: "Index / Network & Channels" columns, the NYC coord
 Live check (CDP): logos load at 1440 and 375; mailto + wa.me + site + booking links (external ones in a new tab); Back to top → scrollY 0; 0 console errors.
 
 Checks: eslint 0, tsc, `next build` pass; axe 0 (full page, 375 / 768 / 1440); no horizontal overflow; detector clean. Not committed.
+
+Follow-up (§38): footer recoloured to a canary tint (the About card's yellow blocks, user request) with a closing `TileBand` mosaic: tiles light up on hover and fade back over 1s, leaving a pointer trail (CSS only; deterministic pattern, so no hydration mismatch). axe 0 at 375 / 768 / 1440 on the tint; hover trail confirmed in a live screenshot; build passes. Not committed.
+
+Follow-up (§38): footer background back to white with hairline borders (user request); the yellow `TileBand` mosaic stays.
