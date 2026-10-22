@@ -1353,3 +1353,17 @@ Rebuilt to the user's reference (`docs/image.png`, now the bento image), with an
 Interaction test (headless Edge, CDP, 1440): with motion, every tile plays once on scroll-in and rests (directions → Editorial, updates → 100%, deploy → Live, 3 searches typed, modules → CMS, AI → step 4); clicks then drive each tile, Redeploy replays the pipeline, and nothing restarts on its own. With reduced motion nothing autoplays; deploy shows Live, search the full query; clicks still work. **Bug found and fixed:** hydration mismatch under reduced motion (render branched on `useReducedMotion()`). Console: 0 errors.
 
 Checks: eslint 0, tsc, `next build` pass; axe on `#process` 0 violations at 375 / 768 / 1440; no horizontal overflow; detector clean.
+
+## 30. Testimonials → carousel (2026-10-22)
+
+Rebuilt to the user's reference (`docs/testimonial.png`). Quotes, names, roles and "delivered" lines unchanged (still the placeholder testimonials flagged in the copy inventory).
+
+| Change | Notes |
+|---|---|
+| `components/sections/Testimonials.tsx` rewritten (server) + new `TestimonialCarousel.tsx` (client) | Grey band, header + "Book a free call" button, dark grid-texture cards in a native scroll-snap track that bleeds off the right edge, dots pill. The 3-column grid, avatars and `Reveal` are gone |
+| `content/testimonials.ts` | `company` per testimonial (the company already named in each role) for the card wordmark; `carouselLabel`; header `cta` reusing "Book a free call" + `site.bookingUrl` |
+| `components/ui/PlanButton.tsx` | `shrink-0 whitespace-nowrap` (label wrapped to 2 lines at 768) |
+
+Carousel test (headless Edge, CDP, 1440 and 375): first card's left edge = heading's left edge (73px / 20px); dot 4 and dot 6 scroll to their cards and set `aria-current`; scrolling back resets the dot; 6× ArrowRight on the focused track scrolls it and the dot follows; page `scrollX` stays 0; 0 console errors.
+
+Checks: eslint 0, tsc, `next build` pass; axe 0 violations (section at 375 / 768 / 1440, full page at 375 / 1440); no page-level horizontal overflow; detector clean. Not committed (user reviews first).
