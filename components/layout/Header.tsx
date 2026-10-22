@@ -1,41 +1,24 @@
-import { Fragment } from "react";
-import { Button } from "@/components/ui/Button";
+import { CalendarDays } from "lucide-react";
+import { PlanButton } from "@/components/ui/PlanButton";
 import { headerCta, primaryNav } from "@/content/navigation";
 import Logo from "./Logo";
 import MobileMenu from "./MobileMenu";
+import { NavLinks } from "./NavLinks";
 
-// Floating navbar (user-supplied reference, docs/landing page .png): a white rounded bar that hovers over
-// the hero. Logo | links separated by canary dots | CTA, with dotted dividers between the three zones.
-// The wrapper ignores pointer events so the page around the bar stays clickable.
+// Floating navbar: a white rounded bar over the page. Logo | links in an inset tray with a sliding canary
+// chip on the current section (NavLinks) | booking button. Once the page scrolls (html[data-scrolled], set
+// by NavLinks) the shadow deepens so the bar lifts off the content. The wrapper ignores pointer events so
+// the page around the bar stays clickable.
 export default function Header() {
   return (
     <header className="pointer-events-none fixed inset-x-0 top-0 z-50 px-page-pad-mobile pt-unit-3 sm:pt-unit-4">
-      <div className="pointer-events-auto mx-auto flex h-14 max-w-3xl items-stretch rounded-xl border border-border-hairline bg-white shadow-sm">
-        <div className="flex items-center px-unit-4 sm:px-unit-6 md:border-r md:border-dotted md:border-border-strong">
-          <Logo size="sm" />
-        </div>
-        <nav aria-label="Primary" className="hidden flex-1 items-center justify-center gap-unit-4 md:flex">
-          {primaryNav.map(({ label, href }, i) => (
-            <Fragment key={href}>
-              {i > 0 && <span aria-hidden className="size-1.5 rounded-full border border-ink-black bg-canary-yellow" />}
-              <a
-                href={href}
-                className="font-mono text-mono-meta tracking-wider text-on-surface-variant uppercase transition-colors hover:text-ink-black"
-              >
-                {label}
-              </a>
-            </Fragment>
-          ))}
+      <div className="pointer-events-auto mx-auto flex h-14 max-w-3xl items-center gap-unit-2 rounded-2xl border border-border-hairline bg-white py-1.5 pr-1.5 pl-unit-4 shadow-sm transition-shadow duration-300 [html[data-scrolled]_&]:shadow-lg sm:pl-unit-6">
+        <Logo size="sm" />
+        <nav aria-label="Primary" className="hidden flex-1 justify-center md:flex">
+          <NavLinks links={primaryNav} />
         </nav>
-        <div className="ml-auto flex items-center gap-unit-2 pr-2 pl-unit-2 md:ml-0 md:border-l md:border-dotted md:border-border-strong">
-          <Button
-            href={headerCta.href}
-            size="sm"
-            {...(headerCta.external && { target: "_blank", rel: "noopener" })}
-          >
-            {headerCta.label}
-            {headerCta.external && <span className="sr-only"> (opens in a new tab)</span>}
-          </Button>
+        <div className="ml-auto flex items-center gap-unit-2 md:ml-0">
+          <PlanButton href={headerCta.href} label={headerCta.label} icon={CalendarDays} external={headerCta.external} />
           <MobileMenu links={primaryNav} />
         </div>
       </div>

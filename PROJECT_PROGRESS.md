@@ -1528,3 +1528,15 @@ Follow-up (§39): Work header rewritten for search (user: "The TokiOsman effect"
 ## 40. Wordmark → "tokiosman." (2026-10-22)
 
 `components/layout/Logo.tsx` (header + footer): lowercase "tokiosman" with the full stop as a canary block (ink edge) that flips into a signal-blue diamond on hover/focus. The mini wordmark and browser-tab text in the "What I build" illustration match; the video-call host label is now "Toki Osman" (a person, not the wordmark). `site.name` ("TokiOsman", used by the page-title template and metadata) is unchanged. Live capture at rest / hover / footer; axe 0 at 375 / 1440; build passes. Not committed.
+
+## 41. Navbar redesign (2026-10-22)
+
+`components/layout/Header.tsx` rewritten; new `components/layout/NavLinks.tsx` (client). Links sit in an inset tray; a canary highlight chip slides to the section in view (scroll-spy), cleared at the top; the CTA is the shared `PlanButton`; the bar's shadow deepens once the page scrolls. Dotted zone dividers removed.
+
+Live test (CDP, 1440): chip follows About → Work → Services → FAQ and clears back at the top; `aria-current` on the active link; shadow 1px → 10px when scrolled (the `in-data-scrolled` variant generated nothing; replaced with `[html[data-scrolled]_&]:`). 375: bar fits (335px), menu opens with focus on "Work". axe 0 (full page, 375 / 768 / 1440); build passes. Not committed.
+Follow-up (§41): chip easing changed from overshoot to ease-out-quint (detector: bounce easing on a moving nav indicator).
+Follow-up (§41): navbar animation bugs (user: "not working properly"), found by sampling every frame in the browser:
+1. The chip never slid: positions were read with `offsetLeft`, relative to each link's own `<li class="relative">`, so every link measured 0 and the chip sat on "Work" for every section. Now measured against the tray (`getBoundingClientRect`), moved with `translate`, re-measured by a ResizeObserver (font loading).
+2. It grew out of / shrank into the tray's left edge when appearing / hiding. Now it is placed instantly and fades in, slides only between links while visible, and fades out in place.
+3. The logo dot never animated: Tailwind v4 moves elements with the separate `translate` / `scale` / `rotate` properties, but the transition listed `transform`. Now `transition-[translate,scale,rotate,background-color]`.
+Re-measured: About 63 → Work 4 → Services 130 → FAQ 221 px, each matching its link; logo dot 0° → 45° over ~200ms. axe 0, build passes, detector clean.

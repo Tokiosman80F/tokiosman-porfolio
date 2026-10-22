@@ -21,7 +21,7 @@ export default function Logo({ size = "md", className }: LogoProps) {
       tokiosman
       <span
         aria-hidden
-        className="ml-[0.08em] inline-block size-[0.3em] rounded-[0.06em] border-[0.06em] border-ink-black bg-canary-yellow transition-[transform,background-color] duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:translate-y-[-0.1em] group-hover:scale-125 group-hover:rotate-45 group-hover:bg-signal-blue group-focus-visible:rotate-45 group-focus-visible:bg-signal-blue motion-reduce:transition-none"
+        className="ml-[0.08em] inline-block size-[0.3em] rounded-[0.06em] border-[0.06em] border-ink-black bg-canary-yellow transition-[translate,scale,rotate,background-color] duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:translate-y-[-0.1em] group-hover:scale-125 group-hover:rotate-45 group-hover:bg-signal-blue group-focus-visible:rotate-45 group-focus-visible:bg-signal-blue motion-reduce:transition-none"
       />
     </Link>
   );
