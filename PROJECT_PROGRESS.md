@@ -1472,3 +1472,21 @@ Checks: eslint 0, tsc, `next build` pass; axe 0 (full page, 375 / 768 / 1440); n
 At the user's request. Deleted `components/sections/AiHuman.tsx`, `content/ai-human.ts` and `components/ui/BeamBackground.tsx` (its last user), plus the reduced-motion rule that hid the beams' SMIL layer (`svg:has(animate)`). The footer's "Our Manifesto" link (`#manifesto`) went with it (it would have pointed nowhere). Page order is now Hero → Pricing → Process → About → Work → Services → Testimonials → FAQ → Final CTA. Page height: 1440 12942 → 12057, 375 21505 → 19960.
 
 Checks: eslint 0, tsc, `next build` pass; axe 0 (full page, 375 / 1440); no horizontal overflow. Not committed.
+
+## 37. Final CTA + contact form (2026-10-22)
+
+The user reverted the footer redesign (uncommitted) and asked for the Final CTA instead: content from `docs/cta.md` (main headline), new UI. Footer untouched.
+
+| Change | Notes |
+|---|---|
+| `content/final-cta.ts` rewritten | Badge, headline ("unsure" green box), lead, buttons, trust line; `contactForm` copy (labels, placeholders, validation, success, error); `projectTypes` |
+| `components/sections/FinalCta.tsx` rewritten | Ink slab: pitch + booking left, form card right, trust line bottom |
+| New `components/sections/ContactForm.tsx` (client) | Collapsed behind "Prefer to write?"; browser validation, focus to first error, honeypot; submits via `startTransition` (a native form action resets the fields, which lost the visitor's text on an error) |
+| New `app/actions/contact.ts` (server action), `lib/contact.ts` (shared validation), `lib/crm.ts` | Server re-validates; honeypot → silent fake success; Zoho CRM lead via OAuth refresh token **only if** `ZOHO_CLIENT_ID`, `ZOHO_CLIENT_SECRET`, `ZOHO_REFRESH_TOKEN` are set (optional `ZOHO_ACCOUNTS_URL` / `ZOHO_API_URL` for non-.com data centres); otherwise the error state ("email me at …"), so no message is silently lost |
+| `components/layout/CurrentMonth.tsx` | (left over from the reverted footer work) fills "{month}" in the badge; joiner " · " supported |
+
+**Not done yet (needs the user):** Zoho credentials (the Zoho call is written but untested), Turnstile keys, auto-reply + owner notification (needs an email provider), Budget field ("add later" in the doc). The "straight to my CRM" note under the button only renders once Zoho is configured. The page is static, so `crmConfigured()` is read at build time: redeploy after adding the env vars. Zoho Leads require Company by default; the form sends "Not provided". The source ("Portfolio contact form") goes into Description.
+
+Live test (CDP, 1440): form hidden until the toggle (aria-expanded); empty submit → 4 messages, focus on Name; bad email → only the email error; valid → error state with the values kept; honeypot → "Thanks! 🎉". 0 console errors.
+
+Checks: eslint 0, tsc, `next build` pass (route still static); axe 0 (full page, 375 / 768 / 1440); no horizontal overflow; detector clean. Not committed.
