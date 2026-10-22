@@ -8,10 +8,9 @@ export type NavLink = {
 };
 
 // Section anchors (ids live on the <section>s in app/page.tsx).
-// "About" points at the AI + Human section (#manifesto) until an About section exists.
 export const primaryNav: NavLink[] = [
   { label: "Work", href: "#work" },
-  { label: "About", href: "#manifesto" },
+  { label: "About", href: "#about" },
   { label: "Services", href: "#services" },
   { label: "FAQ", href: "#faq" },
 ];

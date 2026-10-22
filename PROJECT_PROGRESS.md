@@ -1425,3 +1425,22 @@ Rebuilt to the user's references (`docs/what-we-build-1.png`, `-2.png`). User ch
 Fixes after the first render: phone notifications were hidden by the fade (phone raised, clock tightened, fade 70% → 78%); the closer kept its min-height on mobile where the globe is hidden (now from `sm`).
 
 Checks: eslint 0, `next build` pass; axe 0 violations (section at 375 / 768 / 1440); no horizontal overflow; detector clean. Not committed.
+
+## 34. Toolbox → About me (2026-10-22)
+
+Layout after `docs/about-me.png`, content verbatim from `docs/about-me.md` (main heading, not the alternative), photo from `docs/toki-osman-image.png`.
+
+| Change | Notes |
+|---|---|
+| New `components/sections/About.tsx` + `content/about.ts` | Photo / 20+ stat / companies marquee / about-me quote / tech stack bento, `id="about"` |
+| Deleted `components/sections/Toolbox.tsx`, `content/skills.ts` | "My creative toolbox" replaced |
+| `public/images/toki-osman.jpg` | Head-and-shoulders 900px crop of the 1.9 MB PNG (54 KB; served at ~22 KB by next/image) |
+| `content/navigation.ts` | "About" → `#about` (was the AI + Human section) |
+| `components/ui/SectionHeader.tsx` | `eyebrow` optional |
+| `app/globals.css` | `marquee` keyframes |
+
+Tech logos: no icon package installed (no-installs rule), so the stack is periodic-table tiles (symbol + brand-colour stripe + name); React keeps its real mark. Real logos can replace the symbols if SVGs are added to `public/logos/`.
+
+Fixes after the first render: the photo floated over the tile grid (now the grid's centre 2×2 cell); the mobile heading orphaned "DESIGN" (text-pretty). Live check (CDP): photo loads at 1440 and 375, marquee moves (~30px/s), 0 console errors.
+
+Checks: eslint 0, tsc, `next build` pass; axe 0 violations (section at 375 / 768 / 1440); no horizontal overflow. Not committed.

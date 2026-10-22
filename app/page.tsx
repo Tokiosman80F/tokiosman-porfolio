@@ -1,5 +1,6 @@
 import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
+import About from "@/components/sections/About";
 import AiHuman from "@/components/sections/AiHuman";
 import Faq from "@/components/sections/Faq";
 import FinalCta from "@/components/sections/FinalCta";
@@ -8,7 +9,6 @@ import Process from "@/components/sections/Process";
 import Services from "@/components/sections/Services";
 import Pricing from "@/components/sections/Pricing";
 import Testimonials from "@/components/sections/Testimonials";
-import Toolbox from "@/components/sections/Toolbox";
 import Work from "@/components/sections/Work";
 
 export default function Home() {
@@ -20,7 +20,7 @@ export default function Home() {
           <Hero />
           <Pricing />
           <Process />
-          <Toolbox />
+          <About />
           <AiHuman />
           <Work />
           <Services />

@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 import { Heading } from "./Heading";
 
 type SectionHeaderProps = {
-  eyebrow: ReactNode;
+  eyebrow?: ReactNode;
   title: ReactNode;
   lead?: ReactNode;
   aside?: ReactNode;

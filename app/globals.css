@@ -165,6 +165,10 @@
 @keyframes trace-flow {
   to { stroke-dashoffset: -40; }
 }
+/* About: companies marquee (the list is rendered twice, so -50% loops seamlessly) */
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
 
 @keyframes blue-gradient-shift {
   0% { background-position: 0% 50%; }
