@@ -1411,3 +1411,17 @@ Checks: eslint 0, tsc, `next build` pass; axe full page 0 violations at 375 / 76
 Follow-up: hero badges as a live activity feed. New `components/sections/HeroArtBadges.tsx` (client `CursorTag` / `StatusCard`, rendered inside HeroArt's SVG); 7 + 7 messages in `content/hero.ts` (`art.cursorTags`, `art.statuses`; the ✓ is the drawn check). Every 2s, right badge offset 1s; widths fit each message (browser-measured: 8px padding; "→" renders 2 glyphs wide). Tested (CDP, 1440): all 14 messages cycle in order and loop; reduced motion stays on message 1; paused off screen; 0 console errors. eslint, build pass; axe 0 at 375 / 1440.
 
 Follow-up: hero badge feed slowed to every 20s (right badge offset 10s) and the per-message `tile-in` entrance removed (read as blinking), at the user's request.
+
+## 33. "What I build" redesign (2026-10-22)
+
+Rebuilt to the user's references (`docs/what-we-build-1.png`, `-2.png`). User choices: five cards mapped to the real offer, copy drafted in the owner's voice (**draft for review**), drawn video call with initials.
+
+| Change | Notes |
+|---|---|
+| `content/services.ts` rewritten | Header ("I take care of things from [start to finish]"), 5 services (Web and app design & development · CRM, payments & automation · AI chatbots & SEO · Consultation & strategy · Anything and everything web), illustration text (`serviceArt`). The old 6 cards and their "#" EXPLORE links are gone |
+| `components/sections/Services.tsx` rewritten | Centred header, 2-column grey cards, full-width closer with client avatars (from `hero.trustedBy.clients`) + globe |
+| New `components/sections/ServiceArt.tsx` | Browser, phone, chat, call and globe illustrations |
+
+Fixes after the first render: phone notifications were hidden by the fade (phone raised, clock tightened, fade 70% → 78%); the closer kept its min-height on mobile where the globe is hidden (now from `sm`).
+
+Checks: eslint 0, `next build` pass; axe 0 violations (section at 375 / 768 / 1440); no horizontal overflow; detector clean. Not committed.
