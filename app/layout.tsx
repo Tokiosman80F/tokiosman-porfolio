@@ -17,6 +17,18 @@ export const metadata: Metadata = {
   applicationName: site.name,
 };
 
+// Person structured data (docs/footer.md): links the name to the site and, once set, the GitHub /
+// LinkedIn profiles in content/site.ts (empty URLs are left out of sameAs).
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: site.person,
+  jobTitle: site.jobTitle,
+  url: site.url,
+  email: `mailto:${site.email}`,
+  sameAs: site.socials.map((s) => s.href).filter(Boolean),
+};
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
@@ -28,6 +40,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <noscript>
           <style>{"[data-reveal] > * { opacity: 1 !important; }"}</style>
         </noscript>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd).replace(/</g, "\\u003c") }} />
       </head>
       <body className="font-body-md text-body-md text-on-surface antialiased bg-white">
         <MotionProvider>{children}</MotionProvider>

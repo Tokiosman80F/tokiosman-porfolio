@@ -1492,3 +1492,21 @@ Live test (CDP, 1440): form hidden until the toggle (aria-expanded); empty submi
 Checks: eslint 0, tsc, `next build` pass (route still static); axe 0 (full page, 375 / 768 / 1440); no horizontal overflow; detector clean. Not committed.
 
 Follow-up (§37): the contact form is always open (user request); the "Prefer to write? Send a message" toggle and its copy are removed.
+
+## 38. Footer: new content + simple UI (2026-10-22)
+
+Content from `docs/footer.md` (the user removed the CTA block from it; the Final CTA section covers that). Simple white footer with logo tiles for the contact rows (user request).
+
+| Change | Notes |
+|---|---|
+| `components/layout/Footer.tsx` rewritten | Brand / Navigate / Services / Contact + bottom bar (©, built-with, Back to top) |
+| `content/footer.ts` rewritten | Verbatim from the doc; contact rows carry `logo` / `icon` |
+| `content/site.ts` | `person`, `jobTitle`, `url`, `phone`, `whatsapp`, `socials` (GitHub / LinkedIn with **empty URLs**: hidden in the footer and omitted from `sameAs` until set) |
+| `app/layout.tsx` | Person JSON-LD (name, job title, URL, email, sameAs), `<` escaped |
+| `public/logos/` | + outlook, whatsapp, github, linkedin (dashboard-icons MCP; scanned clean). Outlook rather than Gmail: the address is @outlook.com |
+
+Removed with the old footer: "Index / Network & Channels" columns, the NYC coordinates line, COLOPHON / PRIVACY links and the "SYSTEM OK" badge.
+
+Live check (CDP): logos load at 1440 and 375; mailto + wa.me + site + booking links (external ones in a new tab); Back to top → scrollY 0; 0 console errors.
+
+Checks: eslint 0, tsc, `next build` pass; axe 0 (full page, 375 / 768 / 1440); no horizontal overflow; detector clean. Not committed.
