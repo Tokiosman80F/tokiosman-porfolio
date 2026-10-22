@@ -14,10 +14,12 @@ export type Project = {
 };
 
 export const workSection = {
-  eyebrow: "CASE STUDIES · RECENT ARTIFACTS",
-  title: "The TokiOsman effect",
-  lead: "Category-defining software identities engineered for radical conversion.",
-  aside: "ARCHIVE REF: 2024–2026 / VOL.04",
+  // SEO: the h2 names what the section shows (case studies) and what was built (Next.js websites and
+  // web apps); the lead repeats the service terms people search for.
+  eyebrow: "CASE STUDIES · SELECTED WORK",
+  title: "Case studies: Next.js websites and web apps",
+  lead: "Real projects for startups and growing businesses: custom websites, dashboards, and AI integrations, from design to launch.",
+  aside: "SELECTED PROJECTS · 2024–2026",
   // "#" = placeholders until case-study pages / an archive exist (tracked in PROJECT_PROGRESS.md).
   cta: { label: "Explore All 24+ Shipped Archives", href: "#" },
 };

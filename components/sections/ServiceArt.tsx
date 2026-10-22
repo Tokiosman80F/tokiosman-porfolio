@@ -29,7 +29,9 @@ export function BrowserArt() {
       </div>
       <div className="px-4 pt-3 pb-6">
         <div className="flex items-center justify-between rounded-md border border-border-hairline px-2 py-1">
-          <span className="font-display text-[9px] font-bold text-ink-black">TokiOsman</span>
+          <span className="font-display text-[9px] font-bold text-ink-black">
+            tokiosman<span className="text-canary-yellow [-webkit-text-stroke:0.5px_var(--color-ink-black)]">.</span>
+          </span>
           <span className="hidden gap-2 sm:flex">
             {[0, 1, 2].map((i) => (
               <span key={i} className="h-1 w-5 rounded-full bg-border-strong" />

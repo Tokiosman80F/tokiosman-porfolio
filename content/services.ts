@@ -43,7 +43,7 @@ export const services: Service[] = [
 
 // Text inside the decorative card illustrations (fictional examples).
 export const serviceArt = {
-  browserTabs: ["TokiOsman — I build websites", "Home — Figma"],
+  browserTabs: ["tokiosman. — I build websites", "Home — Figma"],
   notifications: [
     { app: "Zoho CRM", text: "New lead from your contact form" },
     { app: "Stripe", text: "Payment received · $1,500" },
@@ -55,5 +55,5 @@ export const serviceArt = {
     source: "shipping-policy.pdf",
     placeholder: "Ask me anything…",
   },
-  call: { host: "TokiOsman", hostInitials: "TO", guest: "You" },
+  call: { host: "Toki Osman", hostInitials: "TO", guest: "You" },
 };

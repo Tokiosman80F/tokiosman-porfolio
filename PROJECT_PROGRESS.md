@@ -1514,3 +1514,17 @@ Checks: eslint 0, tsc, `next build` pass; axe 0 (full page, 375 / 768 / 1440); n
 Follow-up (§38): footer recoloured to a canary tint (the About card's yellow blocks, user request) with a closing `TileBand` mosaic: tiles light up on hover and fade back over 1s, leaving a pointer trail (CSS only; deterministic pattern, so no hydration mismatch). axe 0 at 375 / 768 / 1440 on the tint; hover trail confirmed in a live screenshot; build passes. Not committed.
 
 Follow-up (§38): footer background back to white with hairline borders (user request); the yellow `TileBand` mosaic stays.
+
+## 39. Case studies → case-file stack (2026-10-22)
+
+UI only (user: "use your creativity"); content unchanged. `components/sections/Work.tsx` rewritten: numbered case-file cards in grey / canary / ink tones, browser-framed images, and a CSS sticky stack on large, tall windows (each card pins under the navbar and the next slides over it, earlier tabs staying visible). No JS; Reveal no longer used here. Images capped at 576px wide (the source JPGs are 512px; the old full-width frame upscaled them).
+
+Live scroll test (CDP): 1440×900 cards pin at 104 / 166 / 228px (one tab apart) and release at the section end; 1440×700 and 375 stay static (no card can hide its own bottom). axe 0 (full page, 375 / 768 / 1440); no overflow; eslint, build pass. Not committed.
+
+Follow-up (§39): case 02 background changed from canary tint to sky blue (`signal-blue` 18% tint, user request).
+
+Follow-up (§39): Work header rewritten for search (user: "The TokiOsman effect" didn't make sense): eyebrow "CASE STUDIES · SELECTED WORK", h2 "Case studies: Next.js websites and web apps", lead naming websites / dashboards / AI integrations, aside "SELECTED PROJECTS · 2024–2026". DESIGN.md sky-blue note present: true.
+
+## 40. Wordmark → "tokiosman." (2026-10-22)
+
+`components/layout/Logo.tsx` (header + footer): lowercase "tokiosman" with the full stop as a canary block (ink edge) that flips into a signal-blue diamond on hover/focus. The mini wordmark and browser-tab text in the "What I build" illustration match; the video-call host label is now "Toki Osman" (a person, not the wordmark). `site.name` ("TokiOsman", used by the page-title template and metadata) is unchanged. Live capture at rest / hover / footer; axe 0 at 375 / 1440; build passes. Not committed.
