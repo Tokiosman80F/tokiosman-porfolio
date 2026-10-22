@@ -5,15 +5,32 @@ import Logo from "./Logo";
 import MobileMenu from "./MobileMenu";
 import { NavLinks } from "./NavLinks";
 
-// Floating navbar: a white rounded bar over the page. Logo | links in an inset tray with a sliding canary
-// chip on the current section (NavLinks) | booking button. Once the page scrolls (html[data-scrolled], set
-// by NavLinks) the shadow deepens so the bar lifts off the content. The wrapper ignores pointer events so
-// the page around the bar stays clickable.
+// Resizable floating navbar. Over the landing hero it is large: the full content width (max-w-page), taller,
+// with a bigger wordmark and no shadow. Once the visitor is 40% of the way through the hero
+// (html[data-compact], set by NavLinks) it shrinks to the compact bar (max-w-3xl, h-14) and lifts with a
+// shadow; scrolling back up widens it again. Transitions only run after the first check
+// (html[data-nav-ready]), so a mid-page reload starts compact instead of shrinking on load.
+// Inside: logo | links in an inset tray with a sliding canary chip on the current section | booking button.
+// The wrapper ignores pointer events so the page around the bar stays clickable.
+
+// Every class is written out in full (no template strings): Tailwind only generates classes it can see.
+const bar = [
+  "pointer-events-auto mx-auto flex items-center gap-unit-2 rounded-2xl border border-border-hairline bg-white py-1.5 pr-1.5 pl-unit-4 sm:pl-unit-6",
+  // large (over the hero)
+  "h-16 max-w-page shadow-xs md:pr-2.5 md:pl-unit-8",
+  // compact (after 40% of the hero)
+  "[html[data-compact]_&]:h-14 [html[data-compact]_&]:max-w-3xl [html[data-compact]_&]:shadow-lg [html[data-compact]_&]:md:pr-1.5 [html[data-compact]_&]:md:pl-unit-6",
+  // animate only after the first check
+  "[html[data-nav-ready]_&]:transition-[max-width,height,box-shadow,padding] [html[data-nav-ready]_&]:duration-500 [html[data-nav-ready]_&]:ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
+].join(" ");
+const logo =
+  "md:text-headline-md [html[data-compact]_&]:md:text-headline-sm [html[data-nav-ready]_&]:transition-[font-size] [html[data-nav-ready]_&]:duration-500 motion-reduce:transition-none";
+
 export default function Header() {
   return (
-    <header className="pointer-events-none fixed inset-x-0 top-0 z-50 px-page-pad-mobile pt-unit-3 sm:pt-unit-4">
-      <div className="pointer-events-auto mx-auto flex h-14 max-w-3xl items-center gap-unit-2 rounded-2xl border border-border-hairline bg-white py-1.5 pr-1.5 pl-unit-4 shadow-sm transition-shadow duration-300 [html[data-scrolled]_&]:shadow-lg sm:pl-unit-6">
-        <Logo size="sm" />
+    <header className="pointer-events-none fixed inset-x-0 top-0 z-50 px-page-pad-mobile pt-unit-3 sm:pt-unit-4 lg:px-page-pad-desktop">
+      <div className={bar}>
+        <Logo size="sm" className={logo} />
         <nav aria-label="Primary" className="hidden flex-1 justify-center md:flex">
           <NavLinks links={primaryNav} />
         </nav>

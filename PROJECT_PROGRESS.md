@@ -1547,3 +1547,10 @@ New `components/layout/WhatsAppButton.tsx` (server, CSS only), rendered after th
 
 Live check (CDP): href and pre-filled text correct, logo loads, 24px from the corner at 1440, label opens on hover (58 → 191px wide). At 375 it floats over content passing beneath while scrolling (normal for a floating button); nothing is covered at the end of the page. axe 0 (375 / 768 / 1440); build passes; detector clean. Not committed.
 Follow-up (§42): button moved inside the `<footer>` landmark (axe `region`: it was outside every landmark); fixed positioning, so it looks the same.
+
+## 43. Resizable navbar (2026-10-23)
+
+Large over the hero (full content width 1280px, 64px tall, 28px wordmark), compact (768×56, 20px wordmark, deeper shadow) once the visitor is 40% through the hero; widens again on the way back up. `#home` id on the hero; `html[data-compact]` replaces `data-scrolled`; `html[data-nav-ready]` gates the transitions so a mid-page reload starts compact. Mobile dropdown offset follows the bar height.
+
+Bug found while testing: the compact classes were assembled with a template string (`${compact}:h-14`), which Tailwind can't see, so the flag toggled but nothing resized. Written out literally.
+Live test (CDP, 1440): large at 35% / 39%, compact at 42%; shrink 1280 → 974 → 836 → 788 → 768px in ~430ms; reload at #faq starts compact; chip still aligned; 375: no overflow, menu 8px under the bar. axe 0 (375 / 768 / 1440); build passes; detector clean. Not committed.

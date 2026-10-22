@@ -73,8 +73,8 @@ export default function MobileMenu({ links }: { links: NavLink[] }) {
         ref={panelRef}
         id={PANEL_ID}
         className={cn(
-          // Dropdown card under the floating navbar (bar bottom = 0.75rem + 3.5rem), same width as the bar
-          "fixed inset-x-page-pad-mobile top-[4.75rem] max-h-[calc(100dvh-6rem)] overflow-y-auto rounded-xl border border-border-hairline bg-white px-unit-4 shadow-lg",
+          // Dropdown card under the floating navbar: 0.5rem below its bottom edge (large bar 0.75 + 4rem, compact 0.75 + 3.5rem)
+          "fixed inset-x-page-pad-mobile top-[5.25rem] max-h-[calc(100dvh-6.5rem)] [html[data-compact]_&]:top-[4.75rem] overflow-y-auto rounded-xl border border-border-hairline bg-white px-unit-4 shadow-lg",
           "motion-reduce:transition-none",
           // Opening doesn't transition visibility, so the panel is focusable when the effect focuses its first link.
           open

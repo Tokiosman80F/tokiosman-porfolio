@@ -12,7 +12,7 @@ import { HeroArt } from "./HeroArt";
 export default function Hero() {
   const { primary, secondary, trustedBy } = hero;
   return (
-    <Section border="none" className="relative overflow-hidden pt-32 lg:pt-40">
+    <Section id="home" border="none" className="relative overflow-hidden pt-32 lg:pt-40">
       <HeroArt />
 
       <div className="relative flex flex-col items-center text-center">

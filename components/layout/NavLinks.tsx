@@ -7,7 +7,9 @@ import { cn } from "@/lib/utils";
 // Desktop nav links in an inset tray, with a canary highlight chip (ink edge, the site's highlight-box
 // style) that slides to the section currently in view. Scroll-spy: a section is "current" while it crosses
 // a thin band around the middle of the viewport; above the first linked section nothing is marked.
-// Also flags the header as scrolled (data attribute) so it can deepen its shadow.
+// Also drives the header's size: html[data-compact] once the visitor has scrolled 40% of the way through the
+// hero (#home), removed when they scroll back. html[data-nav-ready] is set one frame after the first check,
+// so the header only animates on real scrolling, never on load (a mid-page reload starts compact).
 //
 // Chip motion: it slides between links only while visible. When it appears it is placed under the link
 // instantly and fades in; when it hides it fades out where it is (it never grows out of, or shrinks into,
@@ -36,11 +38,15 @@ export function NavLinks({ links }: { links: NavLink[] }) {
       // Measured on every scroll (4 rects), so late layout shifts (fonts, images) can't make it stale
       const firstTop = Math.min(...sections.map((s) => s.getBoundingClientRect().top));
       if (firstTop > window.innerHeight / 2) setActive(null);
-      document.documentElement.toggleAttribute("data-scrolled", window.scrollY > 8);
+      const hero = document.getElementById("home");
+      const past = hero ? -hero.getBoundingClientRect().top > hero.offsetHeight * 0.4 : window.scrollY > 8;
+      document.documentElement.toggleAttribute("data-compact", past);
     };
     onScroll();
+    const ready = requestAnimationFrame(() => document.documentElement.setAttribute("data-nav-ready", ""));
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => {
+      cancelAnimationFrame(ready);
       io.disconnect();
       window.removeEventListener("scroll", onScroll);
     };
