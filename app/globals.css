@@ -165,6 +165,24 @@
 @keyframes trace-flow {
   to { stroke-dashoffset: -40; }
 }
+/* FAQ accordion: animate <details> open/close height where the browser supports ::details-content and
+   interpolate-size (Chromium 131+); elsewhere it opens instantly. */
+.faq-item {
+  interpolate-size: allow-keywords;
+}
+.faq-item::details-content {
+  block-size: 0;
+  overflow: clip;
+  transition: block-size 0.3s ease-out, content-visibility 0.3s allow-discrete;
+}
+.faq-item[open]::details-content {
+  block-size: auto;
+}
+@media (prefers-reduced-motion: reduce) {
+  .faq-item::details-content {
+    transition: none;
+  }
+}
 /* About: companies marquee (the list is rendered twice, so -50% loops seamlessly) */
 @keyframes marquee {
   to { transform: translateX(-50%); }

@@ -1446,3 +1446,23 @@ Fixes after the first render: the photo floated over the tile grid (now the grid
 Checks: eslint 0, tsc, `next build` pass; axe 0 violations (section at 375 / 768 / 1440); no horizontal overflow. Not committed.
 
 Follow-up (§34): real tech logos. dashboard-icons MCP added (`claude mcp add --transport http dashboard-icons https://dashboardicons.com/api/mcp`, local config); queried over HTTP this session. 20 SVGs downloaded to `public/logos/` (scanned: no scripts, handlers or external refs; 0.3–4 KB each); 11 tools added at the user's request (shadcn/ui, Redux, Zustand, Nginx, Cursor, Lovable, Supabase, AWS, Clerk, Framer Motion, GSAP; "Claude" was already listed), 22 in total, grouped by category. Zustand has no icon anywhere ("Zu" symbol); Framer Motion uses the existing brand-icons mark. Tiles lose the colour stripe and index. Live check: 20/20 logos load at 1440 and 375; axe 0; build passes.
+
+## 35. FAQ redesign + real content (2026-10-22)
+
+UI: "help-desk thread" (user: "use your creativity and my website vibe"). Content: the user rewrote `docs/fqa.md` during the task; applied verbatim (10 questions, new lead/side tag, contact strip) with its SEO checklist.
+
+| Change | Notes |
+|---|---|
+| `components/sections/Faq.tsx` rewritten | Sticky intro + dark ask-me card; native `<details name="faq">` accordion (no JS, answers stay in the HTML), questions as `<h3>`, answers as reply bubbles with the photo avatar; FAQPage JSON-LD (escaped `<`) |
+| New `components/sections/CopyEmail.tsx` (client) | Copies `site.email`, "Email copied" for 2s (aria-live), mailto fallback |
+| `content/faq.ts` rewritten | From docs/fqa.md; contact = "Book a free call" (`site.bookingUrl`) + "Copy email address"; `plainAnswer()` for JSON-LD |
+| `content/site.ts` | `email: "tokiosman@outlook.com"` |
+| `app/globals.css` | `.faq-item` open/close height animation |
+| `docs/fqa.md` | New (the user's content) |
+
+Not applied from the checklist: links inside answers ("pricing" → the pricing section is `#pricing`, not `#services` as the doc says; "AI assistant" → a case study that doesn't exist yet).
+
+Fixes found while testing: status chip contrast (axe), the toggle tile rotated into a diamond (now only the icon), mobile index squeeze and double gap, avatar column squeezing mobile answers, the JSON-LD escape was a no-op ("<" in a JS string is "<").
+Live test (CDP): one open at a time (click Q3 closes Q1), Enter/Space toggle, copy writes the address and resets after 2s, 0 console errors. JSON-LD parses: FAQPage, 10 questions; 10 `<h3>` questions in the HTML.
+
+Checks: eslint 0, tsc, `next build` pass; axe 0 (full page, 375 / 768 / 1440); no horizontal overflow. Not committed.
