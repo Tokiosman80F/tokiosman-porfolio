@@ -1,0 +1,227 @@
+@import "tailwindcss";
+
+@theme {
+  --color-*: initial;
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-transparent: transparent;
+
+  /* ink (text) */
+  --color-ink-black: #121212;
+  --color-ink-charcoal: #1A1A1A;
+  --color-on-surface: #1b1c1a;
+  --color-on-surface-variant: #444748;
+  --color-ink-muted: #6C6B66; /* was #6E6D68; AA on paper-subtle */
+  --color-ink-faint: #75736D; /* was #A2A097; AA on paper-card */
+
+  /* paper (surfaces) */
+  --color-paper-card: #FAFAF7;
+  --color-surface: #faf9f5;
+  --color-paper-canvas: #F7F6F2;
+  --color-surface-container-low: #f5f4f0;
+  --color-surface-container: #efeeea;
+  --color-paper-subtle: #EFECE6;
+
+  /* lines */
+  --color-border-hairline: #E5E4DE;
+  --color-border-strong: #D6D4CC;
+
+  /* dark card */
+  --color-surface-tint: #5f5e5e;
+  --color-primary-container: #1c1b1b;
+  --color-on-primary-container: #B1B0B0; /* was #858383; AA on the dark card gradient */
+  --color-on-primary: #ffffff;
+
+  /* accents */
+  --color-canary-yellow: #FDF175;
+  --color-signal-green: #22C55E; /* fills, dots, tints */
+  --color-signal-green-ink: #157A3A; /* green text; #22C55E fails AA as text */
+  --color-signal-blue: #60A5FA;
+  --color-highlight-green: #4ae176;
+
+  /* primary button */
+  --color-graphite: #454545;
+  --color-graphite-hover: #383838;
+
+  --radius-pill: 0.75rem;
+
+  --shadow-offset-sm: 2px 2px 0 var(--color-ink-black);
+  --shadow-offset-md: 3px 3px 0 var(--color-ink-black);
+  --shadow-offset-lg: 4px 4px 0 var(--color-ink-black);
+  --shadow-note: 3px 4px 12px rgb(0 0 0 / 0.08);
+  --shadow-glow: 0 0 12px rgb(56 189 248 / 0.35);
+  --shadow-glow-hover: 0 0 20px rgb(56 189 248 / 0.65);
+
+  --container-page: 1280px;
+
+  --spacing-page-pad-desktop: 3rem;
+  --spacing-page-pad-mobile: 1.25rem;
+  --spacing-gutter: 1.5rem;
+  /* unit-N = N × 0.25rem, identical to the default scale; removed once Phase 4 markup stops using them */
+  --spacing-unit-1: 0.25rem;
+  --spacing-unit-2: 0.5rem;
+  --spacing-unit-3: 0.75rem;
+  --spacing-unit-4: 1rem;
+  --spacing-unit-6: 1.5rem;
+  --spacing-unit-8: 2rem;
+  --spacing-unit-12: 3rem;
+  --spacing-unit-16: 4rem;
+  --spacing-unit-24: 6rem;
+  --spacing-unit-32: 8rem;
+
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains-mono);
+  --font-display: var(--font-space-grotesk);
+  --font-hand: var(--font-caveat);
+  /* per-size family aliases, removed as Phase 4 rewrites the markup */
+  --font-display-hero: var(--font-display);
+  --font-headline-lg: var(--font-display);
+  --font-headline-md: var(--font-display);
+  --font-headline-sm: var(--font-display);
+  --font-body-lead: var(--font-sans);
+  --font-body-md: var(--font-sans);
+  --font-body-sm: var(--font-sans);
+  --font-mono-meta: var(--font-mono);
+  --font-mono-tag: var(--font-mono);
+  --font-quote-annotated: var(--font-hand);
+
+  --text-display-hero: 64px;
+  --text-display-hero--line-height: 68px;
+  --text-display-hero--letter-spacing: -0.04em;
+  --text-display-hero--font-weight: 700;
+  --text-display-hero-mobile: 40px;
+  --text-display-hero-mobile--line-height: 44px;
+  --text-display-hero-mobile--letter-spacing: -0.03em;
+  --text-display-hero-mobile--font-weight: 700;
+  --text-headline-lg: 44px;
+  --text-headline-lg--line-height: 48px;
+  --text-headline-lg--letter-spacing: -0.03em;
+  --text-headline-lg--font-weight: 700;
+  --text-headline-lg-mobile: 32px;
+  --text-headline-lg-mobile--line-height: 36px;
+  --text-headline-lg-mobile--letter-spacing: -0.025em;
+  --text-headline-lg-mobile--font-weight: 700;
+  --text-headline-md: 28px;
+  --text-headline-md--line-height: 34px;
+  --text-headline-md--letter-spacing: -0.02em;
+  --text-headline-md--font-weight: 600;
+  --text-headline-sm: 20px;
+  --text-headline-sm--line-height: 26px;
+  --text-headline-sm--letter-spacing: -0.015em;
+  --text-headline-sm--font-weight: 600;
+  --text-body-lead: 18px;
+  --text-body-lead--line-height: 28px;
+  --text-body-lead--letter-spacing: -0.01em;
+  --text-body-lead--font-weight: 400;
+  --text-body-md: 15px;
+  --text-body-md--line-height: 24px;
+  --text-body-md--letter-spacing: -0.005em;
+  --text-body-md--font-weight: 400;
+  --text-body-sm: 13px;
+  --text-body-sm--line-height: 20px;
+  --text-body-sm--letter-spacing: 0em;
+  --text-body-sm--font-weight: 400;
+  --text-mono-meta: 12px;
+  --text-mono-meta--line-height: 16px;
+  --text-mono-meta--letter-spacing: -0.01em;
+  --text-mono-meta--font-weight: 500;
+  --text-mono-tag: 11px;
+  --text-mono-tag--line-height: 14px;
+  --text-mono-tag--letter-spacing: 0.04em;
+  --text-mono-tag--font-weight: 600;
+  --text-quote-annotated: 20px;
+  --text-quote-annotated--line-height: 24px;
+  --text-quote-annotated--letter-spacing: 0.01em;
+  --text-quote-annotated--font-weight: 500;
+}
+
+/* For small scroll areas inside mock UIs, where a scrollbar would break the illusion. */
+@utility scrollbar-none {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@layer base {
+  html {
+    scroll-padding-top: 5rem; /* fixed h-20 header: anchor jumps land below it */
+  }
+
+  body {
+    overscroll-behavior: none;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ink-black);
+    outline-offset: 2px;
+  }
+}
+
+/* Process bento: panel content swap, and current flowing along the chip traces (hover only). */
+@keyframes tile-in {
+  from { opacity: 0; transform: translateY(4px); }
+}
+@keyframes trace-flow {
+  to { stroke-dashoffset: -40; }
+}
+
+@keyframes blue-gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.moving-blue-border-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  padding: 2px;
+  background: linear-gradient(90deg, #1978e5, #38bdf8, #60a5fa, #00d2ff, #2563eb, #1978e5);
+  background-size: 300% 300%;
+  animation: blue-gradient-shift 4s ease infinite;
+  box-shadow: var(--shadow-glow);
+  transition: all 0.25s ease;
+  text-decoration: none;
+}
+.moving-blue-border-btn:hover {
+  box-shadow: var(--shadow-glow-hover);
+  transform: translateY(-1px);
+}
+.moving-blue-border-btn-inner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  height: 100%;
+  border-radius: 9999px;
+  background: #FAFAF7;
+  color: #121212;
+  transition: background 0.2s ease;
+}
+.moving-blue-border-btn:hover .moving-blue-border-btn-inner {
+  background: #FFFFFF;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation: none !important;
+  }
+  /* SMIL beams can't be paused from CSS; hide the decorative layer instead. */
+  svg:has(animate) {
+    display: none;
+  }
+}
+
+/* Reveal (components/ui/Reveal.tsx): grid children wait hidden until their group scrolls into view.
+   Only on screen (print shows everything) and when motion is allowed; the <noscript> style in
+   app/layout.tsx shows them if JS never runs. */
+@media screen and (prefers-reduced-motion: no-preference) {
+  [data-reveal] > * {
+    opacity: 0;
+  }
+}
