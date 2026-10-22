@@ -29,7 +29,6 @@ export const footer: FooterContent = {
       title: "Index",
       links: [
         { label: "Selected Works", href: "#work" },
-        { label: "Our Manifesto", href: "#manifesto" },
         { label: "Advisory & Design Sprints", href: "#services" },
         { label: "FAQ", href: "#faq" },
       ],

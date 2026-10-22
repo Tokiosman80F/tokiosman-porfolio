@@ -160,7 +160,7 @@ Inline box inside headings: `px-2 border border-ink-black rounded-sm shadow-offs
 
 ### Backgrounds
 
-Hero and AI+Human sections: 4rem hairline grid (`#E5E4DE`, 40% opacity) + animated SVG light beams (SMIL) + a `from-surface` fade. Hero now uses `HeroArt` instead; AI + Human still uses `components/ui/BeamBackground`. Built once as `components/ui/BeamBackground` (put it first inside a `relative overflow-hidden` section; the content wrapper needs `relative`).
+No shared backdrop component any more: the light-beam `BeamBackground` was removed with the AI + Human section (its last user). The hero uses `HeroArt`; a few cards draw their own faint 4rem hairline grid inline.
 
 ### States
 
@@ -176,4 +176,4 @@ Hover = ink border / text-ink-black / underline / offset shadow; active = press-
 
 ### Primitives (`components/ui`)
 
-`Button` (variants `primary` / `glow` / `chip` / `link`, sizes `sm` / `md` / `lg`, renders `next/link` when given `href`), `Container`, `Section`, `Heading` (`lg` / `md` / `sm`), `Badge` (`neutral` / `muted` / `success` / `accent` / `ink`), `Card` (`default` / `interactive` / `elevated`). `Eyebrow`, `SectionHeader`, `PlanButton` (black button with canary icon tile; `external` opens in a new tab, `dark` for black surfaces), `RichText` (`renderRich()`), `Highlight` (+ `renderHighlighted()` for `HighlightedText` content), `Avatar`, `BeamBackground`, `Reveal`, `brand-icons`. `components/layout/Logo`: "TokiOsman" text wordmark. Use these before writing new markup; merge classes with `cn()` from `lib/utils`.
+`Button` (variants `primary` / `glow` / `chip` / `link`, sizes `sm` / `md` / `lg`, renders `next/link` when given `href`), `Container`, `Section`, `Heading` (`lg` / `md` / `sm`), `Badge` (`neutral` / `muted` / `success` / `accent` / `ink`), `Card` (`default` / `interactive` / `elevated`). `Eyebrow`, `SectionHeader`, `PlanButton` (black button with canary icon tile; `external` opens in a new tab, `dark` for black surfaces), `RichText` (`renderRich()`), `Highlight` (+ `renderHighlighted()` for `HighlightedText` content), `Avatar`, `Reveal`, `brand-icons`. `components/layout/Logo`: "TokiOsman" text wordmark. Use these before writing new markup; merge classes with `cn()` from `lib/utils`.

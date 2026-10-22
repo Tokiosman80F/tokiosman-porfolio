@@ -1466,3 +1466,9 @@ Fixes found while testing: status chip contrast (axe), the toggle tile rotated i
 Live test (CDP): one open at a time (click Q3 closes Q1), Enter/Space toggle, copy writes the address and resets after 2s, 0 console errors. JSON-LD parses: FAQPage, 10 questions; 10 `<h3>` questions in the HTML.
 
 Checks: eslint 0, tsc, `next build` pass; axe 0 (full page, 375 / 768 / 1440); no horizontal overflow. Not committed.
+
+## 36. AI + Human section removed (2026-10-22)
+
+At the user's request. Deleted `components/sections/AiHuman.tsx`, `content/ai-human.ts` and `components/ui/BeamBackground.tsx` (its last user), plus the reduced-motion rule that hid the beams' SMIL layer (`svg:has(animate)`). The footer's "Our Manifesto" link (`#manifesto`) went with it (it would have pointed nowhere). Page order is now Hero → Pricing → Process → About → Work → Services → Testimonials → FAQ → Final CTA. Page height: 1440 12942 → 12057, 375 21505 → 19960.
+
+Checks: eslint 0, tsc, `next build` pass; axe 0 (full page, 375 / 1440); no horizontal overflow. Not committed.

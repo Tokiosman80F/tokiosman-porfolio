@@ -233,10 +233,6 @@
   ::after {
     animation: none !important;
   }
-  /* SMIL beams can't be paused from CSS; hide the decorative layer instead. */
-  svg:has(animate) {
-    display: none;
-  }
 }
 
 /* Reveal (components/ui/Reveal.tsx): grid children wait hidden until their group scrolls into view.
