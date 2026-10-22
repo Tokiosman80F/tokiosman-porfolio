@@ -1554,3 +1554,9 @@ Large over the hero (full content width 1280px, 64px tall, 28px wordmark), compa
 
 Bug found while testing: the compact classes were assembled with a template string (`${compact}:h-14`), which Tailwind can't see, so the flag toggled but nothing resized. Written out literally.
 Live test (CDP, 1440): large at 35% / 39%, compact at 42%; shrink 1280 → 974 → 836 → 788 → 768px in ~430ms; reload at #faq starts compact; chip still aligned; 375: no overflow, menu 8px under the bar. axe 0 (375 / 768 / 1440); build passes; detector clean. Not committed.
+
+## 44. Landing hero: rotating outcome + proof strip (2026-10-23)
+
+UI (user: "use your creativity, add something interesting"): the headline's yellow box is now a one-pass ticker, "I build websites that [close deals → capture leads → take payments → book calls → close deals], not just look good." (new `components/sections/RotatingOutcome.tsx`). Content: a proof strip under the buttons with facts from the user's own docs: 20+ projects shipped, 3+ yrs building end to end (docs/about-me.md), 24h reply with a fixed quote (docs/cta.md). `content/hero.ts`: `title` is now the plain sentence, `headline` holds prefix / outcomes / suffix, `proof` added; eyebrow keeps its dot on the first line when wrapping (non-breaking space). Lead, buttons, client strip and HeroArt unchanged. `docs/hero-content.md` not edited (the user's source file).
+
+Live test (CDP): sequence correct at 1440 and 375, stops on "close deals" after ~12s, h1 box/height constant while turning (no reflow), reduced motion static, sr-only sentence correct; 0 console errors. axe 0 (375 / 768 / 1440); no overflow; build passes; detector clean. Not committed.

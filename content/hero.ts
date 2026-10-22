@@ -1,16 +1,24 @@
-import type { HighlightedText } from "@/components/ui/Highlight";
-
 // Source: docs/hero-content.md (case is set by CSS; the words are verbatim).
 export const hero = {
-  eyebrow: "Full-stack developer · Next.js × CRM × AI",
-  title: [
-    "I build websites that ",
-    { highlight: "close deals", color: "canary" },
-    ", not just look good.",
-  ] satisfies HighlightedText,
+  //   keeps the dot with "developer" when the label wraps on phones
+  eyebrow: "Full-stack developer · Next.js × CRM × AI",
+  // Headline: "{prefix} [outcome], not just look good." The outcome box plays through these once, then rests
+  // on the first. Search engines and screen readers get `title` as one plain sentence.
+  title: "I build websites that close deals, not just look good.",
+  headline: {
+    prefix: "I build websites that",
+    outcomes: ["close deals", "capture leads", "take payments", "book calls"],
+    suffix: ", not just look good.",
+  },
   lead: "Next.js sites and web apps connected to your CRM, payments, and bookings, so every visitor becomes a lead and every lead lands in your pipeline. Designed, built, and launched by me.",
   primary: { label: "See Pricing", href: "#pricing" },
   secondary: { label: "Selected Work", href: "#work" },
+  // Proof strip under the buttons (facts from docs/about-me.md and docs/cta.md)
+  proof: [
+    { value: "20+", label: "Projects shipped" },
+    { value: "3+ yrs", label: "Building end to end" },
+    { value: "24h", label: "Reply with a fixed quote" },
+  ],
   trustedBy: {
     label: "Clients & companies I've built for",
     clients: ["PICTURE TV", "REDUXIFY", "LOGIC MATRIX", "WEBERMELON", "EASYGROWDIGITAL"],

@@ -2,15 +2,17 @@ import { ArrowDown, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Heading } from "@/components/ui/Heading";
-import { renderHighlighted } from "@/components/ui/Highlight";
 import { Section } from "@/components/ui/Section";
 import { hero } from "@/content/hero";
 import { HeroArt } from "./HeroArt";
+import { RotatingOutcome } from "./RotatingOutcome";
 
 // Landing hero (user-supplied reference, docs/landing page .png): centred, under the floating navbar
-// (extra top padding clears it). Backdrop: HeroArt (wireframe "mountain range"), no grid.
+// (extra top padding clears it). Backdrop: HeroArt (wireframe "mountain range"), no grid. The headline's
+// highlight box cycles through outcomes once (RotatingOutcome); a proof strip of three facts sits under
+// the buttons.
 export default function Hero() {
-  const { primary, secondary, trustedBy } = hero;
+  const { primary, secondary, trustedBy, headline, proof } = hero;
   return (
     <Section id="home" border="none" className="relative overflow-hidden pt-32 lg:pt-40">
       <HeroArt />
@@ -21,7 +23,10 @@ export default function Hero() {
         </Eyebrow>
         {/* Display scale: 40 → 64 (md). Balanced lines keep the widest one short, inside the illustration's valley */}
         <Heading as="h1" className="mb-unit-6 max-w-4xl text-balance text-display-hero-mobile md:text-display-hero leading-[1.05]">
-          {renderHighlighted(hero.title)}
+          <span className="sr-only">{hero.title}</span>
+          <span aria-hidden>
+            {headline.prefix} <RotatingOutcome outcomes={headline.outcomes} after={headline.suffix} />
+          </span>
         </Heading>
         <p className="mb-unit-8 max-w-2xl font-sans text-body-lead leading-relaxed text-on-surface-variant">{hero.lead}</p>
         <div className="flex flex-wrap items-center justify-center gap-unit-4">
@@ -34,6 +39,16 @@ export default function Hero() {
             <ArrowDown aria-hidden className="size-6 shrink-0" />
           </Button>
         </div>
+
+        {/* Proof strip: three facts, hairline dividers between them */}
+        <dl className="mt-unit-12 grid w-full max-w-2xl grid-cols-3 divide-x divide-border-hairline rounded-2xl border border-border-hairline bg-white/80 py-unit-4 shadow-xs">
+          {proof.map((p) => (
+            <div key={p.label} className="flex flex-col-reverse items-center gap-1 px-1.5 sm:px-unit-2">
+              <dt className="text-center font-mono text-[10px] leading-tight tracking-wide text-ink-muted uppercase sm:text-[11px] sm:tracking-wider">{p.label}</dt>
+              <dd className="font-display text-headline-sm font-bold text-ink-black sm:text-headline-md">{p.value}</dd>
+            </div>
+          ))}
+        </dl>
 
         <div className="mt-unit-16 flex w-full max-w-4xl flex-col items-center lg:mt-unit-24">
           <p className="mb-unit-6 max-w-md font-mono text-mono-tag tracking-widest text-ink-muted uppercase">{trustedBy.label}</p>
