@@ -2,7 +2,9 @@ import { site } from "./site";
 
 // Source: docs/about-me.md (verbatim; layout after docs/about-me.png).
 
-export type Tech = { name: string; symbol: string; color: string };
+/** `logo`: file in public/logos (from the dashboard-icons MCP catalogs: Dashboard Icons, Simple Icons,
+ * LobeHub), or "framer-motion" for the mark in brand-icons. No logo exists for Zustand: it shows `symbol`. */
+export type Tech = { name: string; logo?: string; symbol?: string };
 
 export const about = {
   title: "One developer. Design to deployment.",
@@ -27,19 +29,28 @@ export const about = {
     role: "Full-Stack Developer, Next.js & AI",
   },
   techTitle: "Technologies I use",
-  // Periodic-table tiles: two-letter symbol + brand colour stripe (no logo files in the repo; React uses
-  // its real mark from brand-icons).
   tech: [
-    { name: "Next.js", symbol: "Nx", color: "#000000" },
-    { name: "React", symbol: "Re", color: "#61DAFB" },
-    { name: "TypeScript", symbol: "Ts", color: "#3178C6" },
-    { name: "Node.js", symbol: "Nd", color: "#5FA04E" },
-    { name: "Tailwind CSS", symbol: "Tw", color: "#06B6D4" },
-    { name: "MongoDB", symbol: "Mg", color: "#47A248" },
-    { name: "PostgreSQL", symbol: "Pg", color: "#4169E1" },
-    { name: "Stripe", symbol: "St", color: "#635BFF" },
-    { name: "Zoho CRM", symbol: "Zo", color: "#E42527" },
-    { name: "Docker", symbol: "Dk", color: "#2496ED" },
-    { name: "Claude AI", symbol: "Cl", color: "#D97757" },
+    { name: "Next.js", logo: "nextjs" },
+    { name: "React", logo: "react" },
+    { name: "TypeScript", logo: "typescript" },
+    { name: "Node.js", logo: "nodejs" },
+    { name: "Tailwind CSS", logo: "tailwindcss" },
+    { name: "shadcn/ui", logo: "shadcnui" },
+    { name: "Redux", logo: "redux" },
+    { name: "Zustand", symbol: "Zu" },
+    { name: "Framer Motion", logo: "framer-motion" },
+    { name: "GSAP", logo: "gsap" },
+    { name: "MongoDB", logo: "mongodb" },
+    { name: "PostgreSQL", logo: "postgresql" },
+    { name: "Supabase", logo: "supabase" },
+    { name: "Clerk", logo: "clerk" },
+    { name: "Stripe", logo: "stripe" },
+    { name: "Zoho CRM", logo: "zoho" },
+    { name: "Docker", logo: "docker" },
+    { name: "Nginx", logo: "nginx" },
+    { name: "AWS", logo: "aws" },
+    { name: "Claude AI", logo: "claude" },
+    { name: "Cursor", logo: "cursor" },
+    { name: "Lovable", logo: "lovable" },
   ] satisfies Tech[],
 };

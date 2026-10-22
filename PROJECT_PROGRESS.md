@@ -1444,3 +1444,5 @@ Tech logos: no icon package installed (no-installs rule), so the stack is period
 Fixes after the first render: the photo floated over the tile grid (now the grid's centre 2×2 cell); the mobile heading orphaned "DESIGN" (text-pretty). Live check (CDP): photo loads at 1440 and 375, marquee moves (~30px/s), 0 console errors.
 
 Checks: eslint 0, tsc, `next build` pass; axe 0 violations (section at 375 / 768 / 1440); no horizontal overflow. Not committed.
+
+Follow-up (§34): real tech logos. dashboard-icons MCP added (`claude mcp add --transport http dashboard-icons https://dashboardicons.com/api/mcp`, local config); queried over HTTP this session. 20 SVGs downloaded to `public/logos/` (scanned: no scripts, handlers or external refs; 0.3–4 KB each); 11 tools added at the user's request (shadcn/ui, Redux, Zustand, Nginx, Cursor, Lovable, Supabase, AWS, Clerk, Framer Motion, GSAP; "Claude" was already listed), 22 in total, grouped by category. Zustand has no icon anywhere ("Zu" symbol); Framer Motion uses the existing brand-icons mark. Tiles lose the colour stripe and index. Live check: 20/20 logos load at 1440 and 375; axe 0; build passes.

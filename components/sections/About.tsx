@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { CalendarDays } from "lucide-react";
-import { ReactIcon } from "@/components/ui/brand-icons";
+import { FramerMotionIcon } from "@/components/ui/brand-icons";
 import { PlanButton } from "@/components/ui/PlanButton";
 import { Section } from "@/components/ui/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
@@ -120,25 +120,28 @@ function BioCard({ className }: { className?: string }) {
   );
 }
 
-/* Tech stack as periodic-table tiles: brand-colour stripe, two-letter symbol, name */
+/* Tech stack: logo tiles (public/logos, the Framer Motion mark from brand-icons; Zustand has no logo in any
+   catalog, so it shows a two-letter symbol) with the name underneath */
+function TechMark({ logo, symbol }: { logo?: string; symbol?: string }) {
+  if (logo === "framer-motion") return <FramerMotionIcon />;
+  if (logo) return <Image src={`/logos/${logo}.svg`} alt="" width={28} height={28} unoptimized className="size-7 object-contain" />;
+  return <span className="font-display text-headline-sm font-bold text-ink-black">{symbol}</span>;
+}
+
 function TechCard({ className }: { className?: string }) {
   return (
-    <article className={cn(card, "flex flex-col gap-unit-6 p-unit-6 sm:p-unit-8 lg:flex-row lg:items-center", className)}>
-      <h3 className="shrink-0 font-sans text-body-lead font-medium text-ink-black lg:w-40">{about.techTitle}</h3>
-      <ul className="grid flex-1 grid-cols-[repeat(auto-fill,minmax(4.75rem,1fr))] gap-unit-3">
-        {about.tech.map((t, i) => (
+    <article className={cn(card, "p-unit-6 sm:p-unit-8", className)}>
+      <h3 className="font-sans text-body-lead font-medium text-ink-black">{about.techTitle}</h3>
+      <ul className="mt-unit-6 grid grid-cols-[repeat(auto-fill,minmax(5rem,1fr))] gap-unit-3">
+        {about.tech.map((t) => (
           <li
             key={t.name}
-            className="relative flex flex-col items-center overflow-hidden rounded-xl border border-border-hairline bg-white px-1 pt-3 pb-2 shadow-xs"
+            className="flex flex-col items-center gap-unit-2 rounded-xl border border-border-hairline bg-white px-1 pt-3 pb-2 shadow-xs transition-transform hover:-translate-y-0.5 motion-reduce:transition-none"
           >
-            <span aria-hidden className="absolute inset-x-0 top-0 h-1" style={{ backgroundColor: t.color }} />
-            <span aria-hidden className="absolute top-1.5 left-2 font-mono text-[9px] text-ink-muted">
-              {i + 1}
+            <span aria-hidden className="flex h-7 items-center [&_svg]:size-7">
+              <TechMark logo={t.logo} symbol={t.symbol} />
             </span>
-            <span aria-hidden className="flex h-8 items-center font-display text-headline-sm font-bold text-ink-black [&_svg]:size-6">
-              {t.name === "React" ? <ReactIcon /> : t.symbol}
-            </span>
-            <span className="mt-1 text-center font-sans text-[11px] leading-tight text-ink-charcoal">{t.name}</span>
+            <span className="text-center font-sans text-[11px] leading-tight text-ink-charcoal">{t.name}</span>
           </li>
         ))}
       </ul>
