@@ -1490,3 +1490,5 @@ The user reverted the footer redesign (uncommitted) and asked for the Final CTA 
 Live test (CDP, 1440): form hidden until the toggle (aria-expanded); empty submit → 4 messages, focus on Name; bad email → only the email error; valid → error state with the values kept; honeypot → "Thanks! 🎉". 0 console errors.
 
 Checks: eslint 0, tsc, `next build` pass (route still static); axe 0 (full page, 375 / 768 / 1440); no horizontal overflow; detector clean. Not committed.
+
+Follow-up (§37): the contact form is always open (user request); the "Prefer to write? Send a message" toggle and its copy are removed.

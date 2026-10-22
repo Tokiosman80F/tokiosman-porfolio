@@ -8,8 +8,9 @@ import { crmConfigured } from "@/lib/crm";
 import { ContactForm } from "./ContactForm";
 
 // Final CTA (docs/cta.md) as a closing ink slab, in the family of the testimonial cards (grid texture +
-// corner glow): pitch and the booking call on the left, the "prefer to write?" form card on the right,
-// trust line along the bottom. The call stays the primary action; the form starts collapsed.
+// corner glow): pitch and the booking call on the left, the contact form card on the right,
+// trust line along the bottom. The call stays the primary action (left, first in reading order); the form
+// is always open.
 export default function FinalCta() {
   const { primary, secondary } = finalCta;
   return (

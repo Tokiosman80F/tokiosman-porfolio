@@ -1,15 +1,14 @@
 "use client";
 
 import { startTransition, useActionState, useId, useRef, useState, type FormEvent } from "react";
-import { ArrowRight, CalendarDays, ChevronDown } from "lucide-react";
+import { ArrowRight, CalendarDays } from "lucide-react";
 import { sendContact } from "@/app/actions/contact";
 import { PlanButton } from "@/components/ui/PlanButton";
 import { contactForm as c, projectTypes } from "@/content/final-cta";
 import { readContact, validateContact, type ContactErrors, type ContactField, type ContactState } from "@/lib/contact";
 import { cn } from "@/lib/utils";
 
-// Secondary path beside the call (docs/cta.md): collapsed behind "Prefer to write?" so booking stays the
-// main action. Validated in the browser first (errors linked with aria-describedby, focus moves to the
+// Secondary path beside the call (docs/cta.md), always open (user's choice). Validated in the browser first (errors linked with aria-describedby, focus moves to the
 // first one), then again by the server action. A hidden honeypot field catches bots.
 
 const initial: ContactState = { status: "idle" };
@@ -20,7 +19,6 @@ const fieldClass = (invalid: boolean) =>
   );
 
 export function ContactForm({ crmReady }: { crmReady: boolean }) {
-  const [open, setOpen] = useState(false);
   const [state, action, pending] = useActionState(sendContact, initial);
   const [clientErrors, setClientErrors] = useState<ContactErrors>({});
   const formRef = useRef<HTMLFormElement>(null);
@@ -81,21 +79,8 @@ export function ContactForm({ crmReady }: { crmReady: boolean }) {
       <p className="font-display text-headline-sm font-bold">{c.heading}</p>
       <p className="mt-1 font-sans text-body-md text-on-surface-variant">{c.subtext}</p>
 
-      <button
-        type="button"
-        aria-expanded={open}
-        aria-controls={id("form")}
-        onClick={() => setOpen((v) => !v)}
-        className="mt-unit-4 inline-flex cursor-pointer items-start gap-1.5 text-left font-sans text-body-md font-medium text-ink-black underline decoration-dashed underline-offset-4 hover:decoration-solid"
-      >
-        {c.toggle}
-        <ChevronDown aria-hidden className={cn("mt-1 size-4 shrink-0 transition-transform motion-reduce:transition-none", open && "rotate-180")} />
-      </button>
-
       <form
         ref={formRef}
-        id={id("form")}
-        hidden={!open}
         onSubmit={onSubmit}
         noValidate
         className="relative mt-unit-6 space-y-unit-4"

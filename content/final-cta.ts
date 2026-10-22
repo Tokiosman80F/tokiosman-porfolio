@@ -16,7 +16,6 @@ export const finalCta = {
 export const projectTypes = ["Website", "Web app", "AI upgrade", "Custom"] as const;
 
 export const contactForm = {
-  toggle: "Prefer to write? Send a message",
   heading: "Tell me about your project",
   subtext: "I'll reply within 24 hours.",
   fields: {
