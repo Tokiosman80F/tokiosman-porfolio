@@ -1613,3 +1613,10 @@ Live test (CDP): sequence correct at 1440 and 375, stops on "close deals" after 
 - **Navbar** gets `[contain:layout]`, so the per-frame size change on shrink/grow stays inside the header. Verified: mobile dropdown still 0.5rem under the bar, compact bar 768×56.
 - Process eyebrow dot no longer pulses. Pulses kept where they mean "live": the contact badge (available now) and the deploy tile's "deploying" state.
 - Glow button kept as a style (hero secondary, Work archive link); only its idle motion is gone.
+
+## 51. Polish pass (2026-10-23)
+
+- Checked at 375, 768, 1024, 1280 and 1536: no overflow, axe 0 violations at each; detector, ESLint and tsc clean across app/components.
+- **Process design tile (1024–1279px)**: the Centered / Split / Editorial tabs overflowed the narrow lg column ("Editorial" clipped). Tighter padding and gaps between lg and xl only; all three labels fit at 1024.
+- **Hero client row (below lg)**: capped at 34rem so 5 names wrap 3 + 2, not 4 + 1 with one alone.
+- **Still open for launch** (owner): real booking URL; Zoho credentials; real case studies (Work keeps template placeholders, incl. "24+" vs "20+"); real testimonials (section hidden); GitHub/LinkedIn URLs.

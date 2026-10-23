@@ -133,14 +133,14 @@ export function BuildTile({ className }: { className?: string }) {
   const { ref, index, select, stop } = useAutoplay<HTMLDivElement>(t.directions.length, 2600);
   return (
     <Tile dark className={cn("p-2.5", className)}>
-      <div ref={ref} onPointerEnter={stop} onFocus={stop} className="rounded-xl bg-paper-card p-3">
+      <div ref={ref} onPointerEnter={stop} onFocus={stop} className="rounded-xl bg-paper-card p-3 lg:p-2 xl:p-3">
         <div aria-hidden className="mb-3 flex items-center gap-1.5">
           <span className="size-2 rounded-full bg-[#ef4444]/80" />
           <span className="size-2 rounded-full bg-[#f59e0b]/80" />
           <span className="size-2 rounded-full bg-[#10b981]/80" />
           <span className="mx-auto h-2.5 w-2/5 rounded-full bg-border-hairline" />
         </div>
-        <div role="group" aria-label={t.directionsLabel} className="mb-3 flex gap-1 rounded-md bg-paper-subtle p-1">
+        <div role="group" aria-label={t.directionsLabel} className="mb-3 flex gap-1 rounded-md bg-paper-subtle p-1 lg:gap-0.5 lg:p-0.5 xl:gap-1 xl:p-1">
           {t.directions.map((d, i) => (
             <button
               key={d}
@@ -148,7 +148,7 @@ export function BuildTile({ className }: { className?: string }) {
               aria-pressed={i === index}
               onClick={() => select(i)}
               className={cn(
-                "tap-target flex-1 rounded-sm px-2 py-1.5 font-mono text-mono-tag transition-colors",
+                "tap-target flex-1 rounded-sm px-2 py-1.5 lg:px-1 xl:px-2 font-mono text-mono-tag transition-colors",
                 i === index ? "bg-white text-ink-black shadow-xs" : "text-ink-muted hover:text-ink-black",
               )}
             >

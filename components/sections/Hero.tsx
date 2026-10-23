@@ -67,8 +67,9 @@ export default function Hero() {
 
         <div className="mt-unit-16 flex w-full max-w-4xl flex-col items-center lg:mt-unit-24">
           <p className="mb-unit-6 max-w-md font-mono text-mono-tag tracking-widest text-ink-muted uppercase">{trustedBy.label}</p>
-          {/* Centred wrap: names differ a lot in length (5 clients), so rows centre rather than fill a grid */}
-          <ul aria-label="Clients" className="flex flex-wrap items-center justify-center gap-x-unit-8 gap-y-unit-4">
+          {/* Centred wrap: names differ a lot in length (5 clients), so rows centre rather than fill a grid; the
+              34rem cap below lg makes the wrap 3 + 2 instead of leaving one name alone on a row */}
+          <ul aria-label="Clients" className="flex max-w-[34rem] flex-wrap items-center justify-center gap-x-unit-8 gap-y-unit-4 lg:max-w-none">
             {trustedBy.clients.map((client) => (
               <li key={client} className="flex items-center gap-unit-3">
                 <span
