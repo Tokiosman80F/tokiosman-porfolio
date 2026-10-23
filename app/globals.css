@@ -271,12 +271,9 @@
   to { transform: translateX(-50%); }
 }
 
-/* Process bento: panel content swap, and current flowing along the chip traces (hover only). */
+/* Process bento: panel content swap. */
 @keyframes tile-in {
   from { opacity: 0; transform: translateY(4px); }
-}
-@keyframes trace-flow {
-  to { stroke-dashoffset: -40; }
 }
 /* FAQ accordion: animate <details> open/close height where the browser supports ::details-content and
    interpolate-size (Chromium 131+); elsewhere it opens instantly. */

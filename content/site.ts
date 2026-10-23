@@ -14,10 +14,12 @@ export const site = {
   whatsapp: "https://wa.me/8801987556588",
   // Floating WhatsApp button: label shown on hover, and the message the chat opens with
   whatsappButton: { label: "Chat on WhatsApp", message: "Hi Toki, I'd like to talk about a project." },
-  // TODO: add the real profile URLs. Empty entries are hidden in the footer and left out of the Person
-  // structured data (sameAs), so nothing points to a guessed address. `logo` = file in public/logos.
+  // Profiles (owner, 2026-10-23): footer logos and the Person structured data (sameAs). Empty entries are
+  // hidden. `logo` = file in public/logos.
   socials: [
-    { name: "GitHub", logo: "github", href: "" },
-    { name: "LinkedIn", logo: "linkedin", href: "" },
+    { name: "LinkedIn", logo: "linkedin", href: "https://www.linkedin.com/in/tokiosman/" },
+    { name: "GitHub", logo: "github", href: "https://github.com/Tokiosman80F" },
   ],
+  facebook: "https://www.facebook.com/takiosmaNahian",
+  messenger: "https://m.me/takiosmaNahian",
 };

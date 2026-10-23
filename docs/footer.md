@@ -8,7 +8,7 @@ Footer for tokiosman.com, aligned with the hero, services, and FAQ copy.
 
 - Logo: TokiOsman
 - Tagline: Full-stack developer building Next.js websites and web apps that capture leads, take payments, and sync with your CRM.
-- Location: Based in Bangladesh (GMT+6) · Working with clients worldwide
+- Location: Working remotely (GMT+6) with clients worldwide
 
 ---
 
@@ -32,7 +32,6 @@ Footer for tokiosman.com, aligned with the hero, services, and FAQ copy.
 
 - Email: tokiosman@outlook.com
 - Phone / WhatsApp: +880 1987-556588 → `https://wa.me/8801987556588`
-- Website: tokiosman.com → `https://tokiosman.com`
 - Book a free call → (booking URL)
 
 ---
@@ -49,7 +48,6 @@ Add others (X, Dribbble, Upwork, Fiverr) only if you keep them active.
 ## 5. Bottom bar
 
 - Left: © 2026 Toki Osman. All rights reserved.
-- Center (optional): Built with Next.js, Tailwind CSS & lots of coffee ☕
 - Right: Back to top ↑
 
 ---

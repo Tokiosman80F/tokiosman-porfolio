@@ -67,7 +67,6 @@ Design and product context: [`DESIGN.md`](DESIGN.md) (design system), [`PRODUCT.
 - Set `bookingUrl` in `content/site.ts` to the real Cal.com event link (the "Book a call" buttons open it as a modal).
 - Add the Zoho environment variables, or keep the email fallback.
 - Replace the placeholder case studies (`content/projects.ts`) and testimonials (`content/testimonials.ts`, currently hidden).
-- Add the GitHub and LinkedIn URLs in `content/site.ts`.
 
 ## Deploy
 

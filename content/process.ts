@@ -7,6 +7,7 @@ export const processSection = {
 };
 
 export type AiStep = { name: string; ai: string; me: string };
+export type AppRow = { a: string; b: string; tone: "green" | "blue" | "amber" | "grey"; initials?: string };
 export type SeoSearch = { query: string; domain: string; path: string; title: string };
 
 export const processTiles = {
@@ -15,6 +16,23 @@ export const processTiles = {
     text: "3 homepage design directions; you pick one. Then I build it in Next.js, fully responsive with smooth interactions.",
     directionsLabel: "Homepage directions",
     directions: ["Centered", "Split", "Editorial"],
+    // The sample client shown in all 3 directions (fictional; same studio as the SEO tile's example search).
+    demo: {
+      domain: "oakandgrain.studio",
+      brand: "Oak & Grain",
+      nav: ["Shop", "Process", "About"],
+      badge: "Made in our workshop",
+      headline: "Handmade tables, built to order",
+      sub: "Solid oak, finished by hand and delivered to your door.",
+      primary: "Shop tables",
+      secondary: "Our process",
+      products: [
+        { name: "Dining", price: "$2,400" },
+        { name: "Coffee", price: "$890" },
+        { name: "Desk", price: "$1,250" },
+      ],
+    },
+    builtWith: ["Next.js", "Responsive", "Smooth interactions"],
     cta: { label: "View pricing", href: "#pricing" },
   },
   updates: {
@@ -48,6 +66,29 @@ export const processTiles = {
     title: "Web apps, dashboards and everything else",
     text: "Logins and roles, admin dashboards, payments and bookings.",
     modules: ["Auth", "Admin", "Payments", "CMS"],
+    // The mini admin app in the tile (fictional data): one screen per module, in the same order.
+    appName: "Acme",
+    screens: ["Users & roles", "Overview", "Payments", "Posts"],
+    actions: ["Invite", "This week", "Export", "New post"],
+    users: [
+      { initials: "SA", a: "Sara Ahmed", b: "Owner", tone: "blue" },
+      { initials: "JL", a: "James Lee", b: "Admin", tone: "green" },
+      { initials: "MR", a: "Maya Roy", b: "Editor", tone: "grey" },
+    ] satisfies AppRow[],
+    stats: [
+      { label: "Revenue", value: "$12.4k", delta: "+8%" },
+      { label: "Bookings", value: "318", delta: "+12%" },
+    ],
+    payments: [
+      { a: "$1,500.00 · Website build", b: "Succeeded", tone: "green" },
+      { a: "$420.00 · Monthly care", b: "Succeeded", tone: "green" },
+      { a: "$89.00 · Add-on", b: "Refunded", tone: "grey" },
+    ] satisfies AppRow[],
+    posts: [
+      { a: "Spring menu is here", b: "Published", tone: "green" },
+      { a: "New weekend hours", b: "Scheduled", tone: "blue" },
+      { a: "Meet the team", b: "Draft", tone: "amber" },
+    ] satisfies AppRow[],
   },
   ai: {
     title: "How I use AI",

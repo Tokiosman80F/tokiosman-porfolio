@@ -11,7 +11,7 @@
 
 - 60-min strategy call to define your goals and audience
 - 3 homepage design directions; you pick one
-- Up to 6 pages, fully responsive with smooth interactions
+- Up to 3 pages, fully responsive with smooth interactions
 - AI chat assistant or smart contact form
 - On-page SEO, deployment and domain setup
 - 2 revision rounds
@@ -75,5 +75,5 @@
 ## Included in every project
 
 - Clear fixed scope before work starts
-- Payment: 50% to start, 50% on launch
+- Payment: 50% to start, 50% on launch, via Payoneer
 - Hosting fees are paid by the client; I handle setup and deployment

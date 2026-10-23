@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ArrowUp, FileText, Lock, Mic, PhoneOff, Video, Wifi } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUp, CalendarDays, Captions, Check, CreditCard, FileText, Hand, Info, LayoutDashboard, Lock, MessageSquare, Mic, MicOff, MonitorUp, PhoneOff, Plus, RotateCw, Search, Settings, SlidersHorizontal, Sparkles, Star, Users, Video, Wifi, X } from "lucide-react";
 import { FigmaIcon } from "@/components/ui/brand-icons";
 import { serviceArt as art } from "@/content/services";
 import { cn } from "@/lib/utils";
@@ -10,57 +10,133 @@ import { Globe } from "./Globe";
 // and lifts slightly when the card is hovered (`group`).
 const lift = "transition-transform duration-300 ease-out group-hover:-translate-y-1 motion-reduce:transition-none";
 
-/* 1 · Browser window showing a mini version of this site's hero, with a Figma tab */
+/* 1 · Design → build: a Figma file (back) with the hero frame selected, and in front a Chrome window on macOS
+   showing that hero live at tokiosman.com, the cursor on its CTA. Fixed hex colours, not theme tokens (real
+   app chrome): identical in light and dark. */
+const chromeIcon = "size-[11px] shrink-0 text-[#5f6368]";
+
 export function BrowserArt() {
   return (
-    <div className={cn("absolute inset-x-6 top-7 rounded-t-xl border border-border-strong bg-white shadow-md sm:inset-x-10", lift)}>
-      <div className="flex items-end gap-1 rounded-t-xl border-b border-border-hairline bg-paper-subtle px-2 pt-2">
-        <div className="flex gap-1 px-1 pb-2">
-          <span className="size-2 rounded-full bg-[#ef4444]/80" />
-          <span className="size-2 rounded-full bg-[#f59e0b]/80" />
-          <span className="size-2 rounded-full bg-[#10b981]/80" />
-        </div>
-        <div className="flex min-w-0 items-center gap-1.5 rounded-t-md bg-white px-2 py-1 font-sans text-[9px] text-ink-charcoal">
-          <span className="size-2.5 shrink-0 rounded-xs bg-ink-black" />
-          <span className="truncate">{art.browserTabs[0]}</span>
-        </div>
-        <div className="hidden min-w-0 items-center gap-1.5 px-2 py-1 font-sans text-[9px] text-ink-muted sm:flex [&_svg]:size-2.5">
-          <FigmaIcon />
-          <span className="truncate">{art.browserTabs[1]}</span>
-        </div>
-      </div>
-      <div className="px-4 pt-3 pb-6">
-        <div className="flex items-center justify-between rounded-md border border-border-hairline px-2 py-1">
-          <span className="font-display text-[9px] font-bold text-ink-black">
-            tokiosman<span className="text-canary-yellow [-webkit-text-stroke:0.5px_var(--color-ink-black)]">.</span>
-          </span>
-          <span className="hidden gap-2 sm:flex">
-            {[0, 1, 2].map((i) => (
-              <span key={i} className="h-1 w-5 rounded-full bg-border-strong" />
+    <>
+      {/* Figma, peeking out behind: toolbar, layers panel, canvas with the selected frame */}
+      <div className="absolute top-4 left-4 h-44 w-[78%] overflow-hidden rounded-lg bg-[#2c2c2c] shadow-[0_10px_24px_-10px_rgb(0_0_0/0.45)] transition-transform duration-300 ease-out group-hover:-translate-x-1 motion-reduce:transition-none sm:left-6">
+        <div className="flex h-6 items-center gap-2 border-b border-[#444] px-2">
+          <span className="flex gap-[3px]">
+            {["#ff5f57", "#febc2e", "#28c840"].map((c) => (
+              <span key={c} className="size-[6px] rounded-full" style={{ background: c }} />
             ))}
           </span>
-          <span className="h-3 w-10 rounded-xs bg-ink-black" />
-        </div>
-        <p className="mt-4 text-center font-display text-[13px] leading-tight font-bold text-ink-black uppercase">
-          I build websites that{" "}
-          <span className="rounded-xs border border-ink-black bg-canary-yellow px-0.5 text-ink-black">close deals</span>
-        </p>
-        <div className="mx-auto mt-2 h-1 w-3/5 rounded-full bg-border-strong" />
-        <div className="mx-auto mt-1 h-1 w-2/5 rounded-full bg-border-strong" />
-        <div className="mt-3 flex justify-center gap-1.5">
-          <span className="h-3.5 w-12 rounded-xs bg-ink-black" />
-          <span className="h-3.5 w-12 rounded-xs border border-signal-blue" />
-        </div>
-        <div className="mt-4 grid grid-cols-3 gap-2">
+          <span className="ml-1 flex [&_svg]:h-3 [&_svg]:w-2">
+            <FigmaIcon />
+          </span>
           {[0, 1, 2].map((i) => (
-            <div key={i} className="rounded-md border border-border-hairline p-1.5">
-              <div className="h-8 rounded-sm bg-surface-container" />
-              <div className="mt-1.5 h-1 w-4/5 rounded-full bg-border-strong" />
-            </div>
+            <span key={i} className={cn("size-2.5 rounded-[2px] border border-[#8a8a8a]", i === 0 && "border-[#0d99ff] bg-[#0d99ff]/30")} />
           ))}
+          <span className="ml-auto self-center rounded-[3px] bg-[#0a6fc2] px-1.5 py-[3px] font-sans text-[7px] leading-none font-semibold text-[#fff]">Share</span>
+        </div>
+        <div className="flex h-full">
+          <div className="w-16 shrink-0 space-y-[5px] border-r border-[#444] px-2 pt-2 font-sans text-[6.5px] text-[#b3b3b3]">
+            <p className="font-semibold text-[#fff]">Layers</p>
+            <p className="-mx-1 rounded-[2px] bg-[#0d99ff]/25 px-1 text-[#fff]"># Hero</p>
+            <p className="pl-2">Nav</p>
+            <p className="pl-2">Headline</p>
+            <p className="pl-2">Buttons</p>
+            <p># Services</p>
+          </div>
+          <div className="relative flex-1 bg-[#1e1e1e]">
+            <span className="absolute top-2 left-3 font-sans text-[6.5px] text-[#0d99ff]">Hero · 1440</span>
+            <div className="absolute top-[18px] left-3 h-24 w-40 bg-[#fff] outline outline-1 outline-[#0d99ff]">
+              {[["-top-[2px]", "-left-[2px]"], ["-top-[2px]", "-right-[2px]"], ["-bottom-[2px]", "-left-[2px]"], ["-bottom-[2px]", "-right-[2px]"]].map(([y, x]) => (
+                <span key={y + x} className={cn("absolute size-[4px] border border-[#0d99ff] bg-[#fff]", y, x)} />
+              ))}
+              <span className="mx-auto mt-5 block h-1.5 w-20 rounded-full bg-[#121212]" />
+              <span className="mx-auto mt-1 block h-1.5 w-14 rounded-[1px] bg-[#FDF175]" />
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+
+      {/* Chrome window, in front */}
+      <div className={cn("absolute top-11 right-4 left-12 overflow-hidden rounded-t-[10px] bg-[#fff] shadow-[0_24px_40px_-14px_rgb(0_0_0/0.45),0_0_0_0.5px_rgb(0_0_0/0.18)] sm:right-6 sm:left-20", lift)}>
+        {/* tab strip */}
+        <div className="flex h-7 items-end gap-1 bg-[#dee1e6] pl-2.5">
+          <span className="mb-[9px] flex gap-[5px]">
+            {["#ff5f57", "#febc2e", "#28c840"].map((c) => (
+              <span key={c} className="size-[8px] rounded-full shadow-[inset_0_0_0_0.5px_rgb(0_0_0/0.15)]" style={{ background: c }} />
+            ))}
+          </span>
+          <span className="ml-2 flex h-[22px] w-36 min-w-0 items-center gap-1.5 rounded-t-[7px] bg-[#fff] px-2 font-sans text-[8px] text-[#1f1f1f]">
+            <span className="flex size-[10px] shrink-0 items-center justify-center rounded-[2px] bg-[#121212]">
+              <span className="size-[3px] rounded-[0.5px] bg-[#FDF175]" />
+            </span>
+            <span className="truncate">{art.browserTabs[0]}</span>
+            <X className="ml-auto size-[9px] shrink-0 text-[#5f6368]" />
+          </span>
+          <span className="hidden h-[22px] min-w-0 items-center gap-1.5 px-2 font-sans text-[8px] text-[#474747] sm:flex [&_svg]:h-2.5 [&_svg]:w-2">
+            <FigmaIcon />
+            <span className="truncate">{art.browserTabs[1]}</span>
+          </span>
+          <Plus className="mb-[6px] size-[10px] shrink-0 text-[#5f6368]" />
+        </div>
+        {/* toolbar + omnibox */}
+        <div className="flex items-center gap-2 border-b border-[#e3e3e3] px-2.5 py-1">
+          <ArrowLeft className={chromeIcon} />
+          <ArrowRight className={cn(chromeIcon, "opacity-40")} />
+          <RotateCw className={chromeIcon} />
+          <span className="flex h-[18px] min-w-0 flex-1 items-center gap-1.5 rounded-full bg-[#f1f3f4] px-2 font-sans text-[8.5px] text-[#1f1f1f]">
+            <SlidersHorizontal className="size-[9px] shrink-0 text-[#5f6368]" />
+            <span className="truncate">{art.browserUrl}</span>
+            <Star className="ml-auto size-[9px] shrink-0 text-[#5f6368]" />
+          </span>
+          <span className="flex size-[14px] shrink-0 items-center justify-center rounded-full bg-[#0b57d0] font-sans text-[6.5px] font-semibold text-[#fff]">
+            T
+          </span>
+        </div>
+
+        {/* the live page: this site's hero, in miniature */}
+        <div className="relative px-4 pt-2 pb-6">
+          <div className="flex items-center justify-between rounded-md border border-[#e6e6e6] px-2 py-1 shadow-[0_1px_2px_rgb(0_0_0/0.05)]">
+            <span className="font-logo text-[9px] font-bold tracking-tight text-[#121212]">
+              tokiosman<span className="text-[#FDF175] [-webkit-text-stroke:0.5px_#121212]">.</span>
+            </span>
+            <span className="hidden gap-2 font-sans text-[6.5px] text-[#555] sm:flex">
+              {art.browserNav.map((l) => (
+                <span key={l}>{l}</span>
+              ))}
+            </span>
+            <span className="rounded-[3px] border border-[#121212] bg-[#FDF175] px-1.5 py-[1px] font-sans text-[6.5px] font-semibold text-[#121212]">
+              {art.browserCta.nav}
+            </span>
+          </div>
+          <p className="mx-auto mt-2 w-fit rounded-full border border-[#e6e6e6] px-1.5 py-[1px] font-mono text-[5.5px] tracking-widest text-[#666] uppercase">
+            {art.browserEyebrow}
+          </p>
+          <p className="mt-1.5 text-center font-display text-[13px] leading-tight font-bold text-[#121212] uppercase">
+            I build websites that{" "}
+            <span className="rounded-[2px] border border-[#121212] bg-[#FDF175] px-0.5 shadow-[1.5px_1.5px_0_#121212]">close deals</span>
+          </p>
+          <div className="mx-auto mt-2 h-[3px] w-3/5 rounded-full bg-[#d9d9d9]" />
+          <div className="mx-auto mt-1 h-[3px] w-2/5 rounded-full bg-[#d9d9d9]" />
+          <div className="relative mt-2.5 flex justify-center gap-1.5 font-sans text-[6.5px] font-semibold">
+            <span className="rounded-[3px] bg-[#121212] px-2 py-[3px] text-[#fff]">{art.browserCta.primary}</span>
+            <span className="rounded-[3px] border border-[#2563eb] px-2 py-[3px] text-[#2563eb]">{art.browserCta.secondary}</span>
+            {/* macOS pointer resting on the primary button */}
+            <svg aria-hidden viewBox="0 0 12 18" className="absolute top-2.5 left-[calc(50%-1.25rem)] h-3.5 w-auto drop-shadow-[0_1px_1px_rgb(0_0_0/0.3)]">
+              <path d="M1 1v13.5l3.3-3.1 2.2 5.1 2.2-.9-2.2-5H11z" fill="#121212" stroke="#fff" strokeWidth="1" strokeLinejoin="round" />
+            </svg>
+          </div>
+          <div className="mt-4 grid grid-cols-3 gap-2">
+            {["#FDF175", "#BFDBFE", "#BBF7D0"].map((c) => (
+              <div key={c} className="rounded-md border border-[#e6e6e6] p-1.5">
+                <div className="h-8 rounded-sm" style={{ background: `linear-gradient(135deg, ${c}, #f4f4f5)` }} />
+                <div className="mt-1.5 h-[3px] w-4/5 rounded-full bg-[#d9d9d9]" />
+                <div className="mt-1 h-[3px] w-1/2 rounded-full bg-[#e6e6e6]" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
 
@@ -68,7 +144,7 @@ export function BrowserArt() {
 function CalendarIcon() {
   return (
     <span className="flex size-full flex-col items-center justify-center bg-[#fff] leading-none">
-      <span className="font-sans text-[5px] font-semibold text-[#ef4444] uppercase">Thu</span>
+      <span className="font-sans text-[5px] font-semibold text-[#dc2626] uppercase">Thu</span>
       <span className="font-sans text-[12px] font-light text-[#111]">22</span>
     </span>
   );
@@ -148,44 +224,62 @@ export function PhoneArt() {
   );
 }
 
-/* 3 · AI chat answering from a source document, over a keyboard */
-const keyRows = ["QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM"];
-
+/* 3 · AI chatbot + SEO: a Google result for the store's shipping page (back, the SEO half) and, in front, the
+   store's chat widget answering the same question from its own policy document. Fixed hex colours, not theme
+   tokens (real app chrome): identical in light and dark. */
 export function ChatArt() {
   return (
     <>
-      <div className="absolute inset-x-6 -bottom-2 rounded-t-xl border border-border-hairline bg-paper-subtle p-2 sm:inset-x-10">
-        <div className="space-y-1">
-          {keyRows.map((row, r) => (
-            <div key={row} className="flex justify-center gap-1" style={{ paddingInline: `${r * 6}%` }}>
-              {[...row].map((k) => (
-                <span
-                  key={k}
-                  className="flex h-6 flex-1 items-center justify-center rounded-[5px] border border-border-hairline bg-white font-sans text-[8px] text-ink-muted shadow-xs"
-                >
-                  {k}
-                </span>
-              ))}
-            </div>
-          ))}
-          <div className="mx-auto h-6 w-1/2 rounded-[5px] border border-border-hairline bg-white shadow-xs" />
+      {/* search result */}
+      <div className="absolute top-5 left-5 w-[72%] rounded-xl sm:top-8 bg-[#fff] p-2.5 shadow-[0_10px_24px_-10px_rgb(0_0_0/0.3),0_0_0_0.5px_rgb(0_0_0/0.12)] transition-transform duration-300 ease-out group-hover:-translate-x-1 motion-reduce:transition-none sm:left-8">
+        <div className="flex items-center gap-1.5 rounded-full px-2.5 py-1 shadow-[0_1px_4px_rgb(32_33_36/0.28)]">
+          <Search className="size-[10px] shrink-0 text-[#5f6368]" />
+          <span className="truncate font-sans text-[9px] text-[#202124]">{art.serp.query}</span>
         </div>
-      </div>
-      <div className={cn("absolute top-5 left-1/2 w-[72%] max-w-xs -translate-x-1/2 rounded-xl border border-border-hairline bg-white p-2.5 shadow-lg", lift)}>
-        <div className="flex justify-end">
-          <span className="rounded-lg rounded-br-xs bg-ink-black px-2 py-1 font-sans text-[10px] text-white">{art.chat.question}</span>
-        </div>
-        <div className="mt-1.5 max-w-[85%] rounded-lg rounded-bl-xs bg-paper-subtle px-2 py-1.5">
-          <p className="font-sans text-[10px] text-ink-black">{art.chat.answer}</p>
-          <span className="mt-1 inline-flex items-center gap-1 rounded-sm border border-border-hairline bg-white px-1 py-0.5 font-mono text-[8px] text-ink-charcoal">
-            <FileText className="size-2.5" />
-            {art.chat.source}
+        <div className="mt-2.5 flex items-center gap-1.5">
+          <span className="flex size-[16px] shrink-0 items-center justify-center rounded-full bg-[#f1f3f4] font-sans text-[7px] font-bold text-[#202124]">
+            {art.serp.site[0]}
+          </span>
+          <span className="min-w-0 leading-tight">
+            <span className="block truncate font-sans text-[8px] text-[#202124]">{art.serp.site}</span>
+            <span className="block truncate font-sans text-[7px] text-[#4d5156]">{art.serp.url}</span>
           </span>
         </div>
-        <div className="mt-2.5 flex items-center gap-2 rounded-lg border border-border-hairline px-2 py-1.5">
-          <span className="flex-1 font-sans text-[10px] text-ink-muted">{art.chat.placeholder}</span>
-          <span className="flex size-5 items-center justify-center rounded-full bg-ink-black text-white">
-            <ArrowUp className="size-3" />
+        <p className="mt-1 truncate font-sans text-[11px] text-[#1a0dab]">{art.serp.title}</p>
+        <div className="mt-1 h-[3px] w-11/12 rounded-full bg-[#e8eaed]" />
+        <div className="mt-1 h-[3px] w-3/5 rounded-full bg-[#e8eaed]" />
+      </div>
+
+      {/* chat widget */}
+      <div className={cn("absolute top-11 right-5 w-[58%] max-w-[15rem] overflow-hidden rounded-xl bg-[#fff] shadow-[0_24px_40px_-14px_rgb(0_0_0/0.45),0_0_0_0.5px_rgb(0_0_0/0.15)] sm:right-8", lift)}>
+        <div className="flex items-center gap-1.5 bg-[#121212] px-2.5 py-1.5">
+          <span className="flex size-[18px] shrink-0 items-center justify-center rounded-full bg-[#FDF175] text-[#121212] [&_svg]:size-[10px]">
+            <Sparkles />
+          </span>
+          <span className="min-w-0 leading-tight">
+            <span className="block truncate font-sans text-[9px] font-semibold text-[#fff]">{art.chat.bot}</span>
+            <span className="flex items-center gap-1 font-sans text-[7px] text-[#a1a1aa]">
+              <span className="size-[5px] rounded-full bg-[#22c55e]" />
+              {art.chat.status}
+            </span>
+          </span>
+        </div>
+        <div className="space-y-1.5 bg-[#f7f7f8] px-2 py-2">
+          <div className="flex justify-end">
+            <span className="rounded-[10px] rounded-br-[3px] bg-[#121212] px-2 py-1 font-sans text-[9px] text-[#fff]">{art.chat.question}</span>
+          </div>
+          <div className="max-w-[88%] rounded-[10px] rounded-bl-[3px] bg-[#fff] px-2 py-1.5 shadow-[0_0_0_0.5px_rgb(0_0_0/0.1)]">
+            <p className="font-sans text-[9px] text-[#121212]">{art.chat.answer}</p>
+            <span className="mt-1 inline-flex max-w-full items-center gap-1 rounded-[4px] bg-[#f1f3f4] px-1 py-0.5 font-mono text-[7px] text-[#3f3f46]">
+              <FileText className="size-2 shrink-0" />
+              <span className="truncate">{art.chat.source}</span>
+            </span>
+          </div>
+        </div>
+        <div className="flex items-center gap-2 border-t border-[#ececec] px-2 py-1.5">
+          <span className="flex-1 truncate font-sans text-[9px] text-[#71717a]">{art.chat.placeholder}</span>
+          <span className="flex size-[18px] shrink-0 items-center justify-center rounded-full bg-[#121212] text-[#fff]">
+            <ArrowUp className="size-[10px]" />
           </span>
         </div>
       </div>
@@ -193,41 +287,69 @@ export function ChatArt() {
   );
 }
 
-/* 4 · Video call: host tile with initials, guest self-view, call controls */
+/* 4 · Video call in a Meet-style window: Toki's camera as the active speaker (blue ring, voice bars), the
+   guest's self-view in the corner, and the call bar with the meeting name, controls and the red hang-up.
+   Fixed hex colours, not theme tokens (real app chrome): identical in light and dark. */
+const callBtn = "flex size-[22px] shrink-0 items-center justify-center rounded-full bg-[#3c4043] text-[#e8eaed] [&_svg]:size-[11px]";
+
 export function CallArt() {
   return (
-    <div className={cn("absolute top-7 left-1/2 w-[76%] max-w-sm -translate-x-1/2", lift)}>
-      <div className="relative overflow-hidden rounded-xl border border-ink-black bg-[radial-gradient(120%_100%_at_50%_0%,var(--color-paper-card),var(--color-surface-container))] shadow-lg">
-        <div className="flex h-44 items-center justify-center">
-          <span className="flex size-20 items-center justify-center rounded-full border-2 border-ink-black bg-canary-yellow font-display text-headline-md font-bold text-ink-black">
-            {art.call.hostInitials}
-          </span>
-        </div>
-        <span className="absolute top-2 left-2 flex items-center gap-1.5 rounded-md bg-white/90 px-1.5 py-0.5 font-sans text-[9px] font-medium text-ink-black">
-          {/* speaking indicator */}
-          <span className="flex h-2.5 items-end gap-px">
-            <span className="h-1 w-0.5 rounded-full bg-signal-green" />
-            <span className="h-2.5 w-0.5 rounded-full bg-signal-green" />
-            <span className="h-1.5 w-0.5 rounded-full bg-signal-green" />
-          </span>
-          {art.call.host}
+    <div className={cn("absolute inset-x-5 top-5 rounded-xl bg-[#202124] p-1.5 shadow-[0_24px_40px_-14px_rgb(0_0_0/0.5),0_3px_8px_rgb(0_0_0/0.2)] sm:inset-x-8", lift)}>
+      {/* active speaker */}
+      <div className="relative h-36 overflow-hidden rounded-lg bg-[#3c4043] sm:h-40">
+        {/* the whole square photo, over a blurred fill of itself (like a camera feed's background), so the face sits smaller */}
+        <Image src="/images/toki-osman.jpg" alt="" fill sizes="400px" className="scale-125 object-cover blur-xl" />
+        <span className="absolute inset-y-0 left-1/2 aspect-square -translate-x-1/2 [mask-image:linear-gradient(to_right,transparent,black_20%,black_80%,transparent)]">
+          <Image src="/images/toki-osman.jpg" alt="" fill sizes="200px" className="object-cover" />
         </span>
-        <div className="absolute inset-x-0 bottom-2 flex justify-center gap-1.5">
-          <span className="flex size-6 items-center justify-center rounded-full bg-white/90 text-ink-black">
-            <Mic className="size-3" />
+        <span className="absolute inset-0 rounded-lg shadow-[inset_0_0_0_2px_#8ab4f8]" />
+        <span className="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-[#000]/55 to-transparent" />
+        <span className="absolute bottom-1.5 left-2 font-sans text-[8.5px] font-medium text-[#fff]">{art.call.host}</span>
+        {/* voice bars */}
+        <span className="absolute top-2 right-2 flex size-[18px] items-center justify-center gap-[1.5px] rounded-full bg-[#1a73e8]">
+          {[4, 8, 5].map((h, i) => (
+            <span key={i} className="w-[2px] rounded-full bg-[#fff]" style={{ height: h }} />
+          ))}
+        </span>
+        {/* guest self-view */}
+        <span className="absolute right-2 bottom-2 h-14 w-20 overflow-hidden rounded-md bg-[#FDF175] shadow-[0_2px_8px_rgb(0_0_0/0.35)]">
+          <Image src="/avatars/person-2.svg" alt="" fill unoptimized className="object-cover object-[50%_30%]" />
+          <span className="absolute bottom-1 left-1 rounded-[3px] bg-[#000]/45 px-1 py-[1px] font-sans text-[7px] leading-none text-[#fff]">{art.call.guest}</span>
+          <span className="absolute top-1 right-1 flex size-3 items-center justify-center rounded-full bg-[#000]/45 text-[#fff] [&_svg]:size-[7px]">
+            <MicOff />
           </span>
-          <span className="flex size-6 items-center justify-center rounded-full bg-white/90 text-ink-black">
-            <Video className="size-3" />
-          </span>
-          {/* end-call red is a mock-UI colour */}
-          <span className="flex size-6 items-center justify-center rounded-full bg-[#ef4444] text-white">
-            <PhoneOff className="size-3" />
-          </span>
-        </div>
+        </span>
       </div>
-      <div className="absolute -right-6 -bottom-8 flex h-20 w-24 items-center justify-center rounded-lg border border-ink-black bg-ink-black shadow-lg">
-        <span className="flex size-10 items-center justify-center rounded-full bg-white/10 font-sans text-[10px] font-medium text-on-primary">
-          {art.call.guest}
+
+      {/* call bar */}
+      <div className="flex items-center justify-between gap-2 px-1 pt-1.5 pb-0.5">
+        <span className="hidden min-w-0 truncate font-sans text-[8.5px] text-[#e8eaed] sm:block">
+          {art.call.time} <span className="text-[#5f6368]">|</span> {art.call.title}
+        </span>
+        <span className="mx-auto flex items-center gap-1 sm:mx-0">
+          <span className={callBtn}>
+            <Mic />
+          </span>
+          <span className={callBtn}>
+            <Video />
+          </span>
+          <span className={callBtn}>
+            <Captions />
+          </span>
+          <span className={callBtn}>
+            <Hand />
+          </span>
+          <span className={callBtn}>
+            <MonitorUp />
+          </span>
+          <span className="flex h-[22px] w-9 shrink-0 items-center justify-center rounded-full bg-[#ea4335] text-[#fff] [&_svg]:size-[11px]">
+            <PhoneOff />
+          </span>
+        </span>
+        <span className="hidden items-center gap-2 text-[#e8eaed] sm:flex [&_svg]:size-[11px]">
+          <Info />
+          <Users />
+          <MessageSquare />
         </span>
       </div>
     </div>
@@ -237,4 +359,277 @@ export function CallArt() {
 /* 5 · Dotted 3D globe with client pins (bottom-right, partly cropped like the reference): see Globe.tsx */
 export function GlobeArt({ clients }: { clients: string[] }) {
   return <Globe clients={clients} className={cn("absolute -right-6 -bottom-16 size-96 lg:size-104", lift)} />;
+}
+
+/* 6 · Admin dashboard in a browser window (the web app service page's hero): sidebar, KPI cards, a revenue
+   chart and the latest bookings. Fixed hex colours, not theme tokens (a product screen): identical in light
+   and dark. Fictional data from content/services.ts. */
+const dashNav = [LayoutDashboard, CalendarDays, Users, CreditCard, Settings];
+const statusTone: Record<string, string> = {
+  Paid: "bg-[#dcfce7] text-[#166534]",
+  Booked: "bg-[#dbeafe] text-[#1e40af]",
+  Pending: "bg-[#fef3c7] text-[#92400e]",
+};
+// revenue line, 12 points over a 200×56 box
+const revenue = [18, 22, 20, 28, 26, 33, 31, 38, 36, 44, 41, 50];
+const linePath = revenue.map((v, i) => `${i ? "L" : "M"}${((i / (revenue.length - 1)) * 200).toFixed(1)} ${(56 - v).toFixed(1)}`).join(" ");
+
+export function DashboardArt() {
+  const d = art.dashboard;
+  return (
+    <div className={cn("absolute inset-x-5 top-6 overflow-hidden rounded-xl bg-[#fff] shadow-[0_24px_40px_-14px_rgb(0_0_0/0.45),0_0_0_0.5px_rgb(0_0_0/0.18)] sm:inset-x-8 sm:top-8", lift)}>
+      {/* browser bar */}
+      <div className="flex items-center gap-2 border-b border-[#ececec] bg-[#f6f6f7] px-2.5 py-1.5">
+        <span className="flex gap-[4px]">
+          {["#ff5f57", "#febc2e", "#28c840"].map((c) => (
+            <span key={c} className="size-[7px] rounded-full" style={{ background: c }} />
+          ))}
+        </span>
+        <span className="mx-auto flex h-4 w-1/2 items-center justify-center gap-1 rounded-full bg-[#fff] font-sans text-[7.5px] text-[#5f6368] shadow-[0_0_0_0.5px_rgb(0_0_0/0.1)]">
+          <Lock className="size-2 shrink-0" />
+          {d.url}
+        </span>
+      </div>
+      <div className="flex">
+        {/* sidebar */}
+        <div className="flex w-9 shrink-0 flex-col items-center gap-1.5 border-r border-[#f0f0f0] bg-[#fafafa] py-2 sm:w-24 sm:items-stretch sm:px-1.5">
+          <span className="mb-1 flex items-center gap-1 px-1 font-sans text-[8px] font-bold text-[#121212]">
+            <span className="size-2.5 shrink-0 rounded-[3px] bg-[#121212]" />
+            <span className="hidden sm:inline">{d.app}</span>
+          </span>
+          {d.nav.map((n, i) => {
+            const Icon = dashNav[i];
+            return (
+              <span
+                key={n}
+                className={cn(
+                  "flex items-center gap-1.5 rounded-[5px] p-1 font-sans text-[7.5px] sm:px-1.5",
+                  i === 0 ? "bg-[#FDF175] font-semibold text-[#121212]" : "text-[#52525b]",
+                )}
+              >
+                <Icon className="size-[10px] shrink-0" />
+                <span className="hidden sm:inline">{n}</span>
+              </span>
+            );
+          })}
+        </div>
+        {/* main */}
+        <div className="min-w-0 flex-1 p-2.5">
+          <div className="flex items-center justify-between">
+            <span className="font-sans text-[10px] font-semibold text-[#121212]">{d.title}</span>
+            <span className="rounded-[4px] border border-[#e4e4e7] px-1.5 py-[2px] font-sans text-[7px] text-[#52525b]">{d.range}</span>
+          </div>
+          <div className="mt-2 grid grid-cols-3 gap-1.5">
+            {d.kpis.map((k) => (
+              <div key={k.label} className="rounded-md border border-[#ececec] px-1.5 py-1">
+                <p className="truncate font-sans text-[6.5px] text-[#71717a]">{k.label}</p>
+                <p className="font-sans text-[11px] leading-tight font-semibold text-[#121212]">{k.value}</p>
+                <p className="font-sans text-[6.5px] font-medium text-[#15803d]">{k.delta}</p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-1.5 rounded-md border border-[#ececec] px-1.5 pt-1 pb-0.5">
+            <p className="font-sans text-[6.5px] text-[#71717a]">{d.chartLabel}</p>
+            <svg viewBox="0 0 200 56" preserveAspectRatio="none" className="mt-0.5 h-7 w-full sm:h-12">
+              <defs>
+                <linearGradient id="dash-fill" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0" stopColor="#FDF175" stopOpacity="0.7" />
+                  <stop offset="1" stopColor="#FDF175" stopOpacity="0" />
+                </linearGradient>
+              </defs>
+              <path d={`${linePath} L200 56 L0 56 Z`} fill="url(#dash-fill)" />
+              <path d={linePath} fill="none" stroke="#121212" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
+            </svg>
+          </div>
+          <div className="mt-1.5 rounded-md border border-[#ececec] px-1.5 py-1">
+            <p className="font-sans text-[6.5px] text-[#71717a]">{d.tableLabel}</p>
+            <ul>
+              {d.rows.map((r) => (
+                <li key={r.name} className="flex items-center gap-1.5 border-b border-[#f4f4f5] py-[3px] last:border-0">
+                  <span className="flex size-3 shrink-0 items-center justify-center rounded-full bg-[#e4e4e7] font-sans text-[5px] font-semibold text-[#3f3f46]">
+                    {r.name.split(" ").map((w) => w[0]).join("")}
+                  </span>
+                  <span className="min-w-0 flex-1 truncate font-sans text-[7.5px] text-[#121212]">{r.name}</span>
+                  <span className="hidden font-sans text-[7px] text-[#71717a] sm:inline">{r.what}</span>
+                  <span className="font-sans text-[7.5px] font-medium text-[#121212]">{r.amount}</span>
+                  <span className={cn("rounded-full px-1.5 py-px font-sans text-[6.5px] font-medium", statusTone[r.status])}>{r.status}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* 7 · Site health panel (the maintenance service page's hero): 30 days of uptime bars, then the monthly
+   checks with their status. Fixed hex colours, not theme tokens (a product screen). Fictional data. */
+export function HealthArt() {
+  const h = art.health;
+  return (
+    <div className={cn("absolute inset-x-5 top-6 overflow-hidden rounded-xl bg-[#fff] p-3 shadow-[0_24px_40px_-14px_rgb(0_0_0/0.45),0_0_0_0.5px_rgb(0_0_0/0.18)] sm:inset-x-10 sm:top-8 sm:p-4", lift)}>
+      <div className="flex items-center justify-between gap-2">
+        <span className="min-w-0">
+          <span className="block truncate font-sans text-[11px] font-semibold text-[#121212]">{h.site}</span>
+          <span className="flex items-center gap-1 font-sans text-[8px] text-[#15803d]">
+            <span className="size-1.5 rounded-full bg-[#22c55e]" />
+            {h.status}
+          </span>
+        </span>
+        <span className="shrink-0 rounded-full bg-[#f4f4f5] px-2 py-0.5 font-sans text-[8px] text-[#52525b]">{h.updated}</span>
+      </div>
+
+      {/* uptime: one bar per day, one short dip */}
+      <div className="mt-3 rounded-lg border border-[#ececec] p-2">
+        <div className="flex items-baseline justify-between font-sans text-[8px] text-[#71717a]">
+          <span>{h.uptimeLabel}</span>
+          <span className="text-[11px] font-semibold text-[#121212]">{h.uptime}</span>
+        </div>
+        <div className="mt-1.5 flex h-6 items-stretch gap-[2px]">
+          {Array.from({ length: 30 }, (_, i) => (
+            <span key={i} className={cn("flex-1 rounded-[1.5px]", i === 17 ? "bg-[#fbbf24]" : "bg-[#22c55e]")} />
+          ))}
+        </div>
+      </div>
+
+      {/* this month's checks */}
+      <ul className="mt-2 grid grid-cols-2 gap-1.5">
+        {h.checks.map((c) => (
+          <li key={c.label} className="flex items-center gap-1.5 rounded-lg border border-[#ececec] px-2 py-1.5">
+            <span className="flex size-4 shrink-0 items-center justify-center rounded-full bg-[#dcfce7] text-[#166534]">
+              <Check className="size-2.5" strokeWidth={3} />
+            </span>
+            <span className="min-w-0 leading-tight">
+              <span className="block truncate font-sans text-[8.5px] font-medium text-[#121212]">{c.label}</span>
+              <span className="block truncate font-sans text-[7px] text-[#71717a]">{c.detail}</span>
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+/* 8 · Headless WordPress (its service page's hero): the WordPress editor (back) publishes a post, and the
+   Next.js site (front) shows it a moment later with a fast performance score. Fixed hex colours, not theme
+   tokens (real app chrome). Fictional data from content/services.ts. */
+export function HeadlessArt() {
+  const h = art.headless;
+  return (
+    <>
+      {/* WordPress admin, behind */}
+      <div className="absolute top-5 left-4 h-52 w-[70%] overflow-hidden rounded-lg bg-[#f0f0f1] shadow-[0_10px_24px_-10px_rgb(0_0_0/0.45)] transition-transform duration-300 ease-out group-hover:-translate-x-1 motion-reduce:transition-none sm:left-6">
+        <div className="flex h-5 items-center gap-1.5 bg-[#1d2327] px-2 font-sans text-[7px] text-[#f0f0f1]">
+          <span className="flex size-3 items-center justify-center rounded-full border border-[#f0f0f1]/70 font-serif text-[6px] font-bold">W</span>
+          {h.wpSite}
+        </div>
+        <div className="flex h-full">
+          <div className="w-14 shrink-0 space-y-1 bg-[#1d2327] px-1.5 pt-2 font-sans text-[6.5px] text-[#c3c4c7]">
+            {h.wpMenu.map((m, i) => (
+              <p key={m} className={cn("rounded-[2px] px-1 py-[2px]", i === 1 && "bg-[#2271b1] text-[#fff]")}>
+                {m}
+              </p>
+            ))}
+          </div>
+          <div className="min-w-0 flex-1 p-2">
+            <div className="flex items-center justify-between">
+              <span className="font-sans text-[8px] font-semibold text-[#1d2327]">{h.wpAction}</span>
+              <span className="rounded-[3px] bg-[#2271b1] px-1.5 py-[2px] font-sans text-[7px] font-semibold text-[#fff]">{h.wpButton}</span>
+            </div>
+            <div className="mt-2 rounded-[3px] bg-[#fff] p-2 shadow-[0_0_0_0.5px_#dcdcde]">
+              <p className="font-serif text-[10px] leading-tight font-bold text-[#1d2327]">{h.postTitle}</p>
+              <div className="mt-1.5 h-[3px] w-11/12 rounded-full bg-[#dcdcde]" />
+              <div className="mt-1 h-[3px] w-4/5 rounded-full bg-[#dcdcde]" />
+              <div className="mt-1 h-[3px] w-3/5 rounded-full bg-[#dcdcde]" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* "published → live" connector */}
+      <span className="absolute top-[2.6rem] right-4 z-10 flex items-center gap-1 rounded-full sm:right-6 bg-[#121212] px-2 py-1 font-sans text-[7.5px] font-medium whitespace-nowrap text-[#fff] shadow-md">
+        <span className="size-1.5 rounded-full bg-[#22c55e]" />
+        {h.live}
+      </span>
+
+      {/* the Next.js site, in front */}
+      <div className={cn("absolute top-16 right-4 w-[60%] overflow-hidden rounded-lg bg-[#fff] shadow-[0_24px_40px_-14px_rgb(0_0_0/0.45),0_0_0_0.5px_rgb(0_0_0/0.18)] sm:right-6", lift)}>
+        <div className="flex items-center gap-1.5 border-b border-[#ececec] bg-[#f6f6f7] px-2 py-1">
+          <span className="flex gap-[3px]">
+            {["#ff5f57", "#febc2e", "#28c840"].map((c) => (
+              <span key={c} className="size-[6px] rounded-full" style={{ background: c }} />
+            ))}
+          </span>
+          <span className="mx-auto flex h-3.5 min-w-0 items-center gap-1 truncate rounded-full bg-[#fff] px-2 font-sans text-[7px] text-[#5f6368] shadow-[0_0_0_0.5px_rgb(0_0_0/0.1)]">
+            <Lock className="size-2 shrink-0" />
+            {h.siteUrl}
+          </span>
+        </div>
+        <div className="p-2.5">
+          <p className="font-sans text-[6.5px] tracking-widest text-[#71717a] uppercase">{h.siteSection}</p>
+          <p className="mt-1 font-display text-[12px] leading-tight font-bold text-[#121212]">{h.postTitle}</p>
+          <div className="mt-2 h-14 rounded-md bg-[linear-gradient(135deg,#dbeafe,#FDF175)]" />
+          <div className="mt-2 flex items-center gap-2">
+            {h.scores.map((s) => (
+              <span key={s.label} className="flex items-center gap-1 font-sans text-[6.5px] text-[#52525b]">
+                <span className="flex size-5 items-center justify-center rounded-full border-2 border-[#22c55e] font-sans text-[7px] font-bold text-[#15803d]">
+                  {s.value}
+                </span>
+                {s.label}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+/* 9 · Hacked-site recovery (its service page's hero): the Google result flagged "This site may be hacked"
+   (back) and the cleanup report that ends with the site clean and a review requested (front). Fixed hex
+   colours, not theme tokens (real app chrome). Fictional data from content/services.ts. */
+export function SecurityArt() {
+  const s = art.security;
+  return (
+    <>
+      {/* flagged search result, behind */}
+      <div className="absolute top-5 left-4 w-[68%] rounded-xl bg-[#fff] p-2.5 shadow-[0_10px_24px_-10px_rgb(0_0_0/0.35),0_0_0_0.5px_rgb(0_0_0/0.12)] transition-transform duration-300 ease-out group-hover:-translate-x-1 motion-reduce:transition-none sm:left-6">
+        <div className="flex items-center gap-1.5">
+          <span className="flex size-[14px] shrink-0 items-center justify-center rounded-full bg-[#f1f3f4] font-sans text-[6.5px] font-bold text-[#202124]">
+            {s.site[0]}
+          </span>
+          <span className="min-w-0 truncate font-sans text-[7.5px] text-[#4d5156]">{s.url}</span>
+        </div>
+        <p className="mt-1 truncate font-sans text-[10.5px] text-[#1a0dab]">{s.resultTitle}</p>
+        <p className="mt-0.5 font-sans text-[8px] font-semibold text-[#b3261e]">{s.warning}</p>
+        <div className="mt-1 h-[3px] w-11/12 rounded-full bg-[#e8eaed]" />
+        <div className="mt-1 h-[3px] w-2/3 rounded-full bg-[#e8eaed]" />
+      </div>
+
+      {/* cleanup report, in front */}
+      <div className={cn("absolute top-[4.5rem] right-4 w-[64%] overflow-hidden rounded-xl bg-[#fff] shadow-[0_24px_40px_-14px_rgb(0_0_0/0.45),0_0_0_0.5px_rgb(0_0_0/0.18)] sm:right-6", lift)}>
+        <div className="flex items-center justify-between gap-2 border-b border-[#ececec] px-2.5 py-1.5">
+          <span className="truncate font-sans text-[9px] font-semibold text-[#121212]">{s.reportTitle}</span>
+          <span className="flex shrink-0 items-center gap-1 rounded-full bg-[#dcfce7] px-1.5 py-px font-sans text-[7px] font-semibold text-[#166534]">
+            <Check className="size-2.5" strokeWidth={3} />
+            {s.status}
+          </span>
+        </div>
+        <ul className="px-2.5 py-1">
+          {s.findings.map((f) => (
+            <li key={f.label} className="flex items-center gap-2 border-b border-[#f4f4f5] py-[5px] last:border-0">
+              <span className="min-w-0 flex-1 truncate font-sans text-[8px] text-[#3f3f46]">{f.label}</span>
+              <span className="font-sans text-[8px] font-semibold text-[#121212] tabular-nums">{f.count}</span>
+              <span className="rounded-full bg-[#f4f4f5] px-1.5 py-px font-sans text-[6.5px] font-medium text-[#3f3f46]">{f.action}</span>
+            </li>
+          ))}
+        </ul>
+        <div className="flex items-center gap-1.5 bg-[#f7f7f8] px-2.5 py-1.5 font-sans text-[7.5px] text-[#3f3f46]">
+          <span className="size-1.5 rounded-full bg-[#22c55e]" />
+          {s.review}
+        </div>
+      </div>
+    </>
+  );
 }

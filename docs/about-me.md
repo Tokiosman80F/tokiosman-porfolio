@@ -39,7 +39,7 @@ Picture TV · Reduxify · Logic Matrix · Webermelon · EasyGrowDigital · AIUB
 
 - Label: **ABOUT ME**
 - Text:
-  "I'm a full-stack developer from Bangladesh who builds websites that do more than look good: they capture leads, take payments, and sync with your CRM. Clear communication, daily updates, no surprises."
+  "I'm a full-stack developer who builds websites that do more than look good: they capture leads, take payments, and sync with your CRM. Clear communication, daily updates, no surprises."
 - Name line: **— Toki Osman** Full-Stack Developer, Next.js & AI
 
 Later: rotate in real client testimonials here.

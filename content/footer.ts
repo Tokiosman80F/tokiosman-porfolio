@@ -6,16 +6,16 @@ export type FooterLink = {
   label: string;
   href: string;
   external?: boolean;
-  /** Contact rows: a brand logo in public/logos, or a generic icon ("globe" | "calendar"). */
+  /** Contact rows: a brand logo in public/logos, or a generic icon ("calendar"). */
   logo?: string;
-  icon?: "globe" | "calendar";
+  icon?: "calendar";
 };
 export type FooterColumn = { title: string; links: FooterLink[] };
 
 export const footer = {
   tagline:
     "Full-stack developer building Next.js websites and web apps that capture leads, take payments, and sync with your CRM.",
-  location: "Based in Bangladesh (GMT+6) · Working with clients worldwide",
+  location: "Working remotely (GMT+6) with clients worldwide",
   columns: [
     {
       title: "Navigate",
@@ -30,9 +30,13 @@ export const footer = {
     {
       title: "Services",
       links: [
-        { label: "Website Design & Development", href: "/#pricing" },
-        { label: "Web App + Dashboard", href: "/#pricing" },
-        { label: "AI Upgrade for Your Website", href: "/#pricing" },
+        { label: "Website Design & Development", href: "/services/nextjs-website-development" },
+        { label: "Web App + Dashboard", href: "/services/web-app-development" },
+        { label: "Headless WordPress", href: "/services/headless-wordpress-nextjs" },
+        { label: "WordPress Malware Removal", href: "/services/wordpress-malware-removal" },
+        { label: "AI Upgrade for Your Website", href: "/services/ai-chatbot-for-website" },
+        { label: "CRM & Payment Integrations", href: "/services/crm-payments-automation" },
+        { label: "Website Maintenance", href: "/services/website-maintenance" },
         { label: "Custom Projects", href: "/#pricing" },
       ],
     },
@@ -41,13 +45,11 @@ export const footer = {
       links: [
         { label: site.email, href: `mailto:${site.email}`, logo: "outlook" },
         { label: site.phone, href: site.whatsapp, external: true, logo: "whatsapp" },
-        { label: "tokiosman.com", href: site.url, external: true, icon: "globe" },
         { label: "Book a free call", href: site.bookingUrl, external: true, icon: "calendar" },
       ],
     },
   ] satisfies FooterColumn[],
   // Bottom bar: "© {year} {copyright}" (the year is set at build time)
   copyright: "Toki Osman. All rights reserved.",
-  builtWith: "Built with Next.js, Tailwind CSS & lots of coffee ☕",
   backToTop: "Back to top",
 };

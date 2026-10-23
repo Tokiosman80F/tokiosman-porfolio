@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Caveat, Inter, JetBrains_Mono, Sora, Space_Grotesk } from "next/font/google";
 import { BookingModal } from "@/components/BookingModal";
 import { SplashLoader } from "@/components/layout/SplashLoader";
@@ -16,9 +16,22 @@ const sora = Sora({ variable: "--font-sora", subsets: ["latin"] });
 
 // Favicon: app/favicon.ico via the file convention (Next injects the <link>). Replace that file, or add app/icon.svg, when the real one exists.
 export const metadata: Metadata = {
+  metadataBase: new URL(site.url),
   title: { default: site.title, template: `%s · ${site.name}` },
   description: site.description,
   applicationName: site.name,
+  authors: [{ name: site.person, url: site.url }],
+  creator: site.person,
+  // Link previews (the image is app/opengraph-image.tsx)
+  openGraph: { type: "website", siteName: site.name, title: site.title, description: site.description, url: "/", locale: "en_US" },
+  twitter: { card: "summary_large_image", title: site.title, description: site.description },
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#121212" },
+  ],
 };
 
 // Person structured data (docs/footer.md): links the name to the site and, once set, the GitHub /
@@ -30,7 +43,7 @@ const personJsonLd = {
   jobTitle: site.jobTitle,
   url: site.url,
   email: `mailto:${site.email}`,
-  sameAs: site.socials.map((s) => s.href).filter(Boolean),
+  sameAs: [...site.socials.map((s) => s.href), site.facebook].filter(Boolean),
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

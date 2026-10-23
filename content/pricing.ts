@@ -18,6 +18,8 @@ export type Offer = {
   addOn?: string;
   footnote?: string;
   cta: { label: string; href: string };
+  /** Link to the service page with the full plans. */
+  more?: { label: string; href: string };
 };
 
 export type CustomOffer = Pick<Offer, "name" | "price" | "tagline" | "cta">;
@@ -31,7 +33,7 @@ export const pricingSection = {
   includedTitle: "Included in every project",
   included: [
     "Clear fixed scope before work starts",
-    "Payment: 50% to start, 50% on launch",
+    "Payment: 50% to start, 50% on launch, via Payoneer",
     "Hosting fees are paid by the client; I handle setup and deployment",
   ],
 };
@@ -50,13 +52,14 @@ export const offers: Offer[] = [
     features: [
       "60-min strategy call to define your goals and audience",
       "3 homepage design directions; you pick one",
-      "Up to 6 pages, fully responsive with smooth interactions",
+      "Up to 3 pages, fully responsive with smooth interactions",
       "AI chat assistant or smart contact form",
       "On-page SEO, deployment and domain setup",
       "2 revision rounds",
       "Extra pages: $250 each",
     ],
     cta: bookCall,
+    more: { label: "Compare all 3 website plans", href: "/services/nextjs-website-development" },
   },
   {
     id: "web-app",
@@ -75,6 +78,7 @@ export const offers: Offer[] = [
       "Deployment + 30 days of post-launch support",
     ],
     cta: bookCall,
+    more: { label: "Compare all 3 web app plans", href: "/services/web-app-development" },
   },
   {
     id: "ai-upgrade",
@@ -96,6 +100,7 @@ export const offers: Offer[] = [
     addOn: "Model fine-tuning for brand voice or specialized tasks, quoted per project.",
     footnote: "AI usage fees (OpenAI / Anthropic API) are billed directly to the client.",
     cta: { label: "Get a free AI audit", href: site.bookingUrl },
+    more: { label: "Compare all 3 AI assistant plans", href: "/services/ai-chatbot-for-website" },
   },
 ];
 

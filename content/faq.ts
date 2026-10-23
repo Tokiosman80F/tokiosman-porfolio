@@ -56,7 +56,7 @@ export const faqs: FaqItem[] = [
     category: "PRICING",
     question: "How much does a custom Next.js website cost?",
     answer: [
-      "A complete website with up to 6 pages starts at ",
+      "A complete website with up to 3 pages starts at ",
       { strong: "$1,500" },
       ", and extra pages are $250 each. Web apps with dashboards start at ",
       { strong: "$4,500" },
@@ -118,9 +118,9 @@ export const faqs: FaqItem[] = [
   {
     index: "[ 05 ]",
     category: "REMOTE WORK",
-    question: "I'm not in Bangladesh. How do we work together across time zones?",
+    question: "How do we work together across time zones?",
     answer: [
-      "I work remotely with clients worldwide and have worked with remote teams before. I'm based in Bangladesh (GMT+6), which overlaps with European mornings and Asian business hours, and US clients wake up to finished work. You get a written progress update every working day, and I reply to messages within a few hours during my working day.",
+      "I work remotely with clients worldwide and have worked with remote teams before. I work in GMT+6, which overlaps with European mornings and Asian business hours, and US clients wake up to finished work. You get a written progress update every working day, and I reply to messages within a few hours during my working day.",
     ],
     meta: "TIMEZONE: GMT+6 · DAILY UPDATES",
     status: { label: "● REMOTE-READY", tone: "green" },
@@ -142,7 +142,7 @@ export const faqs: FaqItem[] = [
     answer: [
       "You pay ",
       { strong: "50% to start and 50% at launch" },
-      ". Website projects include ",
+      ", through Payoneer. Website projects include ",
       { strong: "2 rounds of revisions" },
       ", and I share progress early so feedback comes before anything is finished. Hosting fees and AI usage fees (like OpenAI or Anthropic API costs) are paid directly by you, so you always own your accounts.",
     ],
