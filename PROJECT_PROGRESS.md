@@ -1696,3 +1696,11 @@ All user-triggered (hover / pointer), 300ms ease-out-quint, off with reduced mot
 - Verified with real mouse events in headless Edge (before/after captures, outcome flip, parallax transforms), axe 0 light 375/1440 and dark 1440, no console errors.
 
 - Removed again at the owner's request: the photo, proof-strip and client-row hover effects (back to static). Kept: CTA icons, eyebrow dot, outcome-box flip, hero art parallax.
+
+## 62. Real client logos in the hero (2026-10-23)
+
+- Logos from docs/ processed into `public/clients/` (sharp: trimmed, lanczos3 resize, light sharpen): picture-tv.png (800 → 480px), logic-matrix-icon.png (icon cropped from the logo, ~2× up), webermelon.png (200 → 600px), easygrow.png (wordmark trimmed, ~3× up). Upscaling smooths but cannot add detail the originals lack; the companies' own SVGs would be sharper still.
+- Redaxify: the supplied file was a 146×30 screenshot, too small to upscale, so it is redrawn as a vector (`RedaxifyLogo` in brand-icons: navy sparkle + wordmark in the display font).
+- Hero client row: logo tiles (h-14 / h-16, white, hairline, `theme-light` so brand colours hold in the dark theme); marks (Picture TV, Logic Matrix, Webermelon) get their name beside them, wordmarks (Redaxify, easygrow) stand alone. One row from lg (container up to max-w-6xl); wraps 2 + 1 + 2 at 375. Logos have alt text or a visible name.
+- Name check: the logo reads "Redaxify", the content lists "REDUXIFY" (hero clients, docs/hero-content.md): to confirm with the owner.
+- Verified: no overflow 320–1440, axe 0 light/dark, no console errors.

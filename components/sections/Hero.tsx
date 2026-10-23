@@ -1,10 +1,12 @@
 import Image from "next/image";
 import { ArrowDown, CalendarDays } from "lucide-react";
+import { RedaxifyLogo } from "@/components/ui/brand-icons";
 import { Button } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Heading } from "@/components/ui/Heading";
 import { Section } from "@/components/ui/Section";
 import { hero } from "@/content/hero";
+import { cn } from "@/lib/utils";
 import { HeroArt } from "./HeroArt";
 import { RotatingOutcome } from "./RotatingOutcome";
 
@@ -65,20 +67,30 @@ export default function Hero() {
           ))}
         </dl>
 
-        <div className="mt-unit-16 flex w-full max-w-4xl flex-col items-center lg:mt-unit-24">
+        <div className="mt-unit-16 flex w-full max-w-4xl flex-col items-center lg:mt-unit-24 lg:max-w-6xl">
           <p className="mb-unit-6 max-w-md font-mono text-mono-tag tracking-widest text-ink-muted uppercase">{trustedBy.label}</p>
-          {/* Centred wrap: names differ a lot in length (5 clients), so rows centre rather than fill a grid; the
-              34rem cap below lg makes the wrap 3 + 2 instead of leaving one name alone on a row */}
-          <ul aria-label="Clients" className="flex max-w-[34rem] flex-wrap items-center justify-center gap-x-unit-8 gap-y-unit-4 lg:max-w-none">
-            {trustedBy.clients.map((client) => (
-              <li key={client} className="flex items-center gap-unit-3">
-                <span
-                  aria-hidden
-                  className="flex size-9 items-center justify-center rounded-md border border-border-hairline bg-white font-display text-body-md font-bold text-ink-black shadow-xs"
-                >
-                  {client[0]}
-                </span>
-                <span className="font-display text-body-md font-semibold tracking-tight text-ink-charcoal">{client}</span>
+          {/* Logo tiles, all the same height; logos that are only a mark get the name beside them. Tiles stay
+              light in the dark theme (theme-light) so the brand colours read as designed. Centred wrap; the
+              36rem cap below lg wraps 3 + 2 instead of leaving one tile alone on a row */}
+          <ul aria-label="Clients" className="flex max-w-[36rem] flex-wrap items-center justify-center gap-unit-3 sm:gap-unit-4 lg:max-w-none">
+            {trustedBy.logos.map((l) => (
+              <li
+                key={l.name}
+                className="theme-light flex h-14 items-center gap-unit-2 rounded-xl border border-border-hairline bg-white px-unit-4 shadow-xs sm:h-16"
+              >
+                {!l.src ? (
+                  <RedaxifyLogo className="h-6 w-auto sm:h-7" />
+                ) : (
+                  <Image
+                    src={l.src}
+                    alt={l.mark ? "" : l.name}
+                    width={l.width}
+                    height={l.height}
+                    sizes="160px"
+                    className={cn("w-auto", l.mark ? "h-9 rounded-lg sm:h-10" : "h-5 sm:h-6")}
+                  />
+                )}
+                {l.mark && <span className="font-display text-body-md font-semibold tracking-tight text-ink-black">{l.name}</span>}
               </li>
             ))}
           </ul>
