@@ -1,58 +1,59 @@
-export type Service = {
-  title: string;
-  description: string;
-  cta: string;
-  href: string;
-};
+import type { HighlightedText } from "@/components/ui/Highlight";
+
+// DRAFT copy for review, in the owner's voice: drawn from docs/services.md and the hero, no new claims.
+// Layout and illustrations follow docs/what-we-build-1.png and -2.png.
+
+export type ServiceId = "build" | "integrations" | "ai-seo" | "strategy" | "web";
+export type Service = { id: ServiceId; title: string; description: string };
 
 export const servicesSection = {
-  eyebrow: "CAPABILITIES TAXONOMY · WHAT WE BUILD",
-  title: "What we build",
-  lead: "Modular, production-ready design artifacts engineered to scale with your team.",
+  eyebrow: "Services · What I build",
+  // "start to finish" stays short enough for one highlight box at 375px
+  title: ["I take care of things from ", { highlight: "start to finish", color: "canary" }] satisfies HighlightedText,
+  clientsLabel: "Clients I've built for",
 };
 
-// "#" = placeholder until the scope pages exist (tracked in PROJECT_PROGRESS.md).
 export const services: Service[] = [
   {
-    title: "Brand Identity",
-    description:
-      "Signature Design Style built from scratch. Logo system, custom color logic, bespoke typography, and visual guidelines tuned to your exact buyer.",
-    cta: "EXPLORE BRAND SCOPE",
-    href: "#",
+    id: "build",
+    title: "Web and app design & development",
+    description: "From idea to wireframes to a live Next.js site or web app, designed and built by me.",
   },
   {
-    title: "Website Architecture",
-    description:
-      "Homepage, key product pages, and interactive showcase views — built with a Claude-ready component library your team can expand without us.",
-    cta: "EXPLORE WEB SCOPE",
-    href: "#",
+    id: "integrations",
+    title: "CRM, payments & automation",
+    description: "Forms, bookings and Stripe payments wired into your CRM, so every lead lands in your pipeline.",
   },
   {
-    title: "High-Velocity Landing Pages",
-    description:
-      "Laser-focused conversion pages for product launches, PPC campaigns, and events — engineered to earn the demo booking within five seconds of arrival.",
-    cta: "EXPLORE LANDERS",
-    href: "#",
+    id: "ai-seo",
+    title: "AI chatbots & SEO",
+    description: "An AI assistant trained on your own content, plus on-page SEO so customers find you on Google.",
   },
   {
-    title: "Product UI/UX Design",
-    description:
-      "Complex dashboards, multi-step onboarding, and workflows designed to match your marketing identity and skyrocket Day-1 product activation.",
-    cta: "EXPLORE PRODUCT UI",
-    href: "#",
+    id: "strategy",
+    title: "Consultation & strategy",
+    description: "A free call to map your goals, the scope and the right starting point.",
   },
   {
-    title: "Sales Enablement Decks",
-    description:
-      "Keynote pitch decks, one-pagers, proposal templates, and Figma click-through demos so your AEs walk into enterprise pitches with unfair leverage.",
-    cta: "EXPLORE DECKS",
-    href: "#",
-  },
-  {
-    title: "Motion & Micro-Artifacts",
-    description:
-      "3D product walkthroughs, animated hero SVGs, and feature announcements crafted under our specialized motion arm.",
-    cta: "EXPLORE MOTION",
-    href: "#",
+    id: "web",
+    title: "Anything and everything web",
+    description: "Deployment, hosting setup, domains, maintenance, revisions and everything in between.",
   },
 ];
+
+// Text inside the decorative card illustrations (fictional examples).
+export const serviceArt = {
+  browserTabs: ["tokiosman. — I build websites", "Home — Figma"],
+  notifications: [
+    { app: "Zoho CRM", text: "New lead from your contact form" },
+    { app: "Stripe", text: "Payment received · $1,500" },
+    { app: "Calendar", text: "Call booked · Thu 10:00" },
+  ],
+  chat: {
+    question: "Do you ship to Canada?",
+    answer: "Yes, in 3–5 business days.",
+    source: "shipping-policy.pdf",
+    placeholder: "Ask me anything…",
+  },
+  call: { host: "Toki Osman", hostInitials: "TO", guest: "You" },
+};

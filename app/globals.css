@@ -34,10 +34,13 @@
 
   /* accents */
   --color-canary-yellow: #FDF175;
+  --color-on-accent: #121212; /* text on canary / green / blue in both themes (never swapped) */
   --color-signal-green: #22C55E; /* fills, dots, tints */
   --color-signal-green-ink: #157A3A; /* green text; #22C55E fails AA as text */
   --color-signal-blue: #60A5FA;
   --color-highlight-green: #4ae176;
+  --color-error: #b91c1c; /* form errors; #F87171 in dark */
+  --color-signal-green-on-primary: #22C55E; /* green text on ink cards (light cards in the dark theme) */
 
   /* primary button */
   --color-graphite: #454545;
@@ -73,6 +76,7 @@
   --font-mono: var(--font-jetbrains-mono);
   --font-display: var(--font-space-grotesk);
   --font-hand: var(--font-caveat);
+  --font-logo: var(--font-sora); /* the tokiosman. wordmark */
   /* per-size family aliases, removed as Phase 4 rewrites the markup */
   --font-display-hero: var(--font-display);
   --font-headline-lg: var(--font-display);
@@ -143,9 +147,83 @@
   }
 }
 
+/* ── Dark theme ──
+   html[data-theme="dark"] (set before paint by the script in app/layout.tsx: saved choice, else the OS
+   setting). Every colour token is swapped, so the markup needs no dark: variants. "white" and "ink-black"
+   trade places: the page goes dark and the ink cards (featured offer, dark tiles, contact card) turn into
+   light cards, keeping each text/surface pair readable. Two kinds of islands keep their light-mode ink:
+   accent fills (canary, greens, blue: dark text stays on them) and .theme-light (logo tiles: brand logos
+   are often black). */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --color-white: #121211;
+  --color-ink-black: #F3F2ED;
+  --color-ink-charcoal: #E6E5E0;
+  --color-on-surface: #ECEBE6;
+  --color-on-surface-variant: #BAB9B3;
+  --color-ink-muted: #A3A29C;
+  --color-ink-faint: #97968F;
+  --color-paper-card: #1A1A18;
+  --color-surface: #171715;
+  --color-paper-canvas: #151513;
+  --color-surface-container-low: #1D1D1B;
+  --color-surface-container: #242422;
+  --color-paper-subtle: #2A2A27;
+  --color-border-hairline: #30302D;
+  --color-border-strong: #45453F;
+  --color-surface-tint: #8C8B86;
+  --color-primary-container: #E9E8E3;
+  --color-on-primary-container: #52514C;
+  --color-on-primary: #121211;
+  --color-signal-green-ink: #4ADE80;
+  --color-graphite: #D4D3CE;
+  --color-graphite-hover: #DCDBD6;
+  --color-error: #F87171;
+  --color-signal-green-on-primary: #157A3A;
+  --color-black: #ffffff; /* end of the primary button gradient: light button in the dark theme */
+}
+:root[data-theme="dark"] :is(.bg-canary-yellow, .bg-signal-green, .bg-highlight-green, .bg-signal-blue, .bg-\[\#3BFF6F\]) {
+  --color-ink-black: #121212;
+  --color-ink-charcoal: #1A1A1A;
+  --color-ink-muted: #4F4E4A;
+  --color-on-surface-variant: #444748;
+}
+/* Logo hover: yellow on dark reads without the ink outline (which would thin the letters) */
+:root[data-theme="dark"] .logo-word {
+  -webkit-text-stroke-color: transparent !important;
+}
+:root[data-theme="dark"] .theme-light {
+  color-scheme: light;
+  --color-white: #ffffff;
+  --color-ink-black: #121212;
+  --color-ink-charcoal: #1A1A1A;
+  --color-on-surface: #1b1c1a;
+  --color-on-surface-variant: #444748;
+  --color-ink-muted: #6C6B66;
+  --color-ink-faint: #75736D;
+  --color-paper-card: #FAFAF7;
+  --color-surface: #faf9f5;
+  --color-paper-canvas: #F7F6F2;
+  --color-surface-container-low: #f5f4f0;
+  --color-surface-container: #efeeea;
+  --color-paper-subtle: #EFECE6;
+  --color-border-hairline: #E5E4DE;
+  --color-border-strong: #D6D4CC;
+  --color-surface-tint: #5f5e5e;
+  --color-primary-container: #1c1b1b;
+  --color-on-primary-container: #B1B0B0;
+  --color-on-primary: #ffffff;
+  --color-signal-green-ink: #157A3A;
+  --color-graphite: #454545;
+  --color-graphite-hover: #383838;
+  --color-error: #b91c1c;
+  --color-signal-green-on-primary: #22C55E;
+  --color-black: #000000;
+}
+
 @layer base {
   html {
-    scroll-padding-top: 5rem; /* fixed h-20 header: anchor jumps land below it */
+    scroll-padding-top: 5rem; /* floating navbar (0.75–1rem + 3.5rem): anchor jumps land below it */
   }
 
   body {
@@ -165,6 +243,39 @@
 @keyframes trace-flow {
   to { stroke-dashoffset: -40; }
 }
+/* FAQ accordion: animate <details> open/close height where the browser supports ::details-content and
+   interpolate-size (Chromium 131+); elsewhere it opens instantly. */
+.faq-item {
+  interpolate-size: allow-keywords;
+}
+.faq-item::details-content {
+  block-size: 0;
+  overflow: clip;
+  transition: block-size 0.3s ease-out, content-visibility 0.3s allow-discrete;
+}
+.faq-item[open]::details-content {
+  block-size: auto;
+}
+@media (prefers-reduced-motion: reduce) {
+  .faq-item::details-content {
+    transition: none;
+  }
+}
+
+/* Touch: grow a small control's hit area to at least 44×44 without changing how it looks.
+   The element becomes position: relative; its ::after is the invisible, centred hit area. */
+@utility tap-target {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: max(100%, 44px);
+    height: max(100%, 44px);
+    translate: -50% -50%;
+  }
+}
 
 @keyframes blue-gradient-shift {
   0% { background-position: 0% 50%; }
@@ -180,14 +291,15 @@
   padding: 2px;
   background: linear-gradient(90deg, #1978e5, #38bdf8, #60a5fa, #00d2ff, #2563eb, #1978e5);
   background-size: 300% 300%;
-  animation: blue-gradient-shift 4s ease infinite;
+  /* Still at rest; the gradient only travels while hovered (one moving thing in the hero: the outcome ticker) */
   box-shadow: var(--shadow-glow);
-  transition: all 0.25s ease;
+  transition: box-shadow 0.25s ease, translate 0.25s ease;
   text-decoration: none;
 }
 .moving-blue-border-btn:hover {
   box-shadow: var(--shadow-glow-hover);
-  transform: translateY(-1px);
+  translate: 0 -1px;
+  animation: blue-gradient-shift 4s ease infinite;
 }
 .moving-blue-border-btn-inner {
   display: inline-flex;
@@ -197,12 +309,12 @@
   width: 100%;
   height: 100%;
   border-radius: 9999px;
-  background: #FAFAF7;
-  color: #121212;
+  background: var(--color-paper-card);
+  color: var(--color-ink-black);
   transition: background 0.2s ease;
 }
 .moving-blue-border-btn:hover .moving-blue-border-btn-inner {
-  background: #FFFFFF;
+  background: var(--color-white);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -210,10 +322,6 @@
   ::before,
   ::after {
     animation: none !important;
-  }
-  /* SMIL beams can't be paused from CSS; hide the decorative layer instead. */
-  svg:has(animate) {
-    display: none;
   }
 }
 

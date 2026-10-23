@@ -1,54 +1,53 @@
+import { site } from "./site";
+
+// Source: docs/footer.md (verbatim).
+
 export type FooterLink = {
   label: string;
   href: string;
-  /** Trailing icon for the "network" column. */
-  icon?: "external" | "email";
+  external?: boolean;
+  /** Contact rows: a brand logo in public/logos, or a generic icon ("globe" | "calendar"). */
+  logo?: string;
+  icon?: "globe" | "calendar";
 };
+export type FooterColumn = { title: string; links: FooterLink[] };
 
-export type FooterColumn = {
-  title: string;
-  links: FooterLink[];
-};
-
-export type FooterContent = {
-  tagline: string;
-  location: string;
-  columns: FooterColumn[];
-  copyright: string;
-  legal: FooterLink[];
-  status: string;
-};
-
-// "#" = placeholder until the real URL exists (tracked in PROJECT_PROGRESS.md).
-export const footer: FooterContent = {
+export const footer = {
   tagline:
-    "Editorial Brutalism with architectural refinement. Designing high-velocity product identities and digital artifacts for radical teams.",
-  location: "40.7128° N, 74.0060° W — TOKIOSMAN ARCHIVE",
+    "Full-stack developer building Next.js websites and web apps that capture leads, take payments, and sync with your CRM.",
+  location: "Based in Bangladesh (GMT+6) · Working with clients worldwide",
   columns: [
     {
-      title: "Index",
+      title: "Navigate",
       links: [
-        { label: "Selected Works", href: "#work" },
-        { label: "Our Manifesto", href: "#manifesto" },
-        { label: "Advisory & Design Sprints", href: "#services" },
-        { label: "FAQ", href: "#faq" },
+        { label: "Services", href: "/#services" },
+        { label: "About", href: "/#about" },
+        { label: "Work", href: "/#work" },
+        { label: "Pricing", href: "/#pricing" },
+        { label: "FAQ", href: "/#faq" },
       ],
     },
     {
-      title: "Network & Channels",
+      title: "Services",
       links: [
-        { label: "Twitter / X", href: "#", icon: "external" },
-        { label: "LinkedIn Editorial", href: "#", icon: "external" },
-        { label: "Substack Dispatch", href: "#", icon: "external" },
-        { label: "Direct Inquiry", href: "#", icon: "email" },
+        { label: "Website Design & Development", href: "/#pricing" },
+        { label: "Web App + Dashboard", href: "/#pricing" },
+        { label: "AI Upgrade for Your Website", href: "/#pricing" },
+        { label: "Custom Projects", href: "/#pricing" },
       ],
     },
-  ],
-  /** Rendered as "© {current year} {copyright}". */
-  copyright: "TOKIOSMAN. ALL RIGHTS RESERVED.",
-  legal: [
-    { label: "COLOPHON", href: "#" },
-    { label: "PRIVACY", href: "#" },
-  ],
-  status: "SYSTEM OK",
+    {
+      title: "Contact",
+      links: [
+        { label: site.email, href: `mailto:${site.email}`, logo: "outlook" },
+        { label: site.phone, href: site.whatsapp, external: true, logo: "whatsapp" },
+        { label: "tokiosman.com", href: site.url, external: true, icon: "globe" },
+        { label: "Book a free call", href: site.bookingUrl, external: true, icon: "calendar" },
+      ],
+    },
+  ] satisfies FooterColumn[],
+  // Bottom bar: "© {year} {copyright}" (the year is set at build time)
+  copyright: "Toki Osman. All rights reserved.",
+  builtWith: "Built with Next.js, Tailwind CSS & lots of coffee ☕",
+  backToTop: "Back to top",
 };

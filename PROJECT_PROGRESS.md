@@ -1353,3 +1353,360 @@ Rebuilt to the user's reference (`docs/image.png`, now the bento image), with an
 Interaction test (headless Edge, CDP, 1440): with motion, every tile plays once on scroll-in and rests (directions → Editorial, updates → 100%, deploy → Live, 3 searches typed, modules → CMS, AI → step 4); clicks then drive each tile, Redeploy replays the pipeline, and nothing restarts on its own. With reduced motion nothing autoplays; deploy shows Live, search the full query; clicks still work. **Bug found and fixed:** hydration mismatch under reduced motion (render branched on `useReducedMotion()`). Console: 0 errors.
 
 Checks: eslint 0, tsc, `next build` pass; axe on `#process` 0 violations at 375 / 768 / 1440; no horizontal overflow; detector clean.
+
+## 30. Testimonials → carousel (2026-10-22)
+
+Rebuilt to the user's reference (`docs/testimonial.png`). Quotes, names, roles and "delivered" lines unchanged (still the placeholder testimonials flagged in the copy inventory).
+
+| Change | Notes |
+|---|---|
+| `components/sections/Testimonials.tsx` rewritten (server) + new `TestimonialCarousel.tsx` (client) | Grey band, header + "Book a free call" button, dark grid-texture cards in a native scroll-snap track that bleeds off the right edge, dots pill. The 3-column grid, avatars and `Reveal` are gone |
+| `content/testimonials.ts` | `company` per testimonial (the company already named in each role) for the card wordmark; `carouselLabel`; header `cta` reusing "Book a free call" + `site.bookingUrl` |
+| `components/ui/PlanButton.tsx` | `shrink-0 whitespace-nowrap` (label wrapped to 2 lines at 768) |
+
+Carousel test (headless Edge, CDP, 1440 and 375): first card's left edge = heading's left edge (73px / 20px); dot 4 and dot 6 scroll to their cards and set `aria-current`; scrolling back resets the dot; 6× ArrowRight on the focused track scrolls it and the dot follows; page `scrollX` stays 0; 0 console errors.
+
+Checks: eslint 0, tsc, `next build` pass; axe 0 violations (section at 375 / 768 / 1440, full page at 375 / 1440); no page-level horizontal overflow; detector clean. Not committed (user reviews first).
+
+## 31. Landing hero + floating navbar (2026-10-22)
+
+Rebuilt to the user's reference (`docs/landing page .png`) in the site's design system (Space Grotesk uppercase h1, canary highlight, ink/glow buttons, beams). Copy unchanged.
+
+| Change | Notes |
+|---|---|
+| `components/layout/Header.tsx` | Floating rounded bar: logo / dot-separated links / CTA with dotted dividers. Removed the static "active" underline on Work (no scroll-spy existed) and the unlabeled green status dot |
+| `components/layout/MobileMenu.tsx` | Panel is now a dropdown card under the bar (was a full-screen sheet under a full-width header); toggle `rounded-md` |
+| `components/sections/Hero.tsx` | Top padding clears the bar; dotted container-edge guides; client row as initial tiles in a balanced grid; sticky notes removed |
+| `content/hero.ts` | `memo` / `note` (sticky-note copy) deleted |
+| `app/page.tsx` | `main` loses `pt-20` (the hero runs under the floating bar) |
+
+Behaviour test (CDP): anchor to `#work` lands at 80px, bar bottom at 72px; 375 menu opens with focus on "Work" and scroll lock, tapping "FAQ" closes it, releases the lock and lands `#faq` at 80px; 0 console errors.
+
+Checks: eslint 0, tsc, `next build` pass; axe full page 0 violations at 375 / 768 / 1440; no horizontal overflow; detector clean. Not committed.
+
+Follow-up: the hero's dotted side guides were removed at the user's request (`Hero.tsx`, `DESIGN.md`).
+
+Follow-up: hero image. No photo (user: "don't use the mountain image"); new `components/sections/HeroArt.tsx`, an inline SVG in the design tokens (wireframe-window "mountain range" with sticky note, selection + cursor, palette card), replacing BeamBackground in the hero (AI + Human keeps it). Hidden below md. Checks: tsc, eslint, build pass; axe 0 at 375 / 1440; no overflow.
+
+Follow-up: hero background grid removed at the user's request (`Hero.tsx`, `DESIGN.md`).
+
+Follow-up: HeroArt's canary sticky note (above-left of the headline) removed at the user's request.
+
+## 32. Landing hero content (2026-10-22)
+
+Source: `docs/hero-content.md` (main headline, not the shorter alternative). Old hero copy removed (eyebrow, "We build Signature Design Styles…", lead, "Trusted by…" label, the 6 placeholder logos).
+
+| Change | Notes |
+|---|---|
+| `content/hero.ts` | Badge, headline with "close deals" highlighted, subheadline, client strip label + 5 clients (PICTURE TV, REDUXIFY, LOGIC MATRIX, WEBERMELON, EASYGROWDIGITAL), `art` labels. Buttons unchanged (See Pricing →, Selected Work ↓). Placeholder comment removed |
+| `content/navigation.ts` | Links WORK · ABOUT · SERVICES · FAQ ("About" → `#manifesto`, the AI + Human section, until an About section exists); CTA "Book a call" → `site.bookingUrl`, new tab (`external` flag on `NavLink`) |
+| `components/layout/Header.tsx` | Opens external CTA in a new tab + sr-only note |
+| `components/sections/HeroArt.tsx` | Cursor tag "New lead → Zoho CRM" (replaces "Signature"); "Stripe payment received" card with a drawn check (replaces the colour swatches); shows from `xl` (was `md`) |
+| `components/sections/Hero.tsx` | h1 `max-w-4xl text-balance` (the longer headline ran into the art); client strip as a centred wrap (5 names of very different lengths) |
+| `components/ui/Highlight.tsx` | `renderHighlighted()` keeps punctuation right after a box glued to it (the comma after "close deals" was wrapping onto its own line). Other headings unaffected (their boxes are followed by a space) |
+| `components/ui/Eyebrow.tsx` | `text-balance` on the label ("× AI" was orphaned on mobile) |
+
+Checks: eslint 0, tsc, `next build` pass; axe full page 0 violations at 375 / 768 / 1024 / 1280 / 1440; no horizontal overflow. Not committed.
+
+Follow-up: hero badges as a live activity feed. New `components/sections/HeroArtBadges.tsx` (client `CursorTag` / `StatusCard`, rendered inside HeroArt's SVG); 7 + 7 messages in `content/hero.ts` (`art.cursorTags`, `art.statuses`; the ✓ is the drawn check). Every 2s, right badge offset 1s; widths fit each message (browser-measured: 8px padding; "→" renders 2 glyphs wide). Tested (CDP, 1440): all 14 messages cycle in order and loop; reduced motion stays on message 1; paused off screen; 0 console errors. eslint, build pass; axe 0 at 375 / 1440.
+
+Follow-up: hero badge feed slowed to every 20s (right badge offset 10s) and the per-message `tile-in` entrance removed (read as blinking), at the user's request.
+
+## 33. "What I build" redesign (2026-10-22)
+
+Rebuilt to the user's references (`docs/what-we-build-1.png`, `-2.png`). User choices: five cards mapped to the real offer, copy drafted in the owner's voice (**draft for review**), drawn video call with initials.
+
+| Change | Notes |
+|---|---|
+| `content/services.ts` rewritten | Header ("I take care of things from [start to finish]"), 5 services (Web and app design & development · CRM, payments & automation · AI chatbots & SEO · Consultation & strategy · Anything and everything web), illustration text (`serviceArt`). The old 6 cards and their "#" EXPLORE links are gone |
+| `components/sections/Services.tsx` rewritten | Centred header, 2-column grey cards, full-width closer with client avatars (from `hero.trustedBy.clients`) + globe |
+| New `components/sections/ServiceArt.tsx` | Browser, phone, chat, call and globe illustrations |
+
+Fixes after the first render: phone notifications were hidden by the fade (phone raised, clock tightened, fade 70% → 78%); the closer kept its min-height on mobile where the globe is hidden (now from `sm`).
+
+Checks: eslint 0, `next build` pass; axe 0 violations (section at 375 / 768 / 1440); no horizontal overflow; detector clean. Not committed.
+
+## 34. Toolbox → About me (2026-10-22)
+
+Layout after `docs/about-me.png`, content verbatim from `docs/about-me.md` (main heading, not the alternative), photo from `docs/toki-osman-image.png`.
+
+| Change | Notes |
+|---|---|
+| New `components/sections/About.tsx` + `content/about.ts` | Photo / 20+ stat / companies marquee / about-me quote / tech stack bento, `id="about"` |
+| Deleted `components/sections/Toolbox.tsx`, `content/skills.ts` | "My creative toolbox" replaced |
+| `public/images/toki-osman.jpg` | Head-and-shoulders 900px crop of the 1.9 MB PNG (54 KB; served at ~22 KB by next/image) |
+| `content/navigation.ts` | "About" → `#about` (was the AI + Human section) |
+| `components/ui/SectionHeader.tsx` | `eyebrow` optional |
+| `app/globals.css` | `marquee` keyframes |
+
+Tech logos: no icon package installed (no-installs rule), so the stack is periodic-table tiles (symbol + brand-colour stripe + name); React keeps its real mark. Real logos can replace the symbols if SVGs are added to `public/logos/`.
+
+Fixes after the first render: the photo floated over the tile grid (now the grid's centre 2×2 cell); the mobile heading orphaned "DESIGN" (text-pretty). Live check (CDP): photo loads at 1440 and 375, marquee moves (~30px/s), 0 console errors.
+
+Checks: eslint 0, tsc, `next build` pass; axe 0 violations (section at 375 / 768 / 1440); no horizontal overflow. Not committed.
+
+Follow-up (§34): real tech logos. dashboard-icons MCP added (`claude mcp add --transport http dashboard-icons https://dashboardicons.com/api/mcp`, local config); queried over HTTP this session. 20 SVGs downloaded to `public/logos/` (scanned: no scripts, handlers or external refs; 0.3–4 KB each); 11 tools added at the user's request (shadcn/ui, Redux, Zustand, Nginx, Cursor, Lovable, Supabase, AWS, Clerk, Framer Motion, GSAP; "Claude" was already listed), 22 in total, grouped by category. Zustand has no icon anywhere ("Zu" symbol); Framer Motion uses the existing brand-icons mark. Tiles lose the colour stripe and index. Live check: 20/20 logos load at 1440 and 375; axe 0; build passes.
+
+## 35. FAQ redesign + real content (2026-10-22)
+
+UI: "help-desk thread" (user: "use your creativity and my website vibe"). Content: the user rewrote `docs/fqa.md` during the task; applied verbatim (10 questions, new lead/side tag, contact strip) with its SEO checklist.
+
+| Change | Notes |
+|---|---|
+| `components/sections/Faq.tsx` rewritten | Sticky intro + dark ask-me card; native `<details name="faq">` accordion (no JS, answers stay in the HTML), questions as `<h3>`, answers as reply bubbles with the photo avatar; FAQPage JSON-LD (escaped `<`) |
+| New `components/sections/CopyEmail.tsx` (client) | Copies `site.email`, "Email copied" for 2s (aria-live), mailto fallback |
+| `content/faq.ts` rewritten | From docs/fqa.md; contact = "Book a free call" (`site.bookingUrl`) + "Copy email address"; `plainAnswer()` for JSON-LD |
+| `content/site.ts` | `email: "tokiosman@outlook.com"` |
+| `app/globals.css` | `.faq-item` open/close height animation |
+| `docs/fqa.md` | New (the user's content) |
+
+Not applied from the checklist: links inside answers ("pricing" → the pricing section is `#pricing`, not `#services` as the doc says; "AI assistant" → a case study that doesn't exist yet).
+
+Fixes found while testing: status chip contrast (axe), the toggle tile rotated into a diamond (now only the icon), mobile index squeeze and double gap, avatar column squeezing mobile answers, the JSON-LD escape was a no-op ("<" in a JS string is "<").
+Live test (CDP): one open at a time (click Q3 closes Q1), Enter/Space toggle, copy writes the address and resets after 2s, 0 console errors. JSON-LD parses: FAQPage, 10 questions; 10 `<h3>` questions in the HTML.
+
+Checks: eslint 0, tsc, `next build` pass; axe 0 (full page, 375 / 768 / 1440); no horizontal overflow. Not committed.
+
+## 36. AI + Human section removed (2026-10-22)
+
+At the user's request. Deleted `components/sections/AiHuman.tsx`, `content/ai-human.ts` and `components/ui/BeamBackground.tsx` (its last user), plus the reduced-motion rule that hid the beams' SMIL layer (`svg:has(animate)`). The footer's "Our Manifesto" link (`#manifesto`) went with it (it would have pointed nowhere). Page order is now Hero → Pricing → Process → About → Work → Services → Testimonials → FAQ → Final CTA. Page height: 1440 12942 → 12057, 375 21505 → 19960.
+
+Checks: eslint 0, tsc, `next build` pass; axe 0 (full page, 375 / 1440); no horizontal overflow. Not committed.
+
+## 37. Final CTA + contact form (2026-10-22)
+
+The user reverted the footer redesign (uncommitted) and asked for the Final CTA instead: content from `docs/cta.md` (main headline), new UI. Footer untouched.
+
+| Change | Notes |
+|---|---|
+| `content/final-cta.ts` rewritten | Badge, headline ("unsure" green box), lead, buttons, trust line; `contactForm` copy (labels, placeholders, validation, success, error); `projectTypes` |
+| `components/sections/FinalCta.tsx` rewritten | Ink slab: pitch + booking left, form card right, trust line bottom |
+| New `components/sections/ContactForm.tsx` (client) | Collapsed behind "Prefer to write?"; browser validation, focus to first error, honeypot; submits via `startTransition` (a native form action resets the fields, which lost the visitor's text on an error) |
+| New `app/actions/contact.ts` (server action), `lib/contact.ts` (shared validation), `lib/crm.ts` | Server re-validates; honeypot → silent fake success; Zoho CRM lead via OAuth refresh token **only if** `ZOHO_CLIENT_ID`, `ZOHO_CLIENT_SECRET`, `ZOHO_REFRESH_TOKEN` are set (optional `ZOHO_ACCOUNTS_URL` / `ZOHO_API_URL` for non-.com data centres); otherwise the error state ("email me at …"), so no message is silently lost |
+| `components/layout/CurrentMonth.tsx` | (left over from the reverted footer work) fills "{month}" in the badge; joiner " · " supported |
+
+**Not done yet (needs the user):** Zoho credentials (the Zoho call is written but untested), Turnstile keys, auto-reply + owner notification (needs an email provider), Budget field ("add later" in the doc). The "straight to my CRM" note under the button only renders once Zoho is configured. The page is static, so `crmConfigured()` is read at build time: redeploy after adding the env vars. Zoho Leads require Company by default; the form sends "Not provided". The source ("Portfolio contact form") goes into Description.
+
+Live test (CDP, 1440): form hidden until the toggle (aria-expanded); empty submit → 4 messages, focus on Name; bad email → only the email error; valid → error state with the values kept; honeypot → "Thanks! 🎉". 0 console errors.
+
+Checks: eslint 0, tsc, `next build` pass (route still static); axe 0 (full page, 375 / 768 / 1440); no horizontal overflow; detector clean. Not committed.
+
+Follow-up (§37): the contact form is always open (user request); the "Prefer to write? Send a message" toggle and its copy are removed.
+
+## 38. Footer: new content + simple UI (2026-10-22)
+
+Content from `docs/footer.md` (the user removed the CTA block from it; the Final CTA section covers that). Simple white footer with logo tiles for the contact rows (user request).
+
+| Change | Notes |
+|---|---|
+| `components/layout/Footer.tsx` rewritten | Brand / Navigate / Services / Contact + bottom bar (©, built-with, Back to top) |
+| `content/footer.ts` rewritten | Verbatim from the doc; contact rows carry `logo` / `icon` |
+| `content/site.ts` | `person`, `jobTitle`, `url`, `phone`, `whatsapp`, `socials` (GitHub / LinkedIn with **empty URLs**: hidden in the footer and omitted from `sameAs` until set) |
+| `app/layout.tsx` | Person JSON-LD (name, job title, URL, email, sameAs), `<` escaped |
+| `public/logos/` | + outlook, whatsapp, github, linkedin (dashboard-icons MCP; scanned clean). Outlook rather than Gmail: the address is @outlook.com |
+
+Removed with the old footer: "Index / Network & Channels" columns, the NYC coordinates line, COLOPHON / PRIVACY links and the "SYSTEM OK" badge.
+
+Live check (CDP): logos load at 1440 and 375; mailto + wa.me + site + booking links (external ones in a new tab); Back to top → scrollY 0; 0 console errors.
+
+Checks: eslint 0, tsc, `next build` pass; axe 0 (full page, 375 / 768 / 1440); no horizontal overflow; detector clean. Not committed.
+
+Follow-up (§38): footer recoloured to a canary tint (the About card's yellow blocks, user request) with a closing `TileBand` mosaic: tiles light up on hover and fade back over 1s, leaving a pointer trail (CSS only; deterministic pattern, so no hydration mismatch). axe 0 at 375 / 768 / 1440 on the tint; hover trail confirmed in a live screenshot; build passes. Not committed.
+
+Follow-up (§38): footer background back to white with hairline borders (user request); the yellow `TileBand` mosaic stays.
+
+## 39. Case studies → case-file stack (2026-10-22)
+
+UI only (user: "use your creativity"); content unchanged. `components/sections/Work.tsx` rewritten: numbered case-file cards in grey / canary / ink tones, browser-framed images, and a CSS sticky stack on large, tall windows (each card pins under the navbar and the next slides over it, earlier tabs staying visible). No JS; Reveal no longer used here. Images capped at 576px wide (the source JPGs are 512px; the old full-width frame upscaled them).
+
+Live scroll test (CDP): 1440×900 cards pin at 104 / 166 / 228px (one tab apart) and release at the section end; 1440×700 and 375 stay static (no card can hide its own bottom). axe 0 (full page, 375 / 768 / 1440); no overflow; eslint, build pass. Not committed.
+
+Follow-up (§39): case 02 background changed from canary tint to sky blue (`signal-blue` 18% tint, user request).
+
+Follow-up (§39): Work header rewritten for search (user: "The TokiOsman effect" didn't make sense): eyebrow "CASE STUDIES · SELECTED WORK", h2 "Case studies: Next.js websites and web apps", lead naming websites / dashboards / AI integrations, aside "SELECTED PROJECTS · 2024–2026". DESIGN.md sky-blue note present: true.
+
+## 40. Wordmark → "tokiosman." (2026-10-22)
+
+`components/layout/Logo.tsx` (header + footer): lowercase "tokiosman" with the full stop as a canary block (ink edge) that flips into a signal-blue diamond on hover/focus. The mini wordmark and browser-tab text in the "What I build" illustration match; the video-call host label is now "Toki Osman" (a person, not the wordmark). `site.name` ("TokiOsman", used by the page-title template and metadata) is unchanged. Live capture at rest / hover / footer; axe 0 at 375 / 1440; build passes. Not committed.
+
+## 41. Navbar redesign (2026-10-22)
+
+`components/layout/Header.tsx` rewritten; new `components/layout/NavLinks.tsx` (client). Links sit in an inset tray; a canary highlight chip slides to the section in view (scroll-spy), cleared at the top; the CTA is the shared `PlanButton`; the bar's shadow deepens once the page scrolls. Dotted zone dividers removed.
+
+Live test (CDP, 1440): chip follows About → Work → Services → FAQ and clears back at the top; `aria-current` on the active link; shadow 1px → 10px when scrolled (the `in-data-scrolled` variant generated nothing; replaced with `[html[data-scrolled]_&]:`). 375: bar fits (335px), menu opens with focus on "Work". axe 0 (full page, 375 / 768 / 1440); build passes. Not committed.
+Follow-up (§41): chip easing changed from overshoot to ease-out-quint (detector: bounce easing on a moving nav indicator).
+Follow-up (§41): navbar animation bugs (user: "not working properly"), found by sampling every frame in the browser:
+1. The chip never slid: positions were read with `offsetLeft`, relative to each link's own `<li class="relative">`, so every link measured 0 and the chip sat on "Work" for every section. Now measured against the tray (`getBoundingClientRect`), moved with `translate`, re-measured by a ResizeObserver (font loading).
+2. It grew out of / shrank into the tray's left edge when appearing / hiding. Now it is placed instantly and fades in, slides only between links while visible, and fades out in place.
+3. The logo dot never animated: Tailwind v4 moves elements with the separate `translate` / `scale` / `rotate` properties, but the transition listed `transform`. Now `transition-[translate,scale,rotate,background-color]`.
+Re-measured: About 63 → Work 4 → Services 130 → FAQ 221 px, each matching its link; logo dot 0° → 45° over ~200ms. axe 0, build passes, detector clean.
+
+## 42. Floating WhatsApp button (2026-10-23)
+
+New `components/layout/WhatsAppButton.tsx` (server, CSS only), rendered after the footer in `app/page.tsx`. Links to `https://wa.me/8801987556588?text=…` (message and label in `content/site.ts` `whatsappButton`), new tab. Footer "Back to top" no longer stretches full-width on mobile (`self-start`).
+
+Live check (CDP): href and pre-filled text correct, logo loads, 24px from the corner at 1440, label opens on hover (58 → 191px wide). At 375 it floats over content passing beneath while scrolling (normal for a floating button); nothing is covered at the end of the page. axe 0 (375 / 768 / 1440); build passes; detector clean. Not committed.
+Follow-up (§42): button moved inside the `<footer>` landmark (axe `region`: it was outside every landmark); fixed positioning, so it looks the same.
+
+## 43. Resizable navbar (2026-10-23)
+
+Large over the hero (full content width 1280px, 64px tall, 28px wordmark), compact (768×56, 20px wordmark, deeper shadow) once the visitor is 40% through the hero; widens again on the way back up. `#home` id on the hero; `html[data-compact]` replaces `data-scrolled`; `html[data-nav-ready]` gates the transitions so a mid-page reload starts compact. Mobile dropdown offset follows the bar height.
+
+Bug found while testing: the compact classes were assembled with a template string (`${compact}:h-14`), which Tailwind can't see, so the flag toggled but nothing resized. Written out literally.
+Live test (CDP, 1440): large at 35% / 39%, compact at 42%; shrink 1280 → 974 → 836 → 788 → 768px in ~430ms; reload at #faq starts compact; chip still aligned; 375: no overflow, menu 8px under the bar. axe 0 (375 / 768 / 1440); build passes; detector clean. Not committed.
+
+## 44. Landing hero: rotating outcome + proof strip (2026-10-23)
+
+UI (user: "use your creativity, add something interesting"): the headline's yellow box is now a one-pass ticker, "I build websites that [close deals → capture leads → take payments → book calls → close deals], not just look good." (new `components/sections/RotatingOutcome.tsx`). Content: a proof strip under the buttons with facts from the user's own docs: 20+ projects shipped, 3+ yrs building end to end (docs/about-me.md), 24h reply with a fixed quote (docs/cta.md). `content/hero.ts`: `title` is now the plain sentence, `headline` holds prefix / outcomes / suffix, `proof` added; eyebrow keeps its dot on the first line when wrapping (non-breaking space). Lead, buttons, client strip and HeroArt unchanged. `docs/hero-content.md` not edited (the user's source file).
+
+Live test (CDP): sequence correct at 1440 and 375, stops on "close deals" after ~12s, h1 box/height constant while turning (no reflow), reduced motion static, sr-only sentence correct; 0 console errors. axe 0 (375 / 768 / 1440); no overflow; build passes; detector clean. Not committed.
+
+## 45. Page restructure after the critique (2026-10-23)
+
+- **Order:** Hero → Services (what I build) → About → Work → Testimonials → Pricing → Process → FAQ → Contact (`app/page.tsx`). Was Hero → Pricing → Process → About → Work → Services → Testimonials → FAQ.
+- **Backgrounds:** Process and Testimonials moved to white so no two grey bands touch; Pricing is the one grey band. Process tiles became `surface-container-low` (AI tile: active step and panel white).
+- **Hero:** primary button is now "Book a free 30-min call" (`site.bookingUrl`, new tab), secondary "See Pricing". New face-and-name line under the buttons (`hero.intro`, DRAFT copy, not from docs).
+- **Nav:** Services · About · Work · Pricing · FAQ (page order). Scroll-spy watches every `main section[id]`, so the chip clears over hero, testimonials, process and contact. Footer Navigate matches; the four offer links go to `#pricing`.
+- Verified: 1280 and 375 full-page captures, no overflow, axe 0 violations, layout detector clean.
+
+## 46. Distill: cut repetition (2026-10-23)
+
+- **Testimonials** taken off the page (`app/page.tsx` comment); files kept for when real quotes exist.
+- **What I build**: unchanged (owner kept all 5 cards, incl. the client avatar stack on the closer).
+- **Client list**: hero strip + the What I build closer. About lost the companies marquee (and the `marquee` keyframes); bento re-gridded.
+- **Tech grid**: 8 shown (Next.js, React, TypeScript, Node.js, Tailwind, Stripe, Zoho CRM, Claude AI), the other 14 behind "Show all 22 tools".
+- **Pricing**: feature lists show 4 on phones with "Show all N included"; all show from md.
+- New `components/ui/FoldList.tsx` (client): first N items, rest folded; `mobileOnly` folds below md only; toggle is a 44px-tall button with `aria-expanded`/`aria-controls`.
+- Page height: 12,925 → 11,303px desktop, 21,154 → 18,953px at 375. Verified: no overflow, axe 0 violations at 1280 and 375.
+
+## 47. Clarify: plain copy (2026-10-23)
+
+- **Title / description** (`content/site.ts`, DRAFT): "Toki Osman — Next.js Developer for Websites, Web Apps & AI" (58 chars); "I design, build and launch Next.js websites and web apps connected to your CRM, payments, bookings and AI. Websites from $1,500, with a fixed quote in 24 hours." (160). Replaces the old agency wording.
+- **Jargon**: pricing "CMS integration" → "A content editor (CMS) so you can update pages yourself"; "RAG setup: …" → "Answers come from your own data, with the source shown"; FAQ meta "RAG ASSISTANT" → "ASSISTANT ON YOUR CONTENT". `docs/services.md` still has the old wording.
+- **Process header** (DRAFT): eyebrow "How it works", title "From brief to launch, with you in the loop", lead "You pick the design direction, I build it, you get a progress update every working day, and I handle the launch." (old lead promised "nothing gets lost in the handoff", which contradicted "no handoffs").
+- **Work left as is** at the owner's request (placeholder case studies, "24+" archive link, "Fortune 500").
+- "We" in FAQ/CTA kept where it means "you and I" ("we'll talk through your goals"), not an agency team.
+- Verified: no overflow, axe 0 violations at 1280 and 375.
+
+## 48. Harden: contact paths (2026-10-23)
+
+- **No CRM connected** (`crmReady` false): the button reads "Send via your email app" and a note under it says the form opens their email app addressed to tokiosman@outlook.com. Submitting (after validation) opens a `mailto:` with subject "Project enquiry: {type}" and the message, name and email in the body; the note is replaced by "Your email app should have opened… Nothing opened? Email me at …" (link). Previously every valid send ended in an error.
+- **CRM send fails**: "Your message didn't go through. Nothing you typed is lost: Email this message instead (address)." The link is the same prefilled `mailto:`; fields keep their values.
+- **Honeypot** renamed `company` → `hp_leave_empty` (label "Leave this field empty") so autofill can't fill it and silently drop a real lead. Shared name in `lib/contact.ts` (`HONEYPOT`), with `mailtoHref()`.
+- Still open: real booking URL (`site.bookingUrl` = https://cal.com placeholder), Zoho credentials, Turnstile.
+- Verified live (headless Edge): validation unchanged, valid send → email fallback state, no console errors; axe 0 at 375.
+
+## 49. Adapt: touch targets and phone fixes (2026-10-23)
+
+- **`tap-target` utility** (`app/globals.css`): an invisible centred `::after` of at least 44×44 on small controls, so the hit area grows without changing the look. On: PlanButton, logo, Work "View Case Study", Process direction tabs + Redeploy, FAQ copy-email, contact secondary + submit, footer "Back to top". Elements using it must not need their own `::after`.
+- Menu toggle 40 → 44px; form fields, the SEO "try another search" pill: `min-h-11`.
+- **Footer links**: real 44px rows below md (`min-h-11 min-w-11`, list spacing dropped); unchanged from md.
+- **Proof strip labels**: 10 → 11px on phones.
+- **WhatsApp button**: hidden (invisible + transparent) until the visitor is 40% through the hero (`html[data-compact]`), so it never covers the hero buttons/proof strip; fades in after, hides again at the top.
+- Audit at 375 (every link/button/field, counting the ::after hit area): 36 under 44px → 0. Left: 10px captions in the Work cards' mock browser bars (Work kept as is).
+- Verified: no overflow, axe 0 violations at 1280 and 375.
+
+## 50. Quieter: one moving thing in the hero (2026-10-23)
+
+- **Hero at rest** except the outcome ticker (plays once): the eyebrow dot no longer pings (`ping` removed from `Eyebrow`), and the glow button's blue gradient border is still until hovered (was cycling every 4s, forever). The status badges keep their 20s cadence; their first change comes after the ticker has finished.
+- **Logo dot** eases with ease-out-quint instead of the overshooting bounce curve.
+- **Navbar** gets `[contain:layout]`, so the per-frame size change on shrink/grow stays inside the header. Verified: mobile dropdown still 0.5rem under the bar, compact bar 768×56.
+- Process eyebrow dot no longer pulses. Pulses kept where they mean "live": the contact badge (available now) and the deploy tile's "deploying" state.
+- Glow button kept as a style (hero secondary, Work archive link); only its idle motion is gone.
+
+## 51. Polish pass (2026-10-23)
+
+- Checked at 375, 768, 1024, 1280 and 1536: no overflow, axe 0 violations at each; detector, ESLint and tsc clean across app/components.
+- **Process design tile (1024–1279px)**: the Centered / Split / Editorial tabs overflowed the narrow lg column ("Editorial" clipped). Tighter padding and gaps between lg and xl only; all three labels fit at 1024.
+- **Hero client row (below lg)**: capped at 34rem so 5 names wrap 3 + 2, not 4 + 1 with one alone.
+- **Still open for launch** (owner): real booking URL; Zoho credentials; real case studies (Work keeps template placeholders, incl. "24+" vs "20+"); real testimonials (section hidden); GitHub/LinkedIn URLs.
+
+## 52. Case study pages (2026-10-23)
+
+- New route `app/work/[slug]/page.tsx`: `/work/kuhnic-ai`, `/work/mavendata`, `/work/headq` (static params, unknown slugs 404). "View Case Study" links there (`projectHref`). Per-page title and description from the project.
+- Content: `slug` added to projects; `href: "#"` removed. Optional `challenge`, `approach`, `results`, `stack`, `liveUrl` render their sections only when filled: left empty, nothing invented. Page copy in `caseStudyPage`; "How I run every project" uses the real engagement steps (PRODUCT.md).
+- Nav, footer and the contact "See my work" link now use `/#id`; NavLinks matches sections by the hash part.
+- The three projects are still the template placeholders (PRODUCT.md), so these pages show placeholder clients, quotes and results until real case studies replace them.
+- Verified: /work/kuhnic-ai and /work/headq at 1280 and 375, no overflow, axe 0 violations; tsc (after `next typegen`) and ESLint clean.
+
+## 53. Case study: technologies + screenshot slider (2026-10-23)
+
+- **Technologies I used**: `stack` (names) on each project, shown as the About-style logo tiles after the outcome card; names matching `content/about.ts` tech get its logo, others show their first two letters.
+- **Slider** (`components/sections/CaseGallery.tsx`, client): slides = `image` (cover) + `gallery`. Scroll-snap track in one browser window; prev/next wrap around; dots follow manual scrolling; carousel/slide roles. Tested: next/next/wrap/prev, no console errors; axe 0 at 1280/375.
+- **PLACEHOLDER**: each project's `stack` and `gallery` (the extra slides reuse the other case images) are marked in `content/projects.ts` for the owner to replace.
+
+## 54. Booking opens as a Cal.com modal (2026-10-23)
+
+- `components/BookingModal.tsx` (mounted in `app/layout.tsx`): one click listener catches every link to `site.bookingUrl` and opens Cal.com's booking modal (light theme, ink brand colour, month view) instead of a new tab. Cal's official embed loader, no npm package; `embed.js` loads on the first booking click only. Modifier-clicks, no-JS and a bare placeholder URL fall back to the plain link.
+- Needs `site.bookingUrl` = a full event link, e.g. https://cal.com/{user}/30min. Tested with Cal's public demo event: modal opened on the page, no new tab, no console errors; reverted to the placeholder after.
+
+## 55. Dark theme (2026-10-23)
+
+- Token swap under `html[data-theme="dark"]` (see DESIGN.md), accent-fill and `.theme-light` islands, navbar `ThemeToggle` (sun/moon, 44px hit area), no-flash inline script in `app/layout.tsx` (`suppressHydrationWarning` on <html>), Cal modal follows the theme.
+- Hard-coded colours moved to tokens: form error red, the pricing/work colour-mix tints (`white` → `var(--color-white)`), the Process eyebrow gradient, the glow button's inner fill.
+- Verified: axe 0 violations in dark at 1280/375 (home) and 1280 (/work/headq), and in light at 1280; toggle: OS default → click → saved → survives reload → click back; no console errors.
+
+- Fix (dark): text that sits on a canary shape without being inside it (nav chip behind the active link, the hero's SVG cursor tag) turned light. New never-swapped token `on-accent` (#121212) for that text; a dark-mode scan of every text element over a light fill (home 1280/375, two case pages) finds none left.
+
+## 56. Pricing card patterns (2026-10-23)
+
+- New `components/ui/Pattern.tsx` (dots / blocks / waves / lines, SVG `<pattern>` in currentColor). Pricing: Website → dots, Web App → blocks, AI Upgrade → waves, Custom → diagonal lines (map in `Pricing.tsx`), each masked into a corner so text and prices sit on clean ground.
+- Verified light + dark at 1280 and 375: axe 0 violations, no overflow.
+
+- FAQ "Still have a question about your project?" card: new `plus` pattern kind (small plus signs), on-primary 25%, fading from the top-right. axe 0 (light 1280, dark 375).
+
+## 57. Animated 3D globe (2026-10-23)
+
+- "Anything and everything web" card: the flat SVG globe is replaced by `components/sections/Globe.tsx`, a canvas globe (no library): dotted sphere + graticule turning on a tilted axis, depth shading, rim glow; canary "home" point (GMT+6) with arcs and travelling pulses to the 5 client pins, which turn behind the sphere. Pin positions are decorative (no map).
+- Runs only while on screen and the tab is visible (IntersectionObserver + visibilitychange), DPR-capped at 2, one still frame with reduced motion. Verified animating in light and dark, no console errors.
+
+- Globe pins: illustrated people instead of initials (owner's choice over stock photos). Five hand-built SVGs in `public/avatars/` (varied skin tones and hair, backgrounds in the pin colours), drawn clipped into each pin with an ink ring; the letter is the fallback while loading. Not photos of clients: swap in real ones (with permission) by replacing the files.
+
+## 58. Realistic iPhone (CRM, payments & automation card) (2026-10-23)
+
+- `PhoneArt` rebuilt as an iPhone lock screen: titanium frame gradient + side buttons, black bezel, Dynamic Island with camera, status bar (signal, Wi-Fi, battery), lock icon, date, large clock, canary/blue wallpaper; frosted notifications with app icons (Zoho and Stripe logos from public/logos, an iOS-style Calendar tile) and times. Fixed hex colours (a physical device), so it is identical in light and dark.
+- Verified light and dark at 1280 (2x capture), axe 0, no console errors.
+
+- "Anything and everything web" card, left column: `DotWave` (Services.tsx), a 16 × 5 dot matrix with a canary wave running diagonally across (`dot-wave` keyframes, 3.2s, 90ms step per diagonal); CSS only, still with reduced motion. Verified animating in light and dark.
+
+- Dot wave removed again at the owner's request (component and `dot-wave` keyframes deleted).
+
+## 59. Logo hover: the dot turns the word yellow (2026-10-23)
+
+- `Logo.tsx`: on hover/focus the canary dot flips into a diamond (no longer turns blue) and a yellow fill sweeps through "tokiosman" from the dot's side (background-clip text, 500ms ease-out, 100ms after the dot), reversing on leave. Light theme: an ink outline drawn behind the fill (`paint-order`) keeps yellow-on-white legible; dark theme: plain yellow (`.logo-word` rule). Instant with reduced motion. Applies to header and footer logos.
+- Verified hover in / out, light and dark, no console errors.
+
+## 60. Logo font: Unbounded (2026-10-23)
+
+- Wordmark now in Unbounded (owner's choice; `next/font/google`, `--font-unbounded` → `font-logo` token), semibold, normal tracking (tight tracking made the wide letters touch). Header logo: 15px on phones, 20px at md, 28px from lg (compact 20px); footer 20px.
+- The wider wordmark (plus the theme toggle from §55) overflowed narrow headers: fixed by the sizes above, and below 360px the navbar's "Book a call" shows only its calendar tile (label kept for screen readers; new `labelClassName` on PlanButton). No overflow at 320 / 375 / 768 / 1024 / 1280; axe 0.
+
+- Logo font changed again: Unbounded's heavy "s" read poorly, so Sora 700 (owner's pick from a side-by-side comparison), tracking-tight; `--font-sora` → `font-logo`. Header logo 17px on phones. No overflow at 320 / 360 / 375 / 768 / 1280; axe 0.
+
+## 61. Hero micro-interactions (2026-10-23)
+
+All user-triggered (hover / pointer), 300ms ease-out-quint, off with reduced motion; nothing new moves on its own.
+- Primary CTA: calendar icon tilts and grows. See Pricing: arrow nudges down.
+- Intro line: photo tilts, grows and gets a canary ring.
+- Proof strip: hovered value lifts, a canary underline draws in, the label darkens.
+- Client row: initial tile turns canary with an ink edge and offset shadow, tips -6°; name darkens.
+- Eyebrow (all sections): the dot turns into a diamond (the logo dot's move).
+- Outcome box: mouse hover flips to the next outcome (ends the automatic pass) and tips the box -2°.
+- Hero art (xl, fine pointer): pointer parallax via `HeroParallax` (--px/--py, rAF-batched); back range ±6/4px, front range and overlays ±16/10px, 700ms smoothing.
+- Verified with real mouse events in headless Edge (before/after captures, outcome flip, parallax transforms), axe 0 light 375/1440 and dark 1440, no console errors.
+
+- Removed again at the owner's request: the photo, proof-strip and client-row hover effects (back to static). Kept: CTA icons, eyebrow dot, outcome-box flip, hero art parallax.
+
+## 62. Real client logos in the hero (2026-10-23)
+
+- Logos from docs/ processed into `public/clients/` (sharp: trimmed, lanczos3 resize, light sharpen): picture-tv.png (800 → 480px), logic-matrix-icon.png (icon cropped from the logo, ~2× up), webermelon.png (200 → 600px), easygrow.png (wordmark trimmed, ~3× up). Upscaling smooths but cannot add detail the originals lack; the companies' own SVGs would be sharper still.
+- Redaxify: the supplied file was a 146×30 screenshot, too small to upscale, so it is redrawn as a vector (`RedaxifyLogo` in brand-icons: navy sparkle + wordmark in the display font).
+- Hero client row: logo tiles (h-14 / h-16, white, hairline, `theme-light` so brand colours hold in the dark theme); marks (Picture TV, Logic Matrix, Webermelon) get their name beside them, wordmarks (Redaxify, easygrow) stand alone. One row from lg (container up to max-w-6xl); wraps 2 + 1 + 2 at 375. Logos have alt text or a visible name.
+- Name check: the logo reads "Redaxify", the content lists "REDUXIFY" (hero clients, docs/hero-content.md): to confirm with the owner.
+- Verified: no overflow 320–1440, axe 0 light/dark, no console errors.
+
+## 63. Mobile floating dock (2026-10-23)
+
+- Below md the hamburger menu (`MobileMenu.tsx`, deleted) is replaced by `components/layout/MobileDock.tsx`: a floating bottom dock with Services / About / Work / Pricing / FAQ (icon + label), current section highlighted canary via the scroll-spy now shared as `useActiveSection` (NavLinks.tsx).
+- Body gets bottom padding below md (5.5rem + safe-area) so the footer clears the dock; the WhatsApp button moves above the dock on phones.
+- Verified at 320 / 375 (light + dark): highlight follows scrolling and taps, no overflow 320–1280, footer end clear of the dock, axe 0, no console errors. (The round "N" in dev screenshots is the Next.js dev indicator, not shipped.)

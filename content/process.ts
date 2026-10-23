@@ -1,9 +1,9 @@
 // DRAFT copy for review: drawn from docs/services.md and the user's answers on how AI is used.
 
 export const processSection = {
-  eyebrow: "ENGINEERING & DESIGN MOMENTUM",
-  title: "A process tuned for momentum",
-  lead: "Design, build, polish, and stay in sync. Nothing gets lost in the handoff.",
+  eyebrow: "HOW IT WORKS",
+  title: "From brief to launch, with you in the loop",
+  lead: "You pick the design direction, I build it, you get a progress update every working day, and I handle the launch.",
 };
 
 export type AiStep = { name: string; ai: string; me: string };

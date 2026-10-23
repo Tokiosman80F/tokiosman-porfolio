@@ -6,25 +6,33 @@ const dots = {
   green: "bg-signal-green",
   ink: "bg-ink-black",
 };
-const animations = { none: "", pulse: "animate-pulse", ping: "animate-ping" };
+const animations = { none: "", pulse: "animate-pulse" };
 
 type EyebrowProps = ComponentProps<"div"> & {
   dot?: keyof typeof dots;
   animate?: keyof typeof animations;
 };
 
-// Section kicker: paper pill with a status dot and a mono uppercase label.
+// Section kicker: paper pill with a status dot and a mono uppercase label. Hover: the dot turns into a
+// diamond (the logo dot's move).
 export function Eyebrow({ dot = "canary", animate = "none", className, children, ...props }: EyebrowProps) {
   return (
     <div
       className={cn(
-        "inline-flex items-center gap-unit-2 rounded-pill border border-border-hairline bg-paper-card px-unit-4 py-1 shadow-sm",
+        "group/eyebrow inline-flex items-center gap-unit-2 rounded-pill border border-border-hairline bg-paper-card px-unit-4 py-1 shadow-sm",
         className,
       )}
       {...props}
     >
-      <span aria-hidden className={cn("size-2 rounded-pill", dots[dot], animations[animate])} />
-      <span className="font-mono text-mono-tag font-semibold tracking-widest text-ink-charcoal uppercase">{children}</span>
+      <span
+        aria-hidden
+        className={cn(
+          "size-2 rounded-pill transition-[rotate,scale,border-radius] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/eyebrow:scale-125 group-hover/eyebrow:rotate-45 group-hover/eyebrow:rounded-[1px] motion-reduce:transition-none",
+          dots[dot],
+          animations[animate],
+        )}
+      />
+      <span className="font-mono text-mono-tag font-semibold tracking-widest text-balance text-ink-charcoal uppercase">{children}</span>
     </div>
   );
 }

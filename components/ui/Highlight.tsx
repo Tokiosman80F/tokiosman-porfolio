@@ -39,13 +39,34 @@ export function Highlight({ color = "canary", tilt = "none", className, children
 }
 
 export function renderHighlighted(parts: HighlightedText, className?: string) {
-  return parts.map((p, i) =>
-    typeof p === "string" ? (
-      p
-    ) : (
-      <Highlight key={i} color={p.color} tilt={p.tilt} className={className}>
+  const out: ReactNode[] = [];
+  for (let i = 0; i < parts.length; i++) {
+    const p = parts[i];
+    if (typeof p === "string") {
+      out.push(p);
+      continue;
+    }
+    const box = (
+      <Highlight color={p.color} tilt={p.tilt} className={className}>
         {p.highlight}
       </Highlight>
-    ),
-  );
+    );
+    // Punctuation right after a box ("close deals" + ", not…") would otherwise be free to wrap onto the
+    // next line on its own; keep it glued to the box.
+    const next = parts[i + 1];
+    const glue = typeof next === "string" ? (next.match(/^\S+/)?.[0] ?? "") : "";
+    if (glue) {
+      out.push(
+        <span key={i} className="whitespace-nowrap">
+          {box}
+          {glue}
+        </span>,
+        (next as string).slice(glue.length),
+      );
+      i++;
+    } else {
+      out.push(<span key={i}>{box}</span>);
+    }
+  }
+  return out;
 }

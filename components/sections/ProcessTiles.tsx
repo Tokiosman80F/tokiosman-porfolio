@@ -56,7 +56,7 @@ function Tile({ dark, className, children }: { dark?: boolean; className?: strin
         "relative flex flex-col overflow-hidden rounded-2xl",
         dark
           ? "bg-ink-black bg-[radial-gradient(90%_60%_at_0%_100%,rgb(255_255_255/0.12),transparent_60%)]"
-          : "bg-white",
+          : "bg-surface-container-low",
         className,
       )}
     >
@@ -133,14 +133,14 @@ export function BuildTile({ className }: { className?: string }) {
   const { ref, index, select, stop } = useAutoplay<HTMLDivElement>(t.directions.length, 2600);
   return (
     <Tile dark className={cn("p-2.5", className)}>
-      <div ref={ref} onPointerEnter={stop} onFocus={stop} className="rounded-xl bg-paper-card p-3">
+      <div ref={ref} onPointerEnter={stop} onFocus={stop} className="rounded-xl bg-paper-card p-3 lg:p-2 xl:p-3">
         <div aria-hidden className="mb-3 flex items-center gap-1.5">
           <span className="size-2 rounded-full bg-[#ef4444]/80" />
           <span className="size-2 rounded-full bg-[#f59e0b]/80" />
           <span className="size-2 rounded-full bg-[#10b981]/80" />
           <span className="mx-auto h-2.5 w-2/5 rounded-full bg-border-hairline" />
         </div>
-        <div role="group" aria-label={t.directionsLabel} className="mb-3 flex gap-1 rounded-md bg-paper-subtle p-1">
+        <div role="group" aria-label={t.directionsLabel} className="mb-3 flex gap-1 rounded-md bg-paper-subtle p-1 lg:gap-0.5 lg:p-0.5 xl:gap-1 xl:p-1">
           {t.directions.map((d, i) => (
             <button
               key={d}
@@ -148,7 +148,7 @@ export function BuildTile({ className }: { className?: string }) {
               aria-pressed={i === index}
               onClick={() => select(i)}
               className={cn(
-                "flex-1 rounded-sm px-2 py-1.5 font-mono text-mono-tag transition-colors",
+                "tap-target flex-1 rounded-sm px-2 py-1.5 lg:px-1 xl:px-2 font-mono text-mono-tag transition-colors",
                 i === index ? "bg-white text-ink-black shadow-xs" : "text-ink-muted hover:text-ink-black",
               )}
             >
@@ -292,7 +292,7 @@ export function DeployTile({ className }: { className?: string }) {
             <span
               className={cn(
                 "flex items-center gap-1.5 font-mono text-mono-meta",
-                isLive ? "text-signal-green" : "text-on-primary-container",
+                isLive ? "text-signal-green-on-primary" : "text-on-primary-container",
               )}
             >
               <span aria-hidden className={cn("size-1.5 rounded-full", isLive ? "bg-signal-green" : "animate-pulse bg-canary-yellow")} />
@@ -302,7 +302,7 @@ export function DeployTile({ className }: { className?: string }) {
           <button
             type="button"
             onClick={replay}
-            className="flex items-center gap-1.5 rounded-md border border-surface-tint px-unit-3 py-1.5 font-sans text-body-sm text-on-primary transition-colors hover:bg-white/10 focus-visible:outline-white"
+            className="tap-target flex items-center gap-1.5 rounded-md border border-surface-tint px-unit-3 py-1.5 font-sans text-body-sm text-on-primary transition-colors hover:bg-white/10 focus-visible:outline-white"
           >
             <RotateCw aria-hidden className="size-4 shrink-0" />
             {t.action}
@@ -368,7 +368,7 @@ export function SeoTile({ className }: { className?: string }) {
         <button
           type="button"
           onClick={next}
-          className="flex items-center gap-unit-3 rounded-full border border-border-hairline bg-white px-unit-4 py-2.5 text-left shadow-sm transition-colors hover:border-ink-black"
+          className="flex min-h-11 items-center gap-unit-3 rounded-full border border-border-hairline bg-white px-unit-4 py-2.5 text-left shadow-sm transition-colors hover:border-ink-black"
         >
           <GoogleIcon />
           <span className="min-w-0 flex-1 truncate font-sans text-body-sm text-ink-charcoal">
@@ -474,7 +474,7 @@ export function AiTile({ className }: { className?: string }) {
                 onClick={() => select(i)}
                 className={cn(
                   "flex items-center gap-unit-3 rounded-lg px-unit-3 py-2.5 text-left transition-colors",
-                  i === index ? "bg-surface-container-low" : "hover:bg-surface-container-low/60",
+                  i === index ? "bg-white shadow-xs" : "hover:bg-white/60",
                 )}
               >
                 <span className="font-mono text-mono-tag text-ink-muted tabular-nums">{String(i + 1).padStart(2, "0")}</span>
@@ -490,7 +490,7 @@ export function AiTile({ className }: { className?: string }) {
           </div>
         </div>
 
-        <div className="flex flex-col justify-center rounded-xl bg-surface-container-low p-unit-4 sm:p-unit-8">
+        <div className="flex flex-col justify-center rounded-xl bg-white p-unit-4 sm:p-unit-8">
           <div key={index} className="flex animate-[tile-in_0.3s_ease-out] flex-col">
             <p className="font-mono text-mono-tag tracking-widest text-ink-muted uppercase">{step.name}</p>
             <div className="mt-unit-4 rounded-lg border border-border-hairline bg-white p-unit-4">

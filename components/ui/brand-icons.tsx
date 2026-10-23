@@ -50,3 +50,17 @@ export function GoogleIcon() {
     </svg>
   );
 }
+
+// Redaxify client logo, redrawn as a vector from the owner's 146×30 screenshot (docs/): a white four-point
+// sparkle and wordmark in the brand navy (the screenshot showed them white on a navy bar). The wordmark is set in the site's display font, close to the
+// original bold sans; replace with the company's own SVG when available.
+export function RedaxifyLogo({ className }: { className?: string }) {
+  return (
+    <svg viewBox="5 4 107 24" className={className} role="img" aria-label="Redaxify">
+      <path d="M17 6c.7 5.3 4.7 9.3 10 10-5.3.7-9.3 4.7-10 10-.7-5.3-4.7-9.3-10-10 5.3-.7 9.3-4.7 10-10z" fill="#222445" />
+      <text x="33" y="21.5" fill="#222445" className="font-display" fontSize="15.5" fontWeight="700" letterSpacing="-0.2">
+        Redaxify
+      </text>
+    </svg>
+  );
+}
