@@ -1647,3 +1647,10 @@ Live test (CDP): sequence correct at 1440 and 375, stops on "close deals" after 
 - Verified: axe 0 violations in dark at 1280/375 (home) and 1280 (/work/headq), and in light at 1280; toggle: OS default → click → saved → survives reload → click back; no console errors.
 
 - Fix (dark): text that sits on a canary shape without being inside it (nav chip behind the active link, the hero's SVG cursor tag) turned light. New never-swapped token `on-accent` (#121212) for that text; a dark-mode scan of every text element over a light fill (home 1280/375, two case pages) finds none left.
+
+## 56. Pricing card patterns (2026-10-23)
+
+- New `components/ui/Pattern.tsx` (dots / blocks / waves / lines, SVG `<pattern>` in currentColor). Pricing: Website → dots, Web App → blocks, AI Upgrade → waves, Custom → diagonal lines (map in `Pricing.tsx`), each masked into a corner so text and prices sit on clean ground.
+- Verified light + dark at 1280 and 375: axe 0 violations, no overflow.
+
+- FAQ "Still have a question about your project?" card: new `plus` pattern kind (small plus signs), on-primary 25%, fading from the top-right. axe 0 (light 1280, dark 375).

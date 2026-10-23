@@ -5,11 +5,19 @@ import { Section } from "@/components/ui/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { customOffer, offers, pricingSection, type CustomOffer, type Offer } from "@/content/pricing";
 import { FoldList } from "@/components/ui/FoldList";
+import { Pattern, type PatternKind } from "@/components/ui/Pattern";
 import { cn } from "@/lib/utils";
 
 // Pricing cards (user-supplied reference, docs/image.png): soft rounded cards on a warm grey band, a dark
 // card for the recommended offer, an inset top panel, two-tone titles and dot-bullet feature columns.
 // `dark` switches every element to its on-black colours.
+// Each card carries its own faint pattern (dots, blocks, waves, lines), masked into a corner away from the text.
+
+const patterns: Record<string, PatternKind> = { website: "dots", "web-app": "blocks", "ai-upgrade": "waves", custom: "lines" };
+// Fades the pattern out from one corner / edge
+const fadeTopRight = "[mask-image:radial-gradient(70%_90%_at_100%_0%,black,transparent)]";
+const fadeBottomRight = "[mask-image:radial-gradient(80%_100%_at_100%_100%,black,transparent)]";
+const fadeRight = "[mask-image:linear-gradient(to_left,black,transparent_75%)]";
 
 function Pill({ children, featured }: { children: string; featured?: boolean }) {
   return (
@@ -124,15 +132,22 @@ function OfferCard({ offer: o }: { offer: Offer }) {
     <article className={cn("flex flex-col rounded-2xl p-2.5", dark ? "bg-ink-black" : "bg-white")}>
       <div
         className={cn(
-          "flex flex-col rounded-xl p-unit-4 sm:p-unit-6",
+          "relative flex flex-col overflow-hidden rounded-xl p-unit-4 sm:p-unit-6",
           dark
             ? "bg-primary-container bg-[radial-gradient(120%_90%_at_0%_0%,rgb(255_255_255/0.14),transparent_55%)]"
             : "bg-surface-container-low",
         )}
       >
-        <Label name={o.name} badge={o.badge} dark={dark} />
-        <Title parts={o.tagline} dark={dark} />
-        <PriceRow offer={o} dark={dark} />
+        <Pattern
+          kind={patterns[o.id] ?? "dots"}
+          id={o.id}
+          className={cn(fadeTopRight, dark ? "text-on-primary opacity-25" : "text-ink-black opacity-[0.1]")}
+        />
+        <div className="relative flex flex-col">
+          <Label name={o.name} badge={o.badge} dark={dark} />
+          <Title parts={o.tagline} dark={dark} />
+          <PriceRow offer={o} dark={dark} />
+        </div>
       </div>
       <div className="px-unit-4 pt-unit-6 pb-unit-4 sm:px-unit-6">
         <Features items={o.features} dark={dark} />
@@ -145,11 +160,14 @@ function OfferCard({ offer: o }: { offer: Offer }) {
 function WideOfferCard({ offer: o }: { offer: Offer }) {
   return (
     <article className="grid grid-cols-1 gap-2.5 rounded-2xl bg-white p-2.5 lg:grid-cols-2">
-      <div className="flex flex-col p-unit-4 sm:p-unit-6">
-        <Label name={o.name} badge={o.badge} />
-        <Title parts={o.tagline} />
-        <div className="mt-auto">
-          <PriceRow offer={o} />
+      <div className="relative flex flex-col overflow-hidden rounded-xl p-unit-4 sm:p-unit-6">
+        <Pattern kind={patterns[o.id] ?? "waves"} id={o.id} className={cn(fadeBottomRight, "text-ink-black opacity-[0.22]")} />
+        <div className="relative flex flex-1 flex-col">
+          <Label name={o.name} badge={o.badge} />
+          <Title parts={o.tagline} />
+          <div className="mt-auto">
+            <PriceRow offer={o} />
+          </div>
         </div>
       </div>
       <div className="rounded-xl bg-surface-container-low p-unit-4 sm:p-unit-6">
@@ -168,12 +186,13 @@ function WideOfferCard({ offer: o }: { offer: Offer }) {
 
 function CustomCard({ offer: o }: { offer: CustomOffer }) {
   return (
-    <article className="flex flex-col gap-unit-6 rounded-2xl bg-white p-unit-6 sm:p-unit-8 lg:flex-row lg:items-end lg:justify-between">
-      <div>
+    <article className="relative flex flex-col gap-unit-6 overflow-hidden rounded-2xl bg-white p-unit-6 sm:p-unit-8 lg:flex-row lg:items-end lg:justify-between">
+      <Pattern kind={patterns.custom} id="custom" className={cn(fadeRight, "text-ink-black opacity-[0.14]")} />
+      <div className="relative">
         <Label name={o.name} />
         <Title parts={o.tagline} wide />
       </div>
-      <div className="flex shrink-0 flex-col gap-unit-3">
+      <div className="relative flex shrink-0 flex-col gap-unit-3">
         <Price price={o.price} />
         <BookButton cta={o.cta} />
       </div>

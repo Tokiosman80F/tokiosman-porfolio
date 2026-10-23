@@ -2,6 +2,7 @@ import Image from "next/image";
 import { CalendarDays, Plus } from "lucide-react";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { renderHighlighted } from "@/components/ui/Highlight";
+import { Pattern } from "@/components/ui/Pattern";
 import { PlanButton } from "@/components/ui/PlanButton";
 import { renderRich } from "@/components/ui/RichText";
 import { Section } from "@/components/ui/Section";
@@ -70,20 +71,21 @@ function Question({ item, open }: { item: FaqItem; open?: boolean }) {
   );
 }
 
-/* Dark "ask me" card: photo, the contact prompt, chat button + email link */
+/* Dark "ask me" card: photo, the contact prompt, chat button + email link, over a faint field of plus signs */
 function AskCard() {
   const { contact } = faqSection;
   return (
     <div className="relative overflow-hidden rounded-2xl bg-ink-black p-unit-6 bg-[radial-gradient(90%_70%_at_100%_0%,rgb(255_255_255/0.12),transparent_60%)]">
-      <div className="flex items-center gap-unit-3">
+      <Pattern kind="plus" id="faq-ask" className="text-on-primary opacity-25 [mask-image:radial-gradient(75%_100%_at_100%_0%,black,transparent)]" />
+      <div className="relative flex items-center gap-unit-3">
         <Avatar className="size-11 border-white/20" />
         <span className="flex items-center gap-1.5 font-mono text-mono-tag text-on-primary-container">
           <span aria-hidden className="size-1.5 rounded-full bg-signal-green" />
           {about.bio.name}
         </span>
       </div>
-      <p className="mt-unit-4 font-sans text-body-lead text-on-primary">{contact.prompt}</p>
-      <div className="mt-unit-6 flex flex-wrap items-center gap-unit-4">
+      <p className="relative mt-unit-4 font-sans text-body-lead text-on-primary">{contact.prompt}</p>
+      <div className="relative mt-unit-6 flex flex-wrap items-center gap-unit-4">
         <PlanButton href={contact.cta.href} label={contact.cta.label} icon={CalendarDays} external dark />
         <CopyEmail
           address={contact.email.address}
