@@ -18,12 +18,10 @@ import { cn } from "@/lib/utils";
 
 type Chip = { left: number; width: number; visible: boolean; slide: boolean };
 
-export function NavLinks({ links }: { links: NavLink[] }) {
+// Scroll-spy, shared with the mobile dock: the href of the linked section crossing the middle band of the
+// viewport, or null over a section with no link.
+export function useActiveSection(links: NavLink[]) {
   const [active, setActive] = useState<string | null>(null);
-  const [chip, setChip] = useState<Chip>({ left: 0, width: 0, visible: false, slide: false });
-  const trayRef = useRef<HTMLUListElement>(null);
-
-  // Scroll-spy + "scrolled" flag
   useEffect(() => {
     // Links are "/#id"; sections are matched by their "#id" part
     const linked = new Map(links.map((l) => [l.href.slice(l.href.indexOf("#")), l.href]));
@@ -37,6 +35,18 @@ export function NavLinks({ links }: { links: NavLink[] }) {
       { rootMargin: "-45% 0px -50% 0px" },
     );
     document.querySelectorAll("main section[id]").forEach((s) => io.observe(s));
+    return () => io.disconnect();
+  }, [links]);
+  return active;
+}
+
+export function NavLinks({ links }: { links: NavLink[] }) {
+  const active = useActiveSection(links);
+  const [chip, setChip] = useState<Chip>({ left: 0, width: 0, visible: false, slide: false });
+  const trayRef = useRef<HTMLUListElement>(null);
+
+  // "Scrolled" flag for the header size (and the WhatsApp button)
+  useEffect(() => {
     const onScroll = () => {
       const hero = document.getElementById("home");
       const past = hero ? -hero.getBoundingClientRect().top > hero.offsetHeight * 0.4 : window.scrollY > 8;
@@ -47,10 +57,9 @@ export function NavLinks({ links }: { links: NavLink[] }) {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => {
       cancelAnimationFrame(ready);
-      io.disconnect();
       window.removeEventListener("scroll", onScroll);
     };
-  }, [links]);
+  }, []);
 
   // Place the chip under the active link, relative to the tray (not the link's own list item)
   useEffect(() => {

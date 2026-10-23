@@ -2,7 +2,7 @@ import { CalendarDays } from "lucide-react";
 import { PlanButton } from "@/components/ui/PlanButton";
 import { headerCta, primaryNav } from "@/content/navigation";
 import Logo from "./Logo";
-import MobileMenu from "./MobileMenu";
+import { MobileDock } from "./MobileDock";
 import { NavLinks } from "./NavLinks";
 import { ThemeToggle } from "./ThemeToggle";
 
@@ -12,6 +12,7 @@ import { ThemeToggle } from "./ThemeToggle";
 // shadow; scrolling back up widens it again. Transitions only run after the first check
 // (html[data-nav-ready]), so a mid-page reload starts compact instead of shrinking on load.
 // [contain:layout] keeps the per-frame size change inside the header (the page never re-lays out).
+// Below md the section links live in a floating dock at the bottom of the screen (MobileDock).
 // Inside: logo | links in an inset tray with a sliding canary chip on the current section | booking button.
 // The wrapper ignores pointer events so the page around the bar stays clickable.
 
@@ -30,19 +31,21 @@ const logo =
 
 export default function Header() {
   return (
-    <header className="pointer-events-none fixed [contain:layout] inset-x-0 top-0 z-50 px-page-pad-mobile pt-unit-3 sm:pt-unit-4 lg:px-page-pad-desktop">
-      <div className={bar}>
-        <Logo size="sm" className={logo} />
-        <nav aria-label="Primary" className="hidden flex-1 justify-center md:flex">
-          <NavLinks links={primaryNav} />
-        </nav>
-        <div className="ml-auto flex items-center gap-unit-2 md:ml-0">
-          <ThemeToggle />
-          {/* Under 368px only the calendar tile shows (the label stays for screen readers) so the bar fits 320px */}
-          <PlanButton href={headerCta.href} label={headerCta.label} icon={CalendarDays} external={headerCta.external} labelClassName="max-[23rem]:sr-only" />
-          <MobileMenu links={primaryNav} />
+    <>
+      <header className="pointer-events-none fixed [contain:layout] inset-x-0 top-0 z-50 px-page-pad-mobile pt-unit-3 sm:pt-unit-4 lg:px-page-pad-desktop">
+        <div className={bar}>
+          <Logo size="sm" className={logo} />
+          <nav aria-label="Primary" className="hidden flex-1 justify-center md:flex">
+            <NavLinks links={primaryNav} />
+          </nav>
+          <div className="ml-auto flex items-center gap-unit-2 md:ml-0">
+            <ThemeToggle />
+            {/* Under 368px only the calendar tile shows (the label stays for screen readers) so the bar fits 320px */}
+            <PlanButton href={headerCta.href} label={headerCta.label} icon={CalendarDays} external={headerCta.external} labelClassName="max-[23rem]:sr-only" />
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
+      <MobileDock links={primaryNav} />
+    </>
   );
 }

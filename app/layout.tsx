@@ -52,7 +52,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </noscript>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd).replace(/</g, "\\u003c") }} />
       </head>
-      <body className="font-body-md text-body-md text-on-surface antialiased bg-white">
+      <body className="font-body-md text-body-md text-on-surface antialiased bg-white max-md:pb-[calc(5.5rem+env(safe-area-inset-bottom))]">
         <MotionProvider>{children}</MotionProvider>
         <BookingModal />
       </body>

@@ -14,7 +14,7 @@ export function WhatsAppButton() {
       target="_blank"
       rel="noopener"
       aria-label={`${label} (opens in a new tab)`}
-      className="group fixed right-[max(1rem,env(safe-area-inset-right))] bottom-[max(1rem,env(safe-area-inset-bottom))] z-40 flex items-center rounded-2xl border border-border-hairline bg-white p-2 shadow-lg invisible opacity-0 [html[data-compact]_&]:visible [html[data-compact]_&]:opacity-100 transition-[border-color,translate,opacity,visibility] duration-200 hover:-translate-y-0.5 hover:border-ink-black focus-visible:border-ink-black motion-reduce:transition-none sm:right-6 sm:bottom-6"
+      className="group fixed right-[max(1rem,env(safe-area-inset-right))] bottom-[max(1rem,env(safe-area-inset-bottom))] z-40 flex items-center rounded-2xl border border-border-hairline bg-white p-2 shadow-lg invisible opacity-0 [html[data-compact]_&]:visible [html[data-compact]_&]:opacity-100 transition-[border-color,translate,opacity,visibility] duration-200 hover:-translate-y-0.5 hover:border-ink-black focus-visible:border-ink-black motion-reduce:transition-none max-md:bottom-[calc(6.25rem+env(safe-area-inset-bottom))] sm:right-6 md:bottom-6"
     >
       {/* Label: collapsed to 0 width, slides open on hover/focus (desktop pointers only) */}
       <span

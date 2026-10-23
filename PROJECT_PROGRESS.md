@@ -1704,3 +1704,9 @@ All user-triggered (hover / pointer), 300ms ease-out-quint, off with reduced mot
 - Hero client row: logo tiles (h-14 / h-16, white, hairline, `theme-light` so brand colours hold in the dark theme); marks (Picture TV, Logic Matrix, Webermelon) get their name beside them, wordmarks (Redaxify, easygrow) stand alone. One row from lg (container up to max-w-6xl); wraps 2 + 1 + 2 at 375. Logos have alt text or a visible name.
 - Name check: the logo reads "Redaxify", the content lists "REDUXIFY" (hero clients, docs/hero-content.md): to confirm with the owner.
 - Verified: no overflow 320–1440, axe 0 light/dark, no console errors.
+
+## 63. Mobile floating dock (2026-10-23)
+
+- Below md the hamburger menu (`MobileMenu.tsx`, deleted) is replaced by `components/layout/MobileDock.tsx`: a floating bottom dock with Services / About / Work / Pricing / FAQ (icon + label), current section highlighted canary via the scroll-spy now shared as `useActiveSection` (NavLinks.tsx).
+- Body gets bottom padding below md (5.5rem + safe-area) so the footer clears the dock; the WhatsApp button moves above the dock on phones.
+- Verified at 320 / 375 (light + dark): highlight follows scrolling and taps, no overflow 320–1280, footer end clear of the dock, axe 0, no console errors. (The round "N" in dev screenshots is the Next.js dev indicator, not shipped.)
