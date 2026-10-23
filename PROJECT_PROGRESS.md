@@ -1670,3 +1670,15 @@ Live test (CDP): sequence correct at 1440 and 375, stops on "close deals" after 
 - "Anything and everything web" card, left column: `DotWave` (Services.tsx), a 16 × 5 dot matrix with a canary wave running diagonally across (`dot-wave` keyframes, 3.2s, 90ms step per diagonal); CSS only, still with reduced motion. Verified animating in light and dark.
 
 - Dot wave removed again at the owner's request (component and `dot-wave` keyframes deleted).
+
+## 59. Logo hover: the dot turns the word yellow (2026-10-23)
+
+- `Logo.tsx`: on hover/focus the canary dot flips into a diamond (no longer turns blue) and a yellow fill sweeps through "tokiosman" from the dot's side (background-clip text, 500ms ease-out, 100ms after the dot), reversing on leave. Light theme: an ink outline drawn behind the fill (`paint-order`) keeps yellow-on-white legible; dark theme: plain yellow (`.logo-word` rule). Instant with reduced motion. Applies to header and footer logos.
+- Verified hover in / out, light and dark, no console errors.
+
+## 60. Logo font: Unbounded (2026-10-23)
+
+- Wordmark now in Unbounded (owner's choice; `next/font/google`, `--font-unbounded` → `font-logo` token), semibold, normal tracking (tight tracking made the wide letters touch). Header logo: 15px on phones, 20px at md, 28px from lg (compact 20px); footer 20px.
+- The wider wordmark (plus the theme toggle from §55) overflowed narrow headers: fixed by the sizes above, and below 360px the navbar's "Book a call" shows only its calendar tile (label kept for screen readers; new `labelClassName` on PlanButton). No overflow at 320 / 375 / 768 / 1024 / 1280; axe 0.
+
+- Logo font changed again: Unbounded's heavy "s" read poorly, so Sora 700 (owner's pick from a side-by-side comparison), tracking-tight; `--font-sora` → `font-logo`. Header logo 17px on phones. No overflow at 320 / 360 / 375 / 768 / 1280; axe 0.

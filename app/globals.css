@@ -76,6 +76,7 @@
   --font-mono: var(--font-jetbrains-mono);
   --font-display: var(--font-space-grotesk);
   --font-hand: var(--font-caveat);
+  --font-logo: var(--font-sora); /* the tokiosman. wordmark */
   /* per-size family aliases, removed as Phase 4 rewrites the markup */
   --font-display-hero: var(--font-display);
   --font-headline-lg: var(--font-display);
@@ -186,6 +187,10 @@
   --color-ink-charcoal: #1A1A1A;
   --color-ink-muted: #4F4E4A;
   --color-on-surface-variant: #444748;
+}
+/* Logo hover: yellow on dark reads without the ink outline (which would thin the letters) */
+:root[data-theme="dark"] .logo-word {
+  -webkit-text-stroke-color: transparent !important;
 }
 :root[data-theme="dark"] .theme-light {
   color-scheme: light;

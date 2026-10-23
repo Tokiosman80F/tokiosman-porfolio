@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Caveat, Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
+import { Caveat, Inter, JetBrains_Mono, Sora, Space_Grotesk } from "next/font/google";
 import { BookingModal } from "@/components/BookingModal";
 import { MotionProvider } from "@/components/MotionProvider";
 import { site } from "@/content/site";
@@ -10,6 +10,8 @@ const spaceGrotesk = Space_Grotesk({ variable: "--font-space-grotesk", subsets: 
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
 const jetbrainsMono = JetBrains_Mono({ variable: "--font-jetbrains-mono", subsets: ["latin"] });
 const caveat = Caveat({ variable: "--font-caveat", subsets: ["latin"] });
+// Logo wordmark only
+const sora = Sora({ variable: "--font-sora", subsets: ["latin"] });
 
 // Favicon: app/favicon.ico via the file convention (Next injects the <link>). Replace that file, or add app/icon.svg, when the real one exists.
 export const metadata: Metadata = {
@@ -35,7 +37,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       suppressHydrationWarning // data-theme is set by the inline script before React loads
-      className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable} ${caveat.variable}`}
+      className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable} ${caveat.variable} ${sora.variable}`}
     >
       <head>
         {/* Without JS, Reveal never runs: show its children */}

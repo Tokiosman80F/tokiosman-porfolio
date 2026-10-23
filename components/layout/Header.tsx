@@ -7,7 +7,7 @@ import { NavLinks } from "./NavLinks";
 import { ThemeToggle } from "./ThemeToggle";
 
 // Resizable floating navbar. Over the landing hero it is large: the full content width (max-w-page), taller,
-// with a bigger wordmark and no shadow. Once the visitor is 40% of the way through the hero
+// with a bigger wordmark (from lg; 17px on phones, 20px at md) and no shadow. Once the visitor is 40% of the way through the hero
 // (html[data-compact], set by NavLinks) it shrinks to the compact bar (max-w-3xl, h-14) and lifts with a
 // shadow; scrolling back up widens it again. Transitions only run after the first check
 // (html[data-nav-ready]), so a mid-page reload starts compact instead of shrinking on load.
@@ -26,7 +26,7 @@ const bar = [
   "[html[data-nav-ready]_&]:transition-[max-width,height,box-shadow,padding] [html[data-nav-ready]_&]:duration-500 [html[data-nav-ready]_&]:ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
 ].join(" ");
 const logo =
-  "md:text-headline-md [html[data-compact]_&]:md:text-headline-sm [html[data-nav-ready]_&]:transition-[font-size] [html[data-nav-ready]_&]:duration-500 motion-reduce:transition-none";
+  "max-sm:text-[1.0625rem] lg:text-headline-md [html[data-compact]_&]:lg:text-headline-sm [html[data-nav-ready]_&]:transition-[font-size] [html[data-nav-ready]_&]:duration-500 motion-reduce:transition-none";
 
 export default function Header() {
   return (
@@ -38,7 +38,8 @@ export default function Header() {
         </nav>
         <div className="ml-auto flex items-center gap-unit-2 md:ml-0">
           <ThemeToggle />
-          <PlanButton href={headerCta.href} label={headerCta.label} icon={CalendarDays} external={headerCta.external} />
+          {/* Under 368px only the calendar tile shows (the label stays for screen readers) so the bar fits 320px */}
+          <PlanButton href={headerCta.href} label={headerCta.label} icon={CalendarDays} external={headerCta.external} labelClassName="max-[23rem]:sr-only" />
           <MobileMenu links={primaryNav} />
         </div>
       </div>
