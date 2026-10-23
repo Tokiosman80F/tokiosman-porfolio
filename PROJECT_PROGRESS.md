@@ -1634,3 +1634,8 @@ Live test (CDP): sequence correct at 1440 and 375, stops on "close deals" after 
 - **Technologies I used**: `stack` (names) on each project, shown as the About-style logo tiles after the outcome card; names matching `content/about.ts` tech get its logo, others show their first two letters.
 - **Slider** (`components/sections/CaseGallery.tsx`, client): slides = `image` (cover) + `gallery`. Scroll-snap track in one browser window; prev/next wrap around; dots follow manual scrolling; carousel/slide roles. Tested: next/next/wrap/prev, no console errors; axe 0 at 1280/375.
 - **PLACEHOLDER**: each project's `stack` and `gallery` (the extra slides reuse the other case images) are marked in `content/projects.ts` for the owner to replace.
+
+## 54. Booking opens as a Cal.com modal (2026-10-23)
+
+- `components/BookingModal.tsx` (mounted in `app/layout.tsx`): one click listener catches every link to `site.bookingUrl` and opens Cal.com's booking modal (light theme, ink brand colour, month view) instead of a new tab. Cal's official embed loader, no npm package; `embed.js` loads on the first booking click only. Modifier-clicks, no-JS and a bare placeholder URL fall back to the plain link.
+- Needs `site.bookingUrl` = a full event link, e.g. https://cal.com/{user}/30min. Tested with Cal's public demo event: modal opened on the page, no new tab, no console errors; reverted to the placeholder after.

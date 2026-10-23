@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Caveat, Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
+import { BookingModal } from "@/components/BookingModal";
 import { MotionProvider } from "@/components/MotionProvider";
 import { site } from "@/content/site";
 import "./globals.css";
@@ -44,6 +45,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       </head>
       <body className="font-body-md text-body-md text-on-surface antialiased bg-white">
         <MotionProvider>{children}</MotionProvider>
+        <BookingModal />
       </body>
     </html>
   );
