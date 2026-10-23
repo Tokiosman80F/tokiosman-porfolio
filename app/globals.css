@@ -236,6 +236,27 @@
   }
 }
 
+/* Theme toggle: the new icon spins and scales in after a click */
+@keyframes theme-icon-in {
+  from { opacity: 0; rotate: -90deg; scale: 0.4; }
+  to { opacity: 1; rotate: 0deg; scale: 1; }
+}
+
+/* Phone splash loader (SplashLoader): letters rise in, the canary dot pops, the bar fills */
+@keyframes splash-letter {
+  from { opacity: 0; translate: 0 0.45em; }
+  to { opacity: 1; translate: 0 0; }
+}
+@keyframes splash-dot {
+  0% { scale: 0; rotate: -90deg; }
+  70% { scale: 1.3; rotate: 45deg; }
+  100% { scale: 1; rotate: 0deg; }
+}
+@keyframes splash-bar {
+  from { scale: 0 1; }
+  to { scale: 1 1; }
+}
+
 /* Hero client logos below lg: the row is rendered twice, so -50% loops seamlessly */
 @keyframes marquee {
   to { transform: translateX(-50%); }

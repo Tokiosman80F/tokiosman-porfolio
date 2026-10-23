@@ -1717,3 +1717,9 @@ All user-triggered (hover / pointer), 300ms ease-out-quint, off with reduced mot
 - Reduced motion: the animation stops (global rule) and the row scrolls sideways by hand.
 - Tiles moved into a `LogoTiles` component in Hero.tsx (shared by both copies).
 - Verified: moving at 375 / 768 (light + dark), static at 1280, equal halves (seamless loop), no overflow 320–1280, axe 0.
+
+## 65. Theme toggle motion + phone splash loader (2026-10-23)
+
+- `ThemeToggle`: hover turns the sun 90° / tilts the moon; click presses the button (scale 0.9) and the new icon spins and scales in (`theme-icon-in`, keyed remount, only after a click so it never plays on load).
+- `components/layout/SplashLoader.tsx` (mounted in the layout): below md, first visit per session, a full-screen splash: "tokiosman" rises in letter by letter (Sora, `splash-letter`), the canary dot pops (`splash-dot`), a canary bar fills (`splash-bar`); fades out after window load, min 1.3s, max 2.5s. Server-rendered so it covers the first paint; the inline head script sets html[data-loader-done] for repeat views in the session; hidden from md, without JS (noscript) and from screen readers; with reduced motion it just fades.
+- Verified: frames 250ms → 1.2s (reveal, then fade), same-session navigation skips it, desktop display none, toggle hover/click frames, axe 0, no console errors.

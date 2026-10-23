@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Caveat, Inter, JetBrains_Mono, Sora, Space_Grotesk } from "next/font/google";
 import { BookingModal } from "@/components/BookingModal";
+import { SplashLoader } from "@/components/layout/SplashLoader";
 import { MotionProvider } from "@/components/MotionProvider";
 import { site } from "@/content/site";
 import "./globals.css";
@@ -41,18 +42,20 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <head>
         {/* Without JS, Reveal never runs: show its children */}
-        {/* Theme before first paint: the saved choice, else the OS setting (ThemeToggle changes it) */}
+        {/* Before first paint: the theme (saved choice, else the OS setting; ThemeToggle changes it), and the
+            phone splash loader is skipped if it already played this session (SplashLoader) */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `try{var t=localStorage.getItem("theme");if(t!=="dark"&&t!=="light")t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.dataset.theme=t}catch(e){}`,
+            __html: `try{var t=localStorage.getItem("theme");if(t!=="dark"&&t!=="light")t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.dataset.theme=t;if(sessionStorage.getItem("loader-seen"))document.documentElement.setAttribute("data-loader-done","")}catch(e){}`,
           }}
         />
         <noscript>
-          <style>{"[data-reveal] > * { opacity: 1 !important; }"}</style>
+          <style>{"[data-reveal] > * { opacity: 1 !important; } .splash { display: none !important; }"}</style>
         </noscript>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd).replace(/</g, "\\u003c") }} />
       </head>
       <body className="font-body-md text-body-md text-on-surface antialiased bg-white max-md:pb-[calc(5.5rem+env(safe-area-inset-bottom))]">
+        <SplashLoader />
         <MotionProvider>{children}</MotionProvider>
         <BookingModal />
       </body>
