@@ -68,6 +68,19 @@ export const serviceArt = {
     placeholder: "Ask me anything…",
   },
   call: { host: "Toki Osman", guest: "You", time: "10:00", title: "Free strategy call" },
+  health: {
+    site: "acmestudio.com",
+    status: "All systems normal",
+    updated: "Checked today",
+    uptimeLabel: "Uptime · last 30 days",
+    uptime: "99.98%",
+    checks: [
+      { label: "Updates", detail: "Next.js + 42 packages" },
+      { label: "Backup", detail: "Today, 03:00" },
+      { label: "SSL certificate", detail: "Valid · 81 days" },
+      { label: "Forms and payments", detail: "Tested this month" },
+    ],
+  },
   dashboard: {
     url: "app.acme.com/dashboard",
     app: "Acme",

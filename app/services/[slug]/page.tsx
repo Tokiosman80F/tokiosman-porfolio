@@ -6,7 +6,7 @@ import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
 import { TechMark } from "@/components/sections/About";
 import FinalCta from "@/components/sections/FinalCta";
-import { BrowserArt, CallArt, ChatArt, DashboardArt, PhoneArt } from "@/components/sections/ServiceArt";
+import { BrowserArt, CallArt, ChatArt, DashboardArt, HealthArt, PhoneArt } from "@/components/sections/ServiceArt";
 import { Button } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Heading } from "@/components/ui/Heading";
@@ -78,7 +78,7 @@ function jsonLd(p: ServicePage) {
 const num = (i: number) => String(i + 1).padStart(2, "0");
 
 // Hero illustration per page: the matching card art from the home page's Services section
-const arts = { browser: BrowserArt, chat: ChatArt, phone: PhoneArt, call: CallArt, dashboard: DashboardArt } satisfies Record<ServicePage["art"], () => React.JSX.Element>;
+const arts = { browser: BrowserArt, chat: ChatArt, phone: PhoneArt, call: CallArt, dashboard: DashboardArt, health: HealthArt } satisfies Record<ServicePage["art"], () => React.JSX.Element>;
 
 function PlanCard({ plan, cta }: { plan: ServicePlan; cta: ServicePage["cta"] }) {
   const dark = plan.featured;

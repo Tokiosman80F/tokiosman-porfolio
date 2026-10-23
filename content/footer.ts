@@ -34,6 +34,7 @@ export const footer = {
         { label: "Web App + Dashboard", href: "/services/web-app-development" },
         { label: "AI Upgrade for Your Website", href: "/services/ai-chatbot-for-website" },
         { label: "CRM & Payment Integrations", href: "/services/crm-payments-automation" },
+        { label: "Website Maintenance", href: "/services/website-maintenance" },
         { label: "Custom Projects", href: "/#pricing" },
       ],
     },

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ArrowLeft, ArrowRight, ArrowUp, CalendarDays, Captions, CreditCard, FileText, Hand, Info, LayoutDashboard, Lock, MessageSquare, Mic, MicOff, MonitorUp, PhoneOff, Plus, RotateCw, Search, Settings, SlidersHorizontal, Sparkles, Star, Users, Video, Wifi, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUp, CalendarDays, Captions, Check, CreditCard, FileText, Hand, Info, LayoutDashboard, Lock, MessageSquare, Mic, MicOff, MonitorUp, PhoneOff, Plus, RotateCw, Search, Settings, SlidersHorizontal, Sparkles, Star, Users, Video, Wifi, X } from "lucide-react";
 import { FigmaIcon } from "@/components/ui/brand-icons";
 import { serviceArt as art } from "@/content/services";
 import { cn } from "@/lib/utils";
@@ -459,6 +459,54 @@ export function DashboardArt() {
           </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+/* 7 · Site health panel (the maintenance service page's hero): 30 days of uptime bars, then the monthly
+   checks with their status. Fixed hex colours, not theme tokens (a product screen). Fictional data. */
+export function HealthArt() {
+  const h = art.health;
+  return (
+    <div className={cn("absolute inset-x-5 top-6 overflow-hidden rounded-xl bg-[#fff] p-3 shadow-[0_24px_40px_-14px_rgb(0_0_0/0.45),0_0_0_0.5px_rgb(0_0_0/0.18)] sm:inset-x-10 sm:top-8 sm:p-4", lift)}>
+      <div className="flex items-center justify-between gap-2">
+        <span className="min-w-0">
+          <span className="block truncate font-sans text-[11px] font-semibold text-[#121212]">{h.site}</span>
+          <span className="flex items-center gap-1 font-sans text-[8px] text-[#15803d]">
+            <span className="size-1.5 rounded-full bg-[#22c55e]" />
+            {h.status}
+          </span>
+        </span>
+        <span className="shrink-0 rounded-full bg-[#f4f4f5] px-2 py-0.5 font-sans text-[8px] text-[#52525b]">{h.updated}</span>
+      </div>
+
+      {/* uptime: one bar per day, one short dip */}
+      <div className="mt-3 rounded-lg border border-[#ececec] p-2">
+        <div className="flex items-baseline justify-between font-sans text-[8px] text-[#71717a]">
+          <span>{h.uptimeLabel}</span>
+          <span className="text-[11px] font-semibold text-[#121212]">{h.uptime}</span>
+        </div>
+        <div className="mt-1.5 flex h-6 items-stretch gap-[2px]">
+          {Array.from({ length: 30 }, (_, i) => (
+            <span key={i} className={cn("flex-1 rounded-[1.5px]", i === 17 ? "bg-[#fbbf24]" : "bg-[#22c55e]")} />
+          ))}
+        </div>
+      </div>
+
+      {/* this month's checks */}
+      <ul className="mt-2 grid grid-cols-2 gap-1.5">
+        {h.checks.map((c) => (
+          <li key={c.label} className="flex items-center gap-1.5 rounded-lg border border-[#ececec] px-2 py-1.5">
+            <span className="flex size-4 shrink-0 items-center justify-center rounded-full bg-[#dcfce7] text-[#166534]">
+              <Check className="size-2.5" strokeWidth={3} />
+            </span>
+            <span className="min-w-0 leading-tight">
+              <span className="block truncate font-sans text-[8.5px] font-medium text-[#121212]">{c.label}</span>
+              <span className="block truncate font-sans text-[7px] text-[#71717a]">{c.detail}</span>
+            </span>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

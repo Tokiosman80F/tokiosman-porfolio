@@ -21,7 +21,7 @@ export type ServicePlan = {
 export type ServicePage = {
   slug: string;
   /** Hero illustration (the matching Services card art). */
-  art: "browser" | "chat" | "phone" | "call" | "dashboard";
+  art: "browser" | "chat" | "phone" | "call" | "dashboard" | "health";
   /** Short name: breadcrumb, related links, structured data. */
   name: string;
   meta: { title: string; description: string };
@@ -722,6 +722,175 @@ export const servicePages: ServicePage[] = [
         {
           q: "Is my customers' data safe?",
           a: "API keys stay on the server, never in the browser, and data goes straight between your own tools and accounts.",
+        },
+      ],
+    },
+    cta: bookCall,
+  },
+  {
+    slug: "website-maintenance",
+    art: "health",
+    name: "Website maintenance",
+    meta: {
+      title: "Website Maintenance Plans for Next.js Sites, from $99/mo",
+      description:
+        "Monthly care plans for your Next.js website: updates, uptime monitoring, backups and changes, handled by the developer who knows your code. From $99 a month.",
+    },
+    hero: {
+      eyebrow: "Service · Maintenance",
+      title: "Your website, kept fast, secure and up to date",
+      lead: "Updates, uptime monitoring, backups and the small changes you need each month, handled by the developer who knows your code. No ticket queue: you message me directly.",
+      facts: ["From $99 a month", "Cancel any month", "Direct with the developer"],
+    },
+    audience: {
+      title: "Who it's for",
+      items: [
+        {
+          title: "Clients after launch",
+          text: "Your site is live and you want it to stay fast and safe, with someone to make the small changes as your business moves.",
+        },
+        {
+          title: "Owners of a Next.js site",
+          text: "Your site was built in Next.js and the developer has moved on. I check it first, then look after it month by month.",
+        },
+        {
+          title: "Sites that take bookings or payments",
+          text: "When a broken form or a down site costs you customers, you need to hear about it in minutes, not from a client.",
+        },
+      ],
+    },
+    plans: {
+      title: "Three plans, billed monthly",
+      lead: "Every plan covers updates, monitoring and backups; the difference is how many changes you need and how fast I respond.",
+      items: [
+        {
+          name: "Care",
+          price: "$99",
+          timeline: "Per month",
+          tagline: "Kept safe and up to date.",
+          features: [
+            "Monthly updates to Next.js and every package, tested first",
+            "Uptime monitoring with alerts",
+            "Backups of your content and data",
+            "A monthly check of forms, payments and bookings",
+            "1 hour of changes each month",
+            "Reply within 2 working days",
+          ],
+        },
+        {
+          name: "Care+",
+          price: "$249",
+          timeline: "Per month",
+          tagline: "For a site that changes every month.",
+          featured: true,
+          badge: "Recommended",
+          features: [
+            "Everything in Care",
+            "4 hours of changes each month",
+            "Reply within 1 working day",
+            "A monthly speed and accessibility check",
+            "A short monthly report: what was updated and changed",
+          ],
+        },
+        {
+          name: "Priority",
+          price: "$499",
+          timeline: "Per month",
+          tagline: "When the site is how you make money.",
+          features: [
+            "Everything in Care+",
+            "10 hours of changes each month",
+            "Same-day reply on working days",
+            "Small new features within your hours",
+            "A call every quarter to plan improvements",
+          ],
+        },
+      ],
+      notes: [
+        "Hosting and domain fees stay in your own accounts",
+        "Payment: monthly, via Payoneer",
+        "Unused hours don't roll over to the next month",
+      ],
+    },
+    compare: {
+      title: "Do it yourself, my care plan or an agency?",
+      lead: "An honest comparison, using typical 2026 market figures for small-business care plans.",
+      columns: ["Do it yourself", "My care plan", "Agency care plan"],
+      highlight: 1,
+      rows: [
+        { label: "Cost", values: ["Your time", "From $99/month", "Typically $100–$300/month"] },
+        { label: "Who knows your code", values: ["You, hopefully", "The developer who knows it", "Whoever picks up the ticket"] },
+        { label: "When the site goes down", values: ["When a customer tells you", "An alert, and I look at it", "A ticket in the queue"] },
+        { label: "Updates and backups", values: ["If you remember", "Every month, done for you", "Included"] },
+      ],
+      note: "If your site rarely changes and takes no bookings or payments, you may not need a plan: ask me on the call.",
+    },
+    included: {
+      title: "In every care plan",
+      items: [
+        "Updates tested before they go live",
+        "Uptime monitoring with alerts",
+        "Backups of your content and data",
+        "Changes made by the developer who knows your code",
+        "Hosting stays in your name and your account",
+        "No contract: cancel any month",
+      ],
+    },
+    process: {
+      title: "How it works",
+      lead: "One onboarding check, then the same rhythm every month.",
+      steps: [
+        { step: "Free call", when: "Day 0", text: "We talk about your site and what it needs. You pick a plan." },
+        { step: "Onboarding check", when: "Week 1", text: "I review the code, hosting and domain, then set up monitoring and backups." },
+        { step: "Monthly updates", when: "Every month", text: "Updates to Next.js and every package, tested before they go live." },
+        { step: "Changes on request", when: "Any time", text: "Send a change by email or WhatsApp. I make it within your plan's hours." },
+        { step: "Alerts and fixes", when: "When it happens", text: "If the site goes down or a form breaks, I'm alerted and I look at it." },
+      ],
+    },
+    scope: {
+      needTitle: "What I need from you",
+      need: [
+        "Access to your hosting and domain",
+        "Access to the code repository",
+        "A list of the tools your site connects to",
+        "Who to contact when something needs a decision",
+        "The first month's payment",
+      ],
+      notTitle: "Not included",
+      not: [
+        "Hosting, domain and third-party subscription fees",
+        "New pages or features beyond your monthly hours (quoted separately)",
+        "Writing new content",
+        "Outages caused by your hosting or a third-party tool (I help fix the effect)",
+      ],
+    },
+    stack: { title: "Tools I work with", names: ["Next.js", "Node.js", "TypeScript", "Docker", "Nginx", "AWS", "PostgreSQL", "Supabase"] },
+    faq: {
+      title: "Questions about maintenance",
+      items: [
+        {
+          q: "Do you maintain websites you didn't build?",
+          a: "Yes, if the site is built with Next.js. I start with an onboarding check of the code and hosting, so I know what I'm looking after.",
+        },
+        {
+          q: "What counts as a change?",
+          a: "Text and image updates, small layout tweaks and fixes. New pages or bigger features are quoted separately, or use the Priority plan's hours.",
+        },
+        {
+          q: "Do unused hours roll over?",
+          a: "No. Hours reset each month, which keeps the price low and the time reserved for you.",
+        },
+        {
+          q: "Can I cancel?",
+          a: "Yes, any month. There's no long contract.",
+        },
+        {
+          q: "What happens if my site goes down?",
+          a: "The monitoring alerts me, and I look at it: within 2 working days on Care, 1 on Care+, and the same day on Priority.",
+        },
+        {
+          q: "Do I need a plan after my website launches?",
+          a: "No, it's optional. A plan is for when you want someone looking after the site every month.",
         },
       ],
     },
