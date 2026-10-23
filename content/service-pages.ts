@@ -21,19 +21,24 @@ export type ServicePlan = {
 export type ServicePage = {
   slug: string;
   /** Hero illustration (the matching Services card art). */
-  art: "browser" | "chat" | "phone" | "call" | "dashboard" | "health";
+  art: "browser" | "chat" | "phone" | "call" | "dashboard" | "health" | "headless";
   /** Short name: breadcrumb, related links, structured data. */
   name: string;
   meta: { title: string; description: string };
   hero: { eyebrow: string; title: string; lead: string; facts: string[] };
+  /** Optional plain-words explainer with a flow diagram (one column per flow; the last one is "mine"). */
+  explainer?: { title: string; lead: string; paragraphs: string[]; flows: { label: string; title: string; steps: string[] }[] };
   audience: { title: string; items: { title: string; text: string }[] };
+  benefits?: { title: string; items: { title: string; text: string }[] };
   plans: { title: string; lead: string; items: ServicePlan[]; notes: string[] };
   /** Optional comparison table; `highlight` = index of my column. */
   compare?: { title: string; lead: string; columns: string[]; highlight: number; rows: { label: string; values: string[] }[]; note?: string };
+  changes?: { title: string; stayTitle: string; stay: string[]; changeTitle: string; change: string[] };
   included: { title: string; items: string[] };
   process: { title: string; lead: string; steps: { step: string; when: string; text: string }[] };
   scope: { needTitle: string; need: string[]; notTitle: string; not: string[] };
   stack: { title: string; names: string[] };
+  glossary?: { title: string; items: { term: string; text: string }[] };
   faq: { title: string; items: { q: string; a: string }[] };
   cta: { label: string; href: string };
 };
@@ -891,6 +896,278 @@ export const servicePages: ServicePage[] = [
         {
           q: "Do I need a plan after my website launches?",
           a: "No, it's optional. A plan is for when you want someone looking after the site every month.",
+        },
+      ],
+    },
+    cta: bookCall,
+  },
+  {
+    slug: "headless-wordpress-nextjs",
+    art: "headless",
+    name: "Headless WordPress with Next.js",
+    meta: {
+      title: "Headless WordPress with Next.js, from $3,000",
+      description:
+        "Keep WordPress for editing and get a fast Next.js front end: instant publishing, draft previews, SEO and redirects carried over. From $3,000, in 3 weeks.",
+    },
+    hero: {
+      eyebrow: "Service · Headless WordPress",
+      title: "Keep WordPress. Get a Next.js website that loads fast.",
+      lead: "Your team keeps writing in the WordPress admin they know. Visitors get a fast Next.js front end, and every post you publish goes live in seconds. One developer handles the move, from content model to launch.",
+      facts: ["From $3,000", "Live in 3–6 weeks", "Same WordPress admin"],
+    },
+    explainer: {
+      title: "What is headless WordPress?",
+      lead: "In plain words: WordPress keeps the part your team uses, and Next.js takes over the part your visitors see.",
+      paragraphs: [
+        "A normal WordPress site does two jobs at once. It's where you write and store your content (the body), and it also builds every page a visitor sees, using your theme and plugins (the head). Each visit asks WordPress to put the page together, and every extra plugin makes that a little slower.",
+        "Headless means taking the head off. WordPress only stores and manages your content. A separate Next.js front end fetches that content through an API and builds the pages ahead of time, so visitors get a ready-made page from a fast global network instead of waiting for WordPress.",
+        "For your team, nothing changes: you log in to the same WordPress admin, write, and press Publish. What changes is what happens next: the page goes live on a front end that's faster, harder to attack and fully custom.",
+      ],
+      flows: [
+        {
+          label: "Classic",
+          title: "One system does everything",
+          steps: ["You write in WordPress", "WordPress builds the page on every visit, with your theme and plugins", "The visitor waits for it"],
+        },
+        {
+          label: "Headless",
+          title: "WordPress manages, Next.js shows",
+          steps: ["You write in WordPress", "The content is sent through an API", "Next.js builds the page ahead of time", "The visitor gets it instantly"],
+        },
+      ],
+    },
+    audience: {
+      title: "Who it's for",
+      items: [
+        {
+          title: "Content sites that feel slow",
+          text: "Blogs, publishers and resource libraries where a heavy theme and plugins slow every page down. The content stays; the front end gets fast.",
+        },
+        {
+          title: "Teams that like WordPress",
+          text: "Your editors know the WordPress admin and don't want to learn a new CMS. They keep it, with previews and instant publishing.",
+        },
+        {
+          title: "Businesses adding app features",
+          text: "Content from WordPress next to logins, bookings or payments built in Next.js, in one fast site instead of a pile of plugins.",
+        },
+      ],
+    },
+    benefits: {
+      title: "Why go headless",
+      items: [
+        {
+          title: "Faster pages",
+          text: "Pages are built ahead of time and served from a network close to each visitor, instead of being assembled by WordPress on every visit.",
+        },
+        {
+          title: "Harder to attack",
+          text: "Visitors never touch WordPress, its theme or its plugins: they only see the front end. Your admin sits out of the public's way.",
+        },
+        {
+          title: "Design without theme limits",
+          text: "The front end is custom code, so layouts, animations and interactions aren't limited by what a theme or page builder allows.",
+        },
+        {
+          title: "Ready for traffic spikes",
+          text: "Ready-made pages handle a sudden rush of visitors without WordPress having to build a page for each one.",
+        },
+        {
+          title: "Room to grow",
+          text: "Logins, bookings, payments or a dashboard can live in the same Next.js site, next to your WordPress content.",
+        },
+        {
+          title: "Same editing for your team",
+          text: "No new CMS to learn: posts, pages and media stay in the WordPress admin, with draft previews and instant publishing.",
+        },
+      ],
+    },
+    plans: {
+      title: "Three plans, one fixed price each",
+      lead: "Every plan keeps WordPress as your editor; the difference is how much of the site is rebuilt and how much it does.",
+      items: [
+        {
+          name: "Starter",
+          price: "$3,000",
+          timeline: "3 weeks",
+          tagline: "Your current site, rebuilt fast in Next.js.",
+          features: [
+            "Your current design rebuilt in Next.js",
+            "Up to 5 page templates (e.g. home, page, blog, post, category)",
+            "Content from WordPress through WPGraphQL",
+            "Posts go live seconds after you publish",
+            "Draft preview before publishing",
+            "SEO titles and descriptions carried over, sitemap and redirects",
+            "Forms rebuilt and sent to your email or CRM",
+            "30 days of support after launch",
+          ],
+        },
+        {
+          name: "Business",
+          price: "$5,500",
+          timeline: "4–5 weeks",
+          tagline: "A refreshed design and a content model built for your team.",
+          featured: true,
+          badge: "Recommended",
+          features: [
+            "Everything in Starter",
+            "A refreshed design: 3 homepage directions, you pick one",
+            "Up to 10 page templates",
+            "Custom fields and post types mapped (ACF)",
+            "Content blocks your editors can arrange on a page",
+            "Site search",
+            "45 days of support after launch",
+          ],
+        },
+        {
+          name: "Custom",
+          pricePrefix: "From",
+          price: "$9,000",
+          timeline: "6+ weeks",
+          tagline: "For multilingual sites, stores and member areas.",
+          features: [
+            "Everything in Business",
+            "More than one language (WPML or Polylang)",
+            "WooCommerce product pages in Next.js",
+            "Member areas with logins",
+            "Content from WordPress combined with other tools (CRM, Stripe)",
+            "60 days of support after launch",
+          ],
+        },
+      ],
+      notes: [
+        "WordPress hosting and the Next.js hosting (e.g. Vercel) are paid by you, in your own accounts",
+        "Payment: 50% to start, 50% on launch, via Payoneer",
+        "Extra page templates: quoted per template",
+      ],
+    },
+    compare: {
+      title: "Classic WordPress, my headless build or an agency?",
+      lead: "An honest comparison, using typical 2026 market figures. Your quote depends on your site.",
+      columns: ["Classic WordPress theme", "My headless build", "Headless agency"],
+      highlight: 1,
+      rows: [
+        { label: "Build cost", values: ["$2,500–$8,000", "From $3,000", "$20k–$60k+"] },
+        { label: "Page speed", values: ["Depends on theme and plugins", "Pages served ready-made from a CDN", "Fast"] },
+        { label: "Editing", values: ["WordPress, page builders work", "WordPress, with content blocks", "WordPress, with content blocks"] },
+        { label: "Security", values: ["Theme and plugins face the public", "WordPress hidden behind the front end", "WordPress hidden"] },
+        { label: "Who you talk to", values: ["Depends", "The developer, directly", "An account manager"] },
+      ],
+      note: "If your layouts depend on Elementor or another page builder, or the site is a simple brochure, headless may not be worth it. I'll tell you on the call.",
+    },
+    changes: {
+      title: "What stays the same, and what changes",
+      stayTitle: "Stays the same",
+      stay: [
+        "Your WordPress admin and logins",
+        "Posts, pages and the media library",
+        "Categories, tags and authors",
+        "Custom fields (ACF) and SEO settings (Yoast or Rank Math)",
+        "Your URLs, or redirects to the new ones",
+      ],
+      changeTitle: "Changes",
+      change: [
+        "Your theme is replaced by a custom Next.js front end",
+        "Page builders like Elementor or Divi no longer control the layout",
+        "Front-end plugins (sliders, popups, form layouts) are rebuilt in Next.js",
+        "Preview opens your draft on the new front end",
+        "Two hosts: WordPress for content, a front-end host for the site",
+      ],
+    },
+    included: {
+      title: "In every headless build",
+      items: [
+        "Your team keeps the WordPress admin",
+        "Posts and pages go live seconds after publishing",
+        "Draft preview before anything goes live",
+        "Same URLs, or redirects, so links and rankings carry over",
+        "Every plugin checked: kept, rebuilt or replaced",
+        "Speed checked on real pages before launch",
+      ],
+    },
+    process: {
+      title: "How it works",
+      lead: "The Starter timeline. Business and Custom follow the same steps with more to build.",
+      steps: [
+        { step: "Free call and site audit", when: "Day 0", text: "I look at your site, theme and plugins. You get a fixed quote within 24 hours." },
+        { step: "Content model", when: "Week 1", text: "Page types, fields and plugins mapped: what stays in WordPress and what moves to Next.js." },
+        { step: "Front end", when: "Weeks 1–2", text: "I build the Next.js front end. You see it on a preview link, filled with your real content." },
+        { step: "Preview, forms and SEO", when: "Week 3", text: "Draft preview, instant publishing, forms, metadata, sitemap and redirects wired up." },
+        { step: "Launch", when: "Week 3", text: "The domain switches to the new front end, and I check redirects and Search Console after." },
+      ],
+    },
+    scope: {
+      needTitle: "What I need from you",
+      need: [
+        "An admin login to your WordPress site",
+        "Access to your hosting and domain",
+        "A list of the plugins you rely on",
+        "Access to Google Search Console and analytics",
+        "The 50% deposit",
+      ],
+      notTitle: "Not included",
+      not: [
+        "WordPress and front-end hosting fees",
+        "Rebuilding page-builder layouts one by one (templates are rebuilt)",
+        "Writing or moving content from another CMS (quoted separately)",
+        "Support after the support period (quoted separately)",
+      ],
+    },
+    stack: { title: "Built with", names: ["WordPress", "Next.js", "React", "TypeScript", "Tailwind CSS", "Node.js", "Docker", "Nginx"] },
+    glossary: {
+      title: "Words you'll hear, in plain English",
+      items: [
+        { term: "Headless CMS", text: "A content system that only stores and manages content. Something else (here, Next.js) shows it to visitors." },
+        { term: "Front end", text: "Everything a visitor sees and clicks: the pages, the design, the menus and forms." },
+        { term: "API / WPGraphQL", text: "The doorway the front end uses to ask WordPress for content. WPGraphQL is the WordPress plugin that opens it." },
+        { term: "Static pages", text: "Pages built ahead of time, so they're ready the moment someone asks for them." },
+        { term: "Revalidation", text: "When you publish, WordPress tells the front end which pages to rebuild, so changes go live in seconds." },
+        { term: "CDN", text: "A network of servers around the world that hands out your pages from the one closest to each visitor." },
+      ],
+    },
+    faq: {
+      title: "Questions about headless WordPress",
+      items: [
+        {
+          q: "What does \"headless\" actually mean?",
+          a: "It means WordPress no longer draws the pages your visitors see. It keeps managing your content, and a separate Next.js front end shows it.",
+        },
+        {
+          q: "Will my team still use WordPress?",
+          a: "Yes. Posts, pages and media are still written and managed in the same WordPress admin. Only what visitors see changes.",
+        },
+        {
+          q: "Will my plugins still work?",
+          a: "Plugins that manage content, like custom fields or SEO settings, keep working. Plugins that draw the front end, like page builders, sliders and form layouts, are rebuilt in Next.js. I check every plugin during the audit.",
+        },
+        {
+          q: "How quickly do changes go live?",
+          a: "Seconds. When you publish or update, WordPress tells the Next.js site to refresh just those pages.",
+        },
+        {
+          q: "Can I preview drafts?",
+          a: "Yes. Preview opens the draft on the real Next.js front end before it's published.",
+        },
+        {
+          q: "Will I lose my Google rankings?",
+          a: "I keep your URLs or redirect them, carry over your titles and descriptions, and check Search Console after launch, so search engines find the same pages, only faster.",
+        },
+        {
+          q: "Is headless worth it for my site?",
+          a: "Not always. For a small brochure site, or one built entirely with a page builder, a classic WordPress site or a plain Next.js website can be the better choice. I'll tell you honestly on the call.",
+        },
+        {
+          q: "Does it cost more to run?",
+          a: "There are two hosts instead of one: WordPress for content and a front-end host for the site (for example, Vercel's Pro plan is $20 a month per seat). Because WordPress no longer serves every visitor, its hosting can often stay modest.",
+        },
+        {
+          q: "Can I go back to a normal WordPress theme later?",
+          a: "Yes. Your content never leaves WordPress, so you can switch a theme back on at any time.",
+        },
+        {
+          q: "Does it work with WooCommerce?",
+          a: "Yes, on the Custom plan. Product pages are built in Next.js, and during the audit I recommend the right checkout setup for your store.",
         },
       ],
     },

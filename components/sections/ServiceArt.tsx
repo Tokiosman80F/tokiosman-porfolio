@@ -510,3 +510,78 @@ export function HealthArt() {
     </div>
   );
 }
+
+/* 8 · Headless WordPress (its service page's hero): the WordPress editor (back) publishes a post, and the
+   Next.js site (front) shows it a moment later with a fast performance score. Fixed hex colours, not theme
+   tokens (real app chrome). Fictional data from content/services.ts. */
+export function HeadlessArt() {
+  const h = art.headless;
+  return (
+    <>
+      {/* WordPress admin, behind */}
+      <div className="absolute top-5 left-4 h-52 w-[70%] overflow-hidden rounded-lg bg-[#f0f0f1] shadow-[0_10px_24px_-10px_rgb(0_0_0/0.45)] transition-transform duration-300 ease-out group-hover:-translate-x-1 motion-reduce:transition-none sm:left-6">
+        <div className="flex h-5 items-center gap-1.5 bg-[#1d2327] px-2 font-sans text-[7px] text-[#f0f0f1]">
+          <span className="flex size-3 items-center justify-center rounded-full border border-[#f0f0f1]/70 font-serif text-[6px] font-bold">W</span>
+          {h.wpSite}
+        </div>
+        <div className="flex h-full">
+          <div className="w-14 shrink-0 space-y-1 bg-[#1d2327] px-1.5 pt-2 font-sans text-[6.5px] text-[#c3c4c7]">
+            {h.wpMenu.map((m, i) => (
+              <p key={m} className={cn("rounded-[2px] px-1 py-[2px]", i === 1 && "bg-[#2271b1] text-[#fff]")}>
+                {m}
+              </p>
+            ))}
+          </div>
+          <div className="min-w-0 flex-1 p-2">
+            <div className="flex items-center justify-between">
+              <span className="font-sans text-[8px] font-semibold text-[#1d2327]">{h.wpAction}</span>
+              <span className="rounded-[3px] bg-[#2271b1] px-1.5 py-[2px] font-sans text-[7px] font-semibold text-[#fff]">{h.wpButton}</span>
+            </div>
+            <div className="mt-2 rounded-[3px] bg-[#fff] p-2 shadow-[0_0_0_0.5px_#dcdcde]">
+              <p className="font-serif text-[10px] leading-tight font-bold text-[#1d2327]">{h.postTitle}</p>
+              <div className="mt-1.5 h-[3px] w-11/12 rounded-full bg-[#dcdcde]" />
+              <div className="mt-1 h-[3px] w-4/5 rounded-full bg-[#dcdcde]" />
+              <div className="mt-1 h-[3px] w-3/5 rounded-full bg-[#dcdcde]" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* "published → live" connector */}
+      <span className="absolute top-[2.6rem] right-4 z-10 flex items-center gap-1 rounded-full sm:right-6 bg-[#121212] px-2 py-1 font-sans text-[7.5px] font-medium whitespace-nowrap text-[#fff] shadow-md">
+        <span className="size-1.5 rounded-full bg-[#22c55e]" />
+        {h.live}
+      </span>
+
+      {/* the Next.js site, in front */}
+      <div className={cn("absolute top-16 right-4 w-[60%] overflow-hidden rounded-lg bg-[#fff] shadow-[0_24px_40px_-14px_rgb(0_0_0/0.45),0_0_0_0.5px_rgb(0_0_0/0.18)] sm:right-6", lift)}>
+        <div className="flex items-center gap-1.5 border-b border-[#ececec] bg-[#f6f6f7] px-2 py-1">
+          <span className="flex gap-[3px]">
+            {["#ff5f57", "#febc2e", "#28c840"].map((c) => (
+              <span key={c} className="size-[6px] rounded-full" style={{ background: c }} />
+            ))}
+          </span>
+          <span className="mx-auto flex h-3.5 min-w-0 items-center gap-1 truncate rounded-full bg-[#fff] px-2 font-sans text-[7px] text-[#5f6368] shadow-[0_0_0_0.5px_rgb(0_0_0/0.1)]">
+            <Lock className="size-2 shrink-0" />
+            {h.siteUrl}
+          </span>
+        </div>
+        <div className="p-2.5">
+          <p className="font-sans text-[6.5px] tracking-widest text-[#71717a] uppercase">{h.siteSection}</p>
+          <p className="mt-1 font-display text-[12px] leading-tight font-bold text-[#121212]">{h.postTitle}</p>
+          <div className="mt-2 h-14 rounded-md bg-[linear-gradient(135deg,#dbeafe,#FDF175)]" />
+          <div className="mt-2 flex items-center gap-2">
+            {h.scores.map((s) => (
+              <span key={s.label} className="flex items-center gap-1 font-sans text-[6.5px] text-[#52525b]">
+                <span className="flex size-5 items-center justify-center rounded-full border-2 border-[#22c55e] font-sans text-[7px] font-bold text-[#15803d]">
+                  {s.value}
+                </span>
+                {s.label}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}

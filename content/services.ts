@@ -68,6 +68,20 @@ export const serviceArt = {
     placeholder: "Ask me anything…",
   },
   call: { host: "Toki Osman", guest: "You", time: "10:00", title: "Free strategy call" },
+  headless: {
+    wpSite: "Northwind Journal",
+    wpMenu: ["Dashboard", "Posts", "Media", "Pages", "Plugins"],
+    wpAction: "Edit post",
+    wpButton: "Update",
+    postTitle: "10 ways to cut your shipping costs",
+    live: "Published · live in 2s",
+    siteUrl: "northwindjournal.com",
+    siteSection: "Journal",
+    scores: [
+      { label: "Performance", value: "98" },
+      { label: "SEO", value: "100" },
+    ],
+  },
   health: {
     site: "acmestudio.com",
     status: "All systems normal",

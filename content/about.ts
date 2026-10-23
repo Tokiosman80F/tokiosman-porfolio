@@ -59,5 +59,6 @@ export const about = {
     { name: "AWS", logo: "aws" },
     { name: "Cursor", logo: "cursor" },
     { name: "Lovable", logo: "lovable" },
+    { name: "WordPress", logo: "wordpress" },
   ] satisfies Tech[],
 };

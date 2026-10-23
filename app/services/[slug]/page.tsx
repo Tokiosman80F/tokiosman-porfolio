@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowDown, CalendarDays, Check, Minus, Plus } from "lucide-react";
+import { ArrowDown, CalendarDays, Check, Minus, Plus, RefreshCw } from "lucide-react";
 import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
 import { TechMark } from "@/components/sections/About";
 import FinalCta from "@/components/sections/FinalCta";
-import { BrowserArt, CallArt, ChatArt, DashboardArt, HealthArt, PhoneArt } from "@/components/sections/ServiceArt";
+import { BrowserArt, CallArt, ChatArt, DashboardArt, HeadlessArt, HealthArt, PhoneArt } from "@/components/sections/ServiceArt";
 import { Button } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Heading } from "@/components/ui/Heading";
@@ -20,7 +20,9 @@ import { cn } from "@/lib/utils";
 
 // Service page (docs/service-pages-plan.md §4): hero with the price facts, who it's for, three fixed-price
 // plans, what every project includes, the step-by-step timeline, what I need / what's not included, the
-// tools, an FAQ (native <details>, answers stay in the HTML), then the contact section.
+// tools, an FAQ (native <details>, answers stay in the HTML), then the contact section. Optional blocks a
+// page can add: an explainer with a flow diagram, benefits, a comparison table, what stays / what changes,
+// and a glossary.
 // Structured data: Service (with the plans as offers) + BreadcrumbList. Static: one page per entry.
 
 export const dynamicParams = false;
@@ -78,7 +80,7 @@ function jsonLd(p: ServicePage) {
 const num = (i: number) => String(i + 1).padStart(2, "0");
 
 // Hero illustration per page: the matching card art from the home page's Services section
-const arts = { browser: BrowserArt, chat: ChatArt, phone: PhoneArt, call: CallArt, dashboard: DashboardArt, health: HealthArt } satisfies Record<ServicePage["art"], () => React.JSX.Element>;
+const arts = { browser: BrowserArt, chat: ChatArt, phone: PhoneArt, call: CallArt, dashboard: DashboardArt, health: HealthArt, headless: HeadlessArt } satisfies Record<ServicePage["art"], () => React.JSX.Element>;
 
 function PlanCard({ plan, cta }: { plan: ServicePlan; cta: ServicePage["cta"] }) {
   const dark = plan.featured;
@@ -182,6 +184,55 @@ export default async function ServicePageRoute({ params }: PageProps<"/services/
           </div>
         </section>
 
+        {/* ── Optional explainer: plain words + a classic-vs-new flow diagram ── */}
+        {p.explainer && (
+          <Section border="none" className="pt-0 lg:pt-0">
+            <div className="grid grid-cols-1 gap-unit-12 lg:grid-cols-12 lg:gap-unit-8">
+              <div className="lg:col-span-5">
+                <Heading as="h2" className="text-balance">{p.explainer.title}</Heading>
+                <p className="mt-unit-4 font-sans text-body-lead font-medium text-ink-black">{p.explainer.lead}</p>
+                <div className="mt-unit-6 space-y-unit-4">
+                  {p.explainer.paragraphs.map((t) => (
+                    <p key={t} className="font-sans text-body-md leading-relaxed text-on-surface-variant">{t}</p>
+                  ))}
+                </div>
+              </div>
+              <div className="grid grid-cols-1 gap-unit-4 sm:grid-cols-2 lg:col-span-7">
+                {p.explainer.flows.map((f, fi) => {
+                  const dark = fi === p.explainer!.flows.length - 1;
+                  return (
+                    <figure key={f.title} className={cn("rounded-2xl p-unit-6", dark ? "bg-ink-black" : "bg-surface-container-low")}>
+                      <figcaption>
+                        <span className={cn("font-mono text-mono-tag tracking-widest uppercase", dark ? "text-on-primary-container" : "text-ink-muted")}>{f.label}</span>
+                        <span className={cn("mt-1 block font-sans text-body-lead font-semibold", dark ? "text-on-primary" : "text-ink-black")}>{f.title}</span>
+                      </figcaption>
+                      <ol className="mt-unit-6 flex flex-col items-stretch">
+                        {f.steps.map((s, i) => (
+                          <li key={s} className="flex flex-col items-center">
+                            {i > 0 && <ArrowDown aria-hidden className={cn("my-1.5 size-4", dark ? "text-canary-yellow [html[data-theme=dark]_&]:text-on-primary" : "text-ink-muted")} />}
+                            <span
+                              className={cn(
+                                "w-full rounded-xl border px-unit-4 py-unit-3 text-center font-sans text-body-sm",
+                                dark
+                                  ? i === f.steps.length - 1
+                                    ? "border-on-accent bg-canary-yellow font-semibold text-on-accent"
+                                    : "border-white/15 bg-white/5 text-on-primary"
+                                  : "border-border-hairline bg-white text-ink-charcoal",
+                              )}
+                            >
+                              {s}
+                            </span>
+                          </li>
+                        ))}
+                      </ol>
+                    </figure>
+                  );
+                })}
+              </div>
+            </div>
+          </Section>
+        )}
+
         {/* ── Who it's for ── */}
         <Section border="none" className="pt-0 lg:pt-0">
           <Heading as="h2" className="text-balance">{p.audience.title}</Heading>
@@ -198,6 +249,24 @@ export default async function ServicePageRoute({ params }: PageProps<"/services/
             ))}
           </ul>
         </Section>
+
+        {/* ── Optional benefits grid ── */}
+        {p.benefits && (
+          <Section border="none" className="pt-0 lg:pt-0">
+            <Heading as="h2" className="text-balance">{p.benefits.title}</Heading>
+            <ul className="mt-unit-8 grid grid-cols-1 gap-unit-4 sm:grid-cols-2 lg:grid-cols-3">
+              {p.benefits.items.map((b) => (
+                <li key={b.title} className="rounded-2xl border border-border-hairline p-unit-6">
+                  <span aria-hidden className="flex size-8 items-center justify-center rounded-md border border-ink-black bg-canary-yellow text-on-accent shadow-offset-sm">
+                    <Check className="size-4" strokeWidth={3} />
+                  </span>
+                  <h3 className="mt-unit-4 font-sans text-body-lead font-semibold text-ink-black">{b.title}</h3>
+                  <p className="mt-unit-2 font-sans text-body-md text-on-surface-variant">{b.text}</p>
+                </li>
+              ))}
+            </ul>
+          </Section>
+        )}
 
         {/* ── Plans ── */}
         <section id="plans" className="scroll-mt-24 bg-paper-subtle px-page-pad-mobile py-unit-16 lg:px-page-pad-desktop lg:py-unit-24">
@@ -284,6 +353,31 @@ export default async function ServicePageRoute({ params }: PageProps<"/services/
           </Section>
         )}
 
+        {/* ── Optional: what stays the same / what changes ── */}
+        {p.changes && (
+          <Section border="none" className="pb-0 lg:pb-0">
+            <Heading as="h2" className="text-balance">{p.changes.title}</Heading>
+            <div className="mt-unit-8 grid grid-cols-1 gap-unit-4 md:grid-cols-2">
+              {[
+                { title: p.changes.stayTitle, items: p.changes.stay, Icon: Check, box: "bg-surface-container-low", icon: "text-signal-green-ink" },
+                { title: p.changes.changeTitle, items: p.changes.change, Icon: RefreshCw, box: "border border-border-hairline", icon: "text-ink-black" },
+              ].map(({ title, items, Icon, box, icon }) => (
+                <div key={title} className={cn("rounded-2xl p-unit-6 sm:p-unit-8", box)}>
+                  <h3 className="font-display text-headline-sm font-bold text-ink-black">{title}</h3>
+                  <ul className="mt-unit-6 space-y-unit-3">
+                    {items.map((n) => (
+                      <li key={n} className="flex items-start gap-unit-3 font-sans text-body-md text-on-surface-variant">
+                        <Icon aria-hidden className={cn("mt-1 size-4 shrink-0", icon)} strokeWidth={2.5} />
+                        {n}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </Section>
+        )}
+
         {/* ── Included in every project ── */}
         <Section border="none" className="pb-0 lg:pb-0">
           <div className="grid grid-cols-1 gap-unit-8 lg:grid-cols-12">
@@ -365,6 +459,21 @@ export default async function ServicePageRoute({ params }: PageProps<"/services/
             })}
           </ul>
         </Section>
+
+        {/* ── Optional glossary: the terms a client will hear, in plain words ── */}
+        {p.glossary && (
+          <Section border="none" className="pb-0 lg:pb-0">
+            <Heading as="h2" className="text-balance">{p.glossary.title}</Heading>
+            <dl className="mt-unit-8 grid grid-cols-1 gap-x-unit-8 gap-y-unit-6 border-t border-border-hairline pt-unit-8 sm:grid-cols-2 lg:grid-cols-3">
+              {p.glossary.items.map((g) => (
+                <div key={g.term}>
+                  <dt className="font-mono text-mono-meta font-bold tracking-wider text-ink-black uppercase">{g.term}</dt>
+                  <dd className="mt-unit-2 font-sans text-body-md text-on-surface-variant">{g.text}</dd>
+                </div>
+              ))}
+            </dl>
+          </Section>
+        )}
 
         {/* ── FAQ ── */}
         <Section border="none">
