@@ -5,11 +5,23 @@ import { ArrowRight, CalendarDays } from "lucide-react";
 import { sendContact } from "@/app/actions/contact";
 import { PlanButton } from "@/components/ui/PlanButton";
 import { contactForm as c, projectTypes } from "@/content/final-cta";
-import { readContact, validateContact, type ContactErrors, type ContactField, type ContactState } from "@/lib/contact";
+import {
+  HONEYPOT,
+  mailtoHref,
+  readContact,
+  validateContact,
+  type ContactData,
+  type ContactErrors,
+  type ContactField,
+  type ContactState,
+} from "@/lib/contact";
+import { site } from "@/content/site";
 import { cn } from "@/lib/utils";
 
 // Secondary path beside the call (docs/cta.md), always open (user's choice). Validated in the browser first (errors linked with aria-describedby, focus moves to the
 // first one), then again by the server action. A hidden honeypot field catches bots.
+// No CRM connected (crmReady false): the button says so up front and opens the visitor's email app with the
+// message written out. A failed send keeps what they typed and offers the same email link.
 
 const initial: ContactState = { status: "idle" };
 const fieldClass = (invalid: boolean) =>
@@ -21,6 +33,8 @@ const fieldClass = (invalid: boolean) =>
 export function ContactForm({ crmReady }: { crmReady: boolean }) {
   const [state, action, pending] = useActionState(sendContact, initial);
   const [clientErrors, setClientErrors] = useState<ContactErrors>({});
+  const [last, setLast] = useState<ContactData | null>(null); // last valid message, for the email fallback
+  const [mailed, setMailed] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
   const uid = useId();
   const id = (f: string) => `${uid}-${f}`;
@@ -37,11 +51,18 @@ export function ContactForm({ crmReady }: { crmReady: boolean }) {
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
-    const errs = validateContact(readContact(data));
+    const values = readContact(data);
+    const errs = validateContact(values);
     setClientErrors(errs);
     const first = Object.keys(errs)[0] as ContactField | undefined;
     if (first) {
       formRef.current?.querySelector<HTMLElement>(`[name="${first}"]`)?.focus();
+      return;
+    }
+    setLast(values);
+    if (!crmReady) {
+      window.location.href = mailtoHref(values);
+      setMailed(true);
       return;
     }
     startTransition(() => action(data));
@@ -88,8 +109,8 @@ export function ContactForm({ crmReady }: { crmReady: boolean }) {
         {/* Honeypot: off-screen and skipped by keyboard and assistive tech; only bots fill it */}
         <div aria-hidden className="absolute -left-[9999px] h-px w-px overflow-hidden">
           <label>
-            Company
-            <input type="text" name="company" tabIndex={-1} autoComplete="off" />
+            {c.honeypot}
+            <input type="text" name={HONEYPOT} tabIndex={-1} autoComplete="off" />
           </label>
         </div>
 
@@ -137,13 +158,31 @@ export function ContactForm({ crmReady }: { crmReady: boolean }) {
           <span aria-hidden className="flex size-7 items-center justify-center rounded-sm bg-canary-yellow text-ink-black">
             <ArrowRight className="size-4" />
           </span>
-          {pending ? c.sending : c.submit}
+          {pending ? c.sending : crmReady ? c.submit : c.submitEmail}
         </button>
 
         <div aria-live="polite">
-          {state.status === "error" && !pending && <p className="font-sans text-body-sm text-[#b91c1c]">{c.error}</p>}
+          {state.status === "error" && !pending && last && (
+            <p className="font-sans text-body-sm text-[#b91c1c]">
+              {c.error}{" "}
+              <a href={mailtoHref(last)} className="font-semibold text-ink-black underline underline-offset-2">
+                {c.errorAction}
+              </a>
+              {" "}({site.email}).
+            </p>
+          )}
+          {mailed && (
+            <p className="font-sans text-body-sm text-on-surface-variant">
+              {c.emailOpened}{" "}
+              <a href={`mailto:${site.email}`} className="font-semibold text-ink-black underline underline-offset-2">
+                {site.email}
+              </a>
+              .
+            </p>
+          )}
         </div>
-        {crmReady && <p className="font-sans text-body-sm text-ink-muted">{c.crmNote}</p>}
+        {/* The before-send note gives way to the after-send message */}
+        {!mailed && <p className="font-sans text-body-sm text-ink-muted">{crmReady ? c.crmNote : c.emailNote}</p>}
       </form>
     </div>
   );

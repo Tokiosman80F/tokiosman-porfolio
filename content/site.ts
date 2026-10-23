@@ -3,9 +3,10 @@ export const site = {
   person: "Toki Osman",
   jobTitle: "Full-Stack Developer",
   url: "https://tokiosman.com",
-  title: "TokiOsman — Signature Design Styles for B2B Software",
+  // DRAFT (from PRODUCT.md and docs/services.md): under ~60 and ~160 characters for search results
+  title: "Toki Osman — Next.js Developer for Websites, Web Apps & AI",
   description:
-    "Brand identity, web architecture, design systems, and product interfaces — crafted from scratch around your specific market positioning. 9-day homepage design sprints for B2B & AI founders.",
+    "I design, build and launch Next.js websites and web apps connected to your CRM, payments, bookings and AI. Websites from $1,500, with a fixed quote in 24 hours.",
   // PLACEHOLDER — the real booking link. Every "Book a call" CTA reads this.
   bookingUrl: "https://cal.com",
   email: "tokiosman@outlook.com",

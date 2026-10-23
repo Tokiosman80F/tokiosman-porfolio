@@ -69,7 +69,7 @@ export const offers: Offer[] = [
       "Discovery call and feature planning",
       "User login and role-based access",
       "Admin dashboard to manage your content and data",
-      "CMS integration",
+      "A content editor (CMS) so you can update pages yourself",
       "AI and automation workflows (CRM, email, forms)",
       "Payments and bookings if needed (Stripe)",
       "Deployment + 30 days of post-launch support",
@@ -87,7 +87,7 @@ export const offers: Offer[] = [
     features: [
       "Audit of your site, data and goals",
       ["Custom AI assistant trained on ", { strong: "your" }, " content (docs, FAQs, products, PDFs)"],
-      "RAG setup: answers come from your data, with sources",
+      "Answers come from your own data, with the source shown",
       "Works with your current site: Next.js, WordPress, Webflow and more",
       "Lead capture and handoff to your CRM or email",
       "Admin panel to update the knowledge base",

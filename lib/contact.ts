@@ -1,4 +1,5 @@
 import { contactForm, projectTypes } from "@/content/final-cta";
+import { site } from "@/content/site";
 
 // Contact form validation, shared by the browser (instant feedback) and the server action (the real gate).
 // Plain checks rather than a schema library: four fields don't justify a dependency.
@@ -24,6 +25,16 @@ export function validateContact(d: ContactData): ContactErrors {
   if (d.message.length < 10) errors.message = m.message;
   return errors;
 }
+
+// The visitor's message as a ready-to-send email, for when the CRM is missing or fails.
+// ponytail: some mail clients cut mailto bodies past ~2,000 characters; fine for a first message.
+export function mailtoHref(d: ContactData) {
+  const subject = contactForm.emailSubject.replace("{projectType}", d.projectType || "Website");
+  const body = `${d.message}\n\n${d.name}\n${d.email}`;
+  return `mailto:${site.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
+export const HONEYPOT = "hp_leave_empty";
 
 export type ContactState =
   | { status: "idle" }

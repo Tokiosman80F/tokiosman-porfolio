@@ -1,13 +1,13 @@
 "use server";
 
-import { readContact, validateContact, type ContactState } from "@/lib/contact";
+import { HONEYPOT, readContact, validateContact, type ContactState } from "@/lib/contact";
 import { crmConfigured, env } from "@/lib/crm";
 
 // Contact form → Zoho CRM lead (docs/cta.md). Needs, in the environment:
 //   ZOHO_CLIENT_ID, ZOHO_CLIENT_SECRET, ZOHO_REFRESH_TOKEN  (a Zoho "Self Client" with ZohoCRM.modules.leads.CREATE)
 //   ZOHO_ACCOUNTS_URL / ZOHO_API_URL  (optional; default to the .com data centre, e.g. https://accounts.zoho.eu)
-// Until they're set, every valid submission returns the error state, which tells the visitor to email
-// instead: a message is never accepted and then lost.
+// Until they're set the form never posts here: it opens the visitor's email app instead (ContactForm).
+// If a send fails, the error state offers the same email link: a message is never accepted and then lost.
 // ponytail: no Turnstile, auto-reply or owner notification yet (need keys / an email provider); the
 // honeypot is the only spam guard, add Turnstile before heavy traffic.
 
@@ -49,7 +49,8 @@ async function createZohoLead(d: ReturnType<typeof readContact>) {
 
 export async function sendContact(_prev: ContactState, form: FormData): Promise<ContactState> {
   // Honeypot: people never see or fill this field; bots do. Pretend it worked so they don't retry.
-  if (String(form.get("company") ?? "")) return { status: "success", name: "" };
+  // Not named "company" or similar, so browser autofill can't fill it for a real visitor.
+  if (String(form.get(HONEYPOT) ?? "")) return { status: "success", name: "" };
 
   const data = readContact(form);
   const errors = validateContact(data);

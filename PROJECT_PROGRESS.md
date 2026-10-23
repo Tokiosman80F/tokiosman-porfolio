@@ -1578,3 +1578,20 @@ Live test (CDP): sequence correct at 1440 and 375, stops on "close deals" after 
 - **Pricing**: feature lists show 4 on phones with "Show all N included"; all show from md.
 - New `components/ui/FoldList.tsx` (client): first N items, rest folded; `mobileOnly` folds below md only; toggle is a 44px-tall button with `aria-expanded`/`aria-controls`.
 - Page height: 12,925 → 11,303px desktop, 21,154 → 18,953px at 375. Verified: no overflow, axe 0 violations at 1280 and 375.
+
+## 47. Clarify: plain copy (2026-10-23)
+
+- **Title / description** (`content/site.ts`, DRAFT): "Toki Osman — Next.js Developer for Websites, Web Apps & AI" (58 chars); "I design, build and launch Next.js websites and web apps connected to your CRM, payments, bookings and AI. Websites from $1,500, with a fixed quote in 24 hours." (160). Replaces the old agency wording.
+- **Jargon**: pricing "CMS integration" → "A content editor (CMS) so you can update pages yourself"; "RAG setup: …" → "Answers come from your own data, with the source shown"; FAQ meta "RAG ASSISTANT" → "ASSISTANT ON YOUR CONTENT". `docs/services.md` still has the old wording.
+- **Process header** (DRAFT): eyebrow "How it works", title "From brief to launch, with you in the loop", lead "You pick the design direction, I build it, you get a progress update every working day, and I handle the launch." (old lead promised "nothing gets lost in the handoff", which contradicted "no handoffs").
+- **Work left as is** at the owner's request (placeholder case studies, "24+" archive link, "Fortune 500").
+- "We" in FAQ/CTA kept where it means "you and I" ("we'll talk through your goals"), not an agency team.
+- Verified: no overflow, axe 0 violations at 1280 and 375.
+
+## 48. Harden: contact paths (2026-10-23)
+
+- **No CRM connected** (`crmReady` false): the button reads "Send via your email app" and a note under it says the form opens their email app addressed to tokiosman@outlook.com. Submitting (after validation) opens a `mailto:` with subject "Project enquiry: {type}" and the message, name and email in the body; the note is replaced by "Your email app should have opened… Nothing opened? Email me at …" (link). Previously every valid send ended in an error.
+- **CRM send fails**: "Your message didn't go through. Nothing you typed is lost: Email this message instead (address)." The link is the same prefilled `mailto:`; fields keep their values.
+- **Honeypot** renamed `company` → `hp_leave_empty` (label "Leave this field empty") so autofill can't fill it and silently drop a real lead. Shared name in `lib/contact.ts` (`HONEYPOT`), with `mailtoHref()`.
+- Still open: real booking URL (`site.bookingUrl` = https://cal.com placeholder), Zoho credentials, Turnstile.
+- Verified live (headless Edge): validation unchanged, valid send → email fallback state, no console errors; axe 0 at 375.

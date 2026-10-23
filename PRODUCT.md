@@ -54,8 +54,7 @@ Open (undecided or not yet provided):
 
 - Real booking URL (currently the placeholder `https://cal.com`).
 - GitHub and LinkedIn profile URLs (hidden until set).
-- Zoho CRM credentials for the contact form; until set, the form tells visitors to email instead. Spam protection (Turnstile), auto-reply and lead notification not set up.
-- Page title and meta description still carry old agency wording ("Signature Design Styles for B2B Software", "9-day sprints").
+- Zoho CRM credentials for the contact form; until set, the form opens the visitor's email app with the message written out. Spam protection (Turnstile), auto-reply and lead notification not set up.
 
 ## Brand Commitments
 

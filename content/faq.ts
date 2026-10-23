@@ -168,7 +168,7 @@ export const faqs: FaqItem[] = [
     answer: [
       "Yes. I can add an AI assistant trained on your own content, such as FAQs, product pages, and PDFs, so it answers customers 24/7 with accurate, sourced answers. It works with Next.js, WordPress, Webflow, and most other platforms, and it can send leads straight to your CRM.",
     ],
-    meta: "AI: RAG ASSISTANT · CRM HANDOFF",
+    meta: "AI: ASSISTANT ON YOUR CONTENT · CRM HANDOFF",
     status: { label: "● NEW SERVICE", tone: "green" },
   },
   {

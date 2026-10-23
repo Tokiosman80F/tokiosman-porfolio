@@ -26,6 +26,11 @@ export const contactForm = {
   },
   submit: "Send message",
   sending: "Sending…",
+  // No CRM connected: the form hands the message to the visitor's email app instead (said before they send)
+  submitEmail: "Send via your email app",
+  emailNote: `Opens your email app with your message written out, addressed to ${site.email}.`,
+  emailOpened: "Your email app should have opened with your message ready to send. Nothing opened? Email me at",
+  emailSubject: "Project enquiry: {projectType}",
   // Shown only once the CRM is connected (the claim has to be true)
   crmNote: "This form sends your message straight to my CRM. Want the same for your business?",
   success: {
@@ -33,7 +38,10 @@ export const contactForm = {
     text: "Your message is in. I'll reply within 24 hours. In the meantime, feel free to book a call.",
     cta: { label: "Book a free call", href: site.bookingUrl },
   },
-  error: `Something went wrong. Please try again, or email me at ${site.email}.`,
+  // CRM connected but the send failed: what they typed is kept, and one click emails it instead
+  error: "Your message didn't go through. Nothing you typed is lost:",
+  errorAction: "Email this message instead",
+  honeypot: "Leave this field empty",
   validation: {
     name: "Please enter your name.",
     email: "Please enter a valid email address.",
