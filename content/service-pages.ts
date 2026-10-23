@@ -553,6 +553,180 @@ export const servicePages: ServicePage[] = [
     },
     cta: bookCall,
   },
+  {
+    slug: "crm-payments-automation",
+    art: "phone",
+    name: "CRM, payments and automation",
+    meta: {
+      title: "Zoho CRM, Stripe & Booking Integrations, from $500",
+      description:
+        "I connect your website to Zoho CRM, Stripe payments and bookings, with error alerts and a written handoff, so no lead or payment gets lost. From $500.",
+    },
+    hero: {
+      eyebrow: "Service · Integrations",
+      title: "Every lead, payment and booking lands where you work",
+      lead: "Website forms that go straight into your CRM, Stripe payments and bookings that confirm themselves, and alerts the moment something needs you. No more copying data between tools.",
+      facts: ["From $500", "Done in 3–5 days", "Fixed price"],
+    },
+    audience: {
+      title: "Who it's for",
+      items: [
+        {
+          title: "Leads stuck in an inbox",
+          text: "Enquiries arrive by email and get copied into the CRM by hand, or not at all. Every form goes straight into your pipeline instead.",
+        },
+        {
+          title: "Selling services online",
+          text: "Deposits, packages or consultations paid upfront with Stripe, with the booking and the confirmation handled automatically.",
+        },
+        {
+          title: "Teams copying data between tools",
+          text: "The same customer typed into three systems. One flow keeps your site, CRM, payments and calendar in step.",
+        },
+      ],
+    },
+    plans: {
+      title: "Three plans, one fixed price each",
+      lead: "Start with the one connection that costs you the most time; add the rest when you're ready.",
+      items: [
+        {
+          name: "Single",
+          price: "$500",
+          timeline: "3–5 days",
+          tagline: "One connection, done properly.",
+          features: [
+            "One integration, e.g. website form → Zoho CRM, or Stripe Checkout",
+            "Fields and rules agreed in writing",
+            "Spam protection on the form",
+            "Error alerts by email",
+            "Tested with real data before launch",
+            "A short handoff document",
+            "14 days of support",
+          ],
+        },
+        {
+          name: "Connected",
+          price: "$1,200",
+          timeline: "1–2 weeks",
+          tagline: "Your site, CRM, payments and bookings working together.",
+          featured: true,
+          badge: "Recommended",
+          features: [
+            "Everything in Single",
+            "Up to 3 integrations: forms, CRM, Stripe, bookings",
+            "Payment and booking confirmations by email",
+            "Instant alerts for new leads and payments",
+            "A log of every sync, so nothing gets lost",
+            "30 days of support",
+          ],
+        },
+        {
+          name: "Automated",
+          pricePrefix: "From",
+          price: "$2,500",
+          timeline: "2–3 weeks",
+          tagline: "Multi-step workflows that run on their own.",
+          features: [
+            "Everything in Connected",
+            "Multi-step workflows, e.g. paid → invoice → welcome email → CRM stage",
+            "Stripe subscriptions or deposits",
+            "Follow-up emails and reminders",
+            "An AI step that sorts and summarises new enquiries",
+            "60 days of support",
+          ],
+        },
+      ],
+      notes: [
+        "Zoho, Stripe and booking-tool fees are paid by you, in your own accounts",
+        "Payment: 50% to start, 50% on launch, via Payoneer",
+        "Works with your current website",
+      ],
+    },
+    compare: {
+      title: "Plugin or gig, my build or an agency?",
+      lead: "An honest comparison of the usual options. Your quote depends on your scope.",
+      columns: ["Plugin or marketplace gig", "My build", "Agency"],
+      highlight: 1,
+      rows: [
+        { label: "Cost", values: ["$15–$750 per gig", "From $500, fixed", "Usually hourly, higher"] },
+        { label: "When a sync fails", values: ["You find out later", "You get an alert, it's logged", "Depends on the team"] },
+        { label: "Fits your process", values: ["What the plugin allows", "Built around your fields and rules", "Custom"] },
+        { label: "Who you talk to", values: ["Whoever took the gig", "The developer, directly", "An account manager"] },
+        { label: "Documentation", values: ["Rarely", "A written handoff", "Usually"] },
+      ],
+      note: "If your CRM or booking tool already has a built-in connection that does the job, I'll tell you on the call and you won't need me.",
+    },
+    included: {
+      title: "In every integration",
+      items: [
+        "Fields and rules agreed before I build",
+        "Error alerts, so a failed sync never goes unnoticed",
+        "API keys kept on the server, never in the browser",
+        "Tested with real leads and test payments",
+        "A written handoff: what's connected and how",
+        "A progress update every working day",
+      ],
+    },
+    process: {
+      title: "How it works",
+      lead: "The Single timeline. Connected and Automated follow the same steps with more to connect.",
+      steps: [
+        { step: "Free call", when: "Day 0", text: "We look at your tools and where data gets stuck. You get a fixed quote within 24 hours." },
+        { step: "Map the flow", when: "Day 1", text: "Which form goes where, which fields, what happens on payment: agreed in writing." },
+        { step: "Build", when: "Days 2–3", text: "I build the connection with error alerts and a log of every sync." },
+        { step: "Test with real data", when: "Day 4", text: "Test leads and test payments run end to end, and you check them in your CRM." },
+        { step: "Handoff", when: "Day 5", text: "It goes live, and you get a short document explaining how it all works." },
+      ],
+    },
+    scope: {
+      needTitle: "What I need from you",
+      need: [
+        "Access to your CRM, Stripe and booking tool",
+        "Access to your website",
+        "The fields you want in the CRM, even as a rough list",
+        "An example of a real lead or order",
+        "The 50% deposit",
+      ],
+      notTitle: "Not included",
+      not: [
+        "Zoho, Stripe and booking-tool subscription or transaction fees",
+        "Setting up a new CRM from scratch",
+        "Cleaning up or moving old records (quoted separately)",
+        "Support after the support period (quoted separately)",
+      ],
+    },
+    stack: { title: "Built with", names: ["Zoho CRM", "Stripe", "Next.js", "Node.js", "TypeScript", "Supabase", "PostgreSQL", "Claude AI"] },
+    faq: {
+      title: "Questions about integrations",
+      items: [
+        {
+          q: "Which CRMs do you work with?",
+          a: "Mostly Zoho CRM. If you use another CRM that has an API, tell me on the call and I'll check what it supports before quoting.",
+        },
+        {
+          q: "What happens if a sync fails?",
+          a: "You get an email alert, and every sync is logged, so a failed lead or payment can be found and sent again instead of being lost.",
+        },
+        {
+          q: "Do I need a paid Zoho or Stripe plan?",
+          a: "It depends on what you want to connect. Stripe charges per transaction, and some Zoho features need a paid plan. I check what your current plans support before quoting.",
+        },
+        {
+          q: "Can customers pay a deposit when they book?",
+          a: "Yes. The Connected plan links bookings and Stripe, so a deposit can be taken at booking and confirmed by email.",
+        },
+        {
+          q: "Will it work with my current website?",
+          a: "Yes. You don't need a new website: the forms and payments are connected to the site you already have.",
+        },
+        {
+          q: "Is my customers' data safe?",
+          a: "API keys stay on the server, never in the browser, and data goes straight between your own tools and accounts.",
+        },
+      ],
+    },
+    cta: bookCall,
+  },
 ];
 
 export const servicePageHref = (p: ServicePage) => `/services/${p.slug}`;

@@ -144,7 +144,7 @@ export function BrowserArt() {
 function CalendarIcon() {
   return (
     <span className="flex size-full flex-col items-center justify-center bg-[#fff] leading-none">
-      <span className="font-sans text-[5px] font-semibold text-[#ef4444] uppercase">Thu</span>
+      <span className="font-sans text-[5px] font-semibold text-[#dc2626] uppercase">Thu</span>
       <span className="font-sans text-[12px] font-light text-[#111]">22</span>
     </span>
   );
