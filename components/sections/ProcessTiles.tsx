@@ -2,10 +2,10 @@
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { useInView, useReducedMotion } from "motion/react";
-import { ArrowRight, Bell, Check, Lock, Mic, RotateCw, Sparkles, UserRound } from "lucide-react";
+import { ArrowRight, Bell, Check, CreditCard, FileText, LayoutDashboard, Lock, Mic, RotateCw, Sparkles, UserRound, Users } from "lucide-react";
 import { GoogleIcon } from "@/components/ui/brand-icons";
 import { PlanButton } from "@/components/ui/PlanButton";
-import { processTiles } from "@/content/process";
+import { processTiles, type AppRow } from "@/content/process";
 import { cn } from "@/lib/utils";
 
 // Process bento tiles (user-supplied reference, docs/image.png). Each tile plays its little story once
@@ -409,45 +409,112 @@ export function SeoTile({ className }: { className?: string }) {
   );
 }
 
-/* ── Web apps: a chip whose traces carry current on hover; tap the chip to cycle modules ── */
+/* ── Web apps: a small admin app; the sidebar steps through its modules (users & roles, overview, payments,
+   content). Tap a module to open it. Fixed hex colours inside the window (it's a product screen). ── */
 
-const traces = ["M0 40H150", "M0 60H150", "M0 80H150", "M0 100H150", "M170 150V120", "M190 150V120", "M210 150V120"];
+const appIcons = [Users, LayoutDashboard, CreditCard, FileText];
+const pill = "shrink-0 rounded-full px-1.5 py-px font-sans text-[7px] font-medium";
+const tones: Record<string, string> = {
+  green: "bg-[#dcfce7] text-[#166534]",
+  blue: "bg-[#dbeafe] text-[#1e40af]",
+  amber: "bg-[#fef3c7] text-[#92400e]",
+  grey: "bg-[#f1f5f9] text-[#475569]",
+};
+const row = "flex items-center gap-1.5 border-b border-[#f1f1f1] py-[5px] last:border-0";
+
+function AppPanel({ index }: { index: number }) {
+  const t = processTiles.apps;
+  if (index === 1) {
+    return (
+      <>
+        <div className="grid grid-cols-2 gap-1.5">
+          {t.stats.map((s) => (
+            <div key={s.label} className="rounded-md border border-[#ececec] px-1.5 py-1">
+              <p className="font-sans text-[7px] text-[#71717a]">{s.label}</p>
+              <p className="font-sans text-[11px] font-semibold text-[#121212]">
+                {s.value} <span className="text-[7px] font-medium text-[#16a34a]">{s.delta}</span>
+              </p>
+            </div>
+          ))}
+        </div>
+        <div className="mt-1.5 flex h-12 items-end gap-[3px] rounded-md border border-[#ececec] px-1.5 pt-1.5">
+          {[40, 55, 35, 70, 60, 85, 75, 95].map((h, i) => (
+            <span key={i} className={cn("flex-1 rounded-t-[2px]", i === 7 ? "bg-[#121212]" : "bg-[#e4e4e7]")} style={{ height: `${h}%` }} />
+          ))}
+        </div>
+      </>
+    );
+  }
+  const rows: AppRow[] = index === 0 ? t.users : index === 2 ? t.payments : t.posts;
+  return (
+    <ul>
+      {rows.map((r) => (
+        <li key={r.a} className={row}>
+          {index === 0 && (
+            <span className="flex size-[14px] shrink-0 items-center justify-center rounded-full bg-[#e4e4e7] font-sans text-[6px] font-semibold text-[#3f3f46]">
+              {r.initials}
+            </span>
+          )}
+          <span className="min-w-0 flex-1 truncate font-sans text-[8px] text-[#121212]">{r.a}</span>
+          <span className={cn(pill, tones[r.tone])}>{r.b}</span>
+        </li>
+      ))}
+    </ul>
+  );
+}
 
 export function AppsTile({ className }: { className?: string }) {
   const t = processTiles.apps;
-  const { ref, index, select, stop } = useAutoplay<HTMLDivElement>(t.modules.length, 1400);
+  const { ref, index, select, stop } = useAutoplay<HTMLDivElement>(t.modules.length, 1600);
   return (
-    <Tile className={cn("group p-unit-6", className)}>
+    <Tile className={cn("p-unit-6", className)}>
       <div className="relative z-10">
         <TileTitle>{t.title}</TileTitle>
         <TileText>{t.text}</TileText>
       </div>
-      <div ref={ref} onPointerEnter={stop} onFocus={stop} className="relative mt-auto h-40 pt-unit-4">
-        <svg aria-hidden viewBox="0 0 240 150" className="absolute inset-x-0 bottom-0 h-36 w-full" preserveAspectRatio="xMaxYMax meet">
-          {traces.map((d) => (
-            <g key={d}>
-              <path d={d} fill="none" strokeWidth="1.5" className="stroke-border-hairline" />
-              <path
-                d={d}
-                fill="none"
-                strokeWidth="1.5"
-                strokeDasharray="8 32"
-                className="stroke-canary-yellow opacity-0 transition-opacity group-focus-within:opacity-100 group-focus-within:[animation:trace-flow_1.4s_linear_infinite] group-hover:opacity-100 group-hover:[animation:trace-flow_1.4s_linear_infinite]"
-              />
-            </g>
-          ))}
-        </svg>
-        <button
-          type="button"
-          onClick={() => select((index + 1) % t.modules.length)}
-          className="absolute right-unit-4 bottom-unit-6 flex size-24 flex-col items-center justify-center gap-1 rounded-xl border border-ink-black bg-canary-yellow shadow-lg transition-transform group-hover:-translate-y-0.5 motion-reduce:transition-none"
-        >
-          <span aria-hidden className="font-mono text-[10px] leading-none text-ink-black/60 uppercase">module</span>
-          <span key={index} className="animate-[tile-in_0.3s_ease-out] font-mono text-mono-meta font-bold text-ink-black">
-            {t.modules[index]}
-          </span>
-          <span className="sr-only"> (show next module)</span>
-        </button>
+      <div
+        ref={ref}
+        onPointerEnter={stop}
+        onFocus={stop}
+        className="mt-auto pt-unit-6"
+      >
+        <div className="flex overflow-hidden rounded-lg bg-[#fff] shadow-[0_16px_32px_-14px_rgb(0_0_0/0.35),0_0_0_0.5px_rgb(0_0_0/0.15)]">
+          {/* sidebar: the modules */}
+          <div className="flex w-[4.75rem] shrink-0 flex-col gap-px bg-[#fafafa] p-1 shadow-[inset_-0.5px_0_0_#e5e5e5]">
+            <span className="mb-1 flex items-center gap-1 px-1 pt-0.5 font-sans text-[8px] font-bold text-[#121212]">
+              <span className="size-2 rounded-[2px] bg-[#121212]" />
+              {t.appName}
+            </span>
+            {t.modules.map((m, i) => {
+              const Icon = appIcons[i];
+              return (
+                <button
+                  key={m}
+                  type="button"
+                  aria-pressed={i === index}
+                  onClick={() => select(i)}
+                  className={cn(
+                    "flex items-center gap-1 rounded-[4px] px-1 py-[3px] text-left font-sans text-[8px] transition-colors",
+                    i === index ? "bg-[#FDF175] font-semibold text-[#121212]" : "text-[#52525b] hover:bg-[#f0f0f0]",
+                  )}
+                >
+                  <Icon aria-hidden className="size-[9px] shrink-0" />
+                  {m}
+                </button>
+              );
+            })}
+          </div>
+          {/* the open module */}
+          <div aria-hidden className="min-w-0 flex-1 p-1.5">
+            <p className="mb-1 flex items-center justify-between font-sans text-[9px] font-semibold text-[#121212]">
+              {t.screens[index]}
+              <span className="rounded-[3px] bg-[#121212] px-1 py-px text-[6.5px] font-medium text-[#fff]">{t.actions[index]}</span>
+            </p>
+            <div key={index} className="animate-[tile-in_0.3s_ease-out]">
+              <AppPanel index={index} />
+            </div>
+          </div>
+        </div>
       </div>
     </Tile>
   );
