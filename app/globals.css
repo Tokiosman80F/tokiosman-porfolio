@@ -236,6 +236,11 @@
   }
 }
 
+/* Hero client logos below lg: the row is rendered twice, so -50% loops seamlessly */
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
+
 /* Process bento: panel content swap, and current flowing along the chip traces (hover only). */
 @keyframes tile-in {
   from { opacity: 0; transform: translateY(4px); }

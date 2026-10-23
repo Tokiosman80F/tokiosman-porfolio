@@ -1710,3 +1710,10 @@ All user-triggered (hover / pointer), 300ms ease-out-quint, off with reduced mot
 - Below md the hamburger menu (`MobileMenu.tsx`, deleted) is replaced by `components/layout/MobileDock.tsx`: a floating bottom dock with Services / About / Work / Pricing / FAQ (icon + label), current section highlighted canary via the scroll-spy now shared as `useActiveSection` (NavLinks.tsx).
 - Body gets bottom padding below md (5.5rem + safe-area) so the footer clears the dock; the WhatsApp button moves above the dock on phones.
 - Verified at 320 / 375 (light + dark): highlight follows scrolling and taps, no overflow 320–1280, footer end clear of the dock, axe 0, no console errors. (The round "N" in dev screenshots is the Next.js dev indicator, not shipped.)
+
+## 64. Client logos as a marquee on phones and tablets (2026-10-23)
+
+- Below lg the hero client logos run as an endless marquee (`marquee` keyframes, 26s linear; the row is rendered twice, the copy `aria-hidden` and hidden from lg, track slides -50%), faded at both edges, paused while touched. From lg: one static centred row, as before.
+- Reduced motion: the animation stops (global rule) and the row scrolls sideways by hand.
+- Tiles moved into a `LogoTiles` component in Hero.tsx (shared by both copies).
+- Verified: moving at 375 / 768 (light + dark), static at 1280, equal halves (seamless loop), no overflow 320–1280, axe 0.

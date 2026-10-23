@@ -14,6 +14,34 @@ import { RotatingOutcome } from "./RotatingOutcome";
 // (extra top padding clears it). Backdrop: HeroArt (wireframe "mountain range"), no grid. The headline's
 // highlight box cycles through outcomes once (RotatingOutcome). Booking a call is the primary button; a
 // face-and-name line under the buttons says who the visitor deals with; a proof strip of three facts follows.
+// One row of client tiles; the trailing pad equals the gap, so two rows side by side loop seamlessly
+const logoRow = "flex shrink-0 items-center gap-unit-3 pr-unit-3 sm:gap-unit-4 sm:pr-unit-4 lg:pr-0";
+
+// Logo tiles, all the same height; logos that are only a mark get the name beside them. Tiles stay light in
+// the dark theme (theme-light) so the brand colours read as designed.
+function LogoTiles({ logos }: { logos: typeof hero.trustedBy.logos }) {
+  return logos.map((l) => (
+    <li
+      key={l.name}
+      className="theme-light flex h-14 shrink-0 items-center gap-unit-2 rounded-xl border border-border-hairline bg-white px-unit-4 shadow-xs sm:h-16"
+    >
+      {!l.src ? (
+        <RedaxifyLogo className="h-6 w-auto sm:h-7" />
+      ) : (
+        <Image
+          src={l.src}
+          alt={l.mark ? "" : l.name}
+          width={l.width}
+          height={l.height}
+          sizes="160px"
+          className={cn("w-auto", l.mark ? "h-9 rounded-lg sm:h-10" : "h-5 sm:h-6")}
+        />
+      )}
+      {l.mark && <span className="font-display text-body-md font-semibold tracking-tight whitespace-nowrap text-ink-black">{l.name}</span>}
+    </li>
+  ));
+}
+
 export default function Hero() {
   const { primary, secondary, intro, trustedBy, headline, proof } = hero;
   return (
@@ -69,31 +97,19 @@ export default function Hero() {
 
         <div className="mt-unit-16 flex w-full max-w-4xl flex-col items-center lg:mt-unit-24 lg:max-w-6xl">
           <p className="mb-unit-6 max-w-md font-mono text-mono-tag tracking-widest text-ink-muted uppercase">{trustedBy.label}</p>
-          {/* Logo tiles, all the same height; logos that are only a mark get the name beside them. Tiles stay
-              light in the dark theme (theme-light) so the brand colours read as designed. Centred wrap; the
-              36rem cap below lg wraps 3 + 2 instead of leaving one tile alone on a row */}
-          <ul aria-label="Clients" className="flex max-w-[36rem] flex-wrap items-center justify-center gap-unit-3 sm:gap-unit-4 lg:max-w-none">
-            {trustedBy.logos.map((l) => (
-              <li
-                key={l.name}
-                className="theme-light flex h-14 items-center gap-unit-2 rounded-xl border border-border-hairline bg-white px-unit-4 shadow-xs sm:h-16"
-              >
-                {!l.src ? (
-                  <RedaxifyLogo className="h-6 w-auto sm:h-7" />
-                ) : (
-                  <Image
-                    src={l.src}
-                    alt={l.mark ? "" : l.name}
-                    width={l.width}
-                    height={l.height}
-                    sizes="160px"
-                    className={cn("w-auto", l.mark ? "h-9 rounded-lg sm:h-10" : "h-5 sm:h-6")}
-                  />
-                )}
-                {l.mark && <span className="font-display text-body-md font-semibold tracking-tight text-ink-black">{l.name}</span>}
-              </li>
-            ))}
-          </ul>
+          {/* From lg: one centred row. Below lg: an endless marquee (the row is rendered twice and the track
+              slides by half its width, so it loops seamlessly), faded at both edges, paused while touched.
+              With reduced motion the global rule stops it and the row scrolls sideways by hand instead. */}
+          <div tabIndex={0} role="region" aria-label="Client logos" className="w-full max-lg:overflow-hidden max-lg:[mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)] max-lg:motion-reduce:overflow-x-auto">
+            <div className="flex w-max max-lg:animate-[marquee_26s_linear_infinite] max-lg:active:[animation-play-state:paused] lg:w-full lg:justify-center">
+              <ul aria-label="Clients" className={logoRow}>
+                <LogoTiles logos={trustedBy.logos} />
+              </ul>
+              <ul aria-hidden className={cn(logoRow, "lg:hidden")}>
+                <LogoTiles logos={trustedBy.logos} />
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </Section>
