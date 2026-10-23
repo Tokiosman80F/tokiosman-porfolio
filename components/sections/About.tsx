@@ -98,7 +98,7 @@ function BioCard({ className }: { className?: string }) {
 
 /* Tech stack: logo tiles (public/logos, the Framer Motion mark from brand-icons; Zustand has no logo in any
    catalog, so it shows a two-letter symbol) with the name underneath */
-function TechMark({ logo, symbol }: { logo?: string; symbol?: string }) {
+export function TechMark({ logo, symbol }: { logo?: string; symbol?: string }) {
   if (logo === "framer-motion") return <FramerMotionIcon />;
   if (logo) return <Image src={`/logos/${logo}.svg`} alt="" width={28} height={28} unoptimized className="size-7 object-contain" />;
   return <span className="font-display text-headline-sm font-bold text-ink-black">{symbol}</span>;

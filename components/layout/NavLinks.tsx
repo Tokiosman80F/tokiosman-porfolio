@@ -25,13 +25,13 @@ export function NavLinks({ links }: { links: NavLink[] }) {
 
   // Scroll-spy + "scrolled" flag
   useEffect(() => {
-    const linked = new Set(links.map((l) => l.href));
+    // Links are "/#id"; sections are matched by their "#id" part
+    const linked = new Map(links.map((l) => [l.href.slice(l.href.indexOf("#")), l.href]));
     const io = new IntersectionObserver(
       (entries) => {
         for (const e of entries) {
           if (!e.isIntersecting) continue;
-          const href = `#${e.target.id}`;
-          setActive(linked.has(href) ? href : null);
+          setActive(linked.get(`#${e.target.id}`) ?? null);
         }
       },
       { rootMargin: "-45% 0px -50% 0px" },

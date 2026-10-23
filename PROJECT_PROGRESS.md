@@ -1620,3 +1620,17 @@ Live test (CDP): sequence correct at 1440 and 375, stops on "close deals" after 
 - **Process design tile (1024–1279px)**: the Centered / Split / Editorial tabs overflowed the narrow lg column ("Editorial" clipped). Tighter padding and gaps between lg and xl only; all three labels fit at 1024.
 - **Hero client row (below lg)**: capped at 34rem so 5 names wrap 3 + 2, not 4 + 1 with one alone.
 - **Still open for launch** (owner): real booking URL; Zoho credentials; real case studies (Work keeps template placeholders, incl. "24+" vs "20+"); real testimonials (section hidden); GitHub/LinkedIn URLs.
+
+## 52. Case study pages (2026-10-23)
+
+- New route `app/work/[slug]/page.tsx`: `/work/kuhnic-ai`, `/work/mavendata`, `/work/headq` (static params, unknown slugs 404). "View Case Study" links there (`projectHref`). Per-page title and description from the project.
+- Content: `slug` added to projects; `href: "#"` removed. Optional `challenge`, `approach`, `results`, `stack`, `liveUrl` render their sections only when filled: left empty, nothing invented. Page copy in `caseStudyPage`; "How I run every project" uses the real engagement steps (PRODUCT.md).
+- Nav, footer and the contact "See my work" link now use `/#id`; NavLinks matches sections by the hash part.
+- The three projects are still the template placeholders (PRODUCT.md), so these pages show placeholder clients, quotes and results until real case studies replace them.
+- Verified: /work/kuhnic-ai and /work/headq at 1280 and 375, no overflow, axe 0 violations; tsc (after `next typegen`) and ESLint clean.
+
+## 53. Case study: technologies + screenshot slider (2026-10-23)
+
+- **Technologies I used**: `stack` (names) on each project, shown as the About-style logo tiles after the outcome card; names matching `content/about.ts` tech get its logo, others show their first two letters.
+- **Slider** (`components/sections/CaseGallery.tsx`, client): slides = `image` (cover) + `gallery`. Scroll-snap track in one browser window; prev/next wrap around; dots follow manual scrolling; carousel/slide roles. Tested: next/next/wrap/prev, no console errors; axe 0 at 1280/375.
+- **PLACEHOLDER**: each project's `stack` and `gallery` (the extra slides reuse the other case images) are marked in `content/projects.ts` for the owner to replace.

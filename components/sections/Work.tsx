@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Section } from "@/components/ui/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { projects, workSection, type Project, type ProjectOutcomeIcon } from "@/content/projects";
+import { projectHref, projects, workSection, type Project, type ProjectOutcomeIcon } from "@/content/projects";
 import { cn } from "@/lib/utils";
 
 // Case studies as a deck of case files: on large, tall-enough screens each card sticks under the floating
@@ -12,14 +12,15 @@ import { cn } from "@/lib/utils";
 // Below that (narrow or short windows) they're plain stacked cards, so a stuck card can never hide its own
 // bottom. Tones alternate grey → sky blue (signal-blue tint) → ink.
 
-const outcomeIcons: Record<ProjectOutcomeIcon, typeof Clock> = {
+export const outcomeIcons: Record<ProjectOutcomeIcon, typeof Clock> = {
   trending: TrendingUp,
   clock: Clock,
   verified: BadgeCheck,
 };
 
 type Tone = { card: string; dark: boolean };
-const tones: Tone[] = [
+// Shared with the case study page (app/work/[slug]), which opens in its card's tone
+export const tones: Tone[] = [
   { card: "border-border-hairline bg-surface-container-low", dark: false },
   { card: "border-signal-blue/40 bg-[color-mix(in_srgb,var(--color-signal-blue)_18%,white)]", dark: false },
   { card: "border-ink-black bg-ink-black", dark: true },
@@ -87,7 +88,7 @@ function CaseFile({ project: p, index }: { project: Project; index: number }) {
               ))}
             </ul>
             <a
-              href={p.href}
+              href={projectHref(p)}
               className={cn(
                 "tap-target mt-unit-8 inline-flex items-center gap-unit-2 font-sans text-body-md font-semibold hover:underline",
                 dark && "focus-visible:outline-white",

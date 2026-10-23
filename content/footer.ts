@@ -20,20 +20,20 @@ export const footer = {
     {
       title: "Navigate",
       links: [
-        { label: "Services", href: "#services" },
-        { label: "About", href: "#about" },
-        { label: "Work", href: "#work" },
-        { label: "Pricing", href: "#pricing" },
-        { label: "FAQ", href: "#faq" },
+        { label: "Services", href: "/#services" },
+        { label: "About", href: "/#about" },
+        { label: "Work", href: "/#work" },
+        { label: "Pricing", href: "/#pricing" },
+        { label: "FAQ", href: "/#faq" },
       ],
     },
     {
       title: "Services",
       links: [
-        { label: "Website Design & Development", href: "#pricing" },
-        { label: "Web App + Dashboard", href: "#pricing" },
-        { label: "AI Upgrade for Your Website", href: "#pricing" },
-        { label: "Custom Projects", href: "#pricing" },
+        { label: "Website Design & Development", href: "/#pricing" },
+        { label: "Web App + Dashboard", href: "/#pricing" },
+        { label: "AI Upgrade for Your Website", href: "/#pricing" },
+        { label: "Custom Projects", href: "/#pricing" },
       ],
     },
     {

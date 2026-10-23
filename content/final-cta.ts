@@ -9,7 +9,7 @@ export const finalCta = {
   title: ["Have a project in mind but ", { highlight: "unsure", color: "green" }, " where to start?"] satisfies HighlightedText,
   lead: "One free 30-minute call is all it takes. We'll talk through your goals, and I'll tell you what to build, how long it takes, and what it costs, with a fixed quote within 24 hours. No pressure, no obligation.",
   primary: { label: "Book a free 30-min call", href: site.bookingUrl },
-  secondary: { label: "See my work", href: "#work" },
+  secondary: { label: "See my work", href: "/#work" },
   trust: ["Fixed price", "Direct with the developer", "Launch in 2–4 weeks"],
 };
 
