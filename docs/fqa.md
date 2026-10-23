@@ -33,7 +33,7 @@ I design and build custom **Next.js websites**, **web apps with admin dashboards
 
 **How much does a custom Next.js website cost?**
 
-A complete website with up to 6 pages starts at **$1,500**, and extra pages are $250 each. Web apps with dashboards start at **$4,500**, and AI upgrades for existing websites start at **$2,000**. Every project has a fixed price agreed before work starts, so there are no surprise invoices.
+A complete website with up to 3 pages starts at **$1,500**, and extra pages are $250 each. Web apps with dashboards start at **$4,500**, and AI upgrades for existing websites start at **$2,000**. Every project has a fixed price agreed before work starts, so there are no surprise invoices.
 
 - Meta: PRICING: FIXED SCOPE · FIXED PRICE
 - Status: ● NO HIDDEN FEES (black)
@@ -78,7 +78,7 @@ Yes. You talk to me, the person writing your code, from the first call to launch
 
 **How does payment work, and how many revisions do I get?**
 
-You pay **50% to start and 50% at launch**. Website projects include **2 rounds of revisions**, and I share progress early so feedback comes before anything is finished. Hosting fees and AI usage fees (like OpenAI or Anthropic API costs) are paid directly by you, so you always own your accounts.
+You pay **50% to start and 50% at launch**, through Payoneer. Website projects include **2 rounds of revisions**, and I share progress early so feedback comes before anything is finished. Hosting fees and AI usage fees (like OpenAI or Anthropic API costs) are paid directly by you, so you always own your accounts.
 
 - Meta: TERMS: 50% UPFRONT · 50% ON LAUNCH
 - Status: ● TRANSPARENT (black)

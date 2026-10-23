@@ -30,7 +30,7 @@ export const footer = {
     {
       title: "Services",
       links: [
-        { label: "Website Design & Development", href: "/#pricing" },
+        { label: "Website Design & Development", href: "/services/nextjs-website-development" },
         { label: "Web App + Dashboard", href: "/#pricing" },
         { label: "AI Upgrade for Your Website", href: "/#pricing" },
         { label: "Custom Projects", href: "/#pricing" },

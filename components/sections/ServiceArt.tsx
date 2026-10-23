@@ -32,7 +32,7 @@ export function BrowserArt() {
           {[0, 1, 2].map((i) => (
             <span key={i} className={cn("size-2.5 rounded-[2px] border border-[#8a8a8a]", i === 0 && "border-[#0d99ff] bg-[#0d99ff]/30")} />
           ))}
-          <span className="ml-auto self-center rounded-[3px] bg-[#0d99ff] px-1.5 py-[3px] font-sans text-[7px] leading-none font-semibold text-[#fff]">Share</span>
+          <span className="ml-auto self-center rounded-[3px] bg-[#0a6fc2] px-1.5 py-[3px] font-sans text-[7px] leading-none font-semibold text-[#fff]">Share</span>
         </div>
         <div className="flex h-full">
           <div className="w-16 shrink-0 space-y-[5px] border-r border-[#444] px-2 pt-2 font-sans text-[6.5px] text-[#b3b3b3]">

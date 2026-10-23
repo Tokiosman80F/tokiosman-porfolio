@@ -1,4 +1,5 @@
-import { Calendar, Clock } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, Calendar, Clock } from "lucide-react";
 import { PlanButton } from "@/components/ui/PlanButton";
 import { renderRich, type RichText } from "@/components/ui/RichText";
 import { Section } from "@/components/ui/Section";
@@ -151,6 +152,15 @@ function OfferCard({ offer: o }: { offer: Offer }) {
       </div>
       <div className="px-unit-4 pt-unit-6 pb-unit-4 sm:px-unit-6">
         <Features items={o.features} dark={dark} />
+        {o.more && (
+          <Link
+            href={o.more.href}
+            className={cn("tap-target group mt-unit-6 inline-flex items-center gap-unit-2 font-sans text-body-sm font-semibold underline-offset-4 hover:underline", dark ? "text-on-primary focus-visible:outline-white" : "text-ink-black")}
+          >
+            {o.more.label}
+            <ArrowRight aria-hidden className="size-4 transition-transform group-hover:translate-x-0.5 motion-reduce:transition-none" />
+          </Link>
+        )}
       </div>
     </article>
   );

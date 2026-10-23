@@ -56,7 +56,7 @@ export const faqs: FaqItem[] = [
     category: "PRICING",
     question: "How much does a custom Next.js website cost?",
     answer: [
-      "A complete website with up to 6 pages starts at ",
+      "A complete website with up to 3 pages starts at ",
       { strong: "$1,500" },
       ", and extra pages are $250 each. Web apps with dashboards start at ",
       { strong: "$4,500" },
@@ -142,7 +142,7 @@ export const faqs: FaqItem[] = [
     answer: [
       "You pay ",
       { strong: "50% to start and 50% at launch" },
-      ". Website projects include ",
+      ", through Payoneer. Website projects include ",
       { strong: "2 rounds of revisions" },
       ", and I share progress early so feedback comes before anything is finished. Hosting fees and AI usage fees (like OpenAI or Anthropic API costs) are paid directly by you, so you always own your accounts.",
     ],
