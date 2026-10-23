@@ -14,7 +14,8 @@ const caveat = Caveat({ variable: "--font-caveat", subsets: ["latin"] });
 // Logo wordmark only
 const sora = Sora({ variable: "--font-sora", subsets: ["latin"] });
 
-// Favicon: app/favicon.ico via the file convention (Next injects the <link>). Replace that file, or add app/icon.svg, when the real one exists.
+// Icons (file conventions, Next injects the <link>s): app/icon.svg is the logo mark ("t" + canary dot on ink);
+// app/favicon.ico and app/apple-icon.png are rendered from it (16/32/48 and 180px), as is public/logo.png (512px).
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: { default: site.title, template: `%s · ${site.name}` },
