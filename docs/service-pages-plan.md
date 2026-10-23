@@ -9,7 +9,7 @@ Research date: 2026-10-23. Status: **proposal, nothing built yet.** Every price 
 - **The website stays at $1,500, now for up to 3 pages.** `docs/services.md`, the FAQ and the homepage are updated.
 - **No price rises. Every service offers 3 plans instead** (below). All tier prices are **DRAFT proposals** until you confirm them.
 - **No real projects yet**, so service pages ship without a proof block. It gets added when you've built them.
-- **Pages are built one at a time.** Order: Website ✅ (committed) → AI chatbot ✅ (committed) → Web app ✅ (committed) → CRM/payments ✅ (committed) → Maintenance ✅ (committed) → Headless WordPress + Next.js ✅ (added 2026-10-23 at the owner's request; built, in review). **SEO dropped (owner, 2026-10-23: no standalone SEO service).** On-page SEO stays part of the website build, as in docs/services.md.
+- **Pages are built one at a time.** Order: Website ✅ (committed) → AI chatbot ✅ (committed) → Web app ✅ (committed) → CRM/payments ✅ (committed) → Maintenance ✅ (committed) → Headless WordPress + Next.js ✅ (committed) → WordPress malware removal ✅ (added 2026-10-23 at the owner's request; built, in review). **SEO dropped (owner, 2026-10-23: no standalone SEO service).** On-page SEO stays part of the website build, as in docs/services.md.
 
 | Service | Plan 1 | Plan 2 (recommended) | Plan 3 |
 |---|---|---|---|
@@ -18,6 +18,7 @@ Research date: 2026-10-23. Status: **proposal, nothing built yet.** Every price 
 | AI chatbot | **Assistant from $2,000** · today's package (trained on your content, sources, CRM/email lead handoff, admin panel, 30 days tuning) · 2–3 wks | **Assistant + actions $3,500** · + books calls and takes orders, WhatsApp channel | **Custom from $6,000** · + fine-tuning, deeper system integrations |
 | CRM, payments & automation | **Single $500** · one integration · 3–5 days | **Connected $1,200** · up to 3 integrations + alerts | **Automated from $2,500** · multi-step workflows |
 | Headless WordPress + Next.js | **Starter $3,000** · current design rebuilt, 5 templates, preview, SEO + redirects · 3 wks | **Business $5,500** · refreshed design, 10 templates, ACF, content blocks, search · 4–5 wks | **Custom from $9,000** · multilingual, WooCommerce, member areas · 6+ wks |
+| WordPress malware removal | **Cleanup $299** · 24–48 h, entry point patched, 30-day guarantee | **Cleanup + hardening $499** · within 24 h, firewall, 2FA, backups, 60-day guarantee | **Full recovery from $799** · stores, several sites, 90-day guarantee |
 | Maintenance | **Care $99/mo** · updates, backups, uptime, 1 hr | **Care+ $249/mo** · 4 hrs, priority | **Priority $499/mo** · 10 hrs, same-day response |
 
 > Plan 1 of each service keeps everything the current single package includes (the website only drops from 6 to 3 pages, as you decided). Plans 2 and 3 add to it; nothing is taken away.

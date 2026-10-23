@@ -68,6 +68,22 @@ export const serviceArt = {
     placeholder: "Ask me anything…",
   },
   call: { host: "Toki Osman", guest: "You", time: "10:00", title: "Free strategy call" },
+  security: {
+    site: "Northwind Goods",
+    url: "northwindgoods.com",
+    resultTitle: "Northwind Goods · Handmade home goods",
+    warning: "This site may be hacked.",
+    reportTitle: "Cleanup report · northwindgoods.com",
+    status: "Clean",
+    findings: [
+      { label: "Infected files", count: "37", action: "Removed" },
+      { label: "Backdoors", count: "3", action: "Removed" },
+      { label: "Fake admin users", count: "2", action: "Deleted" },
+      { label: "Spam pages", count: "1,240", action: "Removed" },
+      { label: "Entry point: outdated plugin", count: "1", action: "Patched" },
+    ],
+    review: "Google review requested",
+  },
   headless: {
     wpSite: "Northwind Journal",
     wpMenu: ["Dashboard", "Posts", "Media", "Pages", "Plugins"],

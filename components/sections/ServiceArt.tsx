@@ -585,3 +585,51 @@ export function HeadlessArt() {
     </>
   );
 }
+
+/* 9 · Hacked-site recovery (its service page's hero): the Google result flagged "This site may be hacked"
+   (back) and the cleanup report that ends with the site clean and a review requested (front). Fixed hex
+   colours, not theme tokens (real app chrome). Fictional data from content/services.ts. */
+export function SecurityArt() {
+  const s = art.security;
+  return (
+    <>
+      {/* flagged search result, behind */}
+      <div className="absolute top-5 left-4 w-[68%] rounded-xl bg-[#fff] p-2.5 shadow-[0_10px_24px_-10px_rgb(0_0_0/0.35),0_0_0_0.5px_rgb(0_0_0/0.12)] transition-transform duration-300 ease-out group-hover:-translate-x-1 motion-reduce:transition-none sm:left-6">
+        <div className="flex items-center gap-1.5">
+          <span className="flex size-[14px] shrink-0 items-center justify-center rounded-full bg-[#f1f3f4] font-sans text-[6.5px] font-bold text-[#202124]">
+            {s.site[0]}
+          </span>
+          <span className="min-w-0 truncate font-sans text-[7.5px] text-[#4d5156]">{s.url}</span>
+        </div>
+        <p className="mt-1 truncate font-sans text-[10.5px] text-[#1a0dab]">{s.resultTitle}</p>
+        <p className="mt-0.5 font-sans text-[8px] font-semibold text-[#b3261e]">{s.warning}</p>
+        <div className="mt-1 h-[3px] w-11/12 rounded-full bg-[#e8eaed]" />
+        <div className="mt-1 h-[3px] w-2/3 rounded-full bg-[#e8eaed]" />
+      </div>
+
+      {/* cleanup report, in front */}
+      <div className={cn("absolute top-[4.5rem] right-4 w-[64%] overflow-hidden rounded-xl bg-[#fff] shadow-[0_24px_40px_-14px_rgb(0_0_0/0.45),0_0_0_0.5px_rgb(0_0_0/0.18)] sm:right-6", lift)}>
+        <div className="flex items-center justify-between gap-2 border-b border-[#ececec] px-2.5 py-1.5">
+          <span className="truncate font-sans text-[9px] font-semibold text-[#121212]">{s.reportTitle}</span>
+          <span className="flex shrink-0 items-center gap-1 rounded-full bg-[#dcfce7] px-1.5 py-px font-sans text-[7px] font-semibold text-[#166534]">
+            <Check className="size-2.5" strokeWidth={3} />
+            {s.status}
+          </span>
+        </div>
+        <ul className="px-2.5 py-1">
+          {s.findings.map((f) => (
+            <li key={f.label} className="flex items-center gap-2 border-b border-[#f4f4f5] py-[5px] last:border-0">
+              <span className="min-w-0 flex-1 truncate font-sans text-[8px] text-[#3f3f46]">{f.label}</span>
+              <span className="font-sans text-[8px] font-semibold text-[#121212] tabular-nums">{f.count}</span>
+              <span className="rounded-full bg-[#f4f4f5] px-1.5 py-px font-sans text-[6.5px] font-medium text-[#3f3f46]">{f.action}</span>
+            </li>
+          ))}
+        </ul>
+        <div className="flex items-center gap-1.5 bg-[#f7f7f8] px-2.5 py-1.5 font-sans text-[7.5px] text-[#3f3f46]">
+          <span className="size-1.5 rounded-full bg-[#22c55e]" />
+          {s.review}
+        </div>
+      </div>
+    </>
+  );
+}

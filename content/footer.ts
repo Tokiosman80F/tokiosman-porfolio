@@ -33,6 +33,7 @@ export const footer = {
         { label: "Website Design & Development", href: "/services/nextjs-website-development" },
         { label: "Web App + Dashboard", href: "/services/web-app-development" },
         { label: "Headless WordPress", href: "/services/headless-wordpress-nextjs" },
+        { label: "WordPress Malware Removal", href: "/services/wordpress-malware-removal" },
         { label: "AI Upgrade for Your Website", href: "/services/ai-chatbot-for-website" },
         { label: "CRM & Payment Integrations", href: "/services/crm-payments-automation" },
         { label: "Website Maintenance", href: "/services/website-maintenance" },

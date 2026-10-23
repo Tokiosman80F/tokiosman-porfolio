@@ -21,7 +21,7 @@ export type ServicePlan = {
 export type ServicePage = {
   slug: string;
   /** Hero illustration (the matching Services card art). */
-  art: "browser" | "chat" | "phone" | "call" | "dashboard" | "health" | "headless";
+  art: "browser" | "chat" | "phone" | "call" | "dashboard" | "health" | "headless" | "security";
   /** Short name: breadcrumb, related links, structured data. */
   name: string;
   meta: { title: string; description: string };
@@ -30,6 +30,8 @@ export type ServicePage = {
   explainer?: { title: string; lead: string; paragraphs: string[]; flows: { label: string; title: string; steps: string[] }[] };
   audience: { title: string; items: { title: string; text: string }[] };
   benefits?: { title: string; items: { title: string; text: string }[] };
+  /** Optional: the problems this service fixes, each with how it shows up and what I do. */
+  issues?: { title: string; lead: string; items: { name: string; signs: string; fix: string }[] };
   plans: { title: string; lead: string; items: ServicePlan[]; notes: string[] };
   /** Optional comparison table; `highlight` = index of my column. */
   compare?: { title: string; lead: string; columns: string[]; highlight: number; rows: { label: string; values: string[] }[]; note?: string };
@@ -1172,6 +1174,239 @@ export const servicePages: ServicePage[] = [
       ],
     },
     cta: bookCall,
+  },
+  {
+    slug: "wordpress-malware-removal",
+    art: "security",
+    name: "WordPress malware removal and hacked site recovery",
+    meta: {
+      title: "WordPress Malware Removal & Hacked Site Recovery, from $299",
+      description:
+        "Hacked WordPress site? I remove the malware, backdoors and spam, find and patch how they got in, and request Google's review. Fixed price from $299, with a reinfection guarantee.",
+    },
+    hero: {
+      eyebrow: "Service · WordPress security",
+      title: "Hacked WordPress site? I'll clean it and close the way in.",
+      lead: "Malware, spam pages, redirects to scam sites or a \"This site may be hacked\" warning: I remove every trace, find how the attacker got in and patch it, so it doesn't come back next week.",
+      facts: ["From $299", "Work starts the same day", "Reinfection guarantee"],
+    },
+    audience: {
+      title: "Who it's for",
+      items: [
+        {
+          title: "Your site was hacked today",
+          text: "Spam pages in Google, visitors sent to scam sites, a red warning in Chrome or your host suspended the account. You need it fixed now.",
+        },
+        {
+          title: "It keeps coming back",
+          text: "A plugin or a cheap gig cleaned it, and a week later it's back. That means the way in was never found. I find it and close it.",
+        },
+        {
+          title: "Stores and business sites",
+          text: "WooCommerce shops, booking sites and lead forms, where a hack costs real sales and customer trust every hour it stays.",
+        },
+      ],
+    },
+    issues: {
+      title: "What I find and fix",
+      lead: "The infections I see most on hacked WordPress sites, how they show up, and what I do about each one.",
+      items: [
+        {
+          name: "SEO spam (Japanese keyword and pharma hacks)",
+          signs: "Thousands of spam pages in Google: Japanese text, fake luxury goods or pills under your domain. Often hidden from you while logged in.",
+          fix: "I remove the injected code and spam pages, clean the database, and clear the spam URLs from Google through Search Console.",
+        },
+        {
+          name: "Malicious redirects",
+          signs: "Visitors, often on phones or arriving from Google, are sent to scam, gambling or fake-prize sites.",
+          fix: "I remove the injected scripts and rogue server rules (.htaccess), and check the database, widgets and settings they hide in.",
+        },
+        {
+          name: "Backdoors and web shells",
+          signs: "Nothing visible, but the hack returns after every cleanup. Hidden PHP files let the attacker back in.",
+          fix: "Every file is compared against clean copies; unknown files in uploads and plugin folders are removed; core, plugins and themes are reinstalled fresh.",
+        },
+        {
+          name: "Fake admin users",
+          signs: "Administrator accounts you didn't create, sometimes hidden from the users list.",
+          fix: "I remove them, audit every account, reset all passwords and replace the security keys, which logs everyone out.",
+        },
+        {
+          name: "Vulnerable or nulled plugins and themes",
+          signs: "The usual way in: an outdated plugin, an abandoned one, or a pirated (nulled) theme with malware built in.",
+          fix: "I update or replace them, remove nulled and unused ones, and tell you which plugin was the entry point.",
+        },
+        {
+          name: "Injected scripts and card skimmers",
+          signs: "Pop-ups, unknown scripts in your pages, or on stores, code that copies what customers type at checkout.",
+          fix: "I remove the scripts from files and the database, check the checkout and payment pages, and lock down where they were added.",
+        },
+        {
+          name: "Blacklists and host suspension",
+          signs: "\"This site may be hacked\" in Google, a red warning in Chrome, email going to spam, or the host taking the site offline.",
+          fix: "Once the site is clean I request a review in Google Search Console and give your host the cleanup report.",
+        },
+        {
+          name: "Weak logins and brute force",
+          signs: "Thousands of login attempts, a shared admin password, or old accounts nobody uses.",
+          fix: "Two-factor login for admins, limits on login attempts, strong passwords and removal of old accounts.",
+        },
+      ],
+    },
+    plans: {
+      title: "Three plans, one fixed price each",
+      lead: "Every plan finds and patches the way in, not just the malware. The difference is how far the protection goes after the cleanup.",
+      items: [
+        {
+          name: "Cleanup",
+          price: "$299",
+          timeline: "24–48 hours",
+          tagline: "Clean, patched and off the blacklist.",
+          features: [
+            "Full scan of files and database",
+            "Malware, backdoors and spam pages removed",
+            "Fake admin users removed, passwords and security keys reset",
+            "Core, plugins and themes reinstalled from clean copies",
+            "The entry point found and patched",
+            "Google blacklist review requested",
+            "A written report of what I found and fixed",
+            "30-day reinfection guarantee: free re-clean",
+          ],
+        },
+        {
+          name: "Cleanup + hardening",
+          price: "$499",
+          timeline: "Within 24 hours",
+          tagline: "Cleaned, then locked down so it stays clean.",
+          featured: true,
+          badge: "Recommended",
+          features: [
+            "Everything in Cleanup, with priority",
+            "Firewall and login protection set up",
+            "Two-factor login for every admin",
+            "Vulnerable and abandoned plugins replaced",
+            "Automatic off-site backups set up",
+            "Spam URLs cleared from Google and the sitemap resubmitted",
+            "60-day reinfection guarantee",
+          ],
+        },
+        {
+          name: "Full recovery",
+          pricePrefix: "From",
+          price: "$799",
+          timeline: "1–3 days",
+          tagline: "Stores, badly damaged sites and several sites at once.",
+          features: [
+            "Everything in Cleanup + hardening",
+            "WooCommerce and checkout pages checked line by line",
+            "Several infected sites on the same hosting account",
+            "Restore from backup or rebuild of broken parts",
+            "Help moving to a safer host if needed",
+            "90-day reinfection guarantee and monitoring",
+          ],
+        },
+      ],
+      notes: [
+        "Payment: 50% to start, 50% when the site is clean, via Payoneer",
+        "Hosting fees and security subscriptions are paid by you",
+        "No ranking guarantees: Google decides how fast warnings and spam drop out",
+      ],
+    },
+    compare: {
+      title: "Cheap gig, my cleanup or a security subscription?",
+      lead: "An honest comparison, using typical 2026 market figures.",
+      columns: ["Marketplace gig", "My cleanup", "Security subscription"],
+      highlight: 1,
+      rows: [
+        { label: "Cost", values: ["$50–$199, one-off", "From $299, fixed", "About $99–$490 a year"] },
+        { label: "Finds how they got in", values: ["Rarely", "Yes, and patches it", "Usually"] },
+        { label: "Who does the work", values: ["An unknown seller", "The developer, directly", "A support team"] },
+        { label: "If it comes back", values: ["Depends on the seller", "Free re-clean (30–90 days)", "Cleanups while subscribed"] },
+        { label: "Afterwards", values: ["Nothing", "Hardening and a written report", "Firewall and monitoring"] },
+      ],
+      note: "Want ongoing protection after the cleanup? A security subscription can be a good fit, and I can set it up for you.",
+    },
+    included: {
+      title: "In every cleanup",
+      items: [
+        "A full backup before I touch anything",
+        "Files and database both cleaned",
+        "The way in found and patched",
+        "Passwords and security keys reset",
+        "Google review requested once clean",
+        "A plain-English report of what happened",
+      ],
+    },
+    process: {
+      title: "How it works",
+      lead: "From your first message to a clean, watched site. The Cleanup plan timeline.",
+      steps: [
+        { step: "Message me", when: "Hour 0", text: "Tell me what you're seeing on WhatsApp or by email. You get a fixed price straight away." },
+        { step: "Back up and contain", when: "Hours 0–2", text: "A full backup of the site as it is, then the attacker's access is blocked and passwords reset." },
+        { step: "Scan and clean", when: "Hours 2–24", text: "Files and database compared against clean copies; malware, backdoors and spam removed." },
+        { step: "Patch and report", when: "Day 1–2", text: "The entry point patched, Google's review requested and your written report sent." },
+        { step: "Watch", when: "30+ days", text: "I keep an eye on the site. If it's reinfected within the guarantee, I clean it again for free." },
+      ],
+    },
+    scope: {
+      needTitle: "What I need from you",
+      need: [
+        "A WordPress admin login",
+        "Hosting access (cPanel or SFTP) and database access",
+        "Access to Google Search Console, if you have it",
+        "When you first noticed the problem, and what you saw",
+        "The 50% deposit",
+      ],
+      notTitle: "Not included",
+      not: [
+        "Hosting fees and security subscriptions",
+        "Rebuilding a site the attacker destroyed (quoted separately)",
+        "Recovering content that was deleted with no backup",
+        "Legal or data-breach reporting (I share what I find)",
+      ],
+    },
+    stack: { title: "Tools I work with", names: ["WordPress", "PHP", "MySQL", "Nginx", "Cloudflare", "Docker"] },
+    glossary: {
+      title: "Words you'll hear, in plain English",
+      items: [
+        { term: "Malware", text: "Any code an attacker adds to your site to profit from it: spam, redirects, stolen data or access." },
+        { term: "Backdoor", text: "A hidden file that lets the attacker get back in, even after the visible malware is removed." },
+        { term: "Entry point", text: "The weakness they used to get in, usually an outdated plugin or a stolen password." },
+        { term: "Blacklist", text: "Lists like Google Safe Browsing that warn visitors away from hacked sites." },
+        { term: "Hardening", text: "Settings and tools that make the site harder to break into again." },
+        { term: "Nulled plugin", text: "A pirated copy of a paid plugin or theme, often with malware built in." },
+      ],
+    },
+    faq: {
+      title: "Questions about hacked sites",
+      items: [
+        {
+          q: "How fast can you start?",
+          a: "Usually the same day you message me. The Cleanup + hardening plan gets priority and is finished within 24 hours.",
+        },
+        {
+          q: "Will I lose my content?",
+          a: "No. I take a full backup before touching anything, and I clean the site rather than wipe it. Your posts, pages, products and orders stay.",
+        },
+        {
+          q: "How did they get in?",
+          a: "Most often an outdated or abandoned plugin, a pirated theme, or a weak or reused password. Finding the exact way in is part of every plan, and it's in your report.",
+        },
+        {
+          q: "Will Google remove the warning?",
+          a: "Once the site is clean I request a review in Search Console. Google makes the decision, usually within days for malware warnings. Spam pages take longer to drop out of results.",
+        },
+        {
+          q: "Can you guarantee it won't happen again?",
+          a: "Nobody honestly can. What I guarantee is a free re-clean if the site is reinfected within your plan's guarantee period, and hardening that makes it much less likely.",
+        },
+        {
+          q: "Was my customers' data stolen?",
+          a: "I check for signs of data theft, such as checkout skimmers, and tell you plainly what I find. If data was exposed, reporting it is your decision, and my report helps.",
+        },
+      ],
+    },
+    cta: { label: "Get help on WhatsApp", href: site.whatsapp },
   },
 ];
 

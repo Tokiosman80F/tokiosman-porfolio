@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowDown, CalendarDays, Check, Minus, Plus, RefreshCw } from "lucide-react";
+import { ArrowDown, CalendarDays, Check, MessageCircle, Minus, Plus, RefreshCw } from "lucide-react";
 import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
 import { TechMark } from "@/components/sections/About";
 import FinalCta from "@/components/sections/FinalCta";
-import { BrowserArt, CallArt, ChatArt, DashboardArt, HeadlessArt, HealthArt, PhoneArt } from "@/components/sections/ServiceArt";
+import { BrowserArt, CallArt, ChatArt, DashboardArt, HeadlessArt, HealthArt, PhoneArt, SecurityArt } from "@/components/sections/ServiceArt";
 import { Button } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Heading } from "@/components/ui/Heading";
@@ -80,7 +80,9 @@ function jsonLd(p: ServicePage) {
 const num = (i: number) => String(i + 1).padStart(2, "0");
 
 // Hero illustration per page: the matching card art from the home page's Services section
-const arts = { browser: BrowserArt, chat: ChatArt, phone: PhoneArt, call: CallArt, dashboard: DashboardArt, health: HealthArt, headless: HeadlessArt } satisfies Record<ServicePage["art"], () => React.JSX.Element>;
+const arts = { browser: BrowserArt, chat: ChatArt, phone: PhoneArt, call: CallArt, dashboard: DashboardArt, health: HealthArt, headless: HeadlessArt, security: SecurityArt } satisfies Record<ServicePage["art"], () => React.JSX.Element>;
+
+const ctaIcon = (cta: ServicePage["cta"]) => (cta.href === site.whatsapp ? MessageCircle : CalendarDays);
 
 function PlanCard({ plan, cta }: { plan: ServicePlan; cta: ServicePage["cta"] }) {
   const dark = plan.featured;
@@ -110,7 +112,7 @@ function PlanCard({ plan, cta }: { plan: ServicePlan; cta: ServicePage["cta"] })
           </p>
           <p className={cn("mt-unit-4 font-sans text-body-md", dark ? "text-on-primary" : "text-ink-black")}>{plan.tagline}</p>
           <div className="mt-unit-6">
-            <PlanButton href={cta.href} label={cta.label} icon={CalendarDays} external dark={dark} />
+            <PlanButton href={cta.href} label={cta.label} icon={ctaIcon(cta)} external dark={dark} />
           </div>
         </div>
       </div>
@@ -167,7 +169,11 @@ export default async function ServicePageRoute({ params }: PageProps<"/services/
                 </ul>
                 <div className="mt-unit-8 flex flex-wrap items-center gap-unit-4">
                   <Button href={p.cta.href} target="_blank" rel="noopener noreferrer" className="group">
-                    <CalendarDays aria-hidden className="size-6 shrink-0 transition-transform duration-300 group-hover:-rotate-12 motion-reduce:transition-none" />
+                    {p.cta.href === site.whatsapp ? (
+                      <MessageCircle aria-hidden className="size-6 shrink-0 transition-transform duration-300 group-hover:-rotate-12 motion-reduce:transition-none" />
+                    ) : (
+                      <CalendarDays aria-hidden className="size-6 shrink-0 transition-transform duration-300 group-hover:-rotate-12 motion-reduce:transition-none" />
+                    )}
                     <span>{p.cta.label}</span>
                     <span className="sr-only">(opens in a new tab)</span>
                   </Button>
@@ -249,6 +255,34 @@ export default async function ServicePageRoute({ params }: PageProps<"/services/
             ))}
           </ul>
         </Section>
+
+        {/* ── Optional: the problems this service fixes (what you see / how I fix it) ── */}
+        {p.issues && (
+          <Section border="none" className="pt-0 lg:pt-0">
+            <Heading as="h2" className="text-balance">{p.issues.title}</Heading>
+            <p className="mt-unit-4 max-w-2xl font-sans text-body-lead text-on-surface-variant">{p.issues.lead}</p>
+            <ul className="mt-unit-8 grid grid-cols-1 gap-unit-4 md:grid-cols-2">
+              {p.issues.items.map((it, i) => (
+                <li key={it.name} className="rounded-2xl bg-surface-container-low p-unit-6">
+                  <h3 className="flex items-baseline gap-unit-3 font-sans text-body-lead font-semibold text-ink-black">
+                    <span className="font-mono text-mono-tag text-ink-muted tabular-nums">{num(i)}</span>
+                    {it.name}
+                  </h3>
+                  <dl className="mt-unit-4 grid grid-cols-1 gap-unit-3 font-sans text-body-sm">
+                    <div className="rounded-xl bg-white p-unit-4">
+                      <dt className="font-mono text-mono-tag tracking-widest text-error uppercase">What you see</dt>
+                      <dd className="mt-1 text-on-surface-variant">{it.signs}</dd>
+                    </div>
+                    <div className="rounded-xl bg-white p-unit-4">
+                      <dt className="font-mono text-mono-tag tracking-widest text-signal-green-ink uppercase">How I fix it</dt>
+                      <dd className="mt-1 text-on-surface-variant">{it.fix}</dd>
+                    </div>
+                  </dl>
+                </li>
+              ))}
+            </ul>
+          </Section>
+        )}
 
         {/* ── Optional benefits grid ── */}
         {p.benefits && (
