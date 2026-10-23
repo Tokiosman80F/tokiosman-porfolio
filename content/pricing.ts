@@ -78,6 +78,7 @@ export const offers: Offer[] = [
       "Deployment + 30 days of post-launch support",
     ],
     cta: bookCall,
+    more: { label: "Compare all 3 web app plans", href: "/services/web-app-development" },
   },
   {
     id: "ai-upgrade",

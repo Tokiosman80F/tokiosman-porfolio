@@ -21,7 +21,7 @@ export type ServicePlan = {
 export type ServicePage = {
   slug: string;
   /** Hero illustration (the matching Services card art). */
-  art: "browser" | "chat" | "phone" | "call";
+  art: "browser" | "chat" | "phone" | "call" | "dashboard";
   /** Short name: breadcrumb, related links, structured data. */
   name: string;
   meta: { title: string; description: string };
@@ -376,6 +376,182 @@ export const servicePages: ServicePage[] = [
       ],
     },
     cta: { label: "Get a free AI audit", href: site.bookingUrl },
+  },
+  {
+    slug: "web-app-development",
+    art: "dashboard",
+    name: "Web app and dashboard development",
+    meta: {
+      title: "Custom Web App & Dashboard Development, from $4,500",
+      description:
+        "Custom web apps and admin dashboards with logins, roles, payments and automations, built in Next.js by me, Toki Osman. From $4,500, in 3–4 weeks.",
+    },
+    hero: {
+      eyebrow: "Service · Web apps",
+      title: "Custom web apps and admin dashboards, built around how you work",
+      lead: "Logins and roles, an admin dashboard for your data, payments, bookings and automations: one app instead of five spreadsheets. You talk to the developer building it, and the price is fixed before work starts.",
+      facts: ["From $4,500", "First version in 3–4 weeks", "You own the code"],
+    },
+    audience: {
+      title: "Who it's for",
+      items: [
+        {
+          title: "Startup and SaaS founders",
+          text: "A first version real users can log in to, so you can test the idea, show investors and grow from there.",
+        },
+        {
+          title: "Businesses running on spreadsheets",
+          text: "Orders, clients and bookings spread across sheets and inboxes. One dashboard where your team sees and updates everything.",
+        },
+        {
+          title: "Service businesses with clients",
+          text: "A portal where your clients log in to book, pay, upload files and see their status, without emailing you for it.",
+        },
+      ],
+    },
+    plans: {
+      title: "Three plans, one fixed price each",
+      lead: "Every plan starts with a feature plan and ends with a fixed quote, so you know the price before I write any code.",
+      items: [
+        {
+          name: "MVP",
+          pricePrefix: "From",
+          price: "$4,500",
+          timeline: "3–4 weeks",
+          tagline: "A first version your users can log in to.",
+          features: [
+            "Discovery call and feature planning",
+            "User login and role-based access",
+            "Admin dashboard to manage your content and data",
+            "A content editor (CMS) so you can update pages yourself",
+            "AI and automation workflows (CRM, email, forms)",
+            "Payments and bookings if needed (Stripe)",
+            "Deployment + 30 days of post-launch support",
+          ],
+        },
+        {
+          name: "Growth",
+          pricePrefix: "From",
+          price: "$7,500",
+          timeline: "5–6 weeks",
+          tagline: "More screens, more roles and a portal for your clients.",
+          featured: true,
+          badge: "Recommended",
+          features: [
+            "Everything in MVP",
+            "A client portal: your customers log in to book, pay and track",
+            "Reports and charts for your numbers",
+            "Email notifications for the events that matter",
+            "File uploads and document storage",
+            "60 days of post-launch support",
+          ],
+        },
+        {
+          name: "Scale",
+          pricePrefix: "From",
+          price: "$12,000",
+          timeline: "8+ weeks",
+          tagline: "For a product with many teams and other apps to connect.",
+          features: [
+            "Everything in Growth",
+            "Multiple organisations, each with its own team and data",
+            "Subscription billing with Stripe",
+            "A public API and webhooks for other apps",
+            "Detailed permissions and an activity log",
+            "90 days of post-launch support",
+          ],
+        },
+      ],
+      notes: [
+        "Payment: 50% to start, 50% on launch, via Payoneer",
+        "Hosting and database fees are paid by you, in your own accounts",
+        "Changes to the agreed scope are quoted before any work on them",
+      ],
+    },
+    compare: {
+      title: "Off-the-shelf tool, my build or an agency?",
+      lead: "An honest comparison, using typical 2026 market figures. Your quote depends on your scope.",
+      columns: ["Off-the-shelf tool", "My build", "Agency"],
+      highlight: 1,
+      rows: [
+        { label: "Cost", values: ["A monthly fee per user", "From $4,500 once + hosting", "$25k–$80k for a first version"] },
+        { label: "Time to launch", values: ["Days", "3–4 weeks", "8–12 weeks"] },
+        { label: "Fits your process", values: ["You adapt to the tool", "Built around your process", "Built around your process"] },
+        { label: "Who you talk to", values: ["Support tickets", "The developer, directly", "An account manager"] },
+        { label: "Who owns it", values: ["You rent it", "You own the code and data", "You own the code and data"] },
+      ],
+      note: "If a spreadsheet or an existing tool already does the job, I'll tell you on the call. Custom is worth it when the tool forces you to work around it.",
+    },
+    included: {
+      title: "In every web app",
+      items: [
+        "Logins, roles and permissions done properly",
+        "Works on phones, tablets and desktops",
+        "Your data in your own database",
+        "A preview link to test as it's built",
+        "A written progress update every working day",
+        "A handoff document explaining how it all works",
+      ],
+    },
+    process: {
+      title: "How it works",
+      lead: "The MVP timeline. Growth and Scale follow the same steps with more milestones.",
+      steps: [
+        { step: "Discovery call", when: "Day 0", text: "We talk through what the app must do. You get a fixed quote within 24 hours." },
+        { step: "Feature plan", when: "Week 1", text: "Features ranked must-have or nice-to-have, the screens and the data, agreed in writing." },
+        { step: "Clickable prototype", when: "Week 1", text: "The key screens as a clickable prototype, so you can try the flow before it's built." },
+        { step: "Build in milestones", when: "Weeks 2–3", text: "I build it milestone by milestone. You test each one on a preview link." },
+        { step: "Launch and support", when: "Week 4", text: "Live on your domain, then 30 days of support while your users settle in." },
+      ],
+    },
+    scope: {
+      needTitle: "What I need from you",
+      need: [
+        "What the app must do, even as a rough list",
+        "Examples of tools or apps you like",
+        "Access to the accounts it connects to (Stripe, CRM, domain)",
+        "Someone to test each milestone and give feedback",
+        "The 50% deposit",
+      ],
+      notTitle: "Not included",
+      not: [
+        "Hosting, database and third-party subscription fees",
+        "Native iOS or Android apps (the web app works on phones)",
+        "Features outside the agreed scope (quoted separately)",
+        "Support after the support period (quoted separately)",
+      ],
+    },
+    stack: { title: "Built with", names: ["Next.js", "TypeScript", "Node.js", "PostgreSQL", "Supabase", "Clerk", "Stripe", "Tailwind CSS"] },
+    faq: {
+      title: "Questions about web apps",
+      items: [
+        {
+          q: "How do you price a web app?",
+          a: "\"From\" prices are the starting point for each plan. After the discovery call and the feature plan, you get one fixed price for your app, agreed before I start.",
+        },
+        {
+          q: "Can the app grow later?",
+          a: "Yes. It's built in Next.js with a proper database, so new features, roles or integrations can be added without starting again.",
+        },
+        {
+          q: "Who owns the code and the data?",
+          a: "You do. The code, the database and the hosting accounts are yours.",
+        },
+        {
+          q: "What if I need changes during the build?",
+          a: "Small adjustments are part of each milestone. New features outside the agreed scope are quoted first, so the price never changes without your OK.",
+        },
+        {
+          q: "Will it work on phones?",
+          a: "Yes, every screen works on phones, tablets and desktops. Native iOS or Android apps are not included.",
+        },
+        {
+          q: "What happens after launch?",
+          a: "MVP includes 30 days of support, Growth 60 and Scale 90. After that, new work is quoted separately.",
+        },
+      ],
+    },
+    cta: bookCall,
   },
 ];
 

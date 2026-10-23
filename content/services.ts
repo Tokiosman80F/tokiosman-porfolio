@@ -68,4 +68,23 @@ export const serviceArt = {
     placeholder: "Ask me anything…",
   },
   call: { host: "Toki Osman", guest: "You", time: "10:00", title: "Free strategy call" },
+  dashboard: {
+    url: "app.acme.com/dashboard",
+    app: "Acme",
+    nav: ["Overview", "Bookings", "Clients", "Payments", "Settings"],
+    title: "Overview",
+    range: "Last 30 days",
+    kpis: [
+      { label: "Revenue", value: "$18.2k", delta: "+12%" },
+      { label: "Bookings", value: "214", delta: "+8%" },
+      { label: "Active clients", value: "96", delta: "+5%" },
+    ],
+    chartLabel: "Revenue",
+    tableLabel: "Latest bookings",
+    rows: [
+      { name: "Sara Ahmed", what: "Consultation", amount: "$120", status: "Paid" },
+      { name: "James Lee", what: "Strategy session", amount: "$240", status: "Booked" },
+      { name: "Maya Roy", what: "Follow-up", amount: "$80", status: "Pending" },
+    ],
+  },
 };

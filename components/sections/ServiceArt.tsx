@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ArrowLeft, ArrowRight, ArrowUp, Captions, FileText, Hand, Info, Lock, MessageSquare, Mic, MicOff, MonitorUp, PhoneOff, Plus, RotateCw, Search, SlidersHorizontal, Sparkles, Star, Users, Video, Wifi, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUp, CalendarDays, Captions, CreditCard, FileText, Hand, Info, LayoutDashboard, Lock, MessageSquare, Mic, MicOff, MonitorUp, PhoneOff, Plus, RotateCw, Search, Settings, SlidersHorizontal, Sparkles, Star, Users, Video, Wifi, X } from "lucide-react";
 import { FigmaIcon } from "@/components/ui/brand-icons";
 import { serviceArt as art } from "@/content/services";
 import { cn } from "@/lib/utils";
@@ -359,4 +359,106 @@ export function CallArt() {
 /* 5 · Dotted 3D globe with client pins (bottom-right, partly cropped like the reference): see Globe.tsx */
 export function GlobeArt({ clients }: { clients: string[] }) {
   return <Globe clients={clients} className={cn("absolute -right-6 -bottom-16 size-96 lg:size-104", lift)} />;
+}
+
+/* 6 · Admin dashboard in a browser window (the web app service page's hero): sidebar, KPI cards, a revenue
+   chart and the latest bookings. Fixed hex colours, not theme tokens (a product screen): identical in light
+   and dark. Fictional data from content/services.ts. */
+const dashNav = [LayoutDashboard, CalendarDays, Users, CreditCard, Settings];
+const statusTone: Record<string, string> = {
+  Paid: "bg-[#dcfce7] text-[#166534]",
+  Booked: "bg-[#dbeafe] text-[#1e40af]",
+  Pending: "bg-[#fef3c7] text-[#92400e]",
+};
+// revenue line, 12 points over a 200×56 box
+const revenue = [18, 22, 20, 28, 26, 33, 31, 38, 36, 44, 41, 50];
+const linePath = revenue.map((v, i) => `${i ? "L" : "M"}${((i / (revenue.length - 1)) * 200).toFixed(1)} ${(56 - v).toFixed(1)}`).join(" ");
+
+export function DashboardArt() {
+  const d = art.dashboard;
+  return (
+    <div className={cn("absolute inset-x-5 top-6 overflow-hidden rounded-xl bg-[#fff] shadow-[0_24px_40px_-14px_rgb(0_0_0/0.45),0_0_0_0.5px_rgb(0_0_0/0.18)] sm:inset-x-8 sm:top-8", lift)}>
+      {/* browser bar */}
+      <div className="flex items-center gap-2 border-b border-[#ececec] bg-[#f6f6f7] px-2.5 py-1.5">
+        <span className="flex gap-[4px]">
+          {["#ff5f57", "#febc2e", "#28c840"].map((c) => (
+            <span key={c} className="size-[7px] rounded-full" style={{ background: c }} />
+          ))}
+        </span>
+        <span className="mx-auto flex h-4 w-1/2 items-center justify-center gap-1 rounded-full bg-[#fff] font-sans text-[7.5px] text-[#5f6368] shadow-[0_0_0_0.5px_rgb(0_0_0/0.1)]">
+          <Lock className="size-2 shrink-0" />
+          {d.url}
+        </span>
+      </div>
+      <div className="flex">
+        {/* sidebar */}
+        <div className="flex w-9 shrink-0 flex-col items-center gap-1.5 border-r border-[#f0f0f0] bg-[#fafafa] py-2 sm:w-24 sm:items-stretch sm:px-1.5">
+          <span className="mb-1 flex items-center gap-1 px-1 font-sans text-[8px] font-bold text-[#121212]">
+            <span className="size-2.5 shrink-0 rounded-[3px] bg-[#121212]" />
+            <span className="hidden sm:inline">{d.app}</span>
+          </span>
+          {d.nav.map((n, i) => {
+            const Icon = dashNav[i];
+            return (
+              <span
+                key={n}
+                className={cn(
+                  "flex items-center gap-1.5 rounded-[5px] p-1 font-sans text-[7.5px] sm:px-1.5",
+                  i === 0 ? "bg-[#FDF175] font-semibold text-[#121212]" : "text-[#52525b]",
+                )}
+              >
+                <Icon className="size-[10px] shrink-0" />
+                <span className="hidden sm:inline">{n}</span>
+              </span>
+            );
+          })}
+        </div>
+        {/* main */}
+        <div className="min-w-0 flex-1 p-2.5">
+          <div className="flex items-center justify-between">
+            <span className="font-sans text-[10px] font-semibold text-[#121212]">{d.title}</span>
+            <span className="rounded-[4px] border border-[#e4e4e7] px-1.5 py-[2px] font-sans text-[7px] text-[#52525b]">{d.range}</span>
+          </div>
+          <div className="mt-2 grid grid-cols-3 gap-1.5">
+            {d.kpis.map((k) => (
+              <div key={k.label} className="rounded-md border border-[#ececec] px-1.5 py-1">
+                <p className="truncate font-sans text-[6.5px] text-[#71717a]">{k.label}</p>
+                <p className="font-sans text-[11px] leading-tight font-semibold text-[#121212]">{k.value}</p>
+                <p className="font-sans text-[6.5px] font-medium text-[#15803d]">{k.delta}</p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-1.5 rounded-md border border-[#ececec] px-1.5 pt-1 pb-0.5">
+            <p className="font-sans text-[6.5px] text-[#71717a]">{d.chartLabel}</p>
+            <svg viewBox="0 0 200 56" preserveAspectRatio="none" className="mt-0.5 h-7 w-full sm:h-12">
+              <defs>
+                <linearGradient id="dash-fill" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0" stopColor="#FDF175" stopOpacity="0.7" />
+                  <stop offset="1" stopColor="#FDF175" stopOpacity="0" />
+                </linearGradient>
+              </defs>
+              <path d={`${linePath} L200 56 L0 56 Z`} fill="url(#dash-fill)" />
+              <path d={linePath} fill="none" stroke="#121212" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
+            </svg>
+          </div>
+          <div className="mt-1.5 rounded-md border border-[#ececec] px-1.5 py-1">
+            <p className="font-sans text-[6.5px] text-[#71717a]">{d.tableLabel}</p>
+            <ul>
+              {d.rows.map((r) => (
+                <li key={r.name} className="flex items-center gap-1.5 border-b border-[#f4f4f5] py-[3px] last:border-0">
+                  <span className="flex size-3 shrink-0 items-center justify-center rounded-full bg-[#e4e4e7] font-sans text-[5px] font-semibold text-[#3f3f46]">
+                    {r.name.split(" ").map((w) => w[0]).join("")}
+                  </span>
+                  <span className="min-w-0 flex-1 truncate font-sans text-[7.5px] text-[#121212]">{r.name}</span>
+                  <span className="hidden font-sans text-[7px] text-[#71717a] sm:inline">{r.what}</span>
+                  <span className="font-sans text-[7.5px] font-medium text-[#121212]">{r.amount}</span>
+                  <span className={cn("rounded-full px-1.5 py-px font-sans text-[6.5px] font-medium", statusTone[r.status])}>{r.status}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
