@@ -242,9 +242,18 @@
   to { opacity: 1; rotate: 0deg; scale: 1; }
 }
 
-/* Phone splash loader (SplashLoader): letters rise in, the canary dot pops, the bar fills */
-@keyframes splash-letter {
-  from { opacity: 0; translate: 0 0.45em; }
+/* Phone splash loader (SplashLoader): letters rise out of their line, the canary box sweeps open, the dot
+   pops, the caption fades up, the bar fills */
+@keyframes splash-rise {
+  from { translate: 0 110%; }
+  to { translate: 0 0; }
+}
+@keyframes splash-sweep {
+  from { scale: 0 1; }
+  to { scale: 1 1; }
+}
+@keyframes splash-fade {
+  from { opacity: 0; translate: 0 0.5rem; }
   to { opacity: 1; translate: 0 0; }
 }
 @keyframes splash-dot {
