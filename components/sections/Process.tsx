@@ -12,7 +12,7 @@ export default function Process() {
       <SectionHeader
         eyebrow={
           <div className="inline-flex items-center gap-unit-2 rounded-pill border border-ink-black bg-[linear-gradient(135deg,rgb(0,0,0)_80%,rgb(209,213,219)_100%)] px-unit-4 py-1 text-white shadow-sm">
-            <span aria-hidden className="size-2 animate-pulse rounded-pill border border-ink-black bg-canary-yellow" />
+            <span aria-hidden className="size-2 rounded-pill border border-ink-black bg-canary-yellow" />
             <span className="font-mono text-mono-tag font-semibold tracking-widest text-white uppercase">{processSection.eyebrow}</span>
           </div>
         }

@@ -44,7 +44,7 @@ Contrast rule: all real (non-mock) text meets WCAG AA. Text inside the decorativ
 ### Accent colors used as literals
 
 - **Primary button (ink gradient):** `bg-linear-135/srgb from-graphite to-black`, border `graphite`; hover `from-graphite-hover`.
-- **Glow button ring:** `linear-gradient(90deg, #1978e5, #38bdf8, #60a5fa, #00d2ff, #2563eb, #1978e5)`, glow `rgba(56,189,248,0.35)` → `0.65` on hover; inner `#FAFAF7` → `#FFFFFF`.
+- **Glow button ring:** `linear-gradient(90deg, #1978e5, #38bdf8, #60a5fa, #00d2ff, #2563eb, #1978e5)`, glow `rgba(56,189,248,0.35)` → `0.65` on hover; inner `#FAFAF7` → `#FFFFFF`. The gradient is still at rest and travels only while hovered.
 - **Highlight boxes:** canary `#FDF175`, green `#4ae176`, blue `#60A5FA`, neon `rgb(59,255,111)`.
 - **Beam background:** green `#10b981 → #22C55E → #4ae176`, blue `#2563eb/#3b82f6 → #00d2ff → #60A5FA`, ink `#121212 → #454545`.
 - **Dark card:** `linear-gradient(135deg, #121212 0%, #121212 30%, #3f444e 100%)`.

@@ -10,6 +10,7 @@ import { NavLinks } from "./NavLinks";
 // (html[data-compact], set by NavLinks) it shrinks to the compact bar (max-w-3xl, h-14) and lifts with a
 // shadow; scrolling back up widens it again. Transitions only run after the first check
 // (html[data-nav-ready]), so a mid-page reload starts compact instead of shrinking on load.
+// [contain:layout] keeps the per-frame size change inside the header (the page never re-lays out).
 // Inside: logo | links in an inset tray with a sliding canary chip on the current section | booking button.
 // The wrapper ignores pointer events so the page around the bar stays clickable.
 
@@ -28,7 +29,7 @@ const logo =
 
 export default function Header() {
   return (
-    <header className="pointer-events-none fixed inset-x-0 top-0 z-50 px-page-pad-mobile pt-unit-3 sm:pt-unit-4 lg:px-page-pad-desktop">
+    <header className="pointer-events-none fixed [contain:layout] inset-x-0 top-0 z-50 px-page-pad-mobile pt-unit-3 sm:pt-unit-4 lg:px-page-pad-desktop">
       <div className={bar}>
         <Logo size="sm" className={logo} />
         <nav aria-label="Primary" className="hidden flex-1 justify-center md:flex">

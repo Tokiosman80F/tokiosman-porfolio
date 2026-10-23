@@ -213,14 +213,15 @@
   padding: 2px;
   background: linear-gradient(90deg, #1978e5, #38bdf8, #60a5fa, #00d2ff, #2563eb, #1978e5);
   background-size: 300% 300%;
-  animation: blue-gradient-shift 4s ease infinite;
+  /* Still at rest; the gradient only travels while hovered (one moving thing in the hero: the outcome ticker) */
   box-shadow: var(--shadow-glow);
-  transition: all 0.25s ease;
+  transition: box-shadow 0.25s ease, translate 0.25s ease;
   text-decoration: none;
 }
 .moving-blue-border-btn:hover {
   box-shadow: var(--shadow-glow-hover);
-  transform: translateY(-1px);
+  translate: 0 -1px;
+  animation: blue-gradient-shift 4s ease infinite;
 }
 .moving-blue-border-btn-inner {
   display: inline-flex;

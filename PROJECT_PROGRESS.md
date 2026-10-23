@@ -1605,3 +1605,11 @@ Live test (CDP): sequence correct at 1440 and 375, stops on "close deals" after 
 - **WhatsApp button**: hidden (invisible + transparent) until the visitor is 40% through the hero (`html[data-compact]`), so it never covers the hero buttons/proof strip; fades in after, hides again at the top.
 - Audit at 375 (every link/button/field, counting the ::after hit area): 36 under 44px → 0. Left: 10px captions in the Work cards' mock browser bars (Work kept as is).
 - Verified: no overflow, axe 0 violations at 1280 and 375.
+
+## 50. Quieter: one moving thing in the hero (2026-10-23)
+
+- **Hero at rest** except the outcome ticker (plays once): the eyebrow dot no longer pings (`ping` removed from `Eyebrow`), and the glow button's blue gradient border is still until hovered (was cycling every 4s, forever). The status badges keep their 20s cadence; their first change comes after the ticker has finished.
+- **Logo dot** eases with ease-out-quint instead of the overshooting bounce curve.
+- **Navbar** gets `[contain:layout]`, so the per-frame size change on shrink/grow stays inside the header. Verified: mobile dropdown still 0.5rem under the bar, compact bar 768×56.
+- Process eyebrow dot no longer pulses. Pulses kept where they mean "live": the contact badge (available now) and the deploy tile's "deploying" state.
+- Glow button kept as a style (hero secondary, Work archive link); only its idle motion is gone.

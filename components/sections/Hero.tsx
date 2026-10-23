@@ -19,7 +19,7 @@ export default function Hero() {
       <HeroArt />
 
       <div className="relative flex flex-col items-center text-center">
-        <Eyebrow animate="ping" className="mb-unit-6 py-1.5">
+        <Eyebrow className="mb-unit-6 py-1.5">
           {hero.eyebrow}
         </Eyebrow>
         {/* Display scale: 40 → 64 (md). Balanced lines keep the widest one short, inside the illustration's valley */}

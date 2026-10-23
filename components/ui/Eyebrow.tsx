@@ -6,7 +6,7 @@ const dots = {
   green: "bg-signal-green",
   ink: "bg-ink-black",
 };
-const animations = { none: "", pulse: "animate-pulse", ping: "animate-ping" };
+const animations = { none: "", pulse: "animate-pulse" };
 
 type EyebrowProps = ComponentProps<"div"> & {
   dot?: keyof typeof dots;
