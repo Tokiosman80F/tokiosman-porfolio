@@ -4,6 +4,7 @@ import { renderRich, type RichText } from "@/components/ui/RichText";
 import { Section } from "@/components/ui/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { customOffer, offers, pricingSection, type CustomOffer, type Offer } from "@/content/pricing";
+import { FoldList } from "@/components/ui/FoldList";
 import { cn } from "@/lib/utils";
 
 // Pricing cards (user-supplied reference, docs/image.png): soft rounded cards on a warm grey band, a dark
@@ -93,7 +94,13 @@ function PriceRow({ offer: o, dark }: { offer: Offer; dark?: boolean }) {
 
 function Features({ items, dark }: { items: RichText[]; dark?: boolean }) {
   return (
-    <ul className="grid grid-cols-1 gap-x-unit-6 gap-y-unit-3 sm:grid-cols-2">
+    <FoldList
+      limit={4}
+      mobileOnly
+      more={`Show all ${items.length} included`}
+      className="grid grid-cols-1 gap-x-unit-6 gap-y-unit-3 sm:grid-cols-2"
+      buttonClassName={dark ? "text-on-primary" : "text-ink-black"}
+    >
       {items.map((f, i) => (
         <li
           key={i}
@@ -106,7 +113,7 @@ function Features({ items, dark }: { items: RichText[]; dark?: boolean }) {
           <span>{renderRich(f)}</span>
         </li>
       ))}
-    </ul>
+    </FoldList>
   );
 }
 

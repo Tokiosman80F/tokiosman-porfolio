@@ -5,11 +5,12 @@ import { PlanButton } from "@/components/ui/PlanButton";
 import { Section } from "@/components/ui/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { about } from "@/content/about";
+import { FoldList } from "@/components/ui/FoldList";
 import { cn } from "@/lib/utils";
 
 // About me (reference docs/about-me.png, content docs/about-me.md): bento of grey cards on white.
-// lg: [photo ↕3][stat ↕2][logos]  /  [photo][stat][bio]  /  [photo][tech ⟷2]
-// md: [photo ↕2][stat] / [photo][logos] / [bio ⟷2] / [tech ⟷2]
+// lg: [photo ↕3][stat ↕2][bio ↕2]  /  [photo][tech ⟷2]
+// md: [photo ↕2][stat] / [photo][bio] / [tech ⟷2]
 const card = "relative overflow-hidden rounded-2xl bg-surface-container-low";
 
 /* Photo card: a grid of empty tiles (cut off at the card edges) with the headshot as the large centre tile */
@@ -72,31 +73,6 @@ function StatCard({ className }: { className?: string }) {
   );
 }
 
-/* Companies marquee: scrolls slowly, pauses on hover; static with reduced motion (CSS animations off) */
-function LogosCard({ className }: { className?: string }) {
-  const row = (hidden?: boolean) => (
-    <ul aria-hidden={hidden} aria-label={hidden ? undefined : about.companiesLabel} className="flex shrink-0 gap-unit-3 pr-unit-3">
-      {about.companies.map((c) => (
-        <li key={c} className="flex shrink-0 items-center gap-unit-2 rounded-lg border border-border-hairline bg-white px-unit-3 py-2 shadow-xs">
-          <span aria-hidden className="flex size-6 items-center justify-center rounded-md bg-ink-black font-display text-body-sm font-bold text-white">
-            {c[0]}
-          </span>
-          <span className="font-sans text-body-sm font-medium whitespace-nowrap text-ink-black">{c}</span>
-        </li>
-      ))}
-    </ul>
-  );
-  return (
-    <article className={cn(card, "flex items-center py-unit-8", className)}>
-      <div className="group flex w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]">
-        <div className="flex w-max animate-[marquee_28s_linear_infinite] group-hover:[animation-play-state:paused]">
-          {row()}
-          {row(true)}
-        </div>
-      </div>
-    </article>
-  );
-}
 
 /* About me, testimonial style, over faint canary tiles */
 function BioCard({ className }: { className?: string }) {
@@ -132,7 +108,12 @@ function TechCard({ className }: { className?: string }) {
   return (
     <article className={cn(card, "p-unit-6 sm:p-unit-8", className)}>
       <h3 className="font-sans text-body-lead font-medium text-ink-black">{about.techTitle}</h3>
-      <ul className="mt-unit-6 grid grid-cols-[repeat(auto-fill,minmax(5rem,1fr))] gap-unit-3">
+      <FoldList
+        limit={8}
+        more={`Show all ${about.tech.length} tools`}
+        className="mt-unit-6 grid grid-cols-4 gap-unit-3 md:grid-cols-8"
+        buttonClassName="text-ink-black"
+      >
         {about.tech.map((t) => (
           <li
             key={t.name}
@@ -144,7 +125,7 @@ function TechCard({ className }: { className?: string }) {
             <span className="text-center font-sans text-[11px] leading-tight text-ink-charcoal">{t.name}</span>
           </li>
         ))}
-      </ul>
+      </FoldList>
     </article>
   );
 }
@@ -157,8 +138,7 @@ export default function About() {
       <div className="grid grid-cols-1 gap-unit-4 md:grid-cols-2 lg:grid-cols-3">
         <PhotoCard className="md:row-span-2 lg:row-span-3" />
         <StatCard className="lg:row-span-2" />
-        <LogosCard className="lg:col-start-3 lg:row-start-1" />
-        <BioCard className="md:col-span-2 lg:col-span-1 lg:col-start-3 lg:row-start-2" />
+        <BioCard className="lg:row-span-2" />
         <TechCard className="md:col-span-2 lg:col-start-2 lg:row-start-3" />
       </div>
     </Section>

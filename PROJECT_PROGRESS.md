@@ -1568,3 +1568,13 @@ Live test (CDP): sequence correct at 1440 and 375, stops on "close deals" after 
 - **Hero:** primary button is now "Book a free 30-min call" (`site.bookingUrl`, new tab), secondary "See Pricing". New face-and-name line under the buttons (`hero.intro`, DRAFT copy, not from docs).
 - **Nav:** Services · About · Work · Pricing · FAQ (page order). Scroll-spy watches every `main section[id]`, so the chip clears over hero, testimonials, process and contact. Footer Navigate matches; the four offer links go to `#pricing`.
 - Verified: 1280 and 375 full-page captures, no overflow, axe 0 violations, layout detector clean.
+
+## 46. Distill: cut repetition (2026-10-23)
+
+- **Testimonials** taken off the page (`app/page.tsx` comment); files kept for when real quotes exist.
+- **What I build**: unchanged (owner kept all 5 cards, incl. the client avatar stack on the closer).
+- **Client list**: hero strip + the What I build closer. About lost the companies marquee (and the `marquee` keyframes); bento re-gridded.
+- **Tech grid**: 8 shown (Next.js, React, TypeScript, Node.js, Tailwind, Stripe, Zoho CRM, Claude AI), the other 14 behind "Show all 22 tools".
+- **Pricing**: feature lists show 4 on phones with "Show all N included"; all show from md.
+- New `components/ui/FoldList.tsx` (client): first N items, rest folded; `mobileOnly` folds below md only; toggle is a 44px-tall button with `aria-expanded`/`aria-controls`.
+- Page height: 12,925 → 11,303px desktop, 21,154 → 18,953px at 375. Verified: no overflow, axe 0 violations at 1280 and 375.
