@@ -10,7 +10,7 @@ import { TestimonialCarousel } from "./TestimonialCarousel";
 // the right edge, so only the header sits in the padded Container (same structure Section renders).
 export default function Testimonials() {
   return (
-    <section id="testimonials" className="w-full border-b border-border-hairline bg-surface-container py-unit-16 lg:py-unit-24">
+    <section id="testimonials" className="w-full border-b border-border-hairline bg-white py-unit-16 lg:py-unit-24">
       <div className="px-page-pad-mobile lg:px-page-pad-desktop">
         <Container>
           <SectionHeader

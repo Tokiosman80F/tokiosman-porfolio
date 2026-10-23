@@ -16,13 +16,14 @@ export default function Home() {
       <Header />
       <main className="min-h-screen w-full bg-white">
         <div className="flex w-full flex-col">
+          {/* Reading path: what I build → who builds it and proof → what it costs → how it runs → questions → contact */}
           <Hero />
-          <Pricing />
-          <Process />
+          <Services />
           <About />
           <Work />
-          <Services />
           <Testimonials />
+          <Pricing />
+          <Process />
           <Faq />
           <FinalCta />
         </div>

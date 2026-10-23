@@ -7,11 +7,12 @@ export type NavLink = {
   external?: boolean;
 };
 
-// Section anchors (ids live on the <section>s in app/page.tsx).
+// Section anchors in page order (ids live on the <section>s in app/page.tsx).
 export const primaryNav: NavLink[] = [
-  { label: "Work", href: "#work" },
-  { label: "About", href: "#about" },
   { label: "Services", href: "#services" },
+  { label: "About", href: "#about" },
+  { label: "Work", href: "#work" },
+  { label: "Pricing", href: "#pricing" },
   { label: "FAQ", href: "#faq" },
 ];
 

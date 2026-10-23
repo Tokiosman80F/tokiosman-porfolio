@@ -1,3 +1,5 @@
+import { site } from "./site";
+
 // Source: docs/hero-content.md (case is set by CSS; the words are verbatim).
 export const hero = {
   //   keeps the dot with "developer" when the label wraps on phones
@@ -11,8 +13,11 @@ export const hero = {
     suffix: ", not just look good.",
   },
   lead: "Next.js sites and web apps connected to your CRM, payments, and bookings, so every visitor becomes a lead and every lead lands in your pipeline. Designed, built, and launched by me.",
-  primary: { label: "See Pricing", href: "#pricing" },
-  secondary: { label: "Selected Work", href: "#work" },
+  // The call is the main action (PRODUCT.md); pricing is the secondary path
+  primary: { label: "Book a free 30-min call", href: site.bookingUrl },
+  secondary: { label: "See Pricing", href: "#pricing" },
+  // DRAFT copy (not from docs): who the visitor deals with, under the buttons
+  intro: { name: "Hi, I'm Toki", note: "You'll talk to me directly, from the first call to launch." },
   // Proof strip under the buttons (facts from docs/about-me.md and docs/cta.md)
   proof: [
     { value: "20+", label: "Projects shipped" },

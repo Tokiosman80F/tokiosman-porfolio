@@ -56,7 +56,7 @@ function Tile({ dark, className, children }: { dark?: boolean; className?: strin
         "relative flex flex-col overflow-hidden rounded-2xl",
         dark
           ? "bg-ink-black bg-[radial-gradient(90%_60%_at_0%_100%,rgb(255_255_255/0.12),transparent_60%)]"
-          : "bg-white",
+          : "bg-surface-container-low",
         className,
       )}
     >
@@ -474,7 +474,7 @@ export function AiTile({ className }: { className?: string }) {
                 onClick={() => select(i)}
                 className={cn(
                   "flex items-center gap-unit-3 rounded-lg px-unit-3 py-2.5 text-left transition-colors",
-                  i === index ? "bg-surface-container-low" : "hover:bg-surface-container-low/60",
+                  i === index ? "bg-white shadow-xs" : "hover:bg-white/60",
                 )}
               >
                 <span className="font-mono text-mono-tag text-ink-muted tabular-nums">{String(i + 1).padStart(2, "0")}</span>
@@ -490,7 +490,7 @@ export function AiTile({ className }: { className?: string }) {
           </div>
         </div>
 
-        <div className="flex flex-col justify-center rounded-xl bg-surface-container-low p-unit-4 sm:p-unit-8">
+        <div className="flex flex-col justify-center rounded-xl bg-white p-unit-4 sm:p-unit-8">
           <div key={index} className="flex animate-[tile-in_0.3s_ease-out] flex-col">
             <p className="font-mono text-mono-tag tracking-widest text-ink-muted uppercase">{step.name}</p>
             <div className="mt-unit-4 rounded-lg border border-border-hairline bg-white p-unit-4">

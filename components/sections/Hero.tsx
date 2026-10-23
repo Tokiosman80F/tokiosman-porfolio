@@ -1,4 +1,5 @@
-import { ArrowDown, ArrowRight } from "lucide-react";
+import Image from "next/image";
+import { ArrowDown, CalendarDays } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Heading } from "@/components/ui/Heading";
@@ -9,10 +10,10 @@ import { RotatingOutcome } from "./RotatingOutcome";
 
 // Landing hero (user-supplied reference, docs/landing page .png): centred, under the floating navbar
 // (extra top padding clears it). Backdrop: HeroArt (wireframe "mountain range"), no grid. The headline's
-// highlight box cycles through outcomes once (RotatingOutcome); a proof strip of three facts sits under
-// the buttons.
+// highlight box cycles through outcomes once (RotatingOutcome). Booking a call is the primary button; a
+// face-and-name line under the buttons says who the visitor deals with; a proof strip of three facts follows.
 export default function Hero() {
-  const { primary, secondary, trustedBy, headline, proof } = hero;
+  const { primary, secondary, intro, trustedBy, headline, proof } = hero;
   return (
     <Section id="home" border="none" className="relative overflow-hidden pt-32 lg:pt-40">
       <HeroArt />
@@ -30,15 +31,29 @@ export default function Hero() {
         </Heading>
         <p className="mb-unit-8 max-w-2xl font-sans text-body-lead leading-relaxed text-on-surface-variant">{hero.lead}</p>
         <div className="flex flex-wrap items-center justify-center gap-unit-4">
-          <Button href={primary.href}>
+          <Button href={primary.href} target="_blank" rel="noopener noreferrer">
+            <CalendarDays aria-hidden className="size-6 shrink-0" />
             <span>{primary.label}</span>
-            <ArrowRight aria-hidden className="size-6 shrink-0" />
+            <span className="sr-only">(opens in a new tab)</span>
           </Button>
           <Button variant="glow" href={secondary.href}>
             <span>{secondary.label}</span>
             <ArrowDown aria-hidden className="size-6 shrink-0" />
           </Button>
         </div>
+
+        <p className="mt-unit-8 flex max-w-xl items-center gap-unit-3 text-left text-pretty font-sans text-body-sm text-on-surface-variant">
+          <Image
+            src="/images/toki-osman.jpg"
+            alt=""
+            width={40}
+            height={40}
+            className="size-10 shrink-0 rounded-full border border-ink-black object-cover object-top"
+          />
+          <span>
+            <span className="font-semibold text-ink-black">{intro.name}.</span> {intro.note}
+          </span>
+        </p>
 
         {/* Proof strip: three facts, hairline dividers between them */}
         <dl className="mt-unit-12 grid w-full max-w-2xl grid-cols-3 divide-x divide-border-hairline rounded-2xl border border-border-hairline bg-white/80 py-unit-4 shadow-xs">

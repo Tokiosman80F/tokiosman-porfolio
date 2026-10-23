@@ -6,7 +6,8 @@ import { cn } from "@/lib/utils";
 
 // Desktop nav links in an inset tray, with a canary highlight chip (ink edge, the site's highlight-box
 // style) that slides to the section currently in view. Scroll-spy: a section is "current" while it crosses
-// a thin band around the middle of the viewport; above the first linked section nothing is marked.
+// a thin band around the middle of the viewport. Every section on the page is watched, so over one with no
+// link (hero, testimonials, process, contact) nothing is marked.
 // Also drives the header's size: html[data-compact] once the visitor has scrolled 40% of the way through the
 // hero (#home), removed when they scroll back. html[data-nav-ready] is set one frame after the first check,
 // so the header only animates on real scrolling, never on load (a mid-page reload starts compact).
@@ -24,20 +25,19 @@ export function NavLinks({ links }: { links: NavLink[] }) {
 
   // Scroll-spy + "scrolled" flag
   useEffect(() => {
-    const sections = links
-      .map((l) => document.getElementById(l.href.slice(1)))
-      .filter((s): s is HTMLElement => Boolean(s));
+    const linked = new Set(links.map((l) => l.href));
     const io = new IntersectionObserver(
       (entries) => {
-        for (const e of entries) if (e.isIntersecting) setActive(`#${e.target.id}`);
+        for (const e of entries) {
+          if (!e.isIntersecting) continue;
+          const href = `#${e.target.id}`;
+          setActive(linked.has(href) ? href : null);
+        }
       },
       { rootMargin: "-45% 0px -50% 0px" },
     );
-    sections.forEach((s) => io.observe(s));
+    document.querySelectorAll("main section[id]").forEach((s) => io.observe(s));
     const onScroll = () => {
-      // Measured on every scroll (4 rects), so late layout shifts (fonts, images) can't make it stale
-      const firstTop = Math.min(...sections.map((s) => s.getBoundingClientRect().top));
-      if (firstTop > window.innerHeight / 2) setActive(null);
       const hero = document.getElementById("home");
       const past = hero ? -hero.getBoundingClientRect().top > hero.offsetHeight * 0.4 : window.scrollY > 8;
       document.documentElement.toggleAttribute("data-compact", past);

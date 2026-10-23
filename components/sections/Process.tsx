@@ -8,7 +8,7 @@ import { AiTile, AppsTile, BuildTile, DeployTile, SeoTile, UpdatesTile } from ".
 // md: 2 columns  [Build ↕][Updates] / [Build][Deploy] / [SEO][Apps] / [AI ⟷]
 export default function Process() {
   return (
-    <Section id="process" className="bg-surface-container">
+    <Section id="process">
       <SectionHeader
         eyebrow={
           <div className="inline-flex items-center gap-unit-2 rounded-pill border border-ink-black bg-[linear-gradient(135deg,rgb(0,0,0)_80%,rgb(209,213,219)_100%)] px-unit-4 py-1 text-white shadow-sm">
