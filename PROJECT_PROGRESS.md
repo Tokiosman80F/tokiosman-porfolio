@@ -1661,3 +1661,12 @@ Live test (CDP): sequence correct at 1440 and 375, stops on "close deals" after 
 - Runs only while on screen and the tab is visible (IntersectionObserver + visibilitychange), DPR-capped at 2, one still frame with reduced motion. Verified animating in light and dark, no console errors.
 
 - Globe pins: illustrated people instead of initials (owner's choice over stock photos). Five hand-built SVGs in `public/avatars/` (varied skin tones and hair, backgrounds in the pin colours), drawn clipped into each pin with an ink ring; the letter is the fallback while loading. Not photos of clients: swap in real ones (with permission) by replacing the files.
+
+## 58. Realistic iPhone (CRM, payments & automation card) (2026-10-23)
+
+- `PhoneArt` rebuilt as an iPhone lock screen: titanium frame gradient + side buttons, black bezel, Dynamic Island with camera, status bar (signal, Wi-Fi, battery), lock icon, date, large clock, canary/blue wallpaper; frosted notifications with app icons (Zoho and Stripe logos from public/logos, an iOS-style Calendar tile) and times. Fixed hex colours (a physical device), so it is identical in light and dark.
+- Verified light and dark at 1280 (2x capture), axe 0, no console errors.
+
+- "Anything and everything web" card, left column: `DotWave` (Services.tsx), a 16 × 5 dot matrix with a canary wave running diagonally across (`dot-wave` keyframes, 3.2s, 90ms step per diagonal); CSS only, still with reduced motion. Verified animating in light and dark.
+
+- Dot wave removed again at the owner's request (component and `dot-wave` keyframes deleted).

@@ -1,4 +1,5 @@
-import { ArrowUp, CalendarCheck, CreditCard, FileText, Mic, PhoneOff, UserPlus, Video } from "lucide-react";
+import Image from "next/image";
+import { ArrowUp, FileText, Lock, Mic, PhoneOff, Video, Wifi } from "lucide-react";
 import { FigmaIcon } from "@/components/ui/brand-icons";
 import { serviceArt as art } from "@/content/services";
 import { cn } from "@/lib/utils";
@@ -63,31 +64,84 @@ export function BrowserArt() {
   );
 }
 
-/* 2 · Phone lock screen with CRM / payment / booking notifications */
-const notifIcons = [UserPlus, CreditCard, CalendarCheck];
+/* iPhone lock-screen app icons: Zoho and Stripe brand marks (public/logos), an iOS-style Calendar tile */
+function CalendarIcon() {
+  return (
+    <span className="flex size-full flex-col items-center justify-center bg-[#fff] leading-none">
+      <span className="font-sans text-[5px] font-semibold text-[#ef4444] uppercase">Thu</span>
+      <span className="font-sans text-[12px] font-light text-[#111]">22</span>
+    </span>
+  );
+}
+const notifIcons = [
+  <Image key="zoho" src="/logos/zoho.svg" alt="" width={20} height={20} unoptimized className="size-5" />,
+  <Image key="stripe" src="/logos/stripe.svg" alt="" width={20} height={20} unoptimized className="size-5" />,
+  <CalendarIcon key="cal" />,
+];
+const notifTimes = ["now", "2m ago", "9m ago"];
+// Titanium edge: light catching the frame's curve
+const titanium = "bg-[linear-gradient(145deg,#9a9da3_0%,#43464c_30%,#cfd2d6_52%,#5c5f65_78%,#2c2e32_100%)]";
 
+/* 2 · iPhone lock screen: titanium frame + side buttons, black bezel, Dynamic Island, status bar, date and
+   clock over a canary/blue wallpaper, and frosted notifications from the CRM, Stripe and the calendar.
+   Fixed hex colours, not theme tokens (it's a physical device): identical in light and dark. */
 export function PhoneArt() {
   return (
-    <div className={cn("absolute top-4 left-1/2 w-52 -translate-x-1/2 rounded-4xl border-[5px] border-ink-black bg-ink-black shadow-lg", lift)}>
-      <div className="h-80 rounded-[1.65rem] bg-[linear-gradient(160deg,#121212_0%,#2a2d33_55%,#3f444e_100%)] px-2.5 pt-2">
-        <div className="mx-auto h-4 w-16 rounded-full bg-ink-black" />
-        <p className="mt-2 text-center font-sans text-[10px] text-on-primary-container">Thu 22 Oct</p>
-        <p className="text-center font-display text-[28px] leading-none font-bold text-on-primary">9:41</p>
-        <div className="mt-3 space-y-1.5">
-          {art.notifications.map((n, i) => {
-            const Icon = notifIcons[i];
-            return (
-              <div key={n.app} className="flex items-center gap-2 rounded-xl bg-white/92 px-2 py-1.5">
-                <span className="flex size-6 shrink-0 items-center justify-center rounded-md border border-ink-black bg-canary-yellow text-ink-black">
-                  <Icon className="size-3.5" />
+    <div className={cn("absolute top-3 left-1/2 w-[13.25rem] -translate-x-1/2", lift)}>
+      {/* side buttons: action, volume up / down (left), power (right) */}
+      <span className={cn("absolute top-[4.5rem] -left-[2px] h-5 w-[3px] rounded-l-sm", titanium)} />
+      <span className={cn("absolute top-[6.75rem] -left-[2px] h-9 w-[3px] rounded-l-sm", titanium)} />
+      <span className={cn("absolute top-[9.5rem] -left-[2px] h-9 w-[3px] rounded-l-sm", titanium)} />
+      <span className={cn("absolute top-[7.5rem] -right-[2px] h-14 w-[3px] rounded-r-sm", titanium)} />
+
+      <div className={cn("rounded-[2.55rem] p-[2.5px] shadow-[0_24px_40px_-14px_rgb(0_0_0/0.5),0_3px_8px_rgb(0_0_0/0.25)]", titanium)}>
+        <div className="rounded-[2.4rem] bg-[#050505] p-[5px]">
+          <div className="relative h-[27rem] overflow-hidden rounded-[2.05rem] bg-[radial-gradient(90%_55%_at_15%_8%,#FDF175_0%,transparent_60%),radial-gradient(80%_60%_at_95%_35%,#60A5FA_0%,transparent_65%),linear-gradient(180deg,#2b3f6b_0%,#121a2e_70%)]">
+            {/* status bar + Dynamic Island */}
+            <div className="flex items-center justify-between px-5 pt-[11px] font-sans text-[10px] font-semibold text-[#fff]">
+              <span>9:41</span>
+              <span className="flex items-center gap-[3px]">
+                <span className="flex items-end gap-[1.5px]">
+                  {[3, 4.5, 6, 7.5].map((h) => (
+                    <span key={h} className="w-[2.5px] rounded-[0.5px] bg-[#fff]" style={{ height: h }} />
+                  ))}
                 </span>
-                <span className="min-w-0">
-                  <span className="block font-sans text-[9px] font-semibold text-ink-black">{n.app}</span>
-                  <span className="block truncate font-sans text-[9px] text-ink-charcoal">{n.text}</span>
+                <Wifi className="size-[11px]" strokeWidth={3} />
+                <span className="relative ml-[1px] flex h-[8px] w-[16px] items-center rounded-[2.5px] border border-[#fff]/45 p-[1px]">
+                  <span className="h-full w-[78%] rounded-[1px] bg-[#fff]" />
+                  <span className="absolute -right-[2.5px] h-[3px] w-[1.5px] rounded-r-sm bg-[#fff]/45" />
                 </span>
-              </div>
-            );
-          })}
+              </span>
+            </div>
+            <span className="absolute top-[7px] left-1/2 flex h-[20px] w-[60px] -translate-x-1/2 items-center justify-end rounded-full bg-[#000] pr-[7px]">
+              <span className="size-[7px] rounded-full bg-[radial-gradient(circle_at_35%_35%,#3b4b72,#0b0d14_70%)]" />
+            </span>
+
+            {/* lock, date, clock */}
+            <div className="mt-2 flex flex-col items-center text-[#fff]">
+              <Lock className="size-3 opacity-90" strokeWidth={2.5} />
+              <p className="mt-1 font-sans text-[11px] font-semibold opacity-90">Thursday 22 October</p>
+              <p className="font-sans text-[46px] leading-[1] font-semibold tracking-[-0.03em] opacity-95">9:41</p>
+            </div>
+
+            {/* notifications: frosted glass */}
+            <div className="mt-3 space-y-1.5 px-2">
+              {art.notifications.map((n, i) => (
+                <div key={n.app} className="flex items-center gap-2 rounded-[14px] bg-[#fff]/60 px-2 py-[7px] shadow-[0_1px_2px_rgb(0_0_0/0.08)] backdrop-blur-md">
+                  <span className="flex size-[26px] shrink-0 items-center justify-center overflow-hidden rounded-[7px] bg-[#fff] shadow-[0_0_0_0.5px_rgb(0_0_0/0.08)]">
+                    {notifIcons[i]}
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className="flex items-baseline justify-between gap-1">
+                      <span className="truncate font-sans text-[9.5px] font-semibold text-[#111]">{n.app}</span>
+                      <span className="shrink-0 font-sans text-[8px] text-[#3c3c43]/70">{notifTimes[i]}</span>
+                    </span>
+                    <span className="block truncate font-sans text-[9.5px] text-[#1c1c1e]">{n.text}</span>
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>
