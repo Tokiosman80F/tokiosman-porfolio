@@ -24,6 +24,8 @@ export type ServicePage = {
   art: "browser" | "chat" | "phone" | "call" | "dashboard" | "health" | "headless" | "security";
   /** Short name: breadcrumb, related links, structured data. */
   name: string;
+  /** One line for the homepage's service list. */
+  summary: string;
   meta: { title: string; description: string };
   hero: { eyebrow: string; title: string; lead: string; facts: string[] };
   /** Optional plain-words explainer with a flow diagram (one column per flow; the last one is "mine"). */
@@ -50,6 +52,7 @@ const bookCall = { label: "Book a free call", href: site.bookingUrl };
 export const servicePages: ServicePage[] = [
   {
     slug: "nextjs-website-development",
+    summary: "Custom websites that bring in enquiries and bookings, live in 2–4 weeks.",
     art: "browser",
     name: "Next.js website development",
     meta: {
@@ -211,6 +214,7 @@ export const servicePages: ServicePage[] = [
   },
   {
     slug: "ai-chatbot-for-website",
+    summary: "An assistant that answers customers 24/7 from your own content.",
     art: "chat",
     name: "AI chatbot for your website",
     meta: {
@@ -386,6 +390,7 @@ export const servicePages: ServicePage[] = [
   },
   {
     slug: "web-app-development",
+    summary: "Logins, dashboards, payments and automations, built around how you work.",
     art: "dashboard",
     name: "Web app and dashboard development",
     meta: {
@@ -562,6 +567,7 @@ export const servicePages: ServicePage[] = [
   },
   {
     slug: "crm-payments-automation",
+    summary: "Forms into Zoho CRM, Stripe payments and bookings that confirm themselves.",
     art: "phone",
     name: "CRM, payments and automation",
     meta: {
@@ -736,6 +742,7 @@ export const servicePages: ServicePage[] = [
   },
   {
     slug: "website-maintenance",
+    summary: "Updates, monitoring, backups and monthly changes for your Next.js site.",
     art: "health",
     name: "Website maintenance",
     meta: {
@@ -905,6 +912,7 @@ export const servicePages: ServicePage[] = [
   },
   {
     slug: "headless-wordpress-nextjs",
+    summary: "Keep the WordPress admin, get a fast Next.js front end.",
     art: "headless",
     name: "Headless WordPress with Next.js",
     meta: {
@@ -1177,6 +1185,7 @@ export const servicePages: ServicePage[] = [
   },
   {
     slug: "wordpress-malware-removal",
+    summary: "Hacked site cleaned, the way in patched, Google's warning removed.",
     art: "security",
     name: "WordPress malware removal and hacked site recovery",
     meta: {

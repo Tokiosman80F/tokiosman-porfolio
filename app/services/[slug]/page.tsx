@@ -41,7 +41,9 @@ export async function generateMetadata({ params }: PageProps<"/services/[slug]">
     title: p.meta.title,
     description: p.meta.description,
     alternates: { canonical: url },
-    openGraph: { title: p.meta.title, description: p.meta.description, url, type: "website", siteName: site.name },
+    // the shared preview image (app/opengraph-image.tsx): a page-level openGraph replaces the root one, image included
+    openGraph: { title: p.meta.title, description: p.meta.description, url, type: "website", siteName: site.name, images: "/opengraph-image" },
+    twitter: { card: "summary_large_image", title: p.meta.title, description: p.meta.description, images: "/opengraph-image" },
   };
 }
 

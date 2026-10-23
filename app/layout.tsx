@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Caveat, Inter, JetBrains_Mono, Sora, Space_Grotesk } from "next/font/google";
 import { BookingModal } from "@/components/BookingModal";
 import { SplashLoader } from "@/components/layout/SplashLoader";
@@ -20,6 +20,18 @@ export const metadata: Metadata = {
   title: { default: site.title, template: `%s · ${site.name}` },
   description: site.description,
   applicationName: site.name,
+  authors: [{ name: site.person, url: site.url }],
+  creator: site.person,
+  // Link previews (the image is app/opengraph-image.tsx)
+  openGraph: { type: "website", siteName: site.name, title: site.title, description: site.description, url: "/", locale: "en_US" },
+  twitter: { card: "summary_large_image", title: site.title, description: site.description },
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#121212" },
+  ],
 };
 
 // Person structured data (docs/footer.md): links the name to the site and, once set, the GitHub /

@@ -10,7 +10,7 @@ import { BrowserArt, CallArt, ChatArt, GlobeArt, PhoneArt } from "./ServiceArt";
 
 // "What I build" (references: docs/what-we-build-1.png, -2.png): centred heading with a highlight, then
 // soft grey cards on white, each an illustration over a title and one line; the last card runs full
-// width with the client list and a globe.
+// width with the client list and a globe. The list of every service page is its own section (ServiceMenu).
 const arts: Record<Exclude<ServiceId, "web">, ReactNode> = {
   build: <BrowserArt />,
   integrations: <PhoneArt />,
@@ -84,6 +84,7 @@ export default function Services() {
       <div className="grid grid-cols-1 gap-unit-4 md:grid-cols-2">
         {services.map((s) => (s.id === "web" ? <WebCard key={s.id} {...s} /> : <ServiceCard key={s.id} {...s} />))}
       </div>
+
     </Section>
   );
 }

@@ -1,3 +1,4 @@
+import { site } from "./site";
 import type { HighlightedText } from "@/components/ui/Highlight";
 
 // DRAFT copy for review, in the owner's voice: drawn from docs/services.md and the hero, no new claims.
@@ -11,6 +12,20 @@ export const servicesSection = {
   // "start to finish" stays short enough for one highlight box at 375px
   title: ["I take care of things from ", { highlight: "start to finish", color: "canary" }] satisfies HighlightedText,
   clientsLabel: "Clients I've built for",
+};
+
+// The "every service" menu under the cards (ServiceMenu): service pages grouped by what the visitor needs.
+export const serviceMenu = {
+  eyebrow: "Every service · Fixed prices",
+  title: "Pick what you need",
+  lead: "Build something new, add to the site you have, or keep it safe. Every service has its own page with the plans, the timeline and what's included.",
+  cta: { label: "Not sure? Book a free call", href: site.bookingUrl },
+  detailsLabel: "See plans and details",
+  groups: [
+    { title: "Build something new", slugs: ["nextjs-website-development", "web-app-development", "headless-wordpress-nextjs"] },
+    { title: "Add to your site", slugs: ["ai-chatbot-for-website", "crm-payments-automation"] },
+    { title: "Keep it safe", slugs: ["website-maintenance", "wordpress-malware-removal"] },
+  ],
 };
 
 export const services: Service[] = [
