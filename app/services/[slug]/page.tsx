@@ -6,7 +6,7 @@ import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
 import { TechMark } from "@/components/sections/About";
 import FinalCta from "@/components/sections/FinalCta";
-import { BrowserArt } from "@/components/sections/ServiceArt";
+import { BrowserArt, CallArt, ChatArt, PhoneArt } from "@/components/sections/ServiceArt";
 import { Button } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Heading } from "@/components/ui/Heading";
@@ -77,6 +77,9 @@ function jsonLd(p: ServicePage) {
 
 const num = (i: number) => String(i + 1).padStart(2, "0");
 
+// Hero illustration per page: the matching card art from the home page's Services section
+const arts = { browser: BrowserArt, chat: ChatArt, phone: PhoneArt, call: CallArt } satisfies Record<ServicePage["art"], () => React.JSX.Element>;
+
 function PlanCard({ plan, cta }: { plan: ServicePlan; cta: ServicePage["cta"] }) {
   const dark = plan.featured;
   return (
@@ -96,8 +99,9 @@ function PlanCard({ plan, cta }: { plan: ServicePlan; cta: ServicePage["cta"] })
               </span>
             )}
           </div>
-          <p className={cn("mt-unit-4 font-display text-headline-lg-mobile font-bold md:text-headline-lg", dark ? "text-on-primary" : "text-ink-black")}>
-            {plan.price}
+          <p className="mt-unit-4 flex items-baseline gap-unit-2">
+            {plan.pricePrefix && <span className={cn("font-sans text-body-sm", dark ? "text-on-primary-container" : "text-ink-muted")}>{plan.pricePrefix}</span>}
+            <span className={cn("font-display text-headline-lg-mobile font-bold md:text-headline-lg", dark ? "text-on-primary" : "text-ink-black")}>{plan.price}</span>
           </p>
           <p className={cn("mt-1 font-sans text-body-sm", dark ? "text-on-primary-container" : "text-ink-muted")}>
             {plan.timeline} · fixed price
@@ -123,6 +127,7 @@ function PlanCard({ plan, cta }: { plan: ServicePlan; cta: ServicePage["cta"] })
 export default async function ServicePageRoute({ params }: PageProps<"/services/[slug]">) {
   const p = find((await params).slug);
   if (!p) notFound();
+  const Art = arts[p.art];
 
   return (
     <>
@@ -171,7 +176,7 @@ export default async function ServicePageRoute({ params }: PageProps<"/services/
                 </div>
               </div>
               <div aria-hidden className="group relative h-72 overflow-hidden rounded-3xl bg-surface-container-low [mask-image:linear-gradient(to_bottom,black_80%,transparent)] sm:h-80 lg:col-span-6">
-                <BrowserArt />
+                <Art />
               </div>
             </div>
           </div>
@@ -214,6 +219,70 @@ export default async function ServicePageRoute({ params }: PageProps<"/services/
             </ul>
           </div>
         </section>
+
+        {/* ── Comparison: a real table (scrolls sideways on small screens), my column highlighted ── */}
+        {p.compare && (
+          <Section border="none" className="pb-0 lg:pb-0">
+            <Heading as="h2" className="text-balance">{p.compare.title}</Heading>
+            <p className="mt-unit-4 max-w-2xl font-sans text-body-lead text-on-surface-variant">{p.compare.lead}</p>
+            {/* below md: one card per option, mine first (a 4-column table would hide it off-screen) */}
+            <ul className="mt-unit-8 grid grid-cols-1 gap-unit-3 sm:grid-cols-3 md:hidden">
+              {p.compare.columns.map((col, i) => {
+                const mine = i === p.compare!.highlight;
+                return (
+                  <li key={col} className={cn("rounded-2xl p-unit-4", mine ? "order-first bg-ink-black text-on-primary" : "border border-border-hairline")}>
+                    <h3 className={cn("font-sans text-body-md font-semibold", mine ? "text-on-primary" : "text-ink-black")}>{col}</h3>
+                    <dl className="mt-unit-3 space-y-unit-2 font-sans text-body-sm">
+                      {p.compare!.rows.map((r) => (
+                        <div key={r.label}>
+                          <dt className={mine ? "text-on-primary-container" : "text-ink-muted"}>{r.label}</dt>
+                          <dd className={mine ? "font-medium text-on-primary" : "text-ink-black"}>{r.values[i]}</dd>
+                        </div>
+                      ))}
+                    </dl>
+                  </li>
+                );
+              })}
+            </ul>
+            <div className="mt-unit-8 hidden overflow-hidden rounded-2xl border border-border-hairline md:block">
+              <table className="w-full border-collapse text-left font-sans text-body-sm">
+                <thead>
+                  <tr>
+                    <td className="w-1/4 p-unit-4" />
+                    {p.compare.columns.map((c, i) => (
+                      <th
+                        key={c}
+                        scope="col"
+                        className={cn(
+                          "p-unit-4 font-sans text-body-md font-semibold",
+                          i === p.compare!.highlight ? "bg-ink-black text-on-primary" : "text-ink-black",
+                        )}
+                      >
+                        {c}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {p.compare.rows.map((r) => (
+                    <tr key={r.label} className="border-t border-border-hairline">
+                      <th scope="row" className="p-unit-4 font-medium text-ink-black">{r.label}</th>
+                      {r.values.map((v, i) => (
+                        <td
+                          key={i}
+                          className={cn("p-unit-4", i === p.compare!.highlight ? "bg-ink-black font-medium text-on-primary" : "text-on-surface-variant")}
+                        >
+                          {v}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            {p.compare.note && <p className="mt-unit-4 max-w-3xl font-sans text-body-md text-ink-muted">{p.compare.note}</p>}
+          </Section>
+        )}
 
         {/* ── Included in every project ── */}
         <Section border="none" className="pb-0 lg:pb-0">

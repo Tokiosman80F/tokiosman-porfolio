@@ -189,6 +189,12 @@ function WideOfferCard({ offer: o }: { offer: Offer }) {
           </p>
         )}
         {o.footnote && <p className="mt-unit-2 font-sans text-body-sm text-ink-muted italic">{o.footnote}</p>}
+        {o.more && (
+          <Link href={o.more.href} className="tap-target group mt-unit-6 inline-flex items-center gap-unit-2 font-sans text-body-sm font-semibold text-ink-black underline-offset-4 hover:underline">
+            {o.more.label}
+            <ArrowRight aria-hidden className="size-4 transition-transform group-hover:translate-x-0.5 motion-reduce:transition-none" />
+          </Link>
+        )}
       </div>
     </article>
   );

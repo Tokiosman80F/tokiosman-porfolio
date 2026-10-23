@@ -9,7 +9,7 @@ Research date: 2026-10-23. Status: **proposal, nothing built yet.** Every price 
 - **The website stays at $1,500, now for up to 3 pages.** `docs/services.md`, the FAQ and the homepage are updated.
 - **No price rises. Every service offers 3 plans instead** (below). All tier prices are **DRAFT proposals** until you confirm them.
 - **No real projects yet**, so service pages ship without a proof block. It gets added when you've built them.
-- **Pages are built one at a time.** Order: Website ✅ (built, in review) → AI chatbot → Web app → CRM/payments → SEO → Maintenance.
+- **Pages are built one at a time.** Order: Website ✅ (committed) → AI chatbot ✅ (built, in review) → Web app → CRM/payments → SEO → Maintenance.
 
 | Service | Plan 1 | Plan 2 (recommended) | Plan 3 |
 |---|---|---|---|

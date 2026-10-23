@@ -99,6 +99,7 @@ export const offers: Offer[] = [
     addOn: "Model fine-tuning for brand voice or specialized tasks, quoted per project.",
     footnote: "AI usage fees (OpenAI / Anthropic API) are billed directly to the client.",
     cta: { label: "Get a free AI audit", href: site.bookingUrl },
+    more: { label: "Compare all 3 AI assistant plans", href: "/services/ai-chatbot-for-website" },
   },
 ];
 

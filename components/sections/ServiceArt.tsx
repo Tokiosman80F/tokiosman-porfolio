@@ -277,7 +277,7 @@ export function ChatArt() {
           </div>
         </div>
         <div className="flex items-center gap-2 border-t border-[#ececec] px-2 py-1.5">
-          <span className="flex-1 truncate font-sans text-[9px] text-[#8e8e93]">{art.chat.placeholder}</span>
+          <span className="flex-1 truncate font-sans text-[9px] text-[#71717a]">{art.chat.placeholder}</span>
           <span className="flex size-[18px] shrink-0 items-center justify-center rounded-full bg-[#121212] text-[#fff]">
             <ArrowUp className="size-[10px]" />
           </span>

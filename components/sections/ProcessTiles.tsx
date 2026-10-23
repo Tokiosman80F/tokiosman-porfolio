@@ -184,7 +184,7 @@ export function BuildTile({ className }: { className?: string }) {
               onClick={() => select(i)}
               className={cn(
                 "tap-target flex flex-1 items-center justify-center gap-1 rounded-sm px-2 py-1.5 font-mono text-mono-tag transition-colors lg:px-1 xl:px-2",
-                i === index ? "bg-[#fff] text-[#121212] shadow-xs" : "text-[#71717a] hover:text-[#121212]",
+                i === index ? "bg-[#fff] text-[#121212] shadow-xs" : "text-[#52525b] hover:text-[#121212]",
               )}
             >
               {i === index && <Check aria-hidden className="size-3 shrink-0 text-[#16a34a]" strokeWidth={3} />}

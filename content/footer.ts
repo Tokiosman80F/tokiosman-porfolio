@@ -32,7 +32,7 @@ export const footer = {
       links: [
         { label: "Website Design & Development", href: "/services/nextjs-website-development" },
         { label: "Web App + Dashboard", href: "/#pricing" },
-        { label: "AI Upgrade for Your Website", href: "/#pricing" },
+        { label: "AI Upgrade for Your Website", href: "/services/ai-chatbot-for-website" },
         { label: "Custom Projects", href: "/#pricing" },
       ],
     },
