@@ -236,6 +236,41 @@
   }
 }
 
+/* Theme toggle: the new icon spins and scales in after a click */
+@keyframes theme-icon-in {
+  from { opacity: 0; rotate: -90deg; scale: 0.4; }
+  to { opacity: 1; rotate: 0deg; scale: 1; }
+}
+
+/* Phone splash loader (SplashLoader): letters rise out of their line, the canary box sweeps open, the dot
+   pops, the caption fades up, the bar fills */
+@keyframes splash-rise {
+  from { translate: 0 110%; }
+  to { translate: 0 0; }
+}
+@keyframes splash-sweep {
+  from { scale: 0 1; }
+  to { scale: 1 1; }
+}
+@keyframes splash-fade {
+  from { opacity: 0; translate: 0 0.5rem; }
+  to { opacity: 1; translate: 0 0; }
+}
+@keyframes splash-dot {
+  0% { scale: 0; rotate: -90deg; }
+  70% { scale: 1.3; rotate: 45deg; }
+  100% { scale: 1; rotate: 0deg; }
+}
+@keyframes splash-bar {
+  from { scale: 0 1; }
+  to { scale: 1 1; }
+}
+
+/* Hero client logos below lg: the row is rendered twice, so -50% loops seamlessly */
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
+
 /* Process bento: panel content swap, and current flowing along the chip traces (hover only). */
 @keyframes tile-in {
   from { opacity: 0; transform: translateY(4px); }

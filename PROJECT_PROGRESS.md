@@ -1710,3 +1710,18 @@ All user-triggered (hover / pointer), 300ms ease-out-quint, off with reduced mot
 - Below md the hamburger menu (`MobileMenu.tsx`, deleted) is replaced by `components/layout/MobileDock.tsx`: a floating bottom dock with Services / About / Work / Pricing / FAQ (icon + label), current section highlighted canary via the scroll-spy now shared as `useActiveSection` (NavLinks.tsx).
 - Body gets bottom padding below md (5.5rem + safe-area) so the footer clears the dock; the WhatsApp button moves above the dock on phones.
 - Verified at 320 / 375 (light + dark): highlight follows scrolling and taps, no overflow 320–1280, footer end clear of the dock, axe 0, no console errors. (The round "N" in dev screenshots is the Next.js dev indicator, not shipped.)
+
+## 64. Client logos as a marquee on phones and tablets (2026-10-23)
+
+- Below lg the hero client logos run as an endless marquee (`marquee` keyframes, 26s linear; the row is rendered twice, the copy `aria-hidden` and hidden from lg, track slides -50%), faded at both edges, paused while touched. From lg: one static centred row, as before.
+- Reduced motion: the animation stops (global rule) and the row scrolls sideways by hand.
+- Tiles moved into a `LogoTiles` component in Hero.tsx (shared by both copies).
+- Verified: moving at 375 / 768 (light + dark), static at 1280, equal halves (seamless loop), no overflow 320–1280, axe 0.
+
+## 65. Theme toggle motion + phone splash loader (2026-10-23)
+
+- `ThemeToggle`: hover turns the sun 90° / tilts the moon; click presses the button (scale 0.9) and the new icon spins and scales in (`theme-icon-in`, keyed remount, only after a click so it never plays on load).
+- `components/layout/SplashLoader.tsx` (mounted in the layout): below md, first visit per session, a full-screen splash: "tokiosman" rises in letter by letter (Sora, `splash-letter`), the canary dot pops (`splash-dot`), a canary bar fills (`splash-bar`); fades out after window load, min 1.3s, max 2.5s. Server-rendered so it covers the first paint; the inline head script sets html[data-loader-done] for repeat views in the session; hidden from md, without JS (noscript) and from screen readers; with reduced motion it just fades.
+- Verified: frames 250ms → 1.2s (reveal, then fade), same-session navigation skips it, desktop display none, toggle hover/click frames, axe 0, no console errors.
+
+- Loader redone at the owner's request (full name, bigger animation): "Toki" rises letter by letter (Sora, clamp 60–96px), a canary highlight box with ink edge and offset shadow sweeps open and "Osman" rises inside it, the canary dot pops, "Full-Stack Developer · Design to deploy" fades up, a canary bar fills across the bottom; exit is a curtain lift (-100%, 700ms ease-in-out) instead of a fade (fade with reduced motion). Name and title from `content/site.ts`. Min 2.3s, max 3.2s after hydration. New keyframes `splash-rise`, `splash-sweep`, `splash-fade` (`splash-letter` removed). Verified frame by frame in light and dark at 375.
