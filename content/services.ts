@@ -44,6 +44,10 @@ export const services: Service[] = [
 // Text inside the decorative card illustrations (fictional examples).
 export const serviceArt = {
   browserTabs: ["tokiosman. — I build websites", "Home — Figma"],
+  browserUrl: "tokiosman.com",
+  browserNav: ["Services", "Work", "Pricing", "FAQ"],
+  browserEyebrow: "Next.js × CRM × AI",
+  browserCta: { nav: "Book a call", primary: "Book a call", secondary: "See Pricing" },
   notifications: [
     { app: "Zoho CRM", text: "New lead from your contact form" },
     { app: "Stripe", text: "Payment received · $1,500" },

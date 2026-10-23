@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ArrowUp, FileText, Lock, Mic, PhoneOff, Video, Wifi } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUp, FileText, Lock, Mic, PhoneOff, Plus, RotateCw, SlidersHorizontal, Star, Video, Wifi, X } from "lucide-react";
 import { FigmaIcon } from "@/components/ui/brand-icons";
 import { serviceArt as art } from "@/content/services";
 import { cn } from "@/lib/utils";
@@ -10,57 +10,133 @@ import { Globe } from "./Globe";
 // and lifts slightly when the card is hovered (`group`).
 const lift = "transition-transform duration-300 ease-out group-hover:-translate-y-1 motion-reduce:transition-none";
 
-/* 1 · Browser window showing a mini version of this site's hero, with a Figma tab */
+/* 1 · Design → build: a Figma file (back) with the hero frame selected, and in front a Chrome window on macOS
+   showing that hero live at tokiosman.com, the cursor on its CTA. Fixed hex colours, not theme tokens (real
+   app chrome): identical in light and dark. */
+const chromeIcon = "size-[11px] shrink-0 text-[#5f6368]";
+
 export function BrowserArt() {
   return (
-    <div className={cn("absolute inset-x-6 top-7 rounded-t-xl border border-border-strong bg-white shadow-md sm:inset-x-10", lift)}>
-      <div className="flex items-end gap-1 rounded-t-xl border-b border-border-hairline bg-paper-subtle px-2 pt-2">
-        <div className="flex gap-1 px-1 pb-2">
-          <span className="size-2 rounded-full bg-[#ef4444]/80" />
-          <span className="size-2 rounded-full bg-[#f59e0b]/80" />
-          <span className="size-2 rounded-full bg-[#10b981]/80" />
-        </div>
-        <div className="flex min-w-0 items-center gap-1.5 rounded-t-md bg-white px-2 py-1 font-sans text-[9px] text-ink-charcoal">
-          <span className="size-2.5 shrink-0 rounded-xs bg-ink-black" />
-          <span className="truncate">{art.browserTabs[0]}</span>
-        </div>
-        <div className="hidden min-w-0 items-center gap-1.5 px-2 py-1 font-sans text-[9px] text-ink-muted sm:flex [&_svg]:size-2.5">
-          <FigmaIcon />
-          <span className="truncate">{art.browserTabs[1]}</span>
-        </div>
-      </div>
-      <div className="px-4 pt-3 pb-6">
-        <div className="flex items-center justify-between rounded-md border border-border-hairline px-2 py-1">
-          <span className="font-display text-[9px] font-bold text-ink-black">
-            tokiosman<span className="text-canary-yellow [-webkit-text-stroke:0.5px_var(--color-ink-black)]">.</span>
-          </span>
-          <span className="hidden gap-2 sm:flex">
-            {[0, 1, 2].map((i) => (
-              <span key={i} className="h-1 w-5 rounded-full bg-border-strong" />
+    <>
+      {/* Figma, peeking out behind: toolbar, layers panel, canvas with the selected frame */}
+      <div className="absolute top-4 left-4 h-44 w-[78%] overflow-hidden rounded-lg bg-[#2c2c2c] shadow-[0_10px_24px_-10px_rgb(0_0_0/0.45)] transition-transform duration-300 ease-out group-hover:-translate-x-1 motion-reduce:transition-none sm:left-6">
+        <div className="flex h-6 items-center gap-2 border-b border-[#444] px-2">
+          <span className="flex gap-[3px]">
+            {["#ff5f57", "#febc2e", "#28c840"].map((c) => (
+              <span key={c} className="size-[6px] rounded-full" style={{ background: c }} />
             ))}
           </span>
-          <span className="h-3 w-10 rounded-xs bg-ink-black" />
-        </div>
-        <p className="mt-4 text-center font-display text-[13px] leading-tight font-bold text-ink-black uppercase">
-          I build websites that{" "}
-          <span className="rounded-xs border border-ink-black bg-canary-yellow px-0.5 text-ink-black">close deals</span>
-        </p>
-        <div className="mx-auto mt-2 h-1 w-3/5 rounded-full bg-border-strong" />
-        <div className="mx-auto mt-1 h-1 w-2/5 rounded-full bg-border-strong" />
-        <div className="mt-3 flex justify-center gap-1.5">
-          <span className="h-3.5 w-12 rounded-xs bg-ink-black" />
-          <span className="h-3.5 w-12 rounded-xs border border-signal-blue" />
-        </div>
-        <div className="mt-4 grid grid-cols-3 gap-2">
+          <span className="ml-1 flex [&_svg]:h-3 [&_svg]:w-2">
+            <FigmaIcon />
+          </span>
           {[0, 1, 2].map((i) => (
-            <div key={i} className="rounded-md border border-border-hairline p-1.5">
-              <div className="h-8 rounded-sm bg-surface-container" />
-              <div className="mt-1.5 h-1 w-4/5 rounded-full bg-border-strong" />
-            </div>
+            <span key={i} className={cn("size-2.5 rounded-[2px] border border-[#8a8a8a]", i === 0 && "border-[#0d99ff] bg-[#0d99ff]/30")} />
           ))}
+          <span className="ml-auto self-center rounded-[3px] bg-[#0d99ff] px-1.5 py-[3px] font-sans text-[7px] leading-none font-semibold text-[#fff]">Share</span>
+        </div>
+        <div className="flex h-full">
+          <div className="w-16 shrink-0 space-y-[5px] border-r border-[#444] px-2 pt-2 font-sans text-[6.5px] text-[#b3b3b3]">
+            <p className="font-semibold text-[#fff]">Layers</p>
+            <p className="-mx-1 rounded-[2px] bg-[#0d99ff]/25 px-1 text-[#fff]"># Hero</p>
+            <p className="pl-2">Nav</p>
+            <p className="pl-2">Headline</p>
+            <p className="pl-2">Buttons</p>
+            <p># Services</p>
+          </div>
+          <div className="relative flex-1 bg-[#1e1e1e]">
+            <span className="absolute top-2 left-3 font-sans text-[6.5px] text-[#0d99ff]">Hero · 1440</span>
+            <div className="absolute top-[18px] left-3 h-24 w-40 bg-[#fff] outline outline-1 outline-[#0d99ff]">
+              {[["-top-[2px]", "-left-[2px]"], ["-top-[2px]", "-right-[2px]"], ["-bottom-[2px]", "-left-[2px]"], ["-bottom-[2px]", "-right-[2px]"]].map(([y, x]) => (
+                <span key={y + x} className={cn("absolute size-[4px] border border-[#0d99ff] bg-[#fff]", y, x)} />
+              ))}
+              <span className="mx-auto mt-5 block h-1.5 w-20 rounded-full bg-[#121212]" />
+              <span className="mx-auto mt-1 block h-1.5 w-14 rounded-[1px] bg-[#FDF175]" />
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+
+      {/* Chrome window, in front */}
+      <div className={cn("absolute top-11 right-4 left-12 overflow-hidden rounded-t-[10px] bg-[#fff] shadow-[0_24px_40px_-14px_rgb(0_0_0/0.45),0_0_0_0.5px_rgb(0_0_0/0.18)] sm:right-6 sm:left-20", lift)}>
+        {/* tab strip */}
+        <div className="flex h-7 items-end gap-1 bg-[#dee1e6] pl-2.5">
+          <span className="mb-[9px] flex gap-[5px]">
+            {["#ff5f57", "#febc2e", "#28c840"].map((c) => (
+              <span key={c} className="size-[8px] rounded-full shadow-[inset_0_0_0_0.5px_rgb(0_0_0/0.15)]" style={{ background: c }} />
+            ))}
+          </span>
+          <span className="ml-2 flex h-[22px] w-36 min-w-0 items-center gap-1.5 rounded-t-[7px] bg-[#fff] px-2 font-sans text-[8px] text-[#1f1f1f]">
+            <span className="flex size-[10px] shrink-0 items-center justify-center rounded-[2px] bg-[#121212]">
+              <span className="size-[3px] rounded-[0.5px] bg-[#FDF175]" />
+            </span>
+            <span className="truncate">{art.browserTabs[0]}</span>
+            <X className="ml-auto size-[9px] shrink-0 text-[#5f6368]" />
+          </span>
+          <span className="hidden h-[22px] min-w-0 items-center gap-1.5 px-2 font-sans text-[8px] text-[#474747] sm:flex [&_svg]:h-2.5 [&_svg]:w-2">
+            <FigmaIcon />
+            <span className="truncate">{art.browserTabs[1]}</span>
+          </span>
+          <Plus className="mb-[6px] size-[10px] shrink-0 text-[#5f6368]" />
+        </div>
+        {/* toolbar + omnibox */}
+        <div className="flex items-center gap-2 border-b border-[#e3e3e3] px-2.5 py-1">
+          <ArrowLeft className={chromeIcon} />
+          <ArrowRight className={cn(chromeIcon, "opacity-40")} />
+          <RotateCw className={chromeIcon} />
+          <span className="flex h-[18px] min-w-0 flex-1 items-center gap-1.5 rounded-full bg-[#f1f3f4] px-2 font-sans text-[8.5px] text-[#1f1f1f]">
+            <SlidersHorizontal className="size-[9px] shrink-0 text-[#5f6368]" />
+            <span className="truncate">{art.browserUrl}</span>
+            <Star className="ml-auto size-[9px] shrink-0 text-[#5f6368]" />
+          </span>
+          <span className="flex size-[14px] shrink-0 items-center justify-center rounded-full bg-[#0b57d0] font-sans text-[6.5px] font-semibold text-[#fff]">
+            T
+          </span>
+        </div>
+
+        {/* the live page: this site's hero, in miniature */}
+        <div className="relative px-4 pt-2 pb-6">
+          <div className="flex items-center justify-between rounded-md border border-[#e6e6e6] px-2 py-1 shadow-[0_1px_2px_rgb(0_0_0/0.05)]">
+            <span className="font-logo text-[9px] font-bold tracking-tight text-[#121212]">
+              tokiosman<span className="text-[#FDF175] [-webkit-text-stroke:0.5px_#121212]">.</span>
+            </span>
+            <span className="hidden gap-2 font-sans text-[6.5px] text-[#555] sm:flex">
+              {art.browserNav.map((l) => (
+                <span key={l}>{l}</span>
+              ))}
+            </span>
+            <span className="rounded-[3px] border border-[#121212] bg-[#FDF175] px-1.5 py-[1px] font-sans text-[6.5px] font-semibold text-[#121212]">
+              {art.browserCta.nav}
+            </span>
+          </div>
+          <p className="mx-auto mt-2 w-fit rounded-full border border-[#e6e6e6] px-1.5 py-[1px] font-mono text-[5.5px] tracking-widest text-[#666] uppercase">
+            {art.browserEyebrow}
+          </p>
+          <p className="mt-1.5 text-center font-display text-[13px] leading-tight font-bold text-[#121212] uppercase">
+            I build websites that{" "}
+            <span className="rounded-[2px] border border-[#121212] bg-[#FDF175] px-0.5 shadow-[1.5px_1.5px_0_#121212]">close deals</span>
+          </p>
+          <div className="mx-auto mt-2 h-[3px] w-3/5 rounded-full bg-[#d9d9d9]" />
+          <div className="mx-auto mt-1 h-[3px] w-2/5 rounded-full bg-[#d9d9d9]" />
+          <div className="relative mt-2.5 flex justify-center gap-1.5 font-sans text-[6.5px] font-semibold">
+            <span className="rounded-[3px] bg-[#121212] px-2 py-[3px] text-[#fff]">{art.browserCta.primary}</span>
+            <span className="rounded-[3px] border border-[#2563eb] px-2 py-[3px] text-[#2563eb]">{art.browserCta.secondary}</span>
+            {/* macOS pointer resting on the primary button */}
+            <svg aria-hidden viewBox="0 0 12 18" className="absolute top-2.5 left-[calc(50%-1.25rem)] h-3.5 w-auto drop-shadow-[0_1px_1px_rgb(0_0_0/0.3)]">
+              <path d="M1 1v13.5l3.3-3.1 2.2 5.1 2.2-.9-2.2-5H11z" fill="#121212" stroke="#fff" strokeWidth="1" strokeLinejoin="round" />
+            </svg>
+          </div>
+          <div className="mt-4 grid grid-cols-3 gap-2">
+            {["#FDF175", "#BFDBFE", "#BBF7D0"].map((c) => (
+              <div key={c} className="rounded-md border border-[#e6e6e6] p-1.5">
+                <div className="h-8 rounded-sm" style={{ background: `linear-gradient(135deg, ${c}, #f4f4f5)` }} />
+                <div className="mt-1.5 h-[3px] w-4/5 rounded-full bg-[#d9d9d9]" />
+                <div className="mt-1 h-[3px] w-1/2 rounded-full bg-[#e6e6e6]" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
 
