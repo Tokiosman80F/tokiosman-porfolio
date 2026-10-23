@@ -53,11 +53,19 @@ export const serviceArt = {
     { app: "Stripe", text: "Payment received · $1,500" },
     { app: "Calendar", text: "Call booked · Thu 10:00" },
   ],
+  serp: {
+    query: "do you ship to canada",
+    site: "Northwind Goods",
+    url: "northwindgoods.com › shipping",
+    title: "Shipping to Canada · 3–5 business days",
+  },
   chat: {
+    bot: "Northwind assistant",
+    status: "AI · replies instantly",
     question: "Do you ship to Canada?",
     answer: "Yes, in 3–5 business days.",
     source: "shipping-policy.pdf",
     placeholder: "Ask me anything…",
   },
-  call: { host: "Toki Osman", hostInitials: "TO", guest: "You" },
+  call: { host: "Toki Osman", guest: "You", time: "10:00", title: "Free strategy call" },
 };

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ArrowLeft, ArrowRight, ArrowUp, FileText, Lock, Mic, PhoneOff, Plus, RotateCw, SlidersHorizontal, Star, Video, Wifi, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUp, Captions, FileText, Hand, Info, Lock, MessageSquare, Mic, MicOff, MonitorUp, PhoneOff, Plus, RotateCw, Search, SlidersHorizontal, Sparkles, Star, Users, Video, Wifi, X } from "lucide-react";
 import { FigmaIcon } from "@/components/ui/brand-icons";
 import { serviceArt as art } from "@/content/services";
 import { cn } from "@/lib/utils";
@@ -224,44 +224,62 @@ export function PhoneArt() {
   );
 }
 
-/* 3 · AI chat answering from a source document, over a keyboard */
-const keyRows = ["QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM"];
-
+/* 3 · AI chatbot + SEO: a Google result for the store's shipping page (back, the SEO half) and, in front, the
+   store's chat widget answering the same question from its own policy document. Fixed hex colours, not theme
+   tokens (real app chrome): identical in light and dark. */
 export function ChatArt() {
   return (
     <>
-      <div className="absolute inset-x-6 -bottom-2 rounded-t-xl border border-border-hairline bg-paper-subtle p-2 sm:inset-x-10">
-        <div className="space-y-1">
-          {keyRows.map((row, r) => (
-            <div key={row} className="flex justify-center gap-1" style={{ paddingInline: `${r * 6}%` }}>
-              {[...row].map((k) => (
-                <span
-                  key={k}
-                  className="flex h-6 flex-1 items-center justify-center rounded-[5px] border border-border-hairline bg-white font-sans text-[8px] text-ink-muted shadow-xs"
-                >
-                  {k}
-                </span>
-              ))}
-            </div>
-          ))}
-          <div className="mx-auto h-6 w-1/2 rounded-[5px] border border-border-hairline bg-white shadow-xs" />
+      {/* search result */}
+      <div className="absolute top-5 left-5 w-[72%] rounded-xl sm:top-8 bg-[#fff] p-2.5 shadow-[0_10px_24px_-10px_rgb(0_0_0/0.3),0_0_0_0.5px_rgb(0_0_0/0.12)] transition-transform duration-300 ease-out group-hover:-translate-x-1 motion-reduce:transition-none sm:left-8">
+        <div className="flex items-center gap-1.5 rounded-full px-2.5 py-1 shadow-[0_1px_4px_rgb(32_33_36/0.28)]">
+          <Search className="size-[10px] shrink-0 text-[#5f6368]" />
+          <span className="truncate font-sans text-[9px] text-[#202124]">{art.serp.query}</span>
         </div>
-      </div>
-      <div className={cn("absolute top-5 left-1/2 w-[72%] max-w-xs -translate-x-1/2 rounded-xl border border-border-hairline bg-white p-2.5 shadow-lg", lift)}>
-        <div className="flex justify-end">
-          <span className="rounded-lg rounded-br-xs bg-ink-black px-2 py-1 font-sans text-[10px] text-white">{art.chat.question}</span>
-        </div>
-        <div className="mt-1.5 max-w-[85%] rounded-lg rounded-bl-xs bg-paper-subtle px-2 py-1.5">
-          <p className="font-sans text-[10px] text-ink-black">{art.chat.answer}</p>
-          <span className="mt-1 inline-flex items-center gap-1 rounded-sm border border-border-hairline bg-white px-1 py-0.5 font-mono text-[8px] text-ink-charcoal">
-            <FileText className="size-2.5" />
-            {art.chat.source}
+        <div className="mt-2.5 flex items-center gap-1.5">
+          <span className="flex size-[16px] shrink-0 items-center justify-center rounded-full bg-[#f1f3f4] font-sans text-[7px] font-bold text-[#202124]">
+            {art.serp.site[0]}
+          </span>
+          <span className="min-w-0 leading-tight">
+            <span className="block truncate font-sans text-[8px] text-[#202124]">{art.serp.site}</span>
+            <span className="block truncate font-sans text-[7px] text-[#4d5156]">{art.serp.url}</span>
           </span>
         </div>
-        <div className="mt-2.5 flex items-center gap-2 rounded-lg border border-border-hairline px-2 py-1.5">
-          <span className="flex-1 font-sans text-[10px] text-ink-muted">{art.chat.placeholder}</span>
-          <span className="flex size-5 items-center justify-center rounded-full bg-ink-black text-white">
-            <ArrowUp className="size-3" />
+        <p className="mt-1 truncate font-sans text-[11px] text-[#1a0dab]">{art.serp.title}</p>
+        <div className="mt-1 h-[3px] w-11/12 rounded-full bg-[#e8eaed]" />
+        <div className="mt-1 h-[3px] w-3/5 rounded-full bg-[#e8eaed]" />
+      </div>
+
+      {/* chat widget */}
+      <div className={cn("absolute top-11 right-5 w-[58%] max-w-[15rem] overflow-hidden rounded-xl bg-[#fff] shadow-[0_24px_40px_-14px_rgb(0_0_0/0.45),0_0_0_0.5px_rgb(0_0_0/0.15)] sm:right-8", lift)}>
+        <div className="flex items-center gap-1.5 bg-[#121212] px-2.5 py-1.5">
+          <span className="flex size-[18px] shrink-0 items-center justify-center rounded-full bg-[#FDF175] text-[#121212] [&_svg]:size-[10px]">
+            <Sparkles />
+          </span>
+          <span className="min-w-0 leading-tight">
+            <span className="block truncate font-sans text-[9px] font-semibold text-[#fff]">{art.chat.bot}</span>
+            <span className="flex items-center gap-1 font-sans text-[7px] text-[#a1a1aa]">
+              <span className="size-[5px] rounded-full bg-[#22c55e]" />
+              {art.chat.status}
+            </span>
+          </span>
+        </div>
+        <div className="space-y-1.5 bg-[#f7f7f8] px-2 py-2">
+          <div className="flex justify-end">
+            <span className="rounded-[10px] rounded-br-[3px] bg-[#121212] px-2 py-1 font-sans text-[9px] text-[#fff]">{art.chat.question}</span>
+          </div>
+          <div className="max-w-[88%] rounded-[10px] rounded-bl-[3px] bg-[#fff] px-2 py-1.5 shadow-[0_0_0_0.5px_rgb(0_0_0/0.1)]">
+            <p className="font-sans text-[9px] text-[#121212]">{art.chat.answer}</p>
+            <span className="mt-1 inline-flex max-w-full items-center gap-1 rounded-[4px] bg-[#f1f3f4] px-1 py-0.5 font-mono text-[7px] text-[#3f3f46]">
+              <FileText className="size-2 shrink-0" />
+              <span className="truncate">{art.chat.source}</span>
+            </span>
+          </div>
+        </div>
+        <div className="flex items-center gap-2 border-t border-[#ececec] px-2 py-1.5">
+          <span className="flex-1 truncate font-sans text-[9px] text-[#8e8e93]">{art.chat.placeholder}</span>
+          <span className="flex size-[18px] shrink-0 items-center justify-center rounded-full bg-[#121212] text-[#fff]">
+            <ArrowUp className="size-[10px]" />
           </span>
         </div>
       </div>
@@ -269,41 +287,69 @@ export function ChatArt() {
   );
 }
 
-/* 4 · Video call: host tile with initials, guest self-view, call controls */
+/* 4 · Video call in a Meet-style window: Toki's camera as the active speaker (blue ring, voice bars), the
+   guest's self-view in the corner, and the call bar with the meeting name, controls and the red hang-up.
+   Fixed hex colours, not theme tokens (real app chrome): identical in light and dark. */
+const callBtn = "flex size-[22px] shrink-0 items-center justify-center rounded-full bg-[#3c4043] text-[#e8eaed] [&_svg]:size-[11px]";
+
 export function CallArt() {
   return (
-    <div className={cn("absolute top-7 left-1/2 w-[76%] max-w-sm -translate-x-1/2", lift)}>
-      <div className="relative overflow-hidden rounded-xl border border-ink-black bg-[radial-gradient(120%_100%_at_50%_0%,var(--color-paper-card),var(--color-surface-container))] shadow-lg">
-        <div className="flex h-44 items-center justify-center">
-          <span className="flex size-20 items-center justify-center rounded-full border-2 border-ink-black bg-canary-yellow font-display text-headline-md font-bold text-ink-black">
-            {art.call.hostInitials}
-          </span>
-        </div>
-        <span className="absolute top-2 left-2 flex items-center gap-1.5 rounded-md bg-white/90 px-1.5 py-0.5 font-sans text-[9px] font-medium text-ink-black">
-          {/* speaking indicator */}
-          <span className="flex h-2.5 items-end gap-px">
-            <span className="h-1 w-0.5 rounded-full bg-signal-green" />
-            <span className="h-2.5 w-0.5 rounded-full bg-signal-green" />
-            <span className="h-1.5 w-0.5 rounded-full bg-signal-green" />
-          </span>
-          {art.call.host}
+    <div className={cn("absolute inset-x-5 top-5 rounded-xl bg-[#202124] p-1.5 shadow-[0_24px_40px_-14px_rgb(0_0_0/0.5),0_3px_8px_rgb(0_0_0/0.2)] sm:inset-x-8", lift)}>
+      {/* active speaker */}
+      <div className="relative h-36 overflow-hidden rounded-lg bg-[#3c4043] sm:h-40">
+        {/* the whole square photo, over a blurred fill of itself (like a camera feed's background), so the face sits smaller */}
+        <Image src="/images/toki-osman.jpg" alt="" fill sizes="400px" className="scale-125 object-cover blur-xl" />
+        <span className="absolute inset-y-0 left-1/2 aspect-square -translate-x-1/2 [mask-image:linear-gradient(to_right,transparent,black_20%,black_80%,transparent)]">
+          <Image src="/images/toki-osman.jpg" alt="" fill sizes="200px" className="object-cover" />
         </span>
-        <div className="absolute inset-x-0 bottom-2 flex justify-center gap-1.5">
-          <span className="flex size-6 items-center justify-center rounded-full bg-white/90 text-ink-black">
-            <Mic className="size-3" />
+        <span className="absolute inset-0 rounded-lg shadow-[inset_0_0_0_2px_#8ab4f8]" />
+        <span className="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-[#000]/55 to-transparent" />
+        <span className="absolute bottom-1.5 left-2 font-sans text-[8.5px] font-medium text-[#fff]">{art.call.host}</span>
+        {/* voice bars */}
+        <span className="absolute top-2 right-2 flex size-[18px] items-center justify-center gap-[1.5px] rounded-full bg-[#1a73e8]">
+          {[4, 8, 5].map((h, i) => (
+            <span key={i} className="w-[2px] rounded-full bg-[#fff]" style={{ height: h }} />
+          ))}
+        </span>
+        {/* guest self-view */}
+        <span className="absolute right-2 bottom-2 h-14 w-20 overflow-hidden rounded-md bg-[#FDF175] shadow-[0_2px_8px_rgb(0_0_0/0.35)]">
+          <Image src="/avatars/person-2.svg" alt="" fill unoptimized className="object-cover object-[50%_30%]" />
+          <span className="absolute bottom-1 left-1 rounded-[3px] bg-[#000]/45 px-1 py-[1px] font-sans text-[7px] leading-none text-[#fff]">{art.call.guest}</span>
+          <span className="absolute top-1 right-1 flex size-3 items-center justify-center rounded-full bg-[#000]/45 text-[#fff] [&_svg]:size-[7px]">
+            <MicOff />
           </span>
-          <span className="flex size-6 items-center justify-center rounded-full bg-white/90 text-ink-black">
-            <Video className="size-3" />
-          </span>
-          {/* end-call red is a mock-UI colour */}
-          <span className="flex size-6 items-center justify-center rounded-full bg-[#ef4444] text-white">
-            <PhoneOff className="size-3" />
-          </span>
-        </div>
+        </span>
       </div>
-      <div className="absolute -right-6 -bottom-8 flex h-20 w-24 items-center justify-center rounded-lg border border-ink-black bg-ink-black shadow-lg">
-        <span className="flex size-10 items-center justify-center rounded-full bg-white/10 font-sans text-[10px] font-medium text-on-primary">
-          {art.call.guest}
+
+      {/* call bar */}
+      <div className="flex items-center justify-between gap-2 px-1 pt-1.5 pb-0.5">
+        <span className="hidden min-w-0 truncate font-sans text-[8.5px] text-[#e8eaed] sm:block">
+          {art.call.time} <span className="text-[#5f6368]">|</span> {art.call.title}
+        </span>
+        <span className="mx-auto flex items-center gap-1 sm:mx-0">
+          <span className={callBtn}>
+            <Mic />
+          </span>
+          <span className={callBtn}>
+            <Video />
+          </span>
+          <span className={callBtn}>
+            <Captions />
+          </span>
+          <span className={callBtn}>
+            <Hand />
+          </span>
+          <span className={callBtn}>
+            <MonitorUp />
+          </span>
+          <span className="flex h-[22px] w-9 shrink-0 items-center justify-center rounded-full bg-[#ea4335] text-[#fff] [&_svg]:size-[11px]">
+            <PhoneOff />
+          </span>
+        </span>
+        <span className="hidden items-center gap-2 text-[#e8eaed] sm:flex [&_svg]:size-[11px]">
+          <Info />
+          <Users />
+          <MessageSquare />
         </span>
       </div>
     </div>
