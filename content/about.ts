@@ -13,6 +13,14 @@ export const about = {
     alt: "Toki Osman, full-stack developer",
   },
   greeting: "Hi, I'm Toki 👋",
+  linksLabel: "Connect with me",
+  // Ways to reach me, under the greeting. `logo` = file in public/logos; email uses the mail icon.
+  links: [
+    ...site.socials,
+    { name: "WhatsApp", logo: "whatsapp", href: site.whatsapp },
+    { name: "Messenger", logo: "messenger", href: site.messenger },
+    { name: "Email", logo: "", href: `mailto:${site.email}` },
+  ],
   cta: { label: "Book a call with me", href: site.bookingUrl },
   stat: {
     value: "20+",
@@ -22,7 +30,7 @@ export const about = {
   },
   bio: {
     label: "About me",
-    text: "I'm a full-stack developer from Bangladesh who builds websites that do more than look good: they capture leads, take payments, and sync with your CRM. Clear communication, daily updates, no surprises.",
+    text: "I'm a full-stack developer who builds websites that do more than look good: they capture leads, take payments, and sync with your CRM. Clear communication, daily updates, no surprises.",
     name: "Toki Osman",
     role: "Full-Stack Developer, Next.js & AI",
   },

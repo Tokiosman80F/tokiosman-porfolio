@@ -31,7 +31,7 @@ const personJsonLd = {
   jobTitle: site.jobTitle,
   url: site.url,
   email: `mailto:${site.email}`,
-  sameAs: site.socials.map((s) => s.href).filter(Boolean),
+  sameAs: [...site.socials.map((s) => s.href), site.facebook].filter(Boolean),
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { CalendarDays } from "lucide-react";
+import { CalendarDays, Mail } from "lucide-react";
 import { FramerMotionIcon } from "@/components/ui/brand-icons";
 import { PlanButton } from "@/components/ui/PlanButton";
 import { Section } from "@/components/ui/Section";
@@ -44,6 +44,34 @@ function PhotoCard({ className }: { className?: string }) {
         <p className="font-sans text-body-lead font-medium text-ink-black">{about.greeting}</p>
         <div className="mt-unit-4">
           <PlanButton href={about.cta.href} label={about.cta.label} icon={CalendarDays} external />
+        </div>
+        {/* profiles and direct channels: logo tiles, same as the footer's */}
+        <p id="about-connect" className="mt-unit-6 font-mono text-mono-tag tracking-widest text-ink-muted uppercase">
+          {about.linksLabel}
+        </p>
+        <div className="mt-unit-2">
+          <ul aria-labelledby="about-connect" className="flex flex-wrap gap-unit-2">
+            {about.links.map((l) => {
+              const mail = l.href.startsWith("mailto:");
+              return (
+                <li key={l.name}>
+                  <a
+                    href={l.href}
+                    {...(mail ? {} : { target: "_blank", rel: "me noopener" })}
+                    aria-label={mail ? `Email ${about.bio.name}` : `${about.bio.name} on ${l.name} (opens in a new tab)`}
+                    title={l.name}
+                    className="theme-light flex size-10 items-center justify-center rounded-md border border-border-hairline bg-white shadow-xs transition-[border-color,translate] hover:-translate-y-0.5 hover:border-ink-black motion-reduce:transition-none"
+                  >
+                    {mail ? (
+                      <Mail aria-hidden className="size-5 text-ink-black" />
+                    ) : (
+                      <Image src={`/logos/${l.logo}.svg`} alt="" width={20} height={20} unoptimized className="size-5 object-contain" />
+                    )}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
         </div>
       </div>
     </article>

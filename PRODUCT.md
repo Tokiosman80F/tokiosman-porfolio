@@ -33,7 +33,7 @@ What he delivers (capabilities, not the positioning claim): Next.js websites and
 - Engagement: free 30-minute call → fixed scope and fixed quote within 24 hours → build → launch. Payment 50% to start, 50% on launch, through Payoneer (owner, 2026-10-23). Hosting and AI usage fees (OpenAI / Anthropic API) are paid by the client, who owns those accounts (`docs/services.md`, `docs/fqa.md`).
 - Timelines: website about 2 weeks, web app 3–4 weeks, AI upgrade 2–3 weeks (`docs/services.md`).
 - Communication: a written progress update every working day; email, Slack or WhatsApp, whatever suits the client (`docs/fqa.md`).
-- Contact channels: booking link (`site.bookingUrl`), contact form → Zoho CRM, WhatsApp +880 1987-556588, email tokiosman@outlook.com (`content/site.ts`).
+- Contact channels: booking link (`site.bookingUrl`), contact form → Zoho CRM, WhatsApp +880 1987-556588, email tokiosman@outlook.com, Messenger (m.me/takiosmaNahian). Profiles: LinkedIn linkedin.com/in/tokiosman, GitHub github.com/Tokiosman80F, Facebook facebook.com/takiosmaNahian (`content/site.ts`).
 
 ## Capabilities and Constraints
 
@@ -53,7 +53,6 @@ The site itself: Next.js 16 App Router, Tailwind CSS v4, a single page (`app/pag
 Open (undecided or not yet provided):
 
 - Real booking URL (currently the placeholder `https://cal.com`).
-- GitHub and LinkedIn profile URLs (hidden until set).
 - Zoho CRM credentials for the contact form; until set, the form opens the visitor's email app with the message written out. Spam protection (Turnstile), auto-reply and lead notification not set up.
 
 ## Brand Commitments

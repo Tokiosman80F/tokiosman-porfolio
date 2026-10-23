@@ -58,9 +58,9 @@ I build with **Next.js (App Router)**, **React**, **TypeScript**, **Tailwind CSS
 
 ### [ 05 ] · REMOTE WORK
 
-**I'm not in Bangladesh. How do we work together across time zones?**
+**How do we work together across time zones?**
 
-I work remotely with clients worldwide and have worked with remote teams before. I'm based in Bangladesh (GMT+6), which overlaps with European mornings and Asian business hours, and US clients wake up to finished work. You get a written progress update every working day, and I reply to messages within a few hours during my working day.
+I work remotely with clients worldwide and have worked with remote teams before. I work in GMT+6, which overlaps with European mornings and Asian business hours, and US clients wake up to finished work. You get a written progress update every working day, and I reply to messages within a few hours during my working day.
 
 - Meta: TIMEZONE: GMT+6 · DAILY UPDATES
 - Status: ● REMOTE-READY (green)

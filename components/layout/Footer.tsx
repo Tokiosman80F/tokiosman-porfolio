@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ArrowUp, CalendarDays, Globe, MapPin } from "lucide-react";
+import { ArrowUp, CalendarDays, MapPin } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { footer, type FooterColumn, type FooterLink } from "@/content/footer";
 import { site } from "@/content/site";
@@ -41,7 +41,7 @@ function TileBand() {
 
 // Below md each link is a 44px row (touch); from md the list spacing does the work
 const linkClass = "inline-flex min-h-11 min-w-11 items-center font-sans text-body-sm text-on-surface-variant transition-colors hover:text-ink-black md:min-h-0 md:min-w-0";
-const icons = { globe: Globe, calendar: CalendarDays };
+const icons = { calendar: CalendarDays };
 
 function ContactMark({ logo, icon }: Pick<FooterLink, "logo" | "icon">) {
   const Icon = icon && icons[icon];
@@ -129,7 +129,6 @@ export default function Footer() {
           <p>
             © {new Date().getFullYear()} {footer.copyright}
           </p>
-          <p>{footer.builtWith}</p>
           {/* "#top" scrolls to the top of the document (HTML spec); no id needed */}
           <a href="#top" className="tap-target inline-flex items-center gap-1 self-start md:self-auto text-ink-black transition-colors hover:underline">
             {footer.backToTop}
