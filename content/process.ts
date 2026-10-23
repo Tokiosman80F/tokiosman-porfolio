@@ -16,6 +16,23 @@ export const processTiles = {
     text: "3 homepage design directions; you pick one. Then I build it in Next.js, fully responsive with smooth interactions.",
     directionsLabel: "Homepage directions",
     directions: ["Centered", "Split", "Editorial"],
+    // The sample client shown in all 3 directions (fictional; same studio as the SEO tile's example search).
+    demo: {
+      domain: "oakandgrain.studio",
+      brand: "Oak & Grain",
+      nav: ["Shop", "Process", "About"],
+      badge: "Made in our workshop",
+      headline: "Handmade tables, built to order",
+      sub: "Solid oak, finished by hand and delivered to your door.",
+      primary: "Shop tables",
+      secondary: "Our process",
+      products: [
+        { name: "Dining", price: "$2,400" },
+        { name: "Coffee", price: "$890" },
+        { name: "Desk", price: "$1,250" },
+      ],
+    },
+    builtWith: ["Next.js", "Responsive", "Smooth interactions"],
     cta: { label: "View pricing", href: "#pricing" },
   },
   updates: {

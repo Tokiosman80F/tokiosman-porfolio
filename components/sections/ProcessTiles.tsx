@@ -81,66 +81,101 @@ function TileText({ dark, children }: { dark?: boolean; children: ReactNode }) {
   );
 }
 
-/* ── Design and development: browser mock that switches between the 3 homepage directions ── */
+/* ── Design and development: the same sample client's homepage in 3 directions (tabs). The picked one gets
+   a "Your pick" tick, and a phone shows it built responsive. Fixed hex inside the window (it's a client's
+   site, not this one): identical in light and dark. ── */
 
-const ink = "rounded-full bg-ink-black/80";
-const soft = "rounded-full bg-border-strong";
-const block = "rounded-md bg-surface-container";
+// "photo" fills: warm oak tones with a faint grain
+const wood = (a: string, b: string) =>
+  `repeating-linear-gradient(100deg, rgb(255 255 255 / 0.06) 0 2px, transparent 2px 7px), linear-gradient(135deg, ${a}, ${b})`;
+const woods = [wood("#e8d2b0", "#b4835a"), wood("#d9b48a", "#8a5a36"), wood("#f0dfc4", "#c39a6b")];
 
-const wireframes: ReactNode[] = [
-  // Centered
-  <div key="centered" className="flex h-full flex-col items-center gap-2 pt-3">
-    <div className={cn(ink, "h-2.5 w-3/4")} />
-    <div className="h-2.5 w-1/2 rounded-full bg-canary-yellow" />
-    <div className={cn(soft, "mt-1 h-1.5 w-2/3")} />
-    <div className="mt-2 flex gap-1.5">
-      <div className="h-4 w-14 rounded-sm bg-ink-black" />
-      <div className="h-4 w-14 rounded-sm border border-border-strong" />
+function DemoNav({ small }: { small?: boolean }) {
+  const d = processTiles.build.demo;
+  return (
+    <div className="flex items-center justify-between">
+      <span className={cn("font-display font-bold tracking-tight text-[#2b1d12]", small ? "text-[6px]" : "text-[8px]")}>{d.brand}</span>
+      {!small && (
+        <span className="flex gap-2 font-sans text-[6px] text-[#6b5a4b]">
+          {d.nav.map((n) => (
+            <span key={n}>{n}</span>
+          ))}
+        </span>
+      )}
+      <span className={cn("rounded-full bg-[#2b1d12]", small ? "h-1 w-2.5" : "h-2.5 w-8")} />
     </div>
-    <div className={cn(block, "mt-3 w-full flex-1")} />
-  </div>,
-  // Split
-  <div key="split" className="grid h-full grid-cols-2 gap-3 pt-3">
-    <div className="flex flex-col gap-2 pt-4">
-      <div className={cn(ink, "h-2.5 w-full")} />
-      <div className="h-2.5 w-2/3 rounded-full bg-canary-yellow" />
-      <div className={cn(soft, "mt-1 h-1.5 w-full")} />
-      <div className={cn(soft, "h-1.5 w-4/5")} />
-      <div className="mt-2 h-4 w-16 rounded-sm bg-ink-black" />
-    </div>
-    <div className={block} />
-  </div>,
-  // Editorial
-  <div key="editorial" className="flex h-full flex-col gap-2 pt-3">
-    <div className={cn(ink, "h-4 w-full")} />
-    <div className="flex gap-2">
-      <div className={cn(ink, "h-4 w-2/5")} />
-      <div className="h-4 w-1/4 rounded-full bg-canary-yellow" />
-    </div>
-    <div className="mt-2 grid flex-1 grid-cols-3 gap-2">
-      {[0, 1, 2].map((i) => (
-        <div key={i} className="flex flex-col gap-1.5">
-          <div className={cn(block, "flex-1")} />
-          <div className={cn(soft, "h-1.5 w-4/5")} />
+  );
+}
+
+function DemoButtons() {
+  const d = processTiles.build.demo;
+  return (
+    <span className="flex gap-1 font-sans text-[6.5px] leading-none font-semibold">
+      <span className="rounded-full bg-[#2b1d12] px-2 py-[3px] text-[#fdf8f1]">{d.primary}</span>
+      <span className="rounded-full border border-[#2b1d12]/30 px-2 py-[3px] text-[#2b1d12]">{d.secondary}</span>
+    </span>
+  );
+}
+
+function demoPage(i: number): ReactNode {
+  const d = processTiles.build.demo;
+  const headline = "font-display font-bold leading-[1.05] tracking-tight text-[#2b1d12]";
+  if (i === 0)
+    return (
+      <div className="flex h-full flex-col items-center gap-1.5 text-center">
+        <p className={cn(headline, "mt-2 max-w-[80%] text-[15px]")}>{d.headline}</p>
+        <p className="max-w-[70%] font-sans text-[7px] leading-snug text-[#6b5a4b]">{d.sub}</p>
+        <DemoButtons />
+        <div className="mt-1 w-full flex-1 rounded-md" style={{ background: woods[0] }} />
+      </div>
+    );
+  if (i === 1)
+    return (
+      <div className="grid h-full grid-cols-[1.1fr_1fr] gap-2.5">
+        <div className="flex flex-col justify-center gap-1.5">
+          <span className="w-fit rounded-full bg-[#2b1d12]/8 px-1.5 py-px font-sans text-[6px] text-[#6b5a4b]">{d.badge}</span>
+          <p className={cn(headline, "text-[15px]")}>{d.headline}</p>
+          <p className="font-sans text-[7px] leading-snug text-[#6b5a4b]">{d.sub}</p>
+          <DemoButtons />
         </div>
-      ))}
+        <div className="rounded-md" style={{ background: woods[1] }} />
+      </div>
+    );
+  return (
+    <div className="flex h-full flex-col gap-2">
+      <p className={cn(headline, "mt-1 text-[19px] uppercase")}>{d.headline}</p>
+      <div className="grid flex-1 grid-cols-3 gap-1.5">
+        {d.products.map((p, j) => (
+          <div key={p.name} className="flex flex-col gap-1">
+            <div className="flex-1 rounded-md" style={{ background: woods[j] }} />
+            <span className="flex justify-between font-sans text-[6.5px] text-[#2b1d12]">
+              <span className="font-semibold">{p.name}</span>
+              <span className="text-[#6b5a4b]">{p.price}</span>
+            </span>
+          </div>
+        ))}
+      </div>
     </div>
-  </div>,
-];
+  );
+}
 
 export function BuildTile({ className }: { className?: string }) {
   const t = processTiles.build;
   const { ref, index, select, stop } = useAutoplay<HTMLDivElement>(t.directions.length, 2600);
   return (
     <Tile dark className={cn("p-2.5", className)}>
-      <div ref={ref} onPointerEnter={stop} onFocus={stop} className="rounded-xl bg-paper-card p-3 lg:p-2 xl:p-3">
+      <div ref={ref} onPointerEnter={stop} onFocus={stop} className="rounded-xl bg-[#fff] p-3 lg:p-2 xl:p-3">
+        {/* browser chrome with the client's address */}
         <div aria-hidden className="mb-3 flex items-center gap-1.5">
-          <span className="size-2 rounded-full bg-[#ef4444]/80" />
-          <span className="size-2 rounded-full bg-[#f59e0b]/80" />
-          <span className="size-2 rounded-full bg-[#10b981]/80" />
-          <span className="mx-auto h-2.5 w-2/5 rounded-full bg-border-hairline" />
+          <span className="size-2 rounded-full bg-[#ff5f57]" />
+          <span className="size-2 rounded-full bg-[#febc2e]" />
+          <span className="size-2 rounded-full bg-[#28c840]" />
+          <span className="mx-auto flex h-4 w-1/2 items-center justify-center gap-1 rounded-full bg-[#f1f3f4] font-sans text-[7px] text-[#5f6368]">
+            <Lock className="size-2 shrink-0" />
+            {t.demo.domain}
+          </span>
         </div>
-        <div role="group" aria-label={t.directionsLabel} className="mb-3 flex gap-1 rounded-md bg-paper-subtle p-1 lg:gap-0.5 lg:p-0.5 xl:gap-1 xl:p-1">
+        <div role="group" aria-label={t.directionsLabel} className="mb-3 flex gap-1 rounded-md bg-[#f4f4f5] p-1 lg:gap-0.5 lg:p-0.5 xl:gap-1 xl:p-1">
           {t.directions.map((d, i) => (
             <button
               key={d}
@@ -148,25 +183,51 @@ export function BuildTile({ className }: { className?: string }) {
               aria-pressed={i === index}
               onClick={() => select(i)}
               className={cn(
-                "tap-target flex-1 rounded-sm px-2 py-1.5 lg:px-1 xl:px-2 font-mono text-mono-tag transition-colors",
-                i === index ? "bg-white text-ink-black shadow-xs" : "text-ink-muted hover:text-ink-black",
+                "tap-target flex flex-1 items-center justify-center gap-1 rounded-sm px-2 py-1.5 font-mono text-mono-tag transition-colors lg:px-1 xl:px-2",
+                i === index ? "bg-[#fff] text-[#121212] shadow-xs" : "text-[#71717a] hover:text-[#121212]",
               )}
             >
+              {i === index && <Check aria-hidden className="size-3 shrink-0 text-[#16a34a]" strokeWidth={3} />}
               {d}
             </button>
           ))}
         </div>
         <div aria-hidden className="relative h-52 sm:h-60">
-          {wireframes.map((w, i) => (
+          {t.directions.map((d, i) => (
             <div
-              key={i}
+              key={d}
               className={cn(
-                "absolute inset-0 transition-[opacity,transform] duration-500 ease-out motion-reduce:transition-none",
+                "absolute inset-0 flex flex-col gap-2.5 transition-[opacity,transform] duration-500 ease-out motion-reduce:transition-none",
                 i === index ? "opacity-100" : "translate-y-2 opacity-0",
               )}
             >
-              {w}
+              <DemoNav />
+              <div className="min-h-0 flex-1">{demoPage(i)}</div>
             </div>
+          ))}
+          {/* the picked direction, built: the same page on a phone */}
+          <div className="absolute -right-2 -bottom-2 w-16 rounded-[13px] bg-[#121212] p-[3px] shadow-[0_10px_20px_-6px_rgb(0_0_0/0.45)]">
+            <div key={index} className="flex h-[7.5rem] animate-[tile-in_0.4s_ease-out] flex-col gap-1 overflow-hidden rounded-[10px] bg-[#fdf8f1] px-1.5 pt-2.5 pb-1.5">
+              <DemoNav small />
+              <p className="mt-0.5 font-display text-[7px] leading-[1.05] font-bold tracking-tight text-[#2b1d12]">{t.demo.headline}</p>
+              <span className="w-fit rounded-full bg-[#2b1d12] px-1.5 py-px font-sans text-[5px] leading-tight font-semibold text-[#fdf8f1]">{t.demo.primary}</span>
+              <div className="mt-0.5 flex-1 rounded-[5px]" style={{ background: woods[index] }} />
+            </div>
+          </div>
+        </div>
+        {/* what the pick becomes */}
+        <div className="mt-3 flex flex-wrap items-center gap-1.5 border-t border-[#f0f0f0] pt-2.5 font-sans text-[10px] text-[#3f3f46]">
+          <span className="flex items-center gap-1 rounded-full bg-[#121212] px-2 py-0.5 font-medium text-[#fff]">
+            <svg aria-hidden viewBox="0 0 24 24" className="size-2.5 fill-current">
+              <path d="M18.665 21.978C16.758 23.255 14.465 24 12 24 5.377 24 0 18.623 0 12S5.377 0 12 0s12 5.377 12 12c0 3.583-1.574 6.801-4.067 9.001L9.219 7.2H7.2v9.596h1.615V9.251l9.85 12.727Zm-3.332-8.533 1.6 2.061V7.2h-1.6v6.245Z" />
+            </svg>
+            {t.builtWith[0]}
+          </span>
+          {t.builtWith.slice(1).map((b) => (
+            <span key={b} className="flex items-center gap-1 rounded-full bg-[#f4f4f5] px-2 py-0.5">
+              <Check aria-hidden className="size-2.5 shrink-0 text-[#16a34a]" strokeWidth={3} />
+              {b}
+            </span>
           ))}
         </div>
       </div>
