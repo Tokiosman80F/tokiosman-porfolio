@@ -1639,3 +1639,11 @@ Live test (CDP): sequence correct at 1440 and 375, stops on "close deals" after 
 
 - `components/BookingModal.tsx` (mounted in `app/layout.tsx`): one click listener catches every link to `site.bookingUrl` and opens Cal.com's booking modal (light theme, ink brand colour, month view) instead of a new tab. Cal's official embed loader, no npm package; `embed.js` loads on the first booking click only. Modifier-clicks, no-JS and a bare placeholder URL fall back to the plain link.
 - Needs `site.bookingUrl` = a full event link, e.g. https://cal.com/{user}/30min. Tested with Cal's public demo event: modal opened on the page, no new tab, no console errors; reverted to the placeholder after.
+
+## 55. Dark theme (2026-10-23)
+
+- Token swap under `html[data-theme="dark"]` (see DESIGN.md), accent-fill and `.theme-light` islands, navbar `ThemeToggle` (sun/moon, 44px hit area), no-flash inline script in `app/layout.tsx` (`suppressHydrationWarning` on <html>), Cal modal follows the theme.
+- Hard-coded colours moved to tokens: form error red, the pricing/work colour-mix tints (`white` → `var(--color-white)`), the Process eyebrow gradient, the glow button's inner fill.
+- Verified: axe 0 violations in dark at 1280/375 (home) and 1280 (/work/headq), and in light at 1280; toggle: OS default → click → saved → survives reload → click back; no console errors.
+
+- Fix (dark): text that sits on a canary shape without being inside it (nav chip behind the active link, the hero's SVG cursor tag) turned light. New never-swapped token `on-accent` (#121212) for that text; a dark-mode scan of every text element over a light fill (home 1280/375, two case pages) finds none left.

@@ -117,7 +117,7 @@ function TechCard({ className }: { className?: string }) {
         {about.tech.map((t) => (
           <li
             key={t.name}
-            className="flex flex-col items-center gap-unit-2 rounded-xl border border-border-hairline bg-white px-1 pt-3 pb-2 shadow-xs transition-transform hover:-translate-y-0.5 motion-reduce:transition-none"
+            className="theme-light flex flex-col items-center gap-unit-2 rounded-xl border border-border-hairline bg-white px-1 pt-3 pb-2 shadow-xs transition-transform hover:-translate-y-0.5 motion-reduce:transition-none"
           >
             <span aria-hidden className="flex h-7 items-center [&_svg]:size-7">
               <TechMark logo={t.logo} symbol={t.symbol} />

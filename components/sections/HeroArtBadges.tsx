@@ -48,8 +48,8 @@ export function CursorTag({ messages, x, y }: { messages: string[]; x: number; y
     <g ref={ref} transform={`translate(${x} ${y})`}>
       <path d="M0 0v17l4.5-4.5L8 20l3-1.5-3.5-7H13z" strokeWidth={1} className="fill-ink-black stroke-white" />
       <g>
-        <rect x={14} y={16} width={units(text) * CHAR + 16} height={18} rx={4} strokeWidth={1} className="fill-canary-yellow stroke-ink-black" />
-        <text x={22} y={28.5} className="fill-ink-black font-mono text-[10px] font-bold">
+        <rect x={14} y={16} width={units(text) * CHAR + 16} height={18} rx={4} strokeWidth={1} className="fill-canary-yellow stroke-on-accent" />
+        <text x={22} y={28.5} className="fill-on-accent font-mono text-[10px] font-bold">
           {text}
         </text>
       </g>

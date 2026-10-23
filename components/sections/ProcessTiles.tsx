@@ -292,7 +292,7 @@ export function DeployTile({ className }: { className?: string }) {
             <span
               className={cn(
                 "flex items-center gap-1.5 font-mono text-mono-meta",
-                isLive ? "text-signal-green" : "text-on-primary-container",
+                isLive ? "text-signal-green-on-primary" : "text-on-primary-container",
               )}
             >
               <span aria-hidden className={cn("size-1.5 rounded-full", isLive ? "bg-signal-green" : "animate-pulse bg-canary-yellow")} />

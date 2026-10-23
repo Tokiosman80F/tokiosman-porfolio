@@ -22,7 +22,7 @@ type Tone = { card: string; dark: boolean };
 // Shared with the case study page (app/work/[slug]), which opens in its card's tone
 export const tones: Tone[] = [
   { card: "border-border-hairline bg-surface-container-low", dark: false },
-  { card: "border-signal-blue/40 bg-[color-mix(in_srgb,var(--color-signal-blue)_18%,white)]", dark: false },
+  { card: "border-signal-blue/40 bg-[color-mix(in_srgb,var(--color-signal-blue)_18%,var(--color-white))]", dark: false },
   { card: "border-ink-black bg-ink-black", dark: true },
 ];
 
@@ -54,7 +54,7 @@ function CaseFile({ project: p, index }: { project: Project; index: number }) {
           <span
             className={cn(
               "ml-auto inline-flex items-center gap-1.5 rounded-full border px-unit-3 py-1 font-mono text-mono-meta font-bold",
-              dark ? "border-signal-green/40 text-signal-green" : "border-signal-green/40 bg-white text-signal-green-ink",
+              dark ? "border-signal-green/40 text-signal-green-on-primary" : "border-signal-green/40 bg-white text-signal-green-ink",
             )}
           >
             <OutcomeIcon aria-hidden className="size-4 shrink-0" />

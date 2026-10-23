@@ -4,6 +4,7 @@ import { headerCta, primaryNav } from "@/content/navigation";
 import Logo from "./Logo";
 import MobileMenu from "./MobileMenu";
 import { NavLinks } from "./NavLinks";
+import { ThemeToggle } from "./ThemeToggle";
 
 // Resizable floating navbar. Over the landing hero it is large: the full content width (max-w-page), taller,
 // with a bigger wordmark and no shadow. Once the visitor is 40% of the way through the hero
@@ -36,6 +37,7 @@ export default function Header() {
           <NavLinks links={primaryNav} />
         </nav>
         <div className="ml-auto flex items-center gap-unit-2 md:ml-0">
+          <ThemeToggle />
           <PlanButton href={headerCta.href} label={headerCta.label} icon={CalendarDays} external={headerCta.external} />
           <MobileMenu links={primaryNav} />
         </div>

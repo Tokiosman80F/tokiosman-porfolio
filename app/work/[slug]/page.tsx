@@ -132,7 +132,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
 
               <div className="relative flex flex-col overflow-hidden rounded-2xl bg-ink-black bg-[radial-gradient(90%_60%_at_100%_0%,rgb(255_255_255/0.12),transparent_60%)] p-unit-6 text-on-primary sm:p-unit-8 lg:col-span-5">
                 <Heading as="h2" size="sm" className="text-on-primary">{t.outcome}</Heading>
-                <p className="mt-auto flex items-center gap-unit-3 pt-unit-12 font-display text-headline-lg-mobile font-bold tracking-tight text-canary-yellow md:text-headline-lg">
+                <p className="mt-auto flex items-center gap-unit-3 pt-unit-12 font-display text-headline-lg-mobile font-bold tracking-tight text-canary-yellow md:text-headline-lg [html[data-theme=dark]_&]:text-on-primary">
                   <OutcomeIcon aria-hidden className="size-9 shrink-0 md:size-11" />
                   {p.outcome.label}
                 </p>
@@ -147,7 +147,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
                       return (
                         <li
                           key={name}
-                          className="flex flex-col items-center gap-unit-2 rounded-xl border border-border-hairline bg-white px-1 pt-3 pb-2 shadow-xs"
+                          className="theme-light flex flex-col items-center gap-unit-2 rounded-xl border border-border-hairline bg-white px-1 pt-3 pb-2 shadow-xs"
                         >
                           <span aria-hidden className="flex h-7 items-center [&_svg]:size-7">
                             <TechMark logo={tech?.logo} symbol={tech?.symbol ?? name.slice(0, 2)} />

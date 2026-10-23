@@ -51,7 +51,7 @@ export default function FinalCta() {
 
         <ul className="relative flex flex-wrap items-center justify-center gap-x-unit-3 gap-y-unit-2 border-t border-white/10 px-unit-6 py-unit-6 font-mono text-mono-meta tracking-widest text-on-primary-container uppercase">
           {finalCta.trust.flatMap((t, i) => [
-            ...(i > 0 ? [<li key={`sep-${i}`} aria-hidden className="text-canary-yellow">·</li>] : []),
+            ...(i > 0 ? [<li key={`sep-${i}`} aria-hidden className="text-canary-yellow [html[data-theme=dark]_&]:text-on-primary">·</li>] : []),
             <li key={t}>{t}</li>,
           ])}
         </ul>

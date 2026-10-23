@@ -17,7 +17,7 @@ function Pill({ children, featured }: { children: string; featured?: boolean }) 
       className={cn(
         "rounded-full px-3 py-1 font-sans text-body-sm font-medium",
         featured
-          ? "bg-[color-mix(in_srgb,var(--color-signal-green)_14%,white)] text-signal-green-ink"
+          ? "bg-[color-mix(in_srgb,var(--color-signal-green)_14%,var(--color-white))] text-signal-green-ink"
           : "bg-canary-yellow text-ink-black",
       )}
     >
@@ -82,7 +82,7 @@ function PriceRow({ offer: o, dark }: { offer: Offer; dark?: boolean }) {
           <span className={cn("font-sans text-body-sm", dark ? "text-on-primary-container" : "text-ink-muted")}>
             {pricingSection.timelineLabel}
           </span>
-          <Clock aria-hidden className={cn("size-4 shrink-0", dark ? "text-canary-yellow" : "text-ink-black")} />
+          <Clock aria-hidden className={cn("size-4 shrink-0", dark ? "text-canary-yellow [html[data-theme=dark]_&]:text-on-primary" : "text-ink-black")} />
         </div>
         <p className={cn("mt-1 font-sans text-body-sm font-semibold", dark ? "text-on-primary" : "text-ink-black")}>
           {o.timeline}

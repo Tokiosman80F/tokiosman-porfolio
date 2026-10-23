@@ -91,7 +91,7 @@ export function NavLinks({ links }: { links: NavLink[] }) {
               aria-current={current ? "true" : undefined}
               className={cn(
                 "block rounded-lg px-unit-3 py-1.5 font-mono text-mono-meta tracking-wider uppercase transition-colors",
-                current ? "font-bold text-ink-black" : "text-on-surface-variant hover:bg-white hover:text-ink-black",
+                current ? "font-bold text-on-accent" : "text-on-surface-variant hover:bg-white hover:text-ink-black",
               )}
             >
               {label}

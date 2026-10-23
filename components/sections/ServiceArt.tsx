@@ -41,7 +41,7 @@ export function BrowserArt() {
         </div>
         <p className="mt-4 text-center font-display text-[13px] leading-tight font-bold text-ink-black uppercase">
           I build websites that{" "}
-          <span className="rounded-xs border border-ink-black bg-canary-yellow px-0.5">close deals</span>
+          <span className="rounded-xs border border-ink-black bg-canary-yellow px-0.5 text-ink-black">close deals</span>
         </p>
         <div className="mx-auto mt-2 h-1 w-3/5 rounded-full bg-border-strong" />
         <div className="mx-auto mt-1 h-1 w-2/5 rounded-full bg-border-strong" />

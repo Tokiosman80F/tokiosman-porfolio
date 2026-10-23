@@ -37,8 +37,8 @@ function loadCal() {
   /* eslint-enable prefer-rest-params */
   window.Cal = cal;
   cal("init", { origin: url.origin });
-  // Light, like the site, with its ink as the brand colour; month view like the booking page
-  cal("ui", { theme: "light", cssVarsPerTheme: { light: { "cal-brand": "#121212" } }, layout: "month_view" });
+  // The site's ink as the brand colour in each theme; month view like the booking page
+  cal("ui", { cssVarsPerTheme: { light: { "cal-brand": "#121212" }, dark: { "cal-brand": "#F3F2ED" } }, layout: "month_view" });
   return cal;
 }
 
@@ -50,7 +50,8 @@ export function BookingModal() {
       const a = (e.target as Element).closest?.(`a[href="${site.bookingUrl}"]`);
       if (!a) return;
       e.preventDefault();
-      loadCal()("modal", { calLink, config: { layout: "month_view" } });
+      const theme = document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+      loadCal()("modal", { calLink, config: { layout: "month_view", theme } });
     };
     document.addEventListener("click", onClick);
     return () => document.removeEventListener("click", onClick);

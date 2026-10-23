@@ -34,10 +34,17 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
+      suppressHydrationWarning // data-theme is set by the inline script before React loads
       className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable} ${caveat.variable}`}
     >
       <head>
         {/* Without JS, Reveal never runs: show its children */}
+        {/* Theme before first paint: the saved choice, else the OS setting (ThemeToggle changes it) */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{var t=localStorage.getItem("theme");if(t!=="dark"&&t!=="light")t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.dataset.theme=t}catch(e){}`,
+          }}
+        />
         <noscript>
           <style>{"[data-reveal] > * { opacity: 1 !important; }"}</style>
         </noscript>

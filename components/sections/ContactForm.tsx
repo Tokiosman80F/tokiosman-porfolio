@@ -27,7 +27,7 @@ const initial: ContactState = { status: "idle" };
 const fieldClass = (invalid: boolean) =>
   cn(
     "mt-1.5 min-h-11 w-full rounded-lg border bg-paper-card px-unit-3 py-2.5 font-sans text-body-md text-ink-black placeholder:text-ink-muted",
-    invalid ? "border-[#b91c1c]" : "border-border-strong",
+    invalid ? "border-error" : "border-border-strong",
   );
 
 export function ContactForm({ crmReady }: { crmReady: boolean }) {
@@ -71,7 +71,7 @@ export function ContactForm({ crmReady }: { crmReady: boolean }) {
   const describe = (f: ContactField) => (errors[f] ? id(`${f}-error`) : undefined);
   const error = (f: ContactField) =>
     errors[f] && (
-      <p id={id(`${f}-error`)} className="mt-1 font-sans text-body-sm text-[#b91c1c]">
+      <p id={id(`${f}-error`)} className="mt-1 font-sans text-body-sm text-error">
         {errors[f]}
       </p>
     );
@@ -163,7 +163,7 @@ export function ContactForm({ crmReady }: { crmReady: boolean }) {
 
         <div aria-live="polite">
           {state.status === "error" && !pending && last && (
-            <p className="font-sans text-body-sm text-[#b91c1c]">
+            <p className="font-sans text-body-sm text-error">
               {c.error}{" "}
               <a href={mailtoHref(last)} className="font-semibold text-ink-black underline underline-offset-2">
                 {c.errorAction}
