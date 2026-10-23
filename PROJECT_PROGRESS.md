@@ -1682,3 +1682,17 @@ Live test (CDP): sequence correct at 1440 and 375, stops on "close deals" after 
 - The wider wordmark (plus the theme toggle from §55) overflowed narrow headers: fixed by the sizes above, and below 360px the navbar's "Book a call" shows only its calendar tile (label kept for screen readers; new `labelClassName` on PlanButton). No overflow at 320 / 375 / 768 / 1024 / 1280; axe 0.
 
 - Logo font changed again: Unbounded's heavy "s" read poorly, so Sora 700 (owner's pick from a side-by-side comparison), tracking-tight; `--font-sora` → `font-logo`. Header logo 17px on phones. No overflow at 320 / 360 / 375 / 768 / 1280; axe 0.
+
+## 61. Hero micro-interactions (2026-10-23)
+
+All user-triggered (hover / pointer), 300ms ease-out-quint, off with reduced motion; nothing new moves on its own.
+- Primary CTA: calendar icon tilts and grows. See Pricing: arrow nudges down.
+- Intro line: photo tilts, grows and gets a canary ring.
+- Proof strip: hovered value lifts, a canary underline draws in, the label darkens.
+- Client row: initial tile turns canary with an ink edge and offset shadow, tips -6°; name darkens.
+- Eyebrow (all sections): the dot turns into a diamond (the logo dot's move).
+- Outcome box: mouse hover flips to the next outcome (ends the automatic pass) and tips the box -2°.
+- Hero art (xl, fine pointer): pointer parallax via `HeroParallax` (--px/--py, rAF-batched); back range ±6/4px, front range and overlays ±16/10px, 700ms smoothing.
+- Verified with real mouse events in headless Edge (before/after captures, outcome flip, parallax transforms), axe 0 light 375/1440 and dark 1440, no console errors.
+
+- Removed again at the owner's request: the photo, proof-strip and client-row hover effects (back to static). Kept: CTA icons, eyebrow dot, outcome-box flip, hero art parallax.

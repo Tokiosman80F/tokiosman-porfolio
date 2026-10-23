@@ -31,14 +31,14 @@ export default function Hero() {
         </Heading>
         <p className="mb-unit-8 max-w-2xl font-sans text-body-lead leading-relaxed text-on-surface-variant">{hero.lead}</p>
         <div className="flex flex-wrap items-center justify-center gap-unit-4">
-          <Button href={primary.href} target="_blank" rel="noopener noreferrer">
-            <CalendarDays aria-hidden className="size-6 shrink-0" />
+          <Button href={primary.href} target="_blank" rel="noopener noreferrer" className="group">
+            <CalendarDays aria-hidden className="size-6 shrink-0 transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-rotate-12 group-hover:scale-110 motion-reduce:transition-none" />
             <span>{primary.label}</span>
             <span className="sr-only">(opens in a new tab)</span>
           </Button>
-          <Button variant="glow" href={secondary.href}>
+          <Button variant="glow" href={secondary.href} className="group">
             <span>{secondary.label}</span>
-            <ArrowDown aria-hidden className="size-6 shrink-0" />
+            <ArrowDown aria-hidden className="size-6 shrink-0 transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-y-1 motion-reduce:transition-none" />
           </Button>
         </div>
 

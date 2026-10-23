@@ -28,6 +28,12 @@ export function RotatingOutcome({ outcomes, after }: { outcomes: string[]; after
     return () => clearTimeout(t);
   }, [inView, reduce, steps, outcomes.length]);
 
+  // Hover (mouse): flip to the next outcome by hand; this ends the automatic pass
+  const next = () => {
+    setIndex((i) => (i + 1) % outcomes.length);
+    setSteps(outcomes.length);
+  };
+
   const prev = (index - 1 + outcomes.length) % outcomes.length;
   // The punctuation right after the box is glued to it, so it can't wrap onto a line alone
   const glue = after.match(/^\S+/)?.[0] ?? "";
@@ -37,7 +43,8 @@ export function RotatingOutcome({ outcomes, after }: { outcomes: string[]; after
       <span className="whitespace-nowrap">
         <span
           ref={ref}
-          className="relative inline-grid overflow-hidden rounded-sm border border-ink-black bg-canary-yellow px-2 align-bottom text-ink-black shadow-offset-sm"
+          onPointerEnter={(e) => e.pointerType === "mouse" && next()}
+          className="relative inline-grid overflow-hidden rounded-sm border border-ink-black bg-canary-yellow px-2 align-bottom text-ink-black shadow-offset-sm transition-[rotate] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-rotate-2 motion-reduce:transition-none"
         >
           {outcomes.map((o, i) => (
             <span

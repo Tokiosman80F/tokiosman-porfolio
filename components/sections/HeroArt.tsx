@@ -1,5 +1,6 @@
 import { hero } from "@/content/hero";
 import { CursorTag, StatusCard } from "./HeroArtBadges";
+import { HeroParallax } from "./HeroParallax";
 
 // Hero illustration (replaces the reference's mountain photo): a "mountain range" of website wireframes,
 // two peaks of browser windows framing an open valley where the headline sits, plus design-desk details
@@ -24,6 +25,11 @@ const front: Win[] = [
   { x: 1160, y: 170, w: 220, h: 300, v: "hero", front: true },
   { x: 1320, y: 280, w: 170, h: 250, v: "dashboard", front: true },
 ];
+
+const depth = {
+  back: "transition-transform duration-700 ease-out [transform:translate(calc(var(--px,0)*-6px),calc(var(--py,0)*-4px))]",
+  front: "transition-transform duration-700 ease-out [transform:translate(calc(var(--px,0)*-16px),calc(var(--py,0)*-10px))]",
+};
 
 // Traffic lights are mock-UI colours (allowed inside illustrations).
 const lights = ["fill-[#ef4444]", "fill-[#f59e0b]", "fill-[#10b981]"];
@@ -105,15 +111,17 @@ function Window({ x, y, w, h, v, front }: Win) {
 
 export function HeroArt() {
   return (
-    <div
-      aria-hidden
-      className="pointer-events-none absolute inset-x-0 top-0 hidden [mask-image:linear-gradient(to_bottom,black_40%,transparent_75%)] xl:block"
-    >
+    <HeroParallax className="pointer-events-none absolute inset-x-0 top-0 hidden [mask-image:linear-gradient(to_bottom,black_40%,transparent_75%)] xl:block">
       <svg viewBox="0 0 1440 560" className="block h-auto w-full" xmlns="http://www.w3.org/2000/svg">
-        {back.map((w, i) => (
-          <Window key={`b${i}`} {...w} />
-        ))}
+        {/* Pointer parallax (HeroParallax sets --px / --py): the back range drifts a little, the front range
+            and its overlays more, so the peaks separate in depth as the mouse moves */}
+        <g className={depth.back}>
+          {back.map((w, i) => (
+            <Window key={`b${i}`} {...w} />
+          ))}
+        </g>
 
+        <g className={depth.front}>
         {front.map((w, i) => (
           <Window key={`f${i}`} {...w} />
         ))}
@@ -132,7 +140,8 @@ export function HeroArt() {
             tag ends at x ≈ 270, inside the selection); status card on the right peak (longest ≈ x 1360) */}
         <CursorTag messages={hero.art.cursorTags} x={84} y={214} />
         <StatusCard messages={hero.art.statuses} x={1110} y={100} />
+        </g>
       </svg>
-    </div>
+    </HeroParallax>
   );
 }
