@@ -36,7 +36,7 @@ export default function FinalCta() {
               <PlanButton href={primary.href} label={primary.label} icon={CalendarDays} external dark />
               <a
                 href={secondary.href}
-                className="inline-flex items-center gap-unit-2 rounded-md border border-white/25 px-unit-3 py-2 font-sans text-body-sm font-medium text-on-primary transition-colors hover:bg-white/10 focus-visible:outline-white"
+                className="tap-target inline-flex items-center gap-unit-2 rounded-md border border-white/25 px-unit-3 py-2 font-sans text-body-sm font-medium text-on-primary transition-colors hover:bg-white/10 focus-visible:outline-white"
               >
                 {secondary.label}
                 <Eye aria-hidden className="size-4 shrink-0" />

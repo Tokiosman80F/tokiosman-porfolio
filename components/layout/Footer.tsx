@@ -39,7 +39,8 @@ function TileBand() {
   );
 }
 
-const linkClass = "font-sans text-body-sm text-on-surface-variant transition-colors hover:text-ink-black";
+// Below md each link is a 44px row (touch); from md the list spacing does the work
+const linkClass = "inline-flex min-h-11 min-w-11 items-center font-sans text-body-sm text-on-surface-variant transition-colors hover:text-ink-black md:min-h-0 md:min-w-0";
 const icons = { globe: Globe, calendar: CalendarDays };
 
 function ContactMark({ logo, icon }: Pick<FooterLink, "logo" | "icon">) {
@@ -60,7 +61,7 @@ function Column({ title, links }: FooterColumn) {
   return (
     <div>
       <h2 className="font-mono text-mono-tag tracking-widest text-ink-muted uppercase">{title}</h2>
-      <ul className={contact ? "mt-unit-4 space-y-unit-2" : "mt-unit-4 space-y-unit-3"}>
+      <ul className={contact ? "mt-unit-2 md:mt-unit-4 md:space-y-unit-2" : "mt-unit-2 md:mt-unit-4 md:space-y-unit-3"}>
         {links.map(({ label, href, external, logo, icon }) => (
           <li key={label}>
             <a
@@ -130,7 +131,7 @@ export default function Footer() {
           </p>
           <p>{footer.builtWith}</p>
           {/* "#top" scrolls to the top of the document (HTML spec); no id needed */}
-          <a href="#top" className="inline-flex items-center gap-1 self-start md:self-auto text-ink-black transition-colors hover:underline">
+          <a href="#top" className="tap-target inline-flex items-center gap-1 self-start md:self-auto text-ink-black transition-colors hover:underline">
             {footer.backToTop}
             <ArrowUp aria-hidden className="size-3.5" />
           </a>

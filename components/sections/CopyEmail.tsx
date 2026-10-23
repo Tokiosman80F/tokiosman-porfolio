@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { cn } from "@/lib/utils";
 
 // "Copy email address": copies to the clipboard and confirms for 2s (announced politely). Where the
 // clipboard is unavailable (insecure context, permission denied) it opens the mail app instead.
@@ -23,7 +24,7 @@ export function CopyEmail({ address, label, copiedLabel, className }: { address:
   };
 
   return (
-    <button type="button" onClick={copy} className={className}>
+    <button type="button" onClick={copy} className={cn("tap-target", className)}>
       <span aria-live="polite">{copied ? copiedLabel : label}</span>
       <span className="sr-only"> ({address})</span>
     </button>

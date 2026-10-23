@@ -15,7 +15,7 @@ type PlanButtonProps = {
 // Black button with a canary icon tile (pricing + process bento, from the user's reference).
 export function PlanButton({ href, label, icon: Icon, external, dark }: PlanButtonProps) {
   const className = cn(
-    "inline-flex shrink-0 items-center gap-unit-2 self-start rounded-md whitespace-nowrap border bg-ink-black py-1 pr-unit-3 pl-1 font-sans text-body-sm font-medium text-white transition-colors hover:bg-graphite-hover active:translate-y-px",
+    "tap-target inline-flex shrink-0 items-center gap-unit-2 self-start rounded-md whitespace-nowrap border bg-ink-black py-1 pr-unit-3 pl-1 font-sans text-body-sm font-medium text-white transition-colors hover:bg-graphite-hover active:translate-y-px",
     dark ? "border-surface-tint focus-visible:outline-white" : "border-ink-black",
   );
   const content = (

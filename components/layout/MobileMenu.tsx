@@ -65,7 +65,7 @@ export default function MobileMenu({ links }: { links: NavLink[] }) {
         aria-controls={PANEL_ID}
         aria-label={open ? "Close menu" : "Open menu"}
         onClick={() => setOpen((v) => !v)}
-        className="inline-flex size-10 items-center justify-center rounded-md border border-border-hairline bg-paper-card text-ink-black transition-colors hover:border-ink-black"
+        className="inline-flex size-11 items-center justify-center rounded-md border border-border-hairline bg-paper-card text-ink-black transition-colors hover:border-ink-black"
       >
         {open ? <X aria-hidden className="size-6" /> : <Menu aria-hidden className="size-6" />}
       </button>

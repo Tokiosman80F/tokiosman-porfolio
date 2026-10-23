@@ -184,6 +184,21 @@
   }
 }
 
+/* Touch: grow a small control's hit area to at least 44×44 without changing how it looks.
+   The element becomes position: relative; its ::after is the invisible, centred hit area. */
+@utility tap-target {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: max(100%, 44px);
+    height: max(100%, 44px);
+    translate: -50% -50%;
+  }
+}
+
 @keyframes blue-gradient-shift {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }

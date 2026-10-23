@@ -26,7 +26,7 @@ import { cn } from "@/lib/utils";
 const initial: ContactState = { status: "idle" };
 const fieldClass = (invalid: boolean) =>
   cn(
-    "mt-1.5 w-full rounded-lg border bg-paper-card px-unit-3 py-2.5 font-sans text-body-md text-ink-black placeholder:text-ink-muted",
+    "mt-1.5 min-h-11 w-full rounded-lg border bg-paper-card px-unit-3 py-2.5 font-sans text-body-md text-ink-black placeholder:text-ink-muted",
     invalid ? "border-[#b91c1c]" : "border-border-strong",
   );
 
@@ -153,7 +153,7 @@ export function ContactForm({ crmReady }: { crmReady: boolean }) {
         <button
           type="submit"
           disabled={pending}
-          className="inline-flex cursor-pointer items-center gap-unit-2 rounded-md border border-ink-black bg-ink-black py-1 pr-unit-3 pl-1 font-sans text-body-sm font-medium text-white transition-colors hover:bg-graphite-hover disabled:cursor-wait disabled:opacity-70"
+          className="tap-target inline-flex cursor-pointer items-center gap-unit-2 rounded-md border border-ink-black bg-ink-black py-1 pr-unit-3 pl-1 font-sans text-body-sm font-medium text-white transition-colors hover:bg-graphite-hover disabled:cursor-wait disabled:opacity-70"
         >
           <span aria-hidden className="flex size-7 items-center justify-center rounded-sm bg-canary-yellow text-ink-black">
             <ArrowRight className="size-4" />

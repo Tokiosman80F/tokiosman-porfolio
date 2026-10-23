@@ -16,7 +16,7 @@ export default function Logo({ size = "md", className }: LogoProps) {
     <Link
       href="/"
       aria-label="tokiosman. Home"
-      className={cn("group inline-flex items-baseline font-display font-bold tracking-tight text-ink-black lowercase", sizes[size], className)}
+      className={cn("tap-target group inline-flex items-baseline font-display font-bold tracking-tight text-ink-black lowercase", sizes[size], className)}
     >
       tokiosman
       <span

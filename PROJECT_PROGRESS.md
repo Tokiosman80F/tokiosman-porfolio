@@ -1595,3 +1595,13 @@ Live test (CDP): sequence correct at 1440 and 375, stops on "close deals" after 
 - **Honeypot** renamed `company` → `hp_leave_empty` (label "Leave this field empty") so autofill can't fill it and silently drop a real lead. Shared name in `lib/contact.ts` (`HONEYPOT`), with `mailtoHref()`.
 - Still open: real booking URL (`site.bookingUrl` = https://cal.com placeholder), Zoho credentials, Turnstile.
 - Verified live (headless Edge): validation unchanged, valid send → email fallback state, no console errors; axe 0 at 375.
+
+## 49. Adapt: touch targets and phone fixes (2026-10-23)
+
+- **`tap-target` utility** (`app/globals.css`): an invisible centred `::after` of at least 44×44 on small controls, so the hit area grows without changing the look. On: PlanButton, logo, Work "View Case Study", Process direction tabs + Redeploy, FAQ copy-email, contact secondary + submit, footer "Back to top". Elements using it must not need their own `::after`.
+- Menu toggle 40 → 44px; form fields, the SEO "try another search" pill: `min-h-11`.
+- **Footer links**: real 44px rows below md (`min-h-11 min-w-11`, list spacing dropped); unchanged from md.
+- **Proof strip labels**: 10 → 11px on phones.
+- **WhatsApp button**: hidden (invisible + transparent) until the visitor is 40% through the hero (`html[data-compact]`), so it never covers the hero buttons/proof strip; fades in after, hides again at the top.
+- Audit at 375 (every link/button/field, counting the ::after hit area): 36 under 44px → 0. Left: 10px captions in the Work cards' mock browser bars (Work kept as is).
+- Verified: no overflow, axe 0 violations at 1280 and 375.

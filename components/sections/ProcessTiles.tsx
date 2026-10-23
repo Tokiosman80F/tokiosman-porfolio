@@ -148,7 +148,7 @@ export function BuildTile({ className }: { className?: string }) {
               aria-pressed={i === index}
               onClick={() => select(i)}
               className={cn(
-                "flex-1 rounded-sm px-2 py-1.5 font-mono text-mono-tag transition-colors",
+                "tap-target flex-1 rounded-sm px-2 py-1.5 font-mono text-mono-tag transition-colors",
                 i === index ? "bg-white text-ink-black shadow-xs" : "text-ink-muted hover:text-ink-black",
               )}
             >
@@ -302,7 +302,7 @@ export function DeployTile({ className }: { className?: string }) {
           <button
             type="button"
             onClick={replay}
-            className="flex items-center gap-1.5 rounded-md border border-surface-tint px-unit-3 py-1.5 font-sans text-body-sm text-on-primary transition-colors hover:bg-white/10 focus-visible:outline-white"
+            className="tap-target flex items-center gap-1.5 rounded-md border border-surface-tint px-unit-3 py-1.5 font-sans text-body-sm text-on-primary transition-colors hover:bg-white/10 focus-visible:outline-white"
           >
             <RotateCw aria-hidden className="size-4 shrink-0" />
             {t.action}
@@ -368,7 +368,7 @@ export function SeoTile({ className }: { className?: string }) {
         <button
           type="button"
           onClick={next}
-          className="flex items-center gap-unit-3 rounded-full border border-border-hairline bg-white px-unit-4 py-2.5 text-left shadow-sm transition-colors hover:border-ink-black"
+          className="flex min-h-11 items-center gap-unit-3 rounded-full border border-border-hairline bg-white px-unit-4 py-2.5 text-left shadow-sm transition-colors hover:border-ink-black"
         >
           <GoogleIcon />
           <span className="min-w-0 flex-1 truncate font-sans text-body-sm text-ink-charcoal">

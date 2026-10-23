@@ -59,7 +59,7 @@ export default function Hero() {
         <dl className="mt-unit-12 grid w-full max-w-2xl grid-cols-3 divide-x divide-border-hairline rounded-2xl border border-border-hairline bg-white/80 py-unit-4 shadow-xs">
           {proof.map((p) => (
             <div key={p.label} className="flex flex-col-reverse items-center gap-1 px-1.5 sm:px-unit-2">
-              <dt className="text-center font-mono text-[10px] leading-tight tracking-wide text-ink-muted uppercase sm:text-[11px] sm:tracking-wider">{p.label}</dt>
+              <dt className="text-center font-mono text-[11px] leading-tight tracking-wide text-ink-muted uppercase sm:tracking-wider">{p.label}</dt>
               <dd className="font-display text-headline-sm font-bold text-ink-black sm:text-headline-md">{p.value}</dd>
             </div>
           ))}

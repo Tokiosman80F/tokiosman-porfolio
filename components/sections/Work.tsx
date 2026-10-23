@@ -89,7 +89,7 @@ function CaseFile({ project: p, index }: { project: Project; index: number }) {
             <a
               href={p.href}
               className={cn(
-                "mt-unit-8 inline-flex items-center gap-unit-2 font-sans text-body-md font-semibold hover:underline",
+                "tap-target mt-unit-8 inline-flex items-center gap-unit-2 font-sans text-body-md font-semibold hover:underline",
                 dark && "focus-visible:outline-white",
               )}
             >
