@@ -24,6 +24,8 @@ const homeJsonLd = [
     "@type": "ProfessionalService",
     name: `${site.person} · ${site.jobTitle}`,
     url: site.url,
+    logo: `${site.url}/logo.png`,
+    image: `${site.url}/logo.png`,
     description: site.description,
     email: site.email,
     telephone: site.phone,
