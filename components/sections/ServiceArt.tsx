@@ -2,6 +2,7 @@ import { ArrowUp, CalendarCheck, CreditCard, FileText, Mic, PhoneOff, UserPlus, 
 import { FigmaIcon } from "@/components/ui/brand-icons";
 import { serviceArt as art } from "@/content/services";
 import { cn } from "@/lib/utils";
+import { Globe } from "./Globe";
 
 // Decorative illustrations for the "What I build" cards (references: docs/what-we-build-1.png, -2.png).
 // Drawn in HTML/CSS with the design tokens. Each fills the card's art area (`relative`, fixed height)
@@ -179,49 +180,7 @@ export function CallArt() {
   );
 }
 
-/* 5 · Wireframe globe with client pins (bottom-right, partly cropped like the reference) */
-const pins: [number, number][] = [
-  [150, 135],
-  [255, 115],
-  [305, 205],
-  [195, 245],
-  [105, 225],
-];
-const pinTones = ["fill-ink-black", "fill-canary-yellow", "fill-signal-green", "fill-signal-blue", "fill-graphite"];
-
+/* 5 · Dotted 3D globe with client pins (bottom-right, partly cropped like the reference): see Globe.tsx */
 export function GlobeArt({ clients }: { clients: string[] }) {
-  return (
-    <svg viewBox="0 0 400 400" className={cn("absolute -right-16 -bottom-24 size-104 sm:size-120", lift)} aria-hidden>
-      <defs>
-        <radialGradient id="globe-fill" cx="35%" cy="30%" r="75%">
-          <stop offset="0%" stopColor="#3f444e" />
-          <stop offset="100%" stopColor="#121212" />
-        </radialGradient>
-      </defs>
-      <circle cx={200} cy={200} r={186} fill="none" strokeWidth={8} className="stroke-signal-blue/15" />
-      <circle cx={200} cy={200} r={180} fill="url(#globe-fill)" />
-      <g fill="none" strokeWidth={1} className="stroke-white/12">
-        {[-60, -30, 0, 30, 60].map((lat) => {
-          const rad = (lat * Math.PI) / 180;
-          return <ellipse key={lat} cx={200} cy={200 + 180 * Math.sin(rad)} rx={180 * Math.cos(rad)} ry={18 * Math.cos(rad)} />;
-        })}
-        {[0, 30, 60].map((lon) => (
-          <ellipse key={lon} cx={200} cy={200} rx={180 * Math.cos((lon * Math.PI) / 180)} ry={180} />
-        ))}
-      </g>
-      {pins.map(([x, y], i) => (
-        <g key={i}>
-          <circle cx={x} cy={y} r={15} strokeWidth={2} className={cn(pinTones[i % pinTones.length], "stroke-white")} />
-          <text
-            x={x}
-            y={y + 4}
-            textAnchor="middle"
-            className={cn("font-display text-[12px] font-bold", i === 1 ? "fill-ink-black" : "fill-white")}
-          >
-            {clients[i]?.[0]}
-          </text>
-        </g>
-      ))}
-    </svg>
-  );
+  return <Globe clients={clients} className={cn("absolute -right-6 -bottom-16 size-96 lg:size-104", lift)} />;
 }

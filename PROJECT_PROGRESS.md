@@ -1654,3 +1654,10 @@ Live test (CDP): sequence correct at 1440 and 375, stops on "close deals" after 
 - Verified light + dark at 1280 and 375: axe 0 violations, no overflow.
 
 - FAQ "Still have a question about your project?" card: new `plus` pattern kind (small plus signs), on-primary 25%, fading from the top-right. axe 0 (light 1280, dark 375).
+
+## 57. Animated 3D globe (2026-10-23)
+
+- "Anything and everything web" card: the flat SVG globe is replaced by `components/sections/Globe.tsx`, a canvas globe (no library): dotted sphere + graticule turning on a tilted axis, depth shading, rim glow; canary "home" point (GMT+6) with arcs and travelling pulses to the 5 client pins, which turn behind the sphere. Pin positions are decorative (no map).
+- Runs only while on screen and the tab is visible (IntersectionObserver + visibilitychange), DPR-capped at 2, one still frame with reduced motion. Verified animating in light and dark, no console errors.
+
+- Globe pins: illustrated people instead of initials (owner's choice over stock photos). Five hand-built SVGs in `public/avatars/` (varied skin tones and hair, backgrounds in the pin colours), drawn clipped into each pin with an ink ring; the letter is the fallback while loading. Not photos of clients: swap in real ones (with permission) by replacing the files.
