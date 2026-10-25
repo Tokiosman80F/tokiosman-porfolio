@@ -55,7 +55,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
           <section id="case" className="px-page-pad-mobile pt-28 pb-unit-12 lg:px-page-pad-desktop lg:pt-36 lg:pb-unit-16">
             <div className="mx-auto max-w-page">
               <nav aria-label="Breadcrumb" className="mb-unit-6 flex items-center justify-between gap-unit-4 font-mono text-mono-meta tracking-wider uppercase">
-                <Link href="/#work" className="tap-target group inline-flex items-center gap-unit-2 text-ink-black hover:underline">
+                <Link href="/work" className="tap-target group inline-flex items-center gap-unit-2 text-ink-black hover:underline">
                   <ArrowLeft aria-hidden className="size-4 transition-transform group-hover:-translate-x-0.5 motion-reduce:transition-none" />
                   {t.back}
                 </Link>

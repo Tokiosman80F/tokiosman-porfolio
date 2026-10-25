@@ -55,8 +55,20 @@ export const workSection = {
   title: "Case studies: Next.js websites and web apps",
   lead: "Real projects for startups and growing businesses: custom websites, dashboards, and AI integrations, from design to launch.",
   aside: "SELECTED PROJECTS · 2024–2026",
-  // "#" = placeholders until case-study pages / an archive exist (tracked in PROJECT_PROGRESS.md).
-  cta: { label: "Explore All 24+ Shipped Archives", href: "#" },
+  cta: { label: "Explore All 24+ Shipped Archives", href: "/work" },
+};
+
+// /work: every case file in one grid
+export const archivePage = {
+  meta: {
+    title: "All case studies: Next.js websites and web apps",
+    description: "Every shipped project in one place: custom websites, dashboards and AI integrations for startups and growing businesses.",
+  },
+  back: "Home",
+  eyebrow: "CASE STUDIES · THE ARCHIVE",
+  title: "Everything I've shipped",
+  lead: "Websites, dashboards and AI integrations, from design to launch. Open any case file for the full story.",
+  view: "View Case Study",
 };
 
 export const projects: Project[] = [

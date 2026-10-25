@@ -104,7 +104,7 @@ export default function Footer() {
                       target="_blank"
                       rel="me noopener"
                       aria-label={`${site.person} on ${s.name} (opens in a new tab)`}
-                      className="flex size-10 items-center justify-center rounded-md border border-border-hairline bg-white shadow-xs transition-colors hover:border-ink-black"
+                      className="theme-light flex size-10 items-center justify-center rounded-md border border-border-hairline bg-white shadow-xs transition-colors hover:border-ink-black"
                     >
                       <Image src={`/logos/${s.logo}.svg`} alt="" width={20} height={20} unoptimized className="size-5 object-contain" />
                     </a>
