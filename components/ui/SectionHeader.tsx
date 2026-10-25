@@ -9,11 +9,13 @@ type SectionHeaderProps = {
   aside?: ReactNode;
   align?: "start" | "center";
   titleClassName?: string;
+  /** h1 on pages where the section header is the page title */
+  titleAs?: "h1" | "h2";
 };
 
 // Section intro: eyebrow, title and lead form one tight group (16px steps), set 48 → 64px apart from
 // the content below. The aside (a meta pill) ends the row on md+, bottom-aligned with the lead.
-export function SectionHeader({ eyebrow, title, lead, aside, align = "start", titleClassName }: SectionHeaderProps) {
+export function SectionHeader({ eyebrow, title, lead, aside, align = "start", titleClassName, titleAs }: SectionHeaderProps) {
   const center = align === "center";
   return (
     <div
@@ -24,7 +26,7 @@ export function SectionHeader({ eyebrow, title, lead, aside, align = "start", ti
     >
       <div className={cn("flex flex-col gap-unit-4", center ? "items-center" : "items-start")}>
         {eyebrow}
-        <Heading className={cn("max-w-4xl text-balance", titleClassName)}>{title}</Heading>
+        <Heading as={titleAs} className={cn("max-w-4xl text-balance", titleClassName)}>{title}</Heading>
         {lead && <p className="max-w-xl font-sans text-body-lead text-on-surface-variant">{lead}</p>}
       </div>
       {aside}
