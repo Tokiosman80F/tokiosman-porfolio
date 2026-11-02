@@ -226,6 +226,13 @@
     scroll-padding-top: 5rem; /* floating navbar (0.75–1rem + 3.5rem): anchor jumps land below it */
   }
 
+  /* Section links glide instead of jumping. Next turns this off for page changes (data-scroll-behavior on <html>). */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
   body {
     overscroll-behavior: none;
   }
@@ -233,6 +240,35 @@
   :focus-visible {
     outline: 2px solid var(--color-ink-black);
     outline-offset: 2px;
+  }
+}
+
+/* Mobile dock (MobileDock): the canary tile squashes as it lands, the new icon hops, and a hairline fills
+   with the page's scroll position (hidden where scroll-driven animations aren't supported) */
+@keyframes dock-squash {
+  0% { scale: 1 1; }
+  30% { scale: 1.12 0.86; }
+  65% { scale: 0.96 1.06; }
+  100% { scale: 1 1; }
+}
+@keyframes dock-icon-hop {
+  0% { translate: 0 0; rotate: 0deg; scale: 0.8; }
+  45% { translate: 0 -5px; rotate: -10deg; scale: 1.18; }
+  100% { translate: 0 0; rotate: 0deg; scale: 1; }
+}
+@keyframes dock-progress {
+  from { scale: 0 1; }
+  to { scale: 1 1; }
+}
+.dock-progress {
+  display: none;
+}
+@supports (animation-timeline: scroll()) {
+  .dock-progress {
+    display: block;
+    transform-origin: left;
+    animation: dock-progress linear both;
+    animation-timeline: scroll(root);
   }
 }
 

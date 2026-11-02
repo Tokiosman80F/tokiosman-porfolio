@@ -19,23 +19,58 @@ import { cn } from "@/lib/utils";
 type Chip = { left: number; width: number; visible: boolean; slide: boolean };
 
 // Scroll-spy, shared with the mobile dock: the href of the linked section crossing the middle band of the
-// viewport, or null over a section with no link.
+// viewport, or null over a section with no link. Clicking a section link marks it straight away and holds it
+// until the smooth scroll settles, so the highlight goes to the target instead of stopping at every section
+// on the way.
 export function useActiveSection(links: NavLink[]) {
   const [active, setActive] = useState<string | null>(null);
   useEffect(() => {
     // Links are "/#id"; sections are matched by their "#id" part
     const linked = new Map(links.map((l) => [l.href.slice(l.href.indexOf("#")), l.href]));
+    let seen: string | null = null; // what the scroll position says, even while a click holds the highlight
+    let held = false;
+    let timer: ReturnType<typeof setTimeout>;
+
     const io = new IntersectionObserver(
       (entries) => {
         for (const e of entries) {
           if (!e.isIntersecting) continue;
-          setActive(linked.get(`#${e.target.id}`) ?? null);
+          seen = linked.get(`#${e.target.id}`) ?? null;
+          if (!held) setActive(seen);
         }
       },
       { rootMargin: "-45% 0px -50% 0px" },
     );
     document.querySelectorAll("main section[id]").forEach((s) => io.observe(s));
-    return () => io.disconnect();
+
+    const release = () => {
+      held = false;
+      setActive(seen);
+      window.removeEventListener("scroll", onScroll);
+    };
+    const onScroll = () => {
+      clearTimeout(timer);
+      timer = setTimeout(release, 150); // the scroll has settled
+    };
+    const onClick = (e: MouseEvent) => {
+      if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      const href = (e.target as Element).closest?.("a[href]")?.getAttribute("href") ?? "";
+      const hash = href.slice(href.indexOf("#"));
+      if (!linked.has(hash) || !document.querySelector(hash)) return; // other link, or the section isn't on this page
+      held = true;
+      setActive(linked.get(hash)!);
+      window.addEventListener("scroll", onScroll, { passive: true });
+      clearTimeout(timer);
+      timer = setTimeout(release, 400); // already there: no scroll will come
+    };
+    document.addEventListener("click", onClick);
+
+    return () => {
+      io.disconnect();
+      clearTimeout(timer);
+      document.removeEventListener("click", onClick);
+      window.removeEventListener("scroll", onScroll);
+    };
   }, [links]);
   return active;
 }

@@ -1742,6 +1742,10 @@ All user-triggered (hover / pointer), 300ms ease-out-quint, off with reduced mot
 - Update, section 68: the case studies are back on with the first real project; the placeholders are gone.
 - No analytics, so no cookie banner. Still open: auto-reply and lead notification (needs an email provider), Vercel Firewall, and the account-level items on the launch checklist (2FA, domain lock, Search Console, client logo permissions).
 
+## 70. Smooth section scrolling and a livelier mobile dock (2026-11-02)
+
+- Section links now scroll smoothly, and a clicked link's highlight goes straight to its target on desktop and mobile. The dock gained a sliding tile that squashes as it lands, an icon hop, a press-in and a scroll progress hairline. Details in DESIGN.md (Motion).
+
 ## 69. Fewer booking buttons (2026-11-02)
 
 - The owner found the booking CTA too repetitive. Home page: 12 links to 6 (removed services list aside, About, FAQ card, Custom Project card, footer row). Service pages: 7 to 4 (one button under the plans instead of one per plan). Rule recorded in DESIGN.md.
