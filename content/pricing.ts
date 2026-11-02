@@ -22,7 +22,7 @@ export type Offer = {
   more?: { label: string; href: string };
 };
 
-export type CustomOffer = Pick<Offer, "name" | "price" | "tagline" | "cta">;
+export type CustomOffer = Pick<Offer, "name" | "price" | "tagline" | "cta" | "more">;
 
 export const pricingSection = {
   eyebrow: "SERVICES · FIXED SCOPE · FIXED PRICE",
@@ -112,4 +112,5 @@ export const customOffer: CustomOffer = {
     "Tell me what you need and I'll send a clear quote within 24 hours.",
   ],
   cta: bookCall,
+  more: { label: "How custom projects work", href: "/services/custom-projects" },
 };

@@ -1417,6 +1417,248 @@ export const servicePages: ServicePage[] = [
     },
     cta: { label: "Get help on WhatsApp", href: site.whatsapp },
   },
+  // DRAFT for the owner's review, shaped by docs/competitor-research-custom-projects.md. Proposals, not yet
+  // confirmed: the three starting prices, the $500 paid scoping step and taking on AI-built apps.
+  {
+    slug: "custom-projects",
+    summary: "A job that isn't on the price list: a clear scope and a fixed quote within 24 hours.",
+    art: "call",
+    name: "Custom projects",
+    meta: {
+      title: "Custom Web Development Projects, from $500",
+      description:
+        "Landing pages, integrations, Next.js upgrades and app rescues, built by me, Toki Osman. Tell me the job and get a written scope and fixed quote in 24 hours.",
+    },
+    hero: {
+      eyebrow: "Service · Custom projects",
+      title: "Not on my price list? Tell me the job and get a fixed quote",
+      lead: "Landing pages, integrations, upgrades and apps that got stuck halfway. Tell me what you need, and within 24 hours of our call you get a written scope and one fixed price. You talk to me, the person doing the work, the whole way through.",
+      facts: ["From $500", "Quote within 24 hours", "You own the code"],
+    },
+    explainer: {
+      title: "Two ways to a fixed price",
+      lead: "A price is only worth trusting if the job is clear enough to price. So I tell you which case you're in.",
+      paragraphs: [
+        "If the job is clear after one conversation, you get the written scope and the quote within 24 hours, and the call costs nothing.",
+        "Some jobs aren't clear yet: an unfamiliar codebase, or an idea with open questions. Guessing would mean a padded price or a surprise later, so I suggest a short paid scoping step instead. You keep the written scope either way, and you're free to take it to another developer.",
+      ],
+      flows: [
+        {
+          label: "Route A",
+          title: "The job is clear",
+          steps: ["Free 30-minute call", "Written scope, including what's left out", "Fixed quote within 24 hours", "You decide, with nothing paid so far"],
+        },
+        {
+          label: "Route B",
+          title: "The job isn't clear yet",
+          steps: ["Free 30-minute call", "Paid scoping: $500, about 1 week", "Written scope that's yours to keep", "Fixed quote, with the $500 deducted if we go ahead"],
+        },
+      ],
+    },
+    audience: {
+      title: "Who it's for",
+      items: [
+        {
+          title: "You know the job, and no package fits",
+          text: "A single page, one connection or one fix. You need that job done well, not a full website plan.",
+        },
+        {
+          title: "You have something half-built",
+          text: "A previous developer moved on, or an AI builder got you most of the way. You want to keep what works and finish the rest.",
+        },
+        {
+          title: "You've outgrown your tools",
+          text: "A process that no off-the-shelf tool quite fits, and you'd like an honest view on whether custom work is worth it.",
+        },
+      ],
+    },
+    issues: {
+      title: "Jobs I can take on",
+      lead: "If yours isn't here, ask anyway. If it isn't something I do well, I'll tell you on the call.",
+      items: [
+        {
+          name: "A landing page for one campaign",
+          signs: "An ad or launch is coming up, and your main site is too slow or too hard to change in time.",
+          fix: "One fast page built around a single action, connected to your form, CRM or booking tool.",
+        },
+        {
+          name: "A connection no plugin covers",
+          signs: "Two tools should talk to each other, but there's no built-in option, or the plugin can't follow your rules.",
+          fix: "A direct connection through their APIs, with error alerts and a written note on how it works.",
+        },
+        {
+          name: "An old Next.js version",
+          signs: "Security warnings, packages that won't update, and every change feels risky.",
+          fix: "A step-by-step upgrade on a preview link, checked page by page before it replaces the live site.",
+        },
+        {
+          name: "An app stuck in Lovable or Bolt",
+          signs: "The demo works, but the last features keep breaking, and you aren't sure your data is safe.",
+          fix: "I review the code, logins and database access rules, then tell you what to keep, fix or rebuild.",
+        },
+        {
+          name: "A project another developer left",
+          signs: "Nobody can explain how it works, and small changes break other things.",
+          fix: "A review first, then fixes in priority order and a handoff document. If a rebuild is cheaper, I'll say so.",
+        },
+        {
+          name: "A small internal tool",
+          signs: "One spreadsheet runs an important part of the business, and only one person understands it.",
+          fix: "A simple tool with logins for that one process. For anything bigger, see my web app plans.",
+        },
+      ],
+    },
+    benefits: {
+      title: "What you get in writing before you pay",
+      items: [
+        { title: "What's included", text: "The pages, features and connections, listed one by one, so we both know what done means." },
+        { title: "What's left out", text: "Anything you might assume is included but isn't, so it can't surprise you later." },
+        { title: "One fixed price", text: "The total for that scope, plus any fees you'd pay to other services, such as hosting." },
+        { title: "The timeline", text: "When work starts and when you'll have it, with the steps in between." },
+        { title: "How changes work", text: "Anything new is quoted before I work on it, so the price never moves without your OK." },
+        { title: "What happens after launch", text: "How long support lasts and what's covered, so nothing is unclear on launch day." },
+      ],
+    },
+    plans: {
+      title: "Starting prices, by size of job",
+      lead: "So you can tell if we're in the same range before you book. Your quote is one fixed price for your exact scope.",
+      items: [
+        {
+          name: "Small",
+          pricePrefix: "From",
+          price: "$500",
+          timeline: "3–7 days",
+          tagline: "One clear job, done properly.",
+          features: [
+            "A landing page, one integration or a focused fix",
+            "Written scope and fixed quote",
+            "Tested on a preview link",
+            "A short handoff document",
+            "14 days of support",
+          ],
+        },
+        {
+          name: "Medium",
+          pricePrefix: "From",
+          price: "$2,000",
+          timeline: "2–3 weeks",
+          tagline: "Finish, fix or extend what you already have.",
+          featured: true,
+          features: [
+            "Everything in Small",
+            "A code review before I quote the work",
+            "New features or a Next.js upgrade",
+            "Finishing an AI-built or inherited app",
+            "A progress update every working day",
+            "30 days of support",
+          ],
+        },
+        {
+          name: "Large",
+          pricePrefix: "From",
+          price: "$4,500",
+          timeline: "4+ weeks",
+          tagline: "Something new that doesn't fit a standard plan.",
+          features: [
+            "Everything in Medium",
+            "Work planned in milestones you test one by one",
+            "A clickable prototype of the key screens",
+            "Several tools or user types working together",
+            "30 days of support",
+          ],
+        },
+      ],
+      notes: [
+        "Payment: 50% to start, 50% on launch, via Payoneer",
+        "Hosting and third-party fees are paid by you, in your own accounts",
+        "Changes to the agreed scope are quoted before any work on them",
+      ],
+    },
+    compare: {
+      title: "Marketplace gig, me or an agency?",
+      lead: "An honest comparison, based on what freelancers and agencies published in November 2026. Your quote depends on your scope.",
+      columns: ["Marketplace gig", "Me", "Agency"],
+      highlight: 1,
+      rows: [
+        { label: "Price", values: ["Varies, often \"contact for pricing\"", "From $500, fixed", "Often $10k–$50k+ for a first version"] },
+        { label: "Getting a firm price", values: ["Varies by seller", "Within 24 hours of the call", "Often after paid discovery: roughly $4,000 and 2–3 weeks"] },
+        { label: "Who you talk to", values: ["Whoever took the gig", "The developer, directly", "Usually a project manager"] },
+        { label: "Who owns the code", values: ["Many listings don't say", "You do", "Usually you, check the contract"] },
+        { label: "Best for", values: ["A small, well-defined task", "One clear job or a first version", "Big teams, regulated or round-the-clock systems"] },
+      ],
+      note: "I'm one person, and that's a limit as well as a benefit. If you need a team, round-the-clock cover or a heavily regulated build, an agency is the better choice and I'll tell you so on the call.",
+    },
+    included: {
+      title: "In every custom project",
+      items: [
+        "A written scope and fixed price before work starts",
+        "You deal with me from the first call to launch",
+        "A preview link to test as it's built",
+        "A written progress update every working day",
+        "The code and accounts in your name",
+        "A handoff document explaining how it all works",
+      ],
+    },
+    process: {
+      title: "How it works",
+      lead: "Route A, the usual path. Timings depend on the job, and your quote gives the real dates.",
+      steps: [
+        { step: "Free call", when: "Day 0", text: "You tell me the job. I ask questions and tell you if I'm the right person for it." },
+        { step: "Scope and quote", when: "Within 24 hours", text: "The written scope, the fixed price and the dates, sent to you to review." },
+        { step: "Deposit and start", when: "When you say yes", text: "You pay 50%, and I start on the date in the quote." },
+        { step: "Build and test", when: "Days to weeks", text: "I build it on a preview link, and you see progress and give feedback as it happens." },
+        { step: "Launch and handoff", when: "On the agreed date", text: "It goes live, you pay the other 50%, and you get the handoff document and support." },
+      ],
+    },
+    scope: {
+      needTitle: "What I need from you",
+      need: [
+        "A description of the job, even a rough one",
+        "Examples, screenshots or a recording of the problem",
+        "Access to the code or accounts involved, if there are any",
+        "One person who can give feedback and make decisions",
+        "The 50% deposit",
+      ],
+      notTitle: "Not a good fit",
+      not: [
+        "Native iOS or Android apps",
+        "Open-ended hourly work with no agreed scope",
+        "White-label work for agencies",
+        "Systems that need a large team or round-the-clock cover",
+      ],
+    },
+    stack: { title: "Built with", names: ["Next.js", "TypeScript", "Node.js", "PostgreSQL", "Supabase", "Stripe", "Zoho CRM", "Docker"] },
+    faq: {
+      title: "Questions about custom projects",
+      items: [
+        {
+          q: "Can you really give a fixed price in 24 hours?",
+          a: "Yes, when the job is clear after our call. When it isn't, I won't guess: I'll say so and suggest the paid scoping step, so the price you get is one I can stand behind.",
+        },
+        {
+          q: "What does the paid scoping step include?",
+          a: "About a week of work for $500: I review your code or idea, answer the open questions and write the scope, then give you a fixed quote. The $500 comes off the price if we go ahead, and the written scope is yours either way.",
+        },
+        {
+          q: "Can you take over an app built with Lovable, Bolt or another AI tool?",
+          a: "Usually, yes. I review it first, especially the logins and who can read which data, because those are common weak spots in these apps. Then I tell you whether to fix it or rebuild it.",
+        },
+        {
+          q: "What if I need changes during the project?",
+          a: "Small adjustments are part of the work. Anything new is quoted first, so the price never changes without your OK.",
+        },
+        {
+          q: "Who owns the code?",
+          a: "You do. The code, the database and the hosting accounts are yours, and the handoff document means another developer could pick it up.",
+        },
+        {
+          q: "Is my job too small?",
+          a: "Probably not, but below about $500 a job rarely justifies a scope and a quote. If a built-in setting or an existing tool can do it, I'll tell you on the call and you won't need me.",
+        },
+      ],
+    },
+    cta: bookCall,
+  },
 ];
 
 export const servicePageHref = (p: ServicePage) => `/services/${p.slug}`;

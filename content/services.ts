@@ -25,6 +25,7 @@ export const serviceMenu = {
     { title: "Build something new", slugs: ["nextjs-website-development", "web-app-development", "headless-wordpress-nextjs"] },
     { title: "Add to your site", slugs: ["ai-chatbot-for-website", "crm-payments-automation"] },
     { title: "Keep it safe", slugs: ["website-maintenance", "wordpress-malware-removal"] },
+    { title: "Something else", slugs: ["custom-projects"] },
   ],
 };
 

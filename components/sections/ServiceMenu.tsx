@@ -103,6 +103,17 @@ const icons: Record<string, Art> = {
       <path d="m22.5 21.5 5 5" stroke="#b91c1c" strokeWidth="1.6" strokeLinecap="round" />
     </>,
   ),
+  // a written scope with a canary plus: something that isn't on the list
+  "custom-projects": svg(
+    <>
+      <rect x="5" y="3.5" width="19" height="25" rx="3" fill="#fff" stroke="#121212" strokeWidth="1.2" />
+      <rect x="9" y="8.5" width="11" height="2" rx="1" fill="#121212" />
+      <rect x="9" y="13" width="8" height="2" rx="1" fill="#cbd5e1" />
+      <rect x="9" y="17" width="6" height="2" rx="1" fill="#60A5FA" />
+      <circle cx="23" cy="23" r="6" fill="#FDF175" stroke="#121212" strokeWidth="1.2" />
+      <path d="M23 20v6M20 23h6" stroke="#121212" strokeWidth="1.6" strokeLinecap="round" />
+    </>,
+  ),
 };
 
 // The realistic illustration for each service, the same one its page leads with

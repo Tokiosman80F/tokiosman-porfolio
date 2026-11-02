@@ -1725,3 +1725,8 @@ All user-triggered (hover / pointer), 300ms ease-out-quint, off with reduced mot
 - Verified: frames 250ms → 1.2s (reveal, then fade), same-session navigation skips it, desktop display none, toggle hover/click frames, axe 0, no console errors.
 
 - Loader redone at the owner's request (full name, bigger animation): "Toki" rises letter by letter (Sora, clamp 60–96px), a canary highlight box with ink edge and offset shadow sweeps open and "Osman" rises inside it, the canary dot pops, "Full-Stack Developer · Design to deploy" fades up, a canary bar fills across the bottom; exit is a curtain lift (-100%, 700ms ease-in-out) instead of a fade (fade with reduced motion). Name and title from `content/site.ts`. Min 2.3s, max 3.2s after hydration. New keyframes `splash-rise`, `splash-sweep`, `splash-fade` (`splash-letter` removed). Verified frame by frame in light and dark at 375.
+
+## 66. Custom projects page (2026-11-02)
+
+- `/services/custom-projects`: a new entry in `content/service-pages.ts` on the existing service page template (no new components), shaped by `docs/competitor-research-custom-projects.md`. Linked from the footer, the Pricing custom card and the "Every service" list (new "Something else" group + icon).
+- All copy is DRAFT. Awaiting the owner's decision: the starting prices ($500 / $2,000 / $4,500), the $500 paid scoping step, and offering to take on AI-built apps.
