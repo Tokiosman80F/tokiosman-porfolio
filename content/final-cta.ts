@@ -1,4 +1,5 @@
 import type { HighlightedText } from "@/components/ui/Highlight";
+import { caseStudiesLive } from "./projects";
 import { site } from "./site";
 
 // Source: docs/cta.md (verbatim; main headline, not the alternative).
@@ -9,7 +10,7 @@ export const finalCta = {
   title: ["Have a project in mind but ", { highlight: "unsure", color: "green" }, " where to start?"] satisfies HighlightedText,
   lead: "One free 30-minute call is all it takes. We'll talk through your goals, and I'll tell you what to build, how long it takes, and what it costs, with a fixed quote within 24 hours. No pressure, no obligation.",
   primary: { label: "Book a free 30-min call", href: site.bookingUrl },
-  secondary: { label: "See my work", href: "/#work" },
+  secondary: caseStudiesLive ? { label: "See my work", href: "/#work" } : { label: "See my services", href: "/#all-services" },
   trust: ["Fixed price", "Direct with the developer", "Launch in 2–4 weeks"],
 };
 
@@ -42,6 +43,8 @@ export const contactForm = {
   error: "Your message didn't go through. Nothing you typed is lost:",
   errorAction: "Email this message instead",
   honeypot: "Leave this field empty",
+  // DRAFT: no pre-ticked box; sending is the agreement, and the link says what happens to the data
+  consent: { before: "By sending, you agree to the", link: "Privacy Policy", href: "/privacy" },
   validation: {
     name: "Please enter your name.",
     email: "Please enter a valid email address.",

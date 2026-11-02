@@ -25,7 +25,7 @@ export function MobileDock({ links }: { links: NavLink[] }) {
       aria-label="Sections"
       className="fixed inset-x-0 bottom-[max(0.75rem,env(safe-area-inset-bottom))] z-50 flex justify-center px-page-pad-mobile md:hidden"
     >
-      <ul className="grid w-full max-w-md grid-cols-5 gap-1 rounded-2xl border border-border-hairline bg-white/90 p-1.5 shadow-lg backdrop-blur-md">
+      <ul className="grid w-full max-w-md auto-cols-fr grid-flow-col gap-1 rounded-2xl border border-border-hairline bg-white/90 p-1.5 shadow-lg backdrop-blur-md">
         {links.map(({ label, href }) => {
           const Icon = icons[href] ?? LayoutGrid;
           const current = href === active;

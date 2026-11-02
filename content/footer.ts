@@ -1,3 +1,4 @@
+import { caseStudiesLive } from "./projects";
 import { site } from "./site";
 
 // Source: docs/footer.md (verbatim).
@@ -22,7 +23,7 @@ export const footer = {
       links: [
         { label: "Services", href: "/#services" },
         { label: "About", href: "/#about" },
-        { label: "Work", href: "/#work" },
+        ...(caseStudiesLive ? [{ label: "Work", href: "/#work" }] : []),
         { label: "Pricing", href: "/#pricing" },
         { label: "FAQ", href: "/#faq" },
         { label: "Blogs", href: "/blogs" },
@@ -52,5 +53,10 @@ export const footer = {
   ] satisfies FooterColumn[],
   // Bottom bar: "© {year} {copyright}" (the year is set at build time)
   copyright: "Toki Osman. All rights reserved.",
+  legal: [
+    { label: "Privacy", href: "/privacy" },
+    { label: "Terms", href: "/terms" },
+    { label: "Cookies", href: "/privacy#cookies" },
+  ],
   backToTop: "Back to top",
 };

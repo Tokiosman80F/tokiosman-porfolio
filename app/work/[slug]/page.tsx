@@ -11,7 +11,7 @@ import { outcomeIcons, tones } from "@/components/sections/Work";
 import { Heading } from "@/components/ui/Heading";
 import { Section } from "@/components/ui/Section";
 import { about } from "@/content/about";
-import { caseStudyPage as t, projectHref, projects } from "@/content/projects";
+import { caseStudiesLive, caseStudyPage as t, projectHref, projects } from "@/content/projects";
 import { site } from "@/content/site";
 import { cn } from "@/lib/utils";
 
@@ -24,10 +24,10 @@ import { cn } from "@/lib/utils";
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return projects.map((p) => ({ slug: p.slug }));
+  return caseStudiesLive ? projects.map((p) => ({ slug: p.slug })) : [];
 }
 
-const find = (slug: string) => projects.findIndex((p) => p.slug === slug);
+const find = (slug: string) => (caseStudiesLive ? projects.findIndex((p) => p.slug === slug) : -1);
 const titleCase = (s: string) => s.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase());
 
 export async function generateMetadata({ params }: PageProps<"/work/[slug]">): Promise<Metadata> {

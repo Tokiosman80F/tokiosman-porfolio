@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
@@ -9,7 +10,7 @@ import { outcomeIcons, tones } from "@/components/sections/Work";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Section } from "@/components/ui/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { archivePage as t, projectHref, projects } from "@/content/projects";
+import { archivePage as t, caseStudiesLive, projectHref, projects } from "@/content/projects";
 import { site } from "@/content/site";
 import { cn } from "@/lib/utils";
 
@@ -27,6 +28,7 @@ export const metadata: Metadata = {
 const num = (i: number) => String(i + 1).padStart(2, "0");
 
 export default function WorkArchivePage() {
+  if (!caseStudiesLive) notFound();
   return (
     <>
       <Header />

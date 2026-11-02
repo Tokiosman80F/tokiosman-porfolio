@@ -28,6 +28,10 @@ export type Project = {
 
 export const projectHref = (p: Project) => `/work/${p.slug}`;
 
+// The projects below are template placeholders (PRODUCT.md), so the Work section, its links and every /work
+// page stay off until they are real. Replace the content, then set this to true.
+export const caseStudiesLive = false;
+
 export const caseStudyPage = {
   back: "All case studies",
   scope: "What I did",
