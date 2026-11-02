@@ -145,12 +145,14 @@ export default function Work() {
           <CaseFile key={p.client} project={p} index={i} />
         ))}
       </ol>
-      <div className="mt-unit-12 text-center">
-        <Button variant="glow" href={workSection.cta.href} className="font-mono text-mono-meta tracking-wider text-ink-black">
-          <span>{workSection.cta.label}</span>
-          <ArrowRight aria-hidden className="size-6 shrink-0" />
-        </Button>
-      </div>
+      {projects.length > 1 && (
+        <div className="mt-unit-12 text-center">
+          <Button variant="glow" href={workSection.cta.href} className="font-mono text-mono-meta tracking-wider text-ink-black">
+            <span>{workSection.cta.label}</span>
+            <ArrowRight aria-hidden className="size-6 shrink-0" />
+          </Button>
+        </div>
+      )}
     </Section>
   );
 }

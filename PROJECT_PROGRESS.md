@@ -1739,4 +1739,12 @@ All user-triggered (hover / pointer), 300ms ease-out-quint, off with reduced mot
 - Security headers and CSP in `next.config.ts`, `public/.well-known/security.txt`, custom `app/not-found.tsx`.
 - `/privacy` and `/terms` (`content/legal.ts`, `components/layout/LegalPage.tsx`), linked from the footer and in the sitemap. DRAFT: `// PROPOSED` comments mark terms the owner has not confirmed (refunds, quote validity, payment window, portfolio right, guarantee exclusions, liability, governing law). Needs a lawyer's review.
 - Redaxify renamed Reduxify, following the owner's CV. The supplied logo screenshot read "Redaxify": confirm the spelling with the client.
+- Update, section 68: the case studies are back on with the first real project; the placeholders are gone.
 - No analytics, so no cookie banner. Still open: auto-reply and lead notification (needs an email provider), Vercel Firewall, and the account-level items on the launch checklist (2FA, domain lock, Search Console, client logo permissions).
+
+## 68. First real case study: Picture TV Media (2026-11-02)
+
+- `/work/picture-tv`, from the owner's description and the live site, with four screenshots of picturetv.net (`public/images/case-picturetv-*.jpg`, 1440×785, the gallery's aspect ratio). The three template placeholders are removed from `content/projects.ts`; their images are now unused in `public/images`.
+- Fuller write-up: a `highlights` block ("What the site does now") and an "At a glance" strip of feature counts, all from what the live site shows. The stack is the owner's 9 tools (Next.js, React, TypeScript, Node.js, Tailwind CSS, MongoDB, Stripe, Zoho CRM, Claude AI) plus Vercel and Cloudinary, which the live site shows. The owner also built the site's AI chatbot (PTM AI Assistant); no test messages were sent to it.
+- `caseStudiesLive` is back on, and the case pages are in the sitemap. With one project, the "see all" button and the "next case" card stay hidden.
+- Open: picturetv.net reports Next.js 15.1.11, so the copy says "Next.js 15" and not "latest", and npm's advisory data lists known issues for that version. To confirm with the owner, plus the client's OK to be named and to show the screenshots.
