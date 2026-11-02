@@ -1730,3 +1730,13 @@ All user-triggered (hover / pointer), 300ms ease-out-quint, off with reduced mot
 
 - `/services/custom-projects`: a new entry in `content/service-pages.ts` on the existing service page template (no new components), shaped by `docs/competitor-research-custom-projects.md`. Linked from the footer, the Pricing custom card and the "Every service" list (new "Something else" group + icon).
 - All copy is DRAFT. Awaiting the owner's decision: the starting prices ($500 / $2,000 / $4,500), the $500 paid scoping step, and offering to take on AI-built apps.
+
+## 67. Launch hardening (2026-11-02)
+
+- Next.js upgraded to 16.4.3 in `package.json` and the lockfile (critical RCE advisories, fixed in 16.4.1; 16.4.4 was skipped because it was published that day and pnpm's release-age policy flags it). `node_modules` here is a junction into `E:\my-portfolio`, so it was not reinstalled in place; the upgrade was built and tested in a throwaway copy.
+- Placeholder case studies hidden behind `caseStudiesLive` in `content/projects.ts`: the Work section, its nav and footer links, and every `/work` page (404). The code stays; flip the flag once the content is real.
+- Contact form: fill-time check, rate limit (`lib/rate-limit.ts`, 5 per IP per hour, in-memory) and consent line added. Cloudflare Turnstile is built but off until `TURNSTILE_SITE_KEY` and `TURNSTILE_SECRET_KEY` are set.
+- Security headers and CSP in `next.config.ts`, `public/.well-known/security.txt`, custom `app/not-found.tsx`.
+- `/privacy` and `/terms` (`content/legal.ts`, `components/layout/LegalPage.tsx`), linked from the footer and in the sitemap. DRAFT: `// PROPOSED` comments mark terms the owner has not confirmed (refunds, quote validity, payment window, portfolio right, guarantee exclusions, liability, governing law). Needs a lawyer's review.
+- Redaxify renamed Reduxify, following the owner's CV. The supplied logo screenshot read "Redaxify": confirm the spelling with the client.
+- No analytics, so no cookie banner. Still open: auto-reply and lead notification (needs an email provider), Vercel Firewall, and the account-level items on the launch checklist (2FA, domain lock, Search Console, client logo permissions).
