@@ -28,10 +28,10 @@ export const hero = {
     label: "Clients & companies I've built for",
     clients: ["PICTURE TV", "REDUXIFY", "LOGIC MATRIX", "WEBERMELON", "EASYGROWDIGITAL"],
     // Logos from docs/ (trimmed and resized into public/clients). `name` shows next to logos that are only a
-    // mark; Redaxify has no file: it is a vector redraw (RedaxifyLogo), the supplied logo was a 146×30 screenshot.
+    // mark; Reduxify has no file: it is a vector redraw (ReduxifyLogo), the supplied logo was a 146×30 screenshot.
     logos: [
       { name: "Picture TV", src: "/clients/picture-tv.png", width: 480, height: 480, mark: true },
-      { name: "Redaxify" },
+      { name: "Reduxify" },
       { name: "Logic Matrix", src: "/clients/logic-matrix-icon.png", width: 537, height: 492, mark: true },
       { name: "Webermelon", src: "/clients/webermelon.png", width: 600, height: 600, mark: true },
       { name: "easygrow", src: "/clients/easygrow.png", width: 792, height: 160 },
