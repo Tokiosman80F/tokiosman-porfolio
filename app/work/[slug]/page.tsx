@@ -12,6 +12,7 @@ import { Heading } from "@/components/ui/Heading";
 import { Section } from "@/components/ui/Section";
 import { about } from "@/content/about";
 import { caseStudyPage as t, projectHref, projects } from "@/content/projects";
+import { site } from "@/content/site";
 import { cn } from "@/lib/utils";
 
 // Case study page: the case file from the home page's Work deck, opened. It keeps its card's tone
@@ -32,7 +33,16 @@ const titleCase = (s: string) => s.toLowerCase().replace(/\b\w/g, (c) => c.toUpp
 export async function generateMetadata({ params }: PageProps<"/work/[slug]">): Promise<Metadata> {
   const p = projects[find((await params).slug)];
   if (!p) return {};
-  return { title: `${p.title} · ${titleCase(p.client)} case study`, description: p.summary };
+  const title = `${p.title} · ${titleCase(p.client)} case study`;
+  const url = projectHref(p);
+  return {
+    title,
+    description: p.summary,
+    alternates: { canonical: url },
+    // the shared preview image (app/opengraph-image.tsx): a page-level openGraph replaces the root one, image included
+    openGraph: { title, description: p.summary, url, type: "website", siteName: site.name, images: "/opengraph-image" },
+    twitter: { card: "summary_large_image", title, description: p.summary, images: "/opengraph-image" },
+  };
 }
 
 export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]">) {
