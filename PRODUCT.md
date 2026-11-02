@@ -52,7 +52,6 @@ The site itself: Next.js 16 App Router, Tailwind CSS v4, a single page (`app/pag
 
 Open (undecided or not yet provided):
 
-- Real booking URL (currently the placeholder `https://cal.com`).
 - Zoho CRM credentials for the contact form; until set, the form opens the visitor's email app with the message written out. Spam protection (Turnstile), auto-reply and lead notification not set up.
 
 ## Brand Commitments

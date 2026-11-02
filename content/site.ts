@@ -7,8 +7,8 @@ export const site = {
   title: "Toki Osman — Next.js Developer for Websites, Web Apps & AI",
   description:
     "I design, build and launch Next.js websites and web apps connected to your CRM, payments, bookings and AI. Websites from $1,500, with a fixed quote in 24 hours.",
-  // PLACEHOLDER — the real booking link. Every "Book a call" CTA reads this.
-  bookingUrl: "https://cal.com",
+  // The Cal.com event every "Book a call" CTA reads; components/BookingModal.tsx opens it as a modal.
+  bookingUrl: "https://cal.com/tokiosman/project-call",
   email: "tokiosman@outlook.com",
   phone: "+880 1987-556588",
   whatsapp: "https://wa.me/8801987556588",
