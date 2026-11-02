@@ -26,7 +26,7 @@ export const hero = {
   ],
   trustedBy: {
     label: "Clients & companies I've built for",
-    clients: ["PICTURE TV", "REDUXIFY", "LOGIC MATRIX", "WEBERMELON", "EASYGROWDIGITAL"],
+    clients: ["PICTURE TV", "REDAXIFY", "LOGIC MATRIX", "WEBERMELON", "EASYGROWDIGITAL"],
     // Logos from docs/ (trimmed and resized into public/clients). `name` shows next to logos that are only a
     // mark; Redaxify has no file: it is a vector redraw (RedaxifyLogo), the supplied logo was a 146×30 screenshot.
     logos: [

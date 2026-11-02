@@ -1,3 +1,4 @@
+import { caseStudiesLive } from "./projects";
 import { site } from "./site";
 
 // Source: docs/footer.md (verbatim).
@@ -6,9 +7,8 @@ export type FooterLink = {
   label: string;
   href: string;
   external?: boolean;
-  /** Contact rows: a brand logo in public/logos, or a generic icon ("calendar"). */
+  /** Contact rows: a brand logo in public/logos. */
   logo?: string;
-  icon?: "calendar";
 };
 export type FooterColumn = { title: string; links: FooterLink[] };
 
@@ -22,7 +22,7 @@ export const footer = {
       links: [
         { label: "Services", href: "/#services" },
         { label: "About", href: "/#about" },
-        { label: "Work", href: "/#work" },
+        ...(caseStudiesLive ? [{ label: "Work", href: "/#work" }] : []),
         { label: "Pricing", href: "/#pricing" },
         { label: "FAQ", href: "/#faq" },
         { label: "Blogs", href: "/blogs" },
@@ -38,7 +38,7 @@ export const footer = {
         { label: "AI Upgrade for Your Website", href: "/services/ai-chatbot-for-website" },
         { label: "CRM & Payment Integrations", href: "/services/crm-payments-automation" },
         { label: "Website Maintenance", href: "/services/website-maintenance" },
-        { label: "Custom Projects", href: "/#pricing" },
+        { label: "Custom Projects", href: "/services/custom-projects" },
       ],
     },
     {
@@ -46,11 +46,15 @@ export const footer = {
       links: [
         { label: site.email, href: `mailto:${site.email}`, logo: "outlook" },
         { label: site.phone, href: site.whatsapp, external: true, logo: "whatsapp" },
-        { label: "Book a free call", href: site.bookingUrl, external: true, icon: "calendar" },
       ],
     },
   ] satisfies FooterColumn[],
   // Bottom bar: "© {year} {copyright}" (the year is set at build time)
   copyright: "Toki Osman. All rights reserved.",
+  legal: [
+    { label: "Privacy", href: "/privacy" },
+    { label: "Terms", href: "/terms" },
+    { label: "Cookies", href: "/privacy#cookies" },
+  ],
   backToTop: "Back to top",
 };

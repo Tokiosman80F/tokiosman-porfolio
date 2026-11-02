@@ -1,7 +1,5 @@
 import type { ComponentType, ReactNode } from "react";
-import { CalendarDays } from "lucide-react";
 import { Eyebrow } from "@/components/ui/Eyebrow";
-import { PlanButton } from "@/components/ui/PlanButton";
 import { Section } from "@/components/ui/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { servicePageHref, servicePages, type ServicePage } from "@/content/service-pages";
@@ -9,7 +7,7 @@ import { serviceMenu } from "@/content/services";
 import { BrowserArt, CallArt, ChatArt, DashboardArt, HeadlessArt, HealthArt, PhoneArt, SecurityArt } from "./ServiceArt";
 import { ServiceShowcase, type ShowcaseItem } from "./ServiceShowcase";
 
-// "Every service" section (#all-services, right after What I build): a heading with a booking CTA, then the list of
+// "Every service" section (#all-services, right after What I build): a heading, then the list of
 // every service page grouped by what the visitor needs, with a large live preview of the one in focus
 // (ServiceShowcase). Groups come from content/services.ts; the colour icons and the illustrations are
 // presentation, so they live here, keyed by the page slug / art key.
@@ -103,6 +101,17 @@ const icons: Record<string, Art> = {
       <path d="m22.5 21.5 5 5" stroke="#b91c1c" strokeWidth="1.6" strokeLinecap="round" />
     </>,
   ),
+  // a written scope with a canary plus: something that isn't on the list
+  "custom-projects": svg(
+    <>
+      <rect x="5" y="3.5" width="19" height="25" rx="3" fill="#fff" stroke="#121212" strokeWidth="1.2" />
+      <rect x="9" y="8.5" width="11" height="2" rx="1" fill="#121212" />
+      <rect x="9" y="13" width="8" height="2" rx="1" fill="#cbd5e1" />
+      <rect x="9" y="17" width="6" height="2" rx="1" fill="#60A5FA" />
+      <circle cx="23" cy="23" r="6" fill="#FDF175" stroke="#121212" strokeWidth="1.2" />
+      <path d="M23 20v6M20 23h6" stroke="#121212" strokeWidth="1.6" strokeLinecap="round" />
+    </>,
+  ),
 };
 
 // The realistic illustration for each service, the same one its page leads with
@@ -146,7 +155,6 @@ export default function ServiceMenu() {
         eyebrow={<Eyebrow>{m.eyebrow}</Eyebrow>}
         title={m.title}
         lead={m.lead}
-        aside={<PlanButton href={m.cta.href} label={m.cta.label} icon={CalendarDays} external />}
       />
       <ServiceShowcase items={items} detailsLabel={m.detailsLabel} />
     </Section>

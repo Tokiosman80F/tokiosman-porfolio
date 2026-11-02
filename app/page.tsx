@@ -10,6 +10,7 @@ import ServiceMenu from "@/components/sections/ServiceMenu";
 import Services from "@/components/sections/Services";
 import Pricing from "@/components/sections/Pricing";
 import Work from "@/components/sections/Work";
+import { caseStudiesLive } from "@/content/projects";
 import { servicePageHref, servicePages } from "@/content/service-pages";
 import { site } from "@/content/site";
 
@@ -56,7 +57,7 @@ export default function Home() {
           <Services />
           <ServiceMenu />
           <About />
-          <Work />
+          {caseStudiesLive && <Work />}
           <Pricing />
           <Process />
           <Faq />

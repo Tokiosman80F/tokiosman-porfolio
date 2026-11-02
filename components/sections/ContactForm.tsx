@@ -1,11 +1,14 @@
 "use client";
 
-import { startTransition, useActionState, useId, useRef, useState, type FormEvent } from "react";
+import { startTransition, useActionState, useEffect, useId, useRef, useState, type FormEvent } from "react";
+import Link from "next/link";
+import Script from "next/script";
 import { ArrowRight, CalendarDays } from "lucide-react";
 import { sendContact } from "@/app/actions/contact";
 import { PlanButton } from "@/components/ui/PlanButton";
 import { contactForm as c, projectTypes } from "@/content/final-cta";
 import {
+  ELAPSED,
   HONEYPOT,
   mailtoHref,
   readContact,
@@ -19,7 +22,8 @@ import { site } from "@/content/site";
 import { cn } from "@/lib/utils";
 
 // Secondary path beside the call (docs/cta.md), always open (user's choice). Validated in the browser first (errors linked with aria-describedby, focus moves to the
-// first one), then again by the server action. A hidden honeypot field catches bots.
+// first one), then again by the server action. A hidden honeypot field catches bots; Cloudflare Turnstile
+// joins in when its keys are set (it only loads with the CRM: the email path never reaches the server).
 // No CRM connected (crmReady false): the button says so up front and opens the visitor's email app with the
 // message written out. A failed send keeps what they typed and offers the same email link.
 
@@ -30,8 +34,22 @@ const fieldClass = (invalid: boolean) =>
     invalid ? "border-error" : "border-border-strong",
   );
 
-export function ContactForm({ crmReady }: { crmReady: boolean }) {
+declare global {
+  interface Window {
+    turnstile?: { reset: () => void };
+  }
+}
+
+export function ContactForm({ crmReady, turnstileKey }: { crmReady: boolean; turnstileKey: string }) {
   const [state, action, pending] = useActionState(sendContact, initial);
+  const shownAt = useRef(0);
+  useEffect(() => {
+    shownAt.current = Date.now();
+  }, []);
+  // A Turnstile token works once, so a failed send needs a new one before the visitor can retry
+  useEffect(() => {
+    if (state.status === "error") window.turnstile?.reset();
+  }, [state]);
   const [clientErrors, setClientErrors] = useState<ContactErrors>({});
   const [last, setLast] = useState<ContactData | null>(null); // last valid message, for the email fallback
   const [mailed, setMailed] = useState(false);
@@ -65,6 +83,7 @@ export function ContactForm({ crmReady }: { crmReady: boolean }) {
       setMailed(true);
       return;
     }
+    data.set(ELAPSED, String(Date.now() - shownAt.current));
     startTransition(() => action(data));
   };
 
@@ -150,6 +169,13 @@ export function ContactForm({ crmReady }: { crmReady: boolean }) {
           {error("message")}
         </div>
 
+        {crmReady && turnstileKey && (
+          <>
+            <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" strategy="lazyOnload" />
+            <div className="cf-turnstile" data-sitekey={turnstileKey} data-size="flexible" />
+          </>
+        )}
+
         <button
           type="submit"
           disabled={pending}
@@ -183,6 +209,13 @@ export function ContactForm({ crmReady }: { crmReady: boolean }) {
         </div>
         {/* The before-send note gives way to the after-send message */}
         {!mailed && <p className="font-sans text-body-sm text-ink-muted">{crmReady ? c.crmNote : c.emailNote}</p>}
+        <p className="font-sans text-body-sm text-ink-muted">
+          {c.consent.before}{" "}
+          <Link href={c.consent.href} className="font-medium text-ink-black underline underline-offset-2">
+            {c.consent.link}
+          </Link>
+          .
+        </p>
       </form>
     </div>
   );

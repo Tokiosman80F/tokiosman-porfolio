@@ -1725,3 +1725,36 @@ All user-triggered (hover / pointer), 300ms ease-out-quint, off with reduced mot
 - Verified: frames 250ms → 1.2s (reveal, then fade), same-session navigation skips it, desktop display none, toggle hover/click frames, axe 0, no console errors.
 
 - Loader redone at the owner's request (full name, bigger animation): "Toki" rises letter by letter (Sora, clamp 60–96px), a canary highlight box with ink edge and offset shadow sweeps open and "Osman" rises inside it, the canary dot pops, "Full-Stack Developer · Design to deploy" fades up, a canary bar fills across the bottom; exit is a curtain lift (-100%, 700ms ease-in-out) instead of a fade (fade with reduced motion). Name and title from `content/site.ts`. Min 2.3s, max 3.2s after hydration. New keyframes `splash-rise`, `splash-sweep`, `splash-fade` (`splash-letter` removed). Verified frame by frame in light and dark at 375.
+
+## 66. Custom projects page (2026-11-02)
+
+- `/services/custom-projects`: a new entry in `content/service-pages.ts` on the existing service page template (no new components), shaped by `docs/competitor-research-custom-projects.md`. Linked from the footer, the Pricing custom card and the "Every service" list (new "Something else" group + icon).
+- All copy is DRAFT. Awaiting the owner's decision: the starting prices ($500 / $2,000 / $4,500), the $500 paid scoping step, and offering to take on AI-built apps.
+
+## 67. Launch hardening (2026-11-02)
+
+- Next.js upgraded to 16.4.3 in `package.json` and the lockfile (critical RCE advisories, fixed in 16.4.1; 16.4.4 was skipped because it was published that day and pnpm's release-age policy flags it). `node_modules` here is a junction into `E:\my-portfolio`, so it was not reinstalled in place; the upgrade was built and tested in a throwaway copy.
+- Placeholder case studies hidden behind `caseStudiesLive` in `content/projects.ts`: the Work section, its nav and footer links, and every `/work` page (404). The code stays; flip the flag once the content is real.
+- Contact form: fill-time check, rate limit (`lib/rate-limit.ts`, 5 per IP per hour, in-memory) and consent line added. Cloudflare Turnstile is built but off until `TURNSTILE_SITE_KEY` and `TURNSTILE_SECRET_KEY` are set.
+- Security headers and CSP in `next.config.ts`, `public/.well-known/security.txt`, custom `app/not-found.tsx`.
+- `/privacy` and `/terms` (`content/legal.ts`, `components/layout/LegalPage.tsx`), linked from the footer and in the sitemap. DRAFT: `// PROPOSED` comments mark terms the owner has not confirmed (refunds, quote validity, payment window, portfolio right, guarantee exclusions, liability, governing law). Needs a lawyer's review.
+- Redaxify renamed Reduxify, following the owner's CV. The supplied logo screenshot read "Redaxify": confirm the spelling with the client.
+- Update, section 68: the case studies are back on with the first real project; the placeholders are gone.
+- No analytics, so no cookie banner. Still open: auto-reply and lead notification (needs an email provider), Vercel Firewall, and the account-level items on the launch checklist (2FA, domain lock, Search Console, client logo permissions).
+
+## 70. Smooth section scrolling and a livelier mobile dock (2026-11-02)
+
+- Section links now scroll smoothly, and a clicked link's highlight goes straight to its target on desktop and mobile. The dock gained a sliding tile that squashes as it lands, an icon hop, a press-in and a scroll progress hairline. Details in DESIGN.md (Motion).
+
+## 69. Fewer booking buttons (2026-11-02)
+
+- The owner found the booking CTA too repetitive. Home page: 12 links to 6 (removed services list aside, About, FAQ card, Custom Project card, footer row). Service pages: 7 to 4 (one button under the plans instead of one per plan). Rule recorded in DESIGN.md.
+
+## 68. First real case study: Picture TV Media (2026-11-02)
+
+- `/work/picture-tv`, from the owner's description and the live site, with four screenshots of picturetv.net (`public/images/case-picturetv-*.jpg`, 1440×785, the gallery's aspect ratio). The three template placeholders are removed from `content/projects.ts`; their images are now unused in `public/images`.
+- Fuller write-up: a `highlights` block ("What the site does now") and an "At a glance" strip of feature counts, all from what the live site shows. The stack is the owner's 9 tools (Next.js, React, TypeScript, Node.js, Tailwind CSS, MongoDB, Stripe, Zoho CRM, Claude AI) plus Vercel and Cloudinary, which the live site shows. The owner also built the site's AI chatbot (PTM AI Assistant); no test messages were sent to it.
+- `caseStudiesLive` is back on, and the case pages are in the sitemap. With one project, the "see all" button and the "next case" card stay hidden.
+- Second case: `/work/redaxify`, four public screenshots (`public/images/case-redaxify-*.jpg`). The dashboard and client board sit behind a login, so they have no screenshots yet. Stack shows only what the public site reveals (Next.js, React, Tailwind CSS) until the owner confirms the rest.
+- Spelling settled: redaxify.com shows the name is **Redaxify**, so the section 67 rename to Reduxify is reverted. The owner's CV and `docs/` still say Reduxify in places.
+- Open: picturetv.net reports Next.js 15.1.11, so the copy says "Next.js 15" and not "latest", and npm's advisory data lists known issues for that version. To confirm with the owner, plus the client's OK to be named and to show the screenshots.

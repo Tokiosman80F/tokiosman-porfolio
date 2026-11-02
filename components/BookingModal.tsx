@@ -7,8 +7,8 @@ import { site } from "@/content/site";
 // the Cal.com booking modal instead of a new tab. Cal's embed script (no npm package) loads on the first
 // click only, so it costs nothing until someone books. The links stay real links: without JS, with a
 // modifier key (new tab), or if the script can't load, the visitor still reaches the booking page.
-// Needs site.bookingUrl to be a full Cal.com event link (https://cal.com/{user}/{event}); while it's the
-// bare placeholder there's no event to open, so links behave as plain links.
+// Needs site.bookingUrl to be a full Cal.com event link (https://cal.com/{user}/{event}); a bare
+// https://cal.com has no event to open, so links behave as plain links.
 
 type CalFn = ((...args: unknown[]) => void) & { loaded?: boolean; ns?: Record<string, unknown>; q?: unknown[] };
 declare global {

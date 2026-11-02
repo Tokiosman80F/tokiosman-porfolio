@@ -25,7 +25,6 @@ export const faqSection = {
   aside: "HOW I WORK // 2026",
   contact: {
     prompt: "Still have a question about your project?",
-    cta: { label: "Book a free call", href: site.bookingUrl },
     email: { label: "Copy email address", copied: "Email copied", address: site.email },
   },
 };

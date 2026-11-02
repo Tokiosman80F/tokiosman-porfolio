@@ -1,3 +1,4 @@
+import { caseStudiesLive } from "./projects";
 import { site } from "./site";
 
 export type NavLink = {
@@ -11,7 +12,7 @@ export type NavLink = {
 export const primaryNav: NavLink[] = [
   { label: "Services", href: "/#services" },
   { label: "About", href: "/#about" },
-  { label: "Work", href: "/#work" },
+  ...(caseStudiesLive ? [{ label: "Work", href: "/#work" }] : []),
   { label: "Pricing", href: "/#pricing" },
   { label: "FAQ", href: "/#faq" },
 ];

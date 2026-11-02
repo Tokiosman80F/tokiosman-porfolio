@@ -1,9 +1,8 @@
 import Image from "next/image";
-import { CalendarDays, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { renderHighlighted } from "@/components/ui/Highlight";
 import { Pattern } from "@/components/ui/Pattern";
-import { PlanButton } from "@/components/ui/PlanButton";
 import { renderRich } from "@/components/ui/RichText";
 import { Section } from "@/components/ui/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
@@ -71,7 +70,7 @@ function Question({ item, open }: { item: FaqItem; open?: boolean }) {
   );
 }
 
-/* Dark "ask me" card: photo, the contact prompt, chat button + email link, over a faint field of plus signs */
+/* Dark "ask me" card: photo, the contact prompt and the email link, over a faint field of plus signs */
 function AskCard() {
   const { contact } = faqSection;
   return (
@@ -86,7 +85,6 @@ function AskCard() {
       </div>
       <p className="relative mt-unit-4 font-sans text-body-lead text-on-primary">{contact.prompt}</p>
       <div className="relative mt-unit-6 flex flex-wrap items-center gap-unit-4">
-        <PlanButton href={contact.cta.href} label={contact.cta.label} icon={CalendarDays} external dark />
         <CopyEmail
           address={contact.email.address}
           label={contact.email.label}

@@ -11,7 +11,8 @@ import { outcomeIcons, tones } from "@/components/sections/Work";
 import { Heading } from "@/components/ui/Heading";
 import { Section } from "@/components/ui/Section";
 import { about } from "@/content/about";
-import { caseStudyPage as t, projectHref, projects } from "@/content/projects";
+import { caseStudiesLive, caseStudyPage as t, projectHref, projects } from "@/content/projects";
+import { site } from "@/content/site";
 import { cn } from "@/lib/utils";
 
 // Case study page: the case file from the home page's Work deck, opened. It keeps its card's tone
@@ -23,16 +24,24 @@ import { cn } from "@/lib/utils";
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return projects.map((p) => ({ slug: p.slug }));
+  return caseStudiesLive ? projects.map((p) => ({ slug: p.slug })) : [];
 }
 
-const find = (slug: string) => projects.findIndex((p) => p.slug === slug);
-const titleCase = (s: string) => s.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase());
+const find = (slug: string) => (caseStudiesLive ? projects.findIndex((p) => p.slug === slug) : -1);
 
 export async function generateMetadata({ params }: PageProps<"/work/[slug]">): Promise<Metadata> {
   const p = projects[find((await params).slug)];
   if (!p) return {};
-  return { title: `${p.title} · ${titleCase(p.client)} case study`, description: p.summary };
+  const title = `${p.title} · ${p.client} case study`;
+  const url = projectHref(p);
+  return {
+    title,
+    description: p.summary,
+    alternates: { canonical: url },
+    // the shared preview image (app/opengraph-image.tsx): a page-level openGraph replaces the root one, image included
+    openGraph: { title, description: p.summary, url, type: "website", siteName: site.name, images: "/opengraph-image" },
+    twitter: { card: "summary_large_image", title, description: p.summary, images: "/opengraph-image" },
+  };
 }
 
 export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]">) {
@@ -81,8 +90,8 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
                   {/* Facts: a file label in the corner */}
                   <dl className={cn("grid grid-cols-2 gap-px self-end overflow-hidden rounded-xl border lg:col-span-4 lg:grid-cols-1", dark ? "border-white/10 bg-white/10" : "border-ink-black/10 bg-ink-black/10")}>
                     {[
-                      { term: "Client", detail: titleCase(p.client) },
-                      { term: "Filed", detail: titleCase(p.tag) },
+                      { term: "Client", detail: p.client },
+                      { term: p.tagLabel ?? "Location", detail: p.tag },
                       { term: "Scope", detail: `${p.services.length} services` },
                       { term: t.outcome, detail: p.outcome.label },
                     ].map((f) => (
@@ -225,6 +234,22 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
             </Section>
           )}
 
+          {/* ── What the finished product does ── */}
+          {p.highlights?.length ? (
+            <Section border="none" className="pb-0 lg:pb-0">
+              <Heading as="h2" className="text-balance">{p.highlightsTitle ?? t.highlights}</Heading>
+              <ul className="mt-unit-8 grid grid-cols-1 gap-unit-4 md:grid-cols-2 lg:grid-cols-3">
+                {p.highlights.map((h, i) => (
+                  <li key={h.title} className="rounded-2xl bg-surface-container-low p-unit-6 sm:p-unit-8">
+                    <span className="font-mono text-mono-tag text-ink-muted tabular-nums">{num(i)}</span>
+                    <h3 className="mt-unit-4 font-sans text-body-lead font-semibold text-ink-black">{h.title}</h3>
+                    <p className="mt-unit-2 font-sans text-body-md text-on-surface-variant">{h.text}</p>
+                  </li>
+                ))}
+              </ul>
+            </Section>
+          ) : null}
+
           {/* ── How every project runs: four steps on one line, like the deploy pipeline ── */}
           <Section border="none" className="pb-0 lg:pb-0">
             <Heading as="h2" className="text-balance">{t.howTitle}</Heading>
@@ -244,7 +269,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
           </Section>
 
           {/* ── Next case file, in its own tone ── */}
-          <Section border="none">
+          {projects.length > 1 && <Section border="none">
             <Link
               href={projectHref(next)}
               className={cn(
@@ -266,7 +291,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
                 <ArrowRight className="size-6" />
               </span>
             </Link>
-          </Section>
+          </Section>}
         </article>
 
         <FinalCta />

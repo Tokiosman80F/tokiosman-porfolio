@@ -52,7 +52,6 @@ The site itself: Next.js 16 App Router, Tailwind CSS v4, a single page (`app/pag
 
 Open (undecided or not yet provided):
 
-- Real booking URL (currently the placeholder `https://cal.com`).
 - Zoho CRM credentials for the contact form; until set, the form opens the visitor's email app with the message written out. Spam protection (Turnstile), auto-reply and lead notification not set up.
 
 ## Brand Commitments
@@ -66,10 +65,14 @@ Open (undecided or not yet provided):
 Provided by the owner:
 
 - Experience figures: 20+ projects shipped, 3+ years, 4 companies, "200+ problems solved" (`docs/about-me.md`; the doc notes 20+ should be his real count).
-- Companies and clients built for: Picture TV, Reduxify, Logic Matrix, Webermelon, EasyGrowDigital, and AIUB (`docs/hero-content.md`, `docs/about-me.md`).
+- Companies and clients built for: Picture TV, Redaxify (redaxify.com; the owner's CV and some docs spell it "Reduxify"), Logic Matrix, Webermelon, EasyGrowDigital, and AIUB (`docs/hero-content.md`, `docs/about-me.md`).
 - Headshot: `docs/toki-osman-image.png` (cropped to `public/images/toki-osman.jpg`).
 
-**Not available yet (owner, 2026-10-23): no real testimonials, case studies or live project links.** The testimonials (Cory Pitt, Troy Munson, Sam Hogan, Ben Williams, Tanner Hale, Michael Lock) and the case studies (Kuhnic AI, MavenData, HeadQ, with their quotes and results such as "+142% Demo Bookings" and "Delivered in 9 Days") are placeholders from the original template. Never invent testimonials, quotes, client results, metrics or case studies; replace these or remove them before launch.
+First real case study (owner, 2026-11-02): Picture TV Media, picturetv.net (`content/projects.ts`). The client, Mala Seza, provided the prototype UI; Toki rebuilt the entire site in Next.js and applied the security patches. No client quote or results yet.
+
+Second case study (owner, 2026-11-02): Redaxify, redaxify.com. Toki worked as a frontend developer at Logic Matrix LLC (US-based) and built the website, the user dashboard and the client board.
+
+**Not available yet: real testimonials or client results.** The testimonials (Cory Pitt, Troy Munson, Sam Hogan, Ben Williams, Tanner Hale, Michael Lock) are placeholders from the original template and stay hidden. Never invent testimonials, quotes, client results, metrics or case studies.
 
 ## Product Principles
 

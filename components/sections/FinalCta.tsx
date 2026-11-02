@@ -4,7 +4,7 @@ import { renderHighlighted } from "@/components/ui/Highlight";
 import { PlanButton } from "@/components/ui/PlanButton";
 import { Section } from "@/components/ui/Section";
 import { finalCta } from "@/content/final-cta";
-import { crmConfigured } from "@/lib/crm";
+import { crmConfigured, turnstileSiteKey } from "@/lib/crm";
 import { ContactForm } from "./ContactForm";
 
 // Final CTA (docs/cta.md) as a closing ink slab, in the family of the testimonial cards (grid texture +
@@ -45,7 +45,7 @@ export default function FinalCta() {
           </div>
 
           <div className="lg:col-span-5">
-            <ContactForm crmReady={crmConfigured()} />
+            <ContactForm crmReady={crmConfigured()} turnstileKey={turnstileSiteKey()} />
           </div>
         </div>
 

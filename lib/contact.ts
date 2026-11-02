@@ -35,6 +35,9 @@ export function mailtoHref(d: ContactData) {
 }
 
 export const HONEYPOT = "hp_leave_empty";
+/** Set by the browser on submit: milliseconds since the form appeared. */
+export const ELAPSED = "elapsed_ms";
+export const MIN_FILL_MS = 3000;
 
 export type ContactState =
   | { status: "idle" }
