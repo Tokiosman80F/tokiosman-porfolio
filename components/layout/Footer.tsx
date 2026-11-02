@@ -126,9 +126,20 @@ export default function Footer() {
 
         <div className="mt-unit-12 flex flex-col gap-unit-3 border-t border-border-hairline pt-unit-6 font-mono text-mono-meta text-ink-muted md:flex-row md:items-center md:justify-between">
           {/* Static page: the year is fixed at build time, so it updates on the next deploy. */}
-          <p>
-            © {new Date().getFullYear()} {footer.copyright}
-          </p>
+          <div className="flex flex-wrap items-center gap-x-unit-6 gap-y-unit-2">
+            <p>
+              © {new Date().getFullYear()} {footer.copyright}
+            </p>
+            <ul className="flex flex-wrap gap-x-unit-4">
+              {footer.legal.map((l) => (
+                <li key={l.label}>
+                  <a href={l.href} className="tap-target inline-flex items-center text-ink-black transition-colors hover:underline">
+                    {l.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
           {/* "#top" scrolls to the top of the document (HTML spec); no id needed */}
           <a href="#top" className="tap-target inline-flex items-center gap-1 self-start md:self-auto text-ink-black transition-colors hover:underline">
             {footer.backToTop}

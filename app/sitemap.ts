@@ -10,5 +10,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...paths.map((path) => ({ url: `${site.url}${path === "/" ? "" : path}` })),
     ...posts.map((p) => ({ url: `${site.url}${blogHref(p)}`, lastModified: p.date })),
+    ...["/privacy", "/terms"].map((path) => ({ url: `${site.url}${path}`, priority: 0.1 })),
   ];
 }
