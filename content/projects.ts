@@ -8,6 +8,8 @@ export type Project = {
   client: string;
   /** Short meta tag next to the client name (year or location). */
   tag: string;
+  /** Label for the tag in the case page's facts; defaults to "Location". */
+  tagLabel?: string;
   title: string;
   summary: string;
   quote?: { text: string; author: string };
@@ -25,6 +27,8 @@ export type Project = {
   results?: { value: string; label: string }[];
   /** What the finished product does: one card per feature */
   highlights?: { title: string; text: string }[];
+  /** Heading for the highlights; defaults to caseStudyPage.highlights. */
+  highlightsTitle?: string;
   liveUrl?: string;
 };
 
@@ -56,11 +60,11 @@ export const caseStudyPage = {
 
 export const workSection = {
   // SEO: the h2 names what the section shows (case studies) and what was built (Next.js websites and
-  // web apps). DRAFT: the lead and aside fit a single real project; widen them as more are added.
+  // web apps). DRAFT copy.
   eyebrow: "CASE STUDIES · REAL CLIENT WORK",
   title: "Case studies: Next.js websites and web apps",
   lead: "Real client work, and exactly what I did on it.",
-  aside: "PICTURE TV MEDIA · NEW YORK",
+  aside: "LIVE PROJECTS",
   // Shown from two projects on (Work.tsx)
   cta: { label: "See all case studies", href: "/work" },
 };
@@ -146,5 +150,60 @@ export const projects: Project[] = [
       },
     ],
     liveUrl: "https://www.picturetv.net/",
+  },
+  {
+    // DRAFT from the owner's description (2026-11-02) and the public site. The dashboards sit behind a login, so
+    // they have no screenshots and only a general description: add real ones, and the owner's full stack, when provided.
+    slug: "redaxify",
+    client: "Redaxify",
+    tag: "LOGIC MATRIX LLC, US",
+    tagLabel: "Built at",
+    title: "Three interfaces for an AI redaction platform",
+    summary:
+      "Redaxify uses AI to redact and index video, audio, documents and images for teams in legal, government, finance and healthcare. As a frontend developer at Logic Matrix LLC, I built three of its interfaces: the website, the user dashboard and the client board.",
+    services: ["FRONTEND DEVELOPMENT", "PUBLIC WEBSITE", "USER DASHBOARD", "CLIENT BOARD"],
+    outcome: { label: "3 interfaces built", icon: "verified" },
+    image: {
+      src: "/images/case-redaxify-home.jpg",
+      alt: "Redaxify home page: a dark blue hero reading \"The Ultimate AI Indexing & Redaction Solution\", with Get Started and Request A Demo buttons.",
+      width: 1440,
+      height: 785,
+    },
+    gallery: [
+      { src: "/images/case-redaxify-capabilities.jpg", alt: "Redaxify website cards for investigation, redaction, and transcription and translation.", width: 1440, height: 785 },
+      { src: "/images/case-redaxify-pricing.jpg", alt: "Redaxify pricing page, with the Doc, Lite, Standard and Premium plans above a feature comparison table.", width: 1440, height: 785 },
+      { src: "/images/case-redaxify-app.jpg", alt: "Redaxify app sign-in screen, with a welcome message, a list of product benefits and an email and password form.", width: 1440, height: 785 },
+    ],
+    stack: ["Next.js", "React", "Tailwind CSS"],
+    challenge:
+      "Redaxify automatically hides faces, license plates and personal details in sensitive footage and records. That's a hard product to explain, and different people need different things from it: buyers want to understand what it does, users need a place to do their work, and clients need their own view. One interface couldn't serve all of them, so the product needed three.",
+    approach: [
+      "Worked as the frontend developer on the project, at Logic Matrix LLC, a US-based company.",
+      "Built the public website, which explains the services, features, industries and pricing to buyers.",
+      "Built the user dashboard, the app people sign in to.",
+      "Built the client board, a separate interface for the client side of the product.",
+    ],
+    results: [
+      { value: "3", label: "Interfaces built" },
+      { value: "4", label: "Pricing plans on the site" },
+      { value: "4", label: "Media types: video, audio, docs, images" },
+      { value: "3", label: "Redaction modes explained" },
+    ],
+    highlightsTitle: "The three interfaces I built",
+    highlights: [
+      {
+        title: "The public website",
+        text: "Service, feature and industry pages, including one for law enforcement, plus plans with a monthly and annual toggle. It takes a technical product and explains it in terms buyers recognise.",
+      },
+      {
+        title: "The user dashboard",
+        text: "The signed-in side of Redaxify at app.redaxify.com, where people work with their video, audio and text.",
+      },
+      {
+        title: "The client board",
+        text: "A separate interface built for clients, so they have their own view of the product.",
+      },
+    ],
+    liveUrl: "https://redaxify.com/",
   },
 ];

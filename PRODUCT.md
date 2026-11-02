@@ -65,10 +65,12 @@ Open (undecided or not yet provided):
 Provided by the owner:
 
 - Experience figures: 20+ projects shipped, 3+ years, 4 companies, "200+ problems solved" (`docs/about-me.md`; the doc notes 20+ should be his real count).
-- Companies and clients built for: Picture TV, Reduxify, Logic Matrix, Webermelon, EasyGrowDigital, and AIUB (`docs/hero-content.md`, `docs/about-me.md`).
+- Companies and clients built for: Picture TV, Redaxify (redaxify.com; the owner's CV and some docs spell it "Reduxify"), Logic Matrix, Webermelon, EasyGrowDigital, and AIUB (`docs/hero-content.md`, `docs/about-me.md`).
 - Headshot: `docs/toki-osman-image.png` (cropped to `public/images/toki-osman.jpg`).
 
 First real case study (owner, 2026-11-02): Picture TV Media, picturetv.net (`content/projects.ts`). The client, Mala Seza, provided the prototype UI; Toki rebuilt the entire site in Next.js and applied the security patches. No client quote or results yet.
+
+Second case study (owner, 2026-11-02): Redaxify, redaxify.com. Toki worked as a frontend developer at Logic Matrix LLC (US-based) and built the website, the user dashboard and the client board.
 
 **Not available yet: real testimonials or client results.** The testimonials (Cory Pitt, Troy Munson, Sam Hogan, Ben Williams, Tanner Hale, Michael Lock) are placeholders from the original template and stay hidden. Never invent testimonials, quotes, client results, metrics or case studies.
 

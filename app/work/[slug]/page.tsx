@@ -91,7 +91,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
                   <dl className={cn("grid grid-cols-2 gap-px self-end overflow-hidden rounded-xl border lg:col-span-4 lg:grid-cols-1", dark ? "border-white/10 bg-white/10" : "border-ink-black/10 bg-ink-black/10")}>
                     {[
                       { term: "Client", detail: p.client },
-                      { term: "Location", detail: p.tag },
+                      { term: p.tagLabel ?? "Location", detail: p.tag },
                       { term: "Scope", detail: `${p.services.length} services` },
                       { term: t.outcome, detail: p.outcome.label },
                     ].map((f) => (
@@ -237,7 +237,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
           {/* ── What the finished product does ── */}
           {p.highlights?.length ? (
             <Section border="none" className="pb-0 lg:pb-0">
-              <Heading as="h2" className="text-balance">{t.highlights}</Heading>
+              <Heading as="h2" className="text-balance">{p.highlightsTitle ?? t.highlights}</Heading>
               <ul className="mt-unit-8 grid grid-cols-1 gap-unit-4 md:grid-cols-2 lg:grid-cols-3">
                 {p.highlights.map((h, i) => (
                   <li key={h.title} className="rounded-2xl bg-surface-container-low p-unit-6 sm:p-unit-8">

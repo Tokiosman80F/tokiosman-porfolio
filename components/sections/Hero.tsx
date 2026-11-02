@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { ArrowDown, CalendarDays } from "lucide-react";
-import { ReduxifyLogo } from "@/components/ui/brand-icons";
+import { RedaxifyLogo } from "@/components/ui/brand-icons";
 import { Button } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Heading } from "@/components/ui/Heading";
@@ -26,7 +26,7 @@ function LogoTiles({ logos }: { logos: typeof hero.trustedBy.logos }) {
       className="theme-light flex h-14 shrink-0 items-center gap-unit-2 rounded-xl border border-border-hairline bg-white px-unit-4 shadow-xs sm:h-16"
     >
       {!l.src ? (
-        <ReduxifyLogo className="h-6 w-auto sm:h-7" />
+        <RedaxifyLogo className="h-6 w-auto sm:h-7" />
       ) : (
         <Image
           src={l.src}
