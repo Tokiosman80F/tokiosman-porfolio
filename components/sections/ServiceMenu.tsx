@@ -1,7 +1,5 @@
 import type { ComponentType, ReactNode } from "react";
-import { CalendarDays } from "lucide-react";
 import { Eyebrow } from "@/components/ui/Eyebrow";
-import { PlanButton } from "@/components/ui/PlanButton";
 import { Section } from "@/components/ui/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { servicePageHref, servicePages, type ServicePage } from "@/content/service-pages";
@@ -9,7 +7,7 @@ import { serviceMenu } from "@/content/services";
 import { BrowserArt, CallArt, ChatArt, DashboardArt, HeadlessArt, HealthArt, PhoneArt, SecurityArt } from "./ServiceArt";
 import { ServiceShowcase, type ShowcaseItem } from "./ServiceShowcase";
 
-// "Every service" section (#all-services, right after What I build): a heading with a booking CTA, then the list of
+// "Every service" section (#all-services, right after What I build): a heading, then the list of
 // every service page grouped by what the visitor needs, with a large live preview of the one in focus
 // (ServiceShowcase). Groups come from content/services.ts; the colour icons and the illustrations are
 // presentation, so they live here, keyed by the page slug / art key.
@@ -157,7 +155,6 @@ export default function ServiceMenu() {
         eyebrow={<Eyebrow>{m.eyebrow}</Eyebrow>}
         title={m.title}
         lead={m.lead}
-        aside={<PlanButton href={m.cta.href} label={m.cta.label} icon={CalendarDays} external />}
       />
       <ServiceShowcase items={items} detailsLabel={m.detailsLabel} />
     </Section>

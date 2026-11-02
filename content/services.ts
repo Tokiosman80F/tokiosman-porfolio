@@ -1,4 +1,3 @@
-import { site } from "./site";
 import type { HighlightedText } from "@/components/ui/Highlight";
 
 // DRAFT copy for review, in the owner's voice: drawn from docs/services.md and the hero, no new claims.
@@ -19,7 +18,6 @@ export const serviceMenu = {
   eyebrow: "Every service · Fixed prices",
   title: "Pick what you need",
   lead: "Build something new, add to the site you have, or keep it safe. Every service has its own page with the plans, the timeline and what's included.",
-  cta: { label: "Not sure? Book a free call", href: site.bookingUrl },
   detailsLabel: "See plans and details",
   groups: [
     { title: "Build something new", slugs: ["nextjs-website-development", "web-app-development", "headless-wordpress-nextjs"] },

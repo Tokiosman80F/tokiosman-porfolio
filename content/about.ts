@@ -21,7 +21,6 @@ export const about = {
     { name: "Messenger", logo: "messenger", href: site.messenger },
     { name: "Email", logo: "", href: `mailto:${site.email}` },
   ],
-  cta: { label: "Book a call with me", href: site.bookingUrl },
   stat: {
     value: "20+",
     label: "Projects shipped",

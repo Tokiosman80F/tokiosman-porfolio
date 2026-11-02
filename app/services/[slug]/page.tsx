@@ -86,7 +86,7 @@ const arts = { browser: BrowserArt, chat: ChatArt, phone: PhoneArt, call: CallAr
 
 const ctaIcon = (cta: ServicePage["cta"]) => (cta.href === site.whatsapp ? MessageCircle : CalendarDays);
 
-function PlanCard({ plan, cta }: { plan: ServicePlan; cta: ServicePage["cta"] }) {
+function PlanCard({ plan }: { plan: ServicePlan }) {
   const dark = plan.featured;
   return (
     <article className={cn("flex flex-col rounded-2xl p-2.5", dark ? "bg-ink-black" : "bg-surface-container-low")}>
@@ -113,9 +113,6 @@ function PlanCard({ plan, cta }: { plan: ServicePlan; cta: ServicePage["cta"] })
             {plan.timeline} · fixed price
           </p>
           <p className={cn("mt-unit-4 font-sans text-body-md", dark ? "text-on-primary" : "text-ink-black")}>{plan.tagline}</p>
-          <div className="mt-unit-6">
-            <PlanButton href={cta.href} label={cta.label} icon={ctaIcon(cta)} external dark={dark} />
-          </div>
         </div>
       </div>
       <ul className="flex flex-col gap-unit-3 px-unit-4 pt-unit-6 pb-unit-4 sm:px-unit-6">
@@ -311,8 +308,12 @@ export default async function ServicePageRoute({ params }: PageProps<"/services/
             <p className="mt-unit-4 max-w-2xl font-sans text-body-lead text-on-surface-variant">{p.plans.lead}</p>
             <div className="mt-unit-12 grid grid-cols-1 gap-unit-4 lg:grid-cols-3">
               {p.plans.items.map((plan) => (
-                <PlanCard key={plan.name} plan={plan} cta={p.cta} />
+                <PlanCard key={plan.name} plan={plan} />
               ))}
+            </div>
+            {/* One button for all the plans: they all open the same call */}
+            <div className="mt-unit-8">
+              <PlanButton href={p.cta.href} label={p.cta.label} icon={ctaIcon(p.cta)} external />
             </div>
             <ul className="mt-unit-8 flex flex-col gap-unit-2 font-sans text-body-sm text-ink-muted sm:flex-row sm:flex-wrap sm:gap-x-unit-8">
               {p.plans.notes.map((n) => (

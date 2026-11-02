@@ -1742,6 +1742,10 @@ All user-triggered (hover / pointer), 300ms ease-out-quint, off with reduced mot
 - Update, section 68: the case studies are back on with the first real project; the placeholders are gone.
 - No analytics, so no cookie banner. Still open: auto-reply and lead notification (needs an email provider), Vercel Firewall, and the account-level items on the launch checklist (2FA, domain lock, Search Console, client logo permissions).
 
+## 69. Fewer booking buttons (2026-11-02)
+
+- The owner found the booking CTA too repetitive. Home page: 12 links to 6 (removed services list aside, About, FAQ card, Custom Project card, footer row). Service pages: 7 to 4 (one button under the plans instead of one per plan). Rule recorded in DESIGN.md.
+
 ## 68. First real case study: Picture TV Media (2026-11-02)
 
 - `/work/picture-tv`, from the owner's description and the live site, with four screenshots of picturetv.net (`public/images/case-picturetv-*.jpg`, 1440×785, the gallery's aspect ratio). The three template placeholders are removed from `content/projects.ts`; their images are now unused in `public/images`.

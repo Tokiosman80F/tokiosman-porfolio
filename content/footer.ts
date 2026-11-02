@@ -7,9 +7,8 @@ export type FooterLink = {
   label: string;
   href: string;
   external?: boolean;
-  /** Contact rows: a brand logo in public/logos, or a generic icon ("calendar"). */
+  /** Contact rows: a brand logo in public/logos. */
   logo?: string;
-  icon?: "calendar";
 };
 export type FooterColumn = { title: string; links: FooterLink[] };
 
@@ -47,7 +46,6 @@ export const footer = {
       links: [
         { label: site.email, href: `mailto:${site.email}`, logo: "outlook" },
         { label: site.phone, href: site.whatsapp, external: true, logo: "whatsapp" },
-        { label: "Book a free call", href: site.bookingUrl, external: true, icon: "calendar" },
       ],
     },
   ] satisfies FooterColumn[],

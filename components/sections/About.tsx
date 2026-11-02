@@ -1,7 +1,6 @@
 import Image from "next/image";
-import { CalendarDays, Mail } from "lucide-react";
+import { Mail } from "lucide-react";
 import { FramerMotionIcon } from "@/components/ui/brand-icons";
-import { PlanButton } from "@/components/ui/PlanButton";
 import { Section } from "@/components/ui/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { about } from "@/content/about";
@@ -42,9 +41,6 @@ function PhotoCard({ className }: { className?: string }) {
       </div>
       <div className="relative p-unit-6 sm:p-unit-8">
         <p className="font-sans text-body-lead font-medium text-ink-black">{about.greeting}</p>
-        <div className="mt-unit-4">
-          <PlanButton href={about.cta.href} label={about.cta.label} icon={CalendarDays} external />
-        </div>
         {/* profiles and direct channels: logo tiles, same as the footer's */}
         <p id="about-connect" className="mt-unit-6 font-mono text-mono-tag tracking-widest text-ink-muted uppercase">
           {about.linksLabel}

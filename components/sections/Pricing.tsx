@@ -210,7 +210,6 @@ function CustomCard({ offer: o }: { offer: CustomOffer }) {
       </div>
       <div className="relative flex shrink-0 flex-col gap-unit-3">
         <Price price={o.price} />
-        <BookButton cta={o.cta} />
         {o.more && (
           <Link href={o.more.href} className="tap-target group inline-flex items-center gap-unit-2 font-sans text-body-sm font-semibold text-ink-black underline-offset-4 hover:underline">
             {o.more.label}
