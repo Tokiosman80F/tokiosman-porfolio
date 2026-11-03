@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { BriefcaseBusiness, LayoutGrid, MessageCircleQuestion, Tag, UserRound, type LucideIcon } from "lucide-react";
+import { BriefcaseBusiness, LayoutGrid, MessageCircleQuestion, UserRound, type LucideIcon } from "lucide-react";
 import type { NavLink } from "@/content/navigation";
 import { cn } from "@/lib/utils";
 import { useActiveSection } from "./NavLinks";
@@ -19,7 +19,6 @@ const icons: Record<string, LucideIcon> = {
   "/#services": LayoutGrid,
   "/#about": UserRound,
   "/#work": BriefcaseBusiness,
-  "/#pricing": Tag,
   "/#faq": MessageCircleQuestion,
 };
 

@@ -13,9 +13,9 @@ export const hero = {
     suffix: " that work as well as they look.",
   },
   lead: "I'm a software engineer with strong UI taste, so what I build is solid underneath and a pleasure to use. From small teams to large companies, I design, build and maintain it myself.",
-  // The call is the main action (PRODUCT.md); pricing is the secondary path
+  // The call is the main action (PRODUCT.md); services and prices are the secondary path
   primary: { label: "Book a free 30-min call", href: site.bookingUrl },
-  secondary: { label: "See Pricing", href: "#pricing" },
+  secondary: { label: "See services and prices", href: "#all-services" },
   // DRAFT copy (not from docs): who the visitor deals with, under the buttons
   intro: { name: "Hi, I'm Toki", note: "You'll talk to me directly, from the first call to launch." },
   // Proof strip under the buttons (facts from docs/about-me.md and docs/cta.md)

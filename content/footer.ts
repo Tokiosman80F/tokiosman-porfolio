@@ -23,7 +23,6 @@ export const footer = {
         { label: "Services", href: "/#services" },
         { label: "About", href: "/#about" },
         ...(caseStudiesLive ? [{ label: "Work", href: "/#work" }] : []),
-        { label: "Pricing", href: "/#pricing" },
         { label: "FAQ", href: "/#faq" },
         { label: "Blogs", href: "/blogs" },
       ],

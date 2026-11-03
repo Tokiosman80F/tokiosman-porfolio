@@ -1761,7 +1761,6 @@ All user-triggered (hover / pointer), 300ms ease-out-quint, off with reduced mot
 
 ## Positioning and copy (2026-11-03)
 
-Owner's direction: present Toki as a software engineer with strong UI taste who builds and maintains SaaS products, business tools, CRMs and complex web apps, for small, mid-size and large companies. Not a basic web designer. Every home page section stays; a trial that merged the service lists was reverted at the owner's request.
+Owner's direction: present Toki as a software engineer with strong UI taste who builds and maintains SaaS products, business tools, CRMs and complex web apps, for small, mid-size and large companies. Not a basic web designer. The Pricing section was removed at the owner's request; prices live in "Pick what you need" and on the service pages, and payment terms in the FAQ and service pages.
 
-- **Pricing:** Web App + Dashboard leads and carries the dark card, badged "Main focus". The website card now reads "From $1,500" and "2–4 weeks", matching its service page.
 - **Waiting on the owner:** confirm "20+ projects shipped", ask a client for a real quote, and decide whether "200+ problems solved" (removed) comes back.

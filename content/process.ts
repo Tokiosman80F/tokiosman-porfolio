@@ -33,7 +33,7 @@ export const processTiles = {
       ],
     },
     builtWith: ["Next.js", "Responsive", "Smooth interactions"],
-    cta: { label: "View pricing", href: "#pricing" },
+    cta: { label: "See services and prices", href: "#all-services" },
   },
   updates: {
     title: "Regular updates and progress tracking",
