@@ -24,7 +24,7 @@ export type SocialTestimonial = TestimonialBase & {
 export type Testimonial = QuoteTestimonial | SocialTestimonial;
 
 export const testimonialsSection = {
-  eyebrow: "FOUNDER TESTIMONIALS & SOCIAL PROOF",
+  eyebrow: "What founders say",
   title: "What people say about TokiOsman.",
   lead: "Direct quotes and unprompted LinkedIn posts from founders we've partnered with.",
   carouselLabel: "Testimonials",

@@ -53,17 +53,7 @@ function Question({ item, open }: { item: FaqItem; open?: boolean }) {
         <Avatar className="mt-1 hidden size-8 sm:block" />
         <div className="min-w-0 flex-1 rounded-xl rounded-tl-xs bg-surface-container-low p-unit-4">
           <p className="font-sans text-body-md leading-relaxed text-on-surface-variant">{renderRich(item.answer)}</p>
-          <div className="mt-unit-4 flex flex-wrap items-center justify-between gap-unit-2 border-t border-border-hairline pt-unit-3">
-            <span className="font-mono text-[11px] text-ink-muted">{item.meta}</span>
-            <span
-              className={cn(
-                "rounded-full px-unit-2 py-0.5 font-mono text-[11px] font-bold",
-                item.status.tone === "green" ? "border border-signal-green/40 bg-white text-signal-green-ink" : "bg-ink-black text-white",
-              )}
-            >
-              {item.status.label}
-            </span>
-          </div>
+          <p className="mt-unit-4 border-t border-border-hairline pt-unit-3 font-mono text-[11px] text-ink-muted">{item.meta}</p>
         </div>
       </div>
     </details>
@@ -74,7 +64,7 @@ function Question({ item, open }: { item: FaqItem; open?: boolean }) {
 function AskCard() {
   const { contact } = faqSection;
   return (
-    <div className="relative overflow-hidden rounded-2xl bg-ink-black p-unit-6 bg-[radial-gradient(90%_70%_at_100%_0%,rgb(255_255_255/0.12),transparent_60%)]">
+    <div className="ink-card relative overflow-hidden rounded-2xl bg-ink-black p-unit-6 bg-[radial-gradient(90%_70%_at_100%_0%,rgb(255_255_255/0.12),transparent_60%)]">
       <Pattern kind="plus" id="faq-ask" className="text-on-primary opacity-25 [mask-image:radial-gradient(75%_100%_at_100%_0%,black,transparent)]" />
       <div className="relative flex items-center gap-unit-3">
         <Avatar className="size-11 border-white/20" />
@@ -120,15 +110,7 @@ export default function Faq() {
               eyebrow={<Eyebrow>{faqSection.eyebrow}</Eyebrow>}
               title={renderHighlighted(faqSection.title, "py-0.5")}
               titleClassName="leading-tight"
-              lead={
-                <>
-                  {faqSection.lead}
-                  {/* the side tag sits under the lead here (the column is too narrow for SectionHeader's aside) */}
-                  <span className="mt-unit-4 block w-fit rounded-full border border-border-hairline bg-paper-card px-unit-3 py-1 font-mono text-mono-meta text-ink-muted">
-                    {faqSection.aside}
-                  </span>
-                </>
-              }
+              lead={faqSection.lead}
             />
             <div className="hidden lg:block">
               <AskCard />

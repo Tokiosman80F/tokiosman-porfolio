@@ -1758,3 +1758,9 @@ All user-triggered (hover / pointer), 300ms ease-out-quint, off with reduced mot
 - Second case: `/work/redaxify`, four public screenshots (`public/images/case-redaxify-*.jpg`). The dashboard and client board sit behind a login, so they have no screenshots yet. Stack shows only what the public site reveals (Next.js, React, Tailwind CSS) until the owner confirms the rest.
 - Spelling settled: redaxify.com shows the name is **Redaxify**, so the section 67 rename to Reduxify is reverted. The owner's CV and `docs/` still say Reduxify in places.
 - Open: picturetv.net reports Next.js 15.1.11, so the copy says "Next.js 15" and not "latest", and npm's advisory data lists known issues for that version. To confirm with the owner, plus the client's OK to be named and to show the screenshots.
+
+## Positioning and copy (2026-11-03)
+
+Owner's direction: present Toki as a software engineer with strong UI taste who builds and maintains SaaS products, business tools, CRMs and complex web apps, for small, mid-size and large companies. Not a basic web designer. The Pricing section was removed at the owner's request; prices live in "Pick what you need" and on the service pages, and payment terms in the FAQ and service pages.
+
+- **Waiting on the owner:** confirm "20+ projects shipped", ask a client for a real quote, and decide whether "200+ problems solved" (removed) comes back.

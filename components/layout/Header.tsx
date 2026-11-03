@@ -41,7 +41,7 @@ export default function Header() {
           <div className="ml-auto flex items-center gap-unit-2 md:ml-0">
             <ThemeToggle />
             {/* Under 368px only the calendar tile shows (the label stays for screen readers) so the bar fits 320px */}
-            <PlanButton href={headerCta.href} label={headerCta.label} icon={CalendarDays} external={headerCta.external} labelClassName="max-[23rem]:sr-only" />
+            <PlanButton href={headerCta.href} label={headerCta.label} icon={CalendarDays} external={headerCta.external} className="max-[23rem]:w-10 max-[23rem]:p-0" labelClassName="max-[23rem]:sr-only" />
           </div>
         </div>
       </header>

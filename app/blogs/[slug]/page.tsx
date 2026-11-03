@@ -214,7 +214,7 @@ export default async function BlogPostPage({ params }: PageProps<"/blogs/[slug]"
               {p.cta && (
                 <Link
                   href={p.cta.href}
-                  className="group mt-unit-12 flex flex-col gap-unit-6 rounded-3xl border border-ink-black bg-ink-black p-unit-6 text-on-primary transition-[translate,box-shadow] hover:-translate-y-1 hover:shadow-lg focus-visible:outline-ink-black motion-reduce:transition-none sm:p-unit-8 md:flex-row md:items-end md:justify-between"
+                  className="ink-card group mt-unit-12 flex flex-col gap-unit-6 rounded-3xl border border-ink-black bg-ink-black p-unit-6 text-on-primary transition-[translate,box-shadow] hover:-translate-y-1 hover:shadow-lg focus-visible:outline-ink-black motion-reduce:transition-none sm:p-unit-8 md:flex-row md:items-end md:justify-between"
                 >
                   <span className="flex flex-col gap-unit-3">
                     <span className="font-display text-headline-md font-bold">{p.cta.title}</span>

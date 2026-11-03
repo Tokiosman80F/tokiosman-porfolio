@@ -15,7 +15,7 @@ const inset =
 
 function TestimonialCard({ t }: { t: Testimonial }) {
   return (
-    <figure className="relative flex h-full min-h-72 flex-col overflow-hidden rounded-2xl bg-ink-black p-unit-6 sm:p-unit-8">
+    <figure className="ink-card relative flex h-full min-h-72 flex-col overflow-hidden rounded-2xl bg-ink-black p-unit-6 sm:p-unit-8">
       {/* Grid texture + corner glow, as in the reference */}
       <div
         aria-hidden

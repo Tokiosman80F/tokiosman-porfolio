@@ -139,7 +139,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
                 </ol>
               </div>
 
-              <div className="relative flex flex-col overflow-hidden rounded-2xl bg-ink-black bg-[radial-gradient(90%_60%_at_100%_0%,rgb(255_255_255/0.12),transparent_60%)] p-unit-6 text-on-primary sm:p-unit-8 lg:col-span-5">
+              <div className="ink-card relative flex flex-col overflow-hidden rounded-2xl bg-ink-black bg-[radial-gradient(90%_60%_at_100%_0%,rgb(255_255_255/0.12),transparent_60%)] p-unit-6 text-on-primary sm:p-unit-8 lg:col-span-5">
                 <Heading as="h2" size="sm" className="text-on-primary">{t.outcome}</Heading>
                 <p className="mt-auto flex items-center gap-unit-3 pt-unit-12 font-display text-headline-lg-mobile font-bold tracking-tight text-canary-yellow md:text-headline-lg [html[data-theme=dark]_&]:text-on-primary">
                   <OutcomeIcon aria-hidden className="size-9 shrink-0 md:size-11" />

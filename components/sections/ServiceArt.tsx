@@ -108,12 +108,12 @@ export function BrowserArt() {
               {art.browserCta.nav}
             </span>
           </div>
-          <p className="mx-auto mt-2 w-fit rounded-full border border-[#e6e6e6] px-1.5 py-[1px] font-mono text-[5.5px] tracking-widest text-[#666] uppercase">
+          <p className="mt-2 text-center font-sans text-[6px] font-semibold text-[#121212] underline decoration-[#FDF175] decoration-1 underline-offset-2">
             {art.browserEyebrow}
           </p>
           <p className="mt-1.5 text-center font-display text-[13px] leading-tight font-bold text-[#121212] uppercase">
-            I build websites that{" "}
-            <span className="rounded-[2px] border border-[#121212] bg-[#FDF175] px-0.5 shadow-[1.5px_1.5px_0_#121212]">close deals</span>
+            I build{" "}
+            <span className="rounded-[2px] border border-[#121212] bg-[#FDF175] px-0.5 shadow-[1.5px_1.5px_0_#121212]">SaaS products</span>
           </p>
           <div className="mx-auto mt-2 h-[3px] w-3/5 rounded-full bg-[#d9d9d9]" />
           <div className="mx-auto mt-1 h-[3px] w-2/5 rounded-full bg-[#d9d9d9]" />

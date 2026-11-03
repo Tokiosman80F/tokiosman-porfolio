@@ -16,7 +16,7 @@ export default function NotFound() {
       <Header />
       <main className="w-full bg-white">
         <Section border="none" className="pt-32 lg:pt-40">
-          <Eyebrow className="mb-unit-6">404 · Page not found</Eyebrow>
+          <Eyebrow className="mb-unit-4">Error 404</Eyebrow>
           <h1 className="max-w-3xl font-display text-display-hero-mobile leading-[1.05] font-bold text-balance text-ink-black uppercase md:text-display-hero">
             This page doesn&apos;t exist
           </h1>

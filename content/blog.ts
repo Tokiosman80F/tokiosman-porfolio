@@ -52,7 +52,7 @@ export const blogPage = {
     description: "Practical articles on Next.js websites, headless CMS, WordPress, speed and security, written for business owners and their teams.",
   },
   back: "Home",
-  eyebrow: "BLOGS · NOTES FROM THE WORK",
+  eyebrow: "Notes from the work",
   title: "Blogs",
   lead: "Plain-English articles on websites, Next.js, headless CMS and WordPress: what they are, what they cost you, and when they're worth it.",
   read: "Read article",

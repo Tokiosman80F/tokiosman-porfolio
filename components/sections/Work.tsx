@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { ArrowRight, BadgeCheck, Clock, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Section } from "@/components/ui/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { projectHref, projects, workSection, type Project, type ProjectOutcomeIcon } from "@/content/projects";
@@ -23,7 +22,7 @@ type Tone = { card: string; dark: boolean };
 export const tones: Tone[] = [
   { card: "border-border-hairline bg-surface-container-low", dark: false },
   { card: "border-signal-blue/40 bg-[color-mix(in_srgb,var(--color-signal-blue)_18%,var(--color-white))]", dark: false },
-  { card: "border-ink-black bg-ink-black", dark: true },
+  { card: "ink-card border-ink-black bg-ink-black", dark: true },
 ];
 
 // Stick only from lg width AND 56rem height: the last card sticks at ~14.2rem and is ~40rem tall, so it
@@ -135,7 +134,6 @@ export default function Work() {
   return (
     <Section id="work">
       <SectionHeader
-        eyebrow={<Eyebrow>{workSection.eyebrow}</Eyebrow>}
         title={workSection.title}
         lead={workSection.lead}
         aside={<div className="font-mono text-mono-meta text-ink-muted">{workSection.aside}</div>}
@@ -147,9 +145,9 @@ export default function Work() {
       </ol>
       {projects.length > 1 && (
         <div className="mt-unit-12 text-center">
-          <Button variant="glow" href={workSection.cta.href} className="font-mono text-mono-meta tracking-wider text-ink-black">
-            <span>{workSection.cta.label}</span>
-            <ArrowRight aria-hidden className="size-6 shrink-0" />
+          <Button href={workSection.cta.href}>
+            {workSection.cta.label}
+            <ArrowRight aria-hidden className="size-5 shrink-0 transition-transform duration-300 group-hover:translate-x-0.5 motion-reduce:transition-none" />
           </Button>
         </div>
       )}

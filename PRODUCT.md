@@ -8,7 +8,12 @@ web
 
 ## Users
 
-Prospective clients of Toki Osman, an independent full-stack developer, deciding whether to hire him. Confirmed target groups (owner's answer, 2026-10-23):
+Prospective clients of Toki Osman, an independent software engineer, deciding whether to hire him. Target groups (owner's direction, 2026-11-03: companies of every size; not positioned as a basic web designer):
+
+- **Small and mid-size companies** that need SaaS products, business tools, CRMs or complex web apps built and maintained.
+- **Larger companies** that need the same engineering with strong UI quality.
+
+Also served (owner's answer, 2026-10-23):
 
 - **Small and local businesses** (clinics, shops, service businesses) that need a website that brings in leads and bookings.
 - **Startups and SaaS founders** who need a marketing site, web app or dashboard built.
@@ -26,7 +31,7 @@ tokiosman.com is Toki Osman's portfolio and sales site. It exists to turn visito
 
 **One person, design to deploy.** Toki designs, builds and launches every project himself: the client talks directly to the person writing their code, from the first call to launch, with no account managers, handoffs or junior developers, at a fixed price agreed before work starts (owner's choice, 2026-10-23; the FAQ and services copy already say this).
 
-What he delivers (capabilities, not the positioning claim): Next.js websites and web apps connected to CRM, payments, bookings and AI.
+What he delivers (capabilities, not the positioning claim): SaaS products, business tools, CRMs and complex web apps, designed by a software engineer with strong UI taste and maintained after launch; also Next.js websites and AI integrations.
 
 ## Operating Context
 

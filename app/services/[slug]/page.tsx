@@ -89,7 +89,7 @@ const ctaIcon = (cta: ServicePage["cta"]) => (cta.href === site.whatsapp ? Messa
 function PlanCard({ plan }: { plan: ServicePlan }) {
   const dark = plan.featured;
   return (
-    <article className={cn("flex flex-col rounded-2xl p-2.5", dark ? "bg-ink-black" : "bg-surface-container-low")}>
+    <article className={cn("flex flex-col rounded-2xl p-2.5", dark ? "ink-card bg-ink-black" : "bg-surface-container-low")}>
       <div className={cn("relative overflow-hidden rounded-xl p-unit-6", dark ? "bg-primary-container bg-[radial-gradient(120%_90%_at_0%_0%,rgb(255_255_255/0.14),transparent_55%)]" : "bg-white")}>
         <Pattern
           kind="dots"
@@ -156,7 +156,7 @@ export default async function ServicePageRoute({ params }: PageProps<"/services/
             </nav>
             <div className="grid grid-cols-1 items-center gap-unit-12 lg:grid-cols-12 lg:gap-unit-8">
               <div className="lg:col-span-6">
-                <Eyebrow className="mb-unit-6 py-1.5">{p.hero.eyebrow}</Eyebrow>
+                <Eyebrow className="mb-unit-4">{p.hero.eyebrow}</Eyebrow>
                 <h1 className="font-display text-display-hero-mobile leading-[1.05] font-bold text-balance text-ink-black md:text-[3.25rem]">{p.hero.title}</h1>
                 <p className="mt-unit-6 max-w-xl font-sans text-body-lead text-on-surface-variant">{p.hero.lead}</p>
                 <ul className="mt-unit-6 flex flex-wrap gap-unit-2">
@@ -166,19 +166,11 @@ export default async function ServicePageRoute({ params }: PageProps<"/services/
                     </li>
                   ))}
                 </ul>
-                <div className="mt-unit-8 flex flex-wrap items-center gap-unit-4">
-                  <Button href={p.cta.href} target="_blank" rel="noopener noreferrer" className="group">
-                    {p.cta.href === site.whatsapp ? (
-                      <MessageCircle aria-hidden className="size-6 shrink-0 transition-transform duration-300 group-hover:-rotate-12 motion-reduce:transition-none" />
-                    ) : (
-                      <CalendarDays aria-hidden className="size-6 shrink-0 transition-transform duration-300 group-hover:-rotate-12 motion-reduce:transition-none" />
-                    )}
-                    <span>{p.cta.label}</span>
-                    <span className="sr-only">(opens in a new tab)</span>
-                  </Button>
-                  <Button variant="glow" href="#plans" className="group">
-                    <span>See the plans</span>
-                    <ArrowDown aria-hidden className="size-6 shrink-0 transition-transform duration-300 group-hover:translate-y-1 motion-reduce:transition-none" />
+                <div className="mt-unit-8 flex flex-wrap items-center gap-unit-3">
+                  <PlanButton size="lg" href={p.cta.href} label={p.cta.label} icon={ctaIcon(p.cta)} external />
+                  <Button href="#plans">
+                    See the plans
+                    <ArrowDown aria-hidden className="size-5 shrink-0 transition-transform duration-300 group-hover:translate-y-0.5 motion-reduce:transition-none" />
                   </Button>
                 </div>
               </div>
@@ -206,7 +198,7 @@ export default async function ServicePageRoute({ params }: PageProps<"/services/
                 {p.explainer.flows.map((f, fi) => {
                   const dark = fi === p.explainer!.flows.length - 1;
                   return (
-                    <figure key={f.title} className={cn("rounded-2xl p-unit-6", dark ? "bg-ink-black" : "bg-surface-container-low")}>
+                    <figure key={f.title} className={cn("rounded-2xl p-unit-6", dark ? "ink-card bg-ink-black" : "bg-surface-container-low")}>
                       <figcaption>
                         <span className={cn("font-mono text-mono-tag tracking-widest uppercase", dark ? "text-on-primary-container" : "text-ink-muted")}>{f.label}</span>
                         <span className={cn("mt-1 block font-sans text-body-lead font-semibold", dark ? "text-on-primary" : "text-ink-black")}>{f.title}</span>
@@ -336,7 +328,7 @@ export default async function ServicePageRoute({ params }: PageProps<"/services/
               {p.compare.columns.map((col, i) => {
                 const mine = i === p.compare!.highlight;
                 return (
-                  <li key={col} className={cn("rounded-2xl p-unit-4", mine ? "order-first bg-ink-black text-on-primary" : "border border-border-hairline")}>
+                  <li key={col} className={cn("rounded-2xl p-unit-4", mine ? "ink-card order-first bg-ink-black text-on-primary" : "border border-border-hairline")}>
                     <h3 className={cn("font-sans text-body-md font-semibold", mine ? "text-on-primary" : "text-ink-black")}>{col}</h3>
                     <dl className="mt-unit-3 space-y-unit-2 font-sans text-body-sm">
                       {p.compare!.rows.map((r) => (
@@ -361,7 +353,7 @@ export default async function ServicePageRoute({ params }: PageProps<"/services/
                         scope="col"
                         className={cn(
                           "p-unit-4 font-sans text-body-md font-semibold",
-                          i === p.compare!.highlight ? "bg-ink-black text-on-primary" : "text-ink-black",
+                          i === p.compare!.highlight ? "ink-card bg-ink-black text-on-primary" : "text-ink-black",
                         )}
                       >
                         {c}
@@ -376,7 +368,7 @@ export default async function ServicePageRoute({ params }: PageProps<"/services/
                       {r.values.map((v, i) => (
                         <td
                           key={i}
-                          className={cn("p-unit-4", i === p.compare!.highlight ? "bg-ink-black font-medium text-on-primary" : "text-on-surface-variant")}
+                          className={cn("p-unit-4", i === p.compare!.highlight ? "ink-card bg-ink-black font-medium text-on-primary" : "text-on-surface-variant")}
                         >
                           {v}
                         </td>

@@ -8,7 +8,6 @@ import Hero from "@/components/sections/Hero";
 import Process from "@/components/sections/Process";
 import ServiceMenu from "@/components/sections/ServiceMenu";
 import Services from "@/components/sections/Services";
-import Pricing from "@/components/sections/Pricing";
 import Work from "@/components/sections/Work";
 import { caseStudiesLive } from "@/content/projects";
 import { servicePageHref, servicePages } from "@/content/service-pages";
@@ -51,14 +50,13 @@ export default function Home() {
       <main className="min-h-screen w-full bg-white">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(homeJsonLd).replace(/</g, "\\u003c") }} />
         <div className="flex w-full flex-col">
-          {/* Reading path: what I build → every service with prices → who builds it and proof → what it costs → how it runs → questions → contact.
+          {/* Reading path: what I build → every service with prices → who builds it and proof → how it runs → questions → contact.
               <Testimonials /> (after <Work />) is left out until there are real client quotes: content/testimonials.ts is placeholder. */}
           <Hero />
           <Services />
           <ServiceMenu />
           <About />
           {caseStudiesLive && <Work />}
-          <Pricing />
           <Process />
           <Faq />
           <FinalCta />

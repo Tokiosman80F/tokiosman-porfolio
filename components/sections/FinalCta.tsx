@@ -1,5 +1,6 @@
 import { CalendarDays, Eye } from "lucide-react";
 import { CurrentMonth } from "@/components/layout/CurrentMonth";
+import { Eyebrow } from "@/components/ui/Eyebrow";
 import { renderHighlighted } from "@/components/ui/Highlight";
 import { PlanButton } from "@/components/ui/PlanButton";
 import { Section } from "@/components/ui/Section";
@@ -15,7 +16,7 @@ export default function FinalCta() {
   const { primary, secondary } = finalCta;
   return (
     <Section id="contact" border="none">
-      <div className="relative overflow-hidden rounded-3xl bg-ink-black text-on-primary">
+      <div className="ink-card relative overflow-hidden rounded-3xl bg-ink-black text-on-primary">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgb(255_255_255/0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgb(255_255_255/0.05)_1px,transparent_1px)] [mask-image:radial-gradient(80%_80%_at_0%_0%,black,transparent)] bg-[size:4rem_4rem]"
@@ -24,10 +25,9 @@ export default function FinalCta() {
 
         <div className="relative grid grid-cols-1 gap-unit-12 p-unit-6 sm:p-unit-12 lg:grid-cols-12 lg:items-center lg:gap-unit-16 lg:p-unit-16">
           <div className="lg:col-span-7">
-            <span className="inline-flex items-center gap-unit-2 rounded-full border border-white/15 bg-white/5 px-unit-3 py-1 font-mono text-mono-tag tracking-widest text-on-primary uppercase">
-              <span aria-hidden className="size-2 animate-pulse rounded-full bg-signal-green" />
+            <Eyebrow>
               <CurrentMonth template={finalCta.badge} />
-            </span>
+            </Eyebrow>
             <h2 className="mt-unit-6 font-display text-display-hero-mobile leading-[1.05] font-bold text-balance text-on-primary uppercase lg:text-[3.5rem]">
               {renderHighlighted(finalCta.title)}
             </h2>
@@ -36,7 +36,7 @@ export default function FinalCta() {
               <PlanButton href={primary.href} label={primary.label} icon={CalendarDays} external dark />
               <a
                 href={secondary.href}
-                className="tap-target inline-flex items-center gap-unit-2 rounded-md border border-white/25 px-unit-3 py-2 font-sans text-body-sm font-medium text-on-primary transition-colors hover:bg-white/10 focus-visible:outline-white"
+                className="tap-target inline-flex h-10 items-center gap-unit-2 rounded-[0.625rem] border border-white/25 px-unit-4 font-sans text-body-sm font-semibold tracking-[-0.01em] text-on-primary transition-colors hover:border-white focus-visible:outline-white"
               >
                 {secondary.label}
                 <Eye aria-hidden className="size-4 shrink-0" />
@@ -44,7 +44,7 @@ export default function FinalCta() {
             </div>
           </div>
 
-          <div className="lg:col-span-5">
+          <div className="ink-card-reset lg:col-span-5">
             <ContactForm crmReady={crmConfigured()} turnstileKey={turnstileSiteKey()} />
           </div>
         </div>

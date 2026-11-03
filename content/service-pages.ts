@@ -54,14 +54,14 @@ export const servicePages: ServicePage[] = [
     slug: "nextjs-website-development",
     summary: "Custom websites that bring in enquiries and bookings, live in 2–4 weeks.",
     art: "browser",
-    name: "Next.js website development",
+    name: "Website design and development",
     meta: {
       title: "Next.js Website Development, from $1,500",
       description:
         "Custom Next.js websites designed and built by me, Toki Osman. Three fixed-price plans from $1,500, launched in 2–4 weeks. Book a free call.",
     },
     hero: {
-      eyebrow: "Service · Websites",
+      eyebrow: "Websites",
       title: "Next.js website development, designed and built by one developer",
       lead: "A fast, custom website that brings in enquiries and bookings. You talk to me from the first call to launch, and the price is fixed before any work starts.",
       facts: ["From $1,500", "Launch in 2–4 weeks", "Fixed price"],
@@ -223,7 +223,7 @@ export const servicePages: ServicePage[] = [
         "An AI assistant trained on your own content that answers customers 24/7, shows its sources and sends leads to your CRM. From $2,000, live in 2–3 weeks.",
     },
     hero: {
-      eyebrow: "Service · AI chatbots",
+      eyebrow: "AI chatbots",
       title: "A custom AI chatbot that answers from your own content",
       lead: "Your customers ask the same questions every day. I build an assistant that answers them 24/7 from your documents, FAQs and products, shows where each answer comes from, and passes new leads to you.",
       facts: ["From $2,000", "Live in 2–3 weeks", "Works with your current site"],
@@ -399,7 +399,7 @@ export const servicePages: ServicePage[] = [
         "Custom web apps and admin dashboards with logins, roles, payments and automations, built in Next.js by me, Toki Osman. From $4,500, in 3–4 weeks.",
     },
     hero: {
-      eyebrow: "Service · Web apps",
+      eyebrow: "Web apps",
       title: "Custom web apps and admin dashboards, built around how you work",
       lead: "Logins and roles, an admin dashboard for your data, payments, bookings and automations: one app instead of five spreadsheets. You talk to the developer building it, and the price is fixed before work starts.",
       facts: ["From $4,500", "First version in 3–4 weeks", "You own the code"],
@@ -576,7 +576,7 @@ export const servicePages: ServicePage[] = [
         "I connect your website to Zoho CRM, Stripe payments and bookings, with error alerts and a written handoff, so no lead or payment gets lost. From $500.",
     },
     hero: {
-      eyebrow: "Service · Integrations",
+      eyebrow: "Integrations",
       title: "Every lead, payment and booking lands where you work",
       lead: "Website forms that go straight into your CRM, Stripe payments and bookings that confirm themselves, and alerts the moment something needs you. No more copying data between tools.",
       facts: ["From $500", "Done in 3–5 days", "Fixed price"],
@@ -751,7 +751,7 @@ export const servicePages: ServicePage[] = [
         "Monthly care plans for your Next.js website: updates, uptime monitoring, backups and changes, handled by the developer who knows your code. From $99 a month.",
     },
     hero: {
-      eyebrow: "Service · Maintenance",
+      eyebrow: "Maintenance",
       title: "Your website, kept fast, secure and up to date",
       lead: "Updates, uptime monitoring, backups and the small changes you need each month, handled by the developer who knows your code. No ticket queue: you message me directly.",
       facts: ["From $99 a month", "Cancel any month", "Direct with the developer"],
@@ -921,7 +921,7 @@ export const servicePages: ServicePage[] = [
         "Keep WordPress for editing and get a fast Next.js front end: instant publishing, draft previews, SEO and redirects carried over. From $3,000, in 3 weeks.",
     },
     hero: {
-      eyebrow: "Service · Headless WordPress",
+      eyebrow: "Headless WordPress",
       title: "Keep WordPress. Get a Next.js website that loads fast.",
       lead: "Your team keeps writing in the WordPress admin they know. Visitors get a fast Next.js front end, and every post you publish goes live in seconds. One developer handles the move, from content model to launch.",
       facts: ["From $3,000", "Live in 3–6 weeks", "Same WordPress admin"],
@@ -1194,7 +1194,7 @@ export const servicePages: ServicePage[] = [
         "Hacked WordPress site? I remove the malware, backdoors and spam, find and patch how they got in, and request Google's review. Fixed price from $299, with a reinfection guarantee.",
     },
     hero: {
-      eyebrow: "Service · WordPress security",
+      eyebrow: "WordPress security",
       title: "Hacked WordPress site? I'll clean it and close the way in.",
       lead: "Malware, spam pages, redirects to scam sites or a \"This site may be hacked\" warning: I remove every trace, find how the attacker got in and patch it, so it doesn't come back next week.",
       facts: ["From $299", "Work starts the same day", "Reinfection guarantee"],
@@ -1430,7 +1430,7 @@ export const servicePages: ServicePage[] = [
         "Landing pages, integrations, Next.js upgrades and app rescues, built by me, Toki Osman. Tell me the job and get a written scope and fixed quote in 24 hours.",
     },
     hero: {
-      eyebrow: "Service · Custom projects",
+      eyebrow: "Custom projects",
       title: "Not on my price list? Tell me the job and get a fixed quote",
       lead: "Landing pages, integrations, upgrades and apps that got stuck halfway. Tell me what you need, and within 24 hours of our call you get a written scope and one fixed price. You talk to me, the person doing the work, the whole way through.",
       facts: ["From $500", "Quote within 24 hours", "You own the code"],

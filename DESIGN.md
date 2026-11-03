@@ -2,7 +2,7 @@
 
 ## Brand & Style
 
-**Editorial Brutalism with Signature Refinement** — a tactile, high-conviction aesthetic for the TokiOsman portfolio. Swiss-grid discipline (hairline borders, modular zones, generous whitespace) combined with desk ephemera: canary sticky notes, offset "pinned" shadows, highlighted words, monospaced metadata, and live status dots.
+**Editorial Brutalism with Signature Refinement** — a tactile, high-conviction aesthetic for the TokiOsman portfolio. Swiss-grid discipline (hairline borders, modular zones, generous whitespace) combined with desk ephemera: canary sticky notes, offset "pinned" shadows, highlighted words, and monospaced metadata.
 
 - **Direct:** bold ink-on-paper contrast, uppercase grotesk headlines, little decoration.
 - **Physical craft:** warm paper whites, hairline guides, hard offset shadows, slightly rotated notes and highlight boxes.
@@ -37,15 +37,13 @@ Tokens live in `app/globals.css` `@theme`. `--color-*: initial` removes Tailwind
 | `signal-green-ink` | `#157A3A` | Green text and icons (outcomes, "verified", status labels) |
 | `signal-blue` | `#60A5FA` | Checks, avatar (with ink text), progress bars |
 | `highlight-green` | `#4ae176` | Highlight box fill |
-| `graphite` / `graphite-hover` | `#454545` / `#383838` | Primary button gradient start (idle / hover) |
+| `graphite` / `graphite-hover` | `#454545` / `#383838` | Client avatar tone in What I build (hover value unused) |
 
 Contrast rule: all real (non-mock) text meets WCAG AA. Text inside the decorative mock UIs (code, terminal, iMessage, Figma) keeps its imitation colors.
 
 ### Accent colors used as literals
 
-- **Primary button (ink gradient):** `bg-linear-135/srgb from-graphite to-black`, border `graphite`; hover `from-graphite-hover`.
-- **Dark theme:** `html[data-theme="dark"]` swaps every colour token in `app/globals.css` (no `dark:` variants in markup). Page `#121211`, cards `#1D1D1B`/`#242422`, text `#F3F2ED`, muted `#A3A29C`, hairlines `#30302D`. `white` and `ink-black` trade places, so ink surfaces (featured offer, dark tiles, contact card, ink case file) become light cards with dark text; the primary button becomes a light gradient. Islands keep light-mode ink: accent fills (canary, greens, blue, neon) keep dark text automatically; text that only overlaps a canary shape (nav chip, SVG tags) uses `on-accent` (#121212, never swapped); `.theme-light` keeps logo tiles light. Canary text on ink cards switches to `on-primary` in dark (`[html[data-theme=dark]_&]:text-on-primary`). Tokens added: `error` (#b91c1c / #F87171), `signal-green-on-primary` (green text on ink cards). Toggle: `ThemeToggle` in the navbar; first visit follows the OS; choice saved in localStorage; set before paint by an inline script (no flash). The Cal.com modal opens in the current theme.
-- **Glow button ring:** `linear-gradient(90deg, #1978e5, #38bdf8, #60a5fa, #00d2ff, #2563eb, #1978e5)`, glow `rgba(56,189,248,0.35)` → `0.65` on hover; inner `#FAFAF7` → `#FFFFFF`. The gradient is still at rest and travels only while hovered.
+- **Dark theme:** `html[data-theme="dark"]` swaps every colour token in `app/globals.css` (no `dark:` variants in markup). Page `#121211`, cards `#1D1D1B`/`#242422`, text `#F3F2ED`, muted `#A3A29C`, hairlines `#30302D`. `white` and `ink-black` trade places, so ink surfaces marked `.ink-card` (featured plan, dark tiles, contact card, ink case file) become the deep blue of the Case 2 card (`signal-blue` 18% over the page colour) with light text; the primary button becomes a light gradient. Islands keep light-mode ink: accent fills (canary, greens, blue, neon) keep dark text automatically; text that only overlaps a canary shape (nav chip, SVG tags) uses `on-accent` (#121212, never swapped); `.theme-light` keeps logo tiles light. Canary text on ink cards switches to `on-primary` in dark (`[html[data-theme=dark]_&]:text-on-primary`). Tokens added: `error` (#b91c1c / #F87171), `signal-green-on-primary` (green text on ink cards). Toggle: `ThemeToggle` in the navbar; first visit follows the OS; choice saved in localStorage; set before paint by an inline script (no flash). The Cal.com modal opens in the current theme.
 - **Highlight boxes:** canary `#FDF175`, green `#4ae176`, blue `#60A5FA`, neon `rgb(59,255,111)`.
 - **Beam background:** green `#10b981 → #22C55E → #4ae176`, blue `#2563eb/#3b82f6 → #00d2ff → #60A5FA`, ink `#121212 → #454545`.
 - **Dark card:** `linear-gradient(135deg, #121212 0%, #121212 30%, #3f444e 100%)`.
@@ -60,7 +58,7 @@ All four are **variable fonts** (no weight list), so every weight is real.
 
 | Family | next/font variable | Tailwind family | Use |
 |---|---|---|---|
-| Space Grotesk | `--font-space-grotesk` | `font-display` | Display, headlines, buttons |
+| Space Grotesk | `--font-space-grotesk` | `font-display` | Display, headlines |
 | Inter | `--font-inter` | `font-sans` (default) | Body |
 | JetBrains Mono | `--font-jetbrains-mono` | `font-mono` | Tags, meta, prices, code |
 | Caveat | `--font-caveat` | `font-hand` | Sticky-note quote |
@@ -86,7 +84,7 @@ Icons: **Lucide React** only (Material Symbols and its font link are gone). **De
 
 Legacy per-size family aliases (`font-headline-sm`, `font-body-md`, `font-mono-meta`, …) still exist for the old markup _(removed in Phase 4)_. **New code uses `font-display` / `font-sans` / `font-mono` / `font-hand`** plus a `text-*` size token.
 
-**Conventions in the code:** section h2 = `font-headline-lg text-headline-lg-mobile md:text-headline-lg font-bold uppercase tracking-tight`; h1 = `display-hero(-mobile)` + `uppercase leading-[1.05]`; leads = `body-lead text-on-surface-variant`; eyebrows/tags = `mono-tag uppercase tracking-widest`.
+**Conventions in the code:** section h2 = `font-headline-lg text-headline-lg-mobile md:text-headline-lg font-bold uppercase tracking-tight`; h1 = `display-hero(-mobile)` + `uppercase leading-[1.05]`; leads = `body-lead text-on-surface-variant`; tags = `mono-tag uppercase tracking-widest`; eyebrows: see Eyebrow below.
 
 ## Layout & Spacing
 
@@ -104,9 +102,9 @@ Legacy per-size family aliases (`font-headline-sm`, `font-body-md`, `font-mono-m
 
 - **Tier 0:** `bg-white` page.
 - **Tier 1 (cards):** `bg-paper-card border border-border-hairline shadow-sm`; interactive cards add `hover:border-ink-black`.
-- **Tier 2 (tactile):** `border-ink-black` + hard offset shadow: `shadow-offset-sm` (2px, small CTAs, highlights), `shadow-offset-md` (3px), `shadow-offset-lg` (4px: primary CTAs, paper sticky note, FAQ card hover). All `0` blur, ink color.
+- **Tier 2 (tactile):** `border-ink-black` + hard offset shadow: `shadow-offset-sm` (2px, small CTAs, highlights), `shadow-offset-md` (3px), `shadow-offset-lg` (4px: paper sticky note, FAQ card hover). All `0` blur, ink color.
 - **Sticky note (canary):** `shadow-note` (`3px 4px 12px rgb(0 0 0 / 0.08)`), rotated `-3deg`; paper note `+2deg`; both `hover:rotate-0`. Currently unused (the hero notes were removed in the landing redesign).
-- **Glow:** `shadow-glow` / `shadow-glow-hover`, blue ring buttons only.
+- **Button:** `shadow-button`, ink buttons only.
 - Tailwind `shadow-xs/sm/md/lg/inner` are used inside mock UIs.
 
 ## Shapes
@@ -118,22 +116,20 @@ Tailwind default radii plus one token. **Decision (Q3): keep the rounded-square 
 | `rounded-xs` | 0.125rem | Cards, tags, small buttons (near-square, the house default) |
 | `rounded-sm` | 0.25rem | Highlight boxes, sticky notes, mock panels |
 | `rounded-lg` | 0.5rem | Mock-UI windows |
-| `rounded-pill` | **0.75rem** | "Pills": eyebrows, status chips, avatars, primary CTAs, dots (rounded rectangles, not circles) |
+| `rounded-pill` | **0.75rem** | "Pills": avatars (rounded rectangles, not circles) |
 | `rounded-full` | 9999px | Not used by the design; true circles only if a future design asks |
-| `.moving-blue-border-btn` | 9999px | Glow button (the one true pill) |
 
 ## Components (as implemented)
 
 ### Buttons (all are `<a>` links)
 
-- **Primary (ink gradient):** `bg-linear-135/srgb from-graphite to-black`, white text, border `graphite`, Space Grotesk semibold uppercase `tracking-tight`, offset ink shadow; `active:` translate 0.5 + `shadow-none` (press-in). Sizes: header `px-4 py-2 text-body-sm` + 2px shadow; hero `px-6 py-3 text-body-md` + 4px; pricing `px-6 py-3 text-body-sm rounded` + 3px. Hover: gradient start → `graphite-hover` (#383838) + 1px lift.
-- **Glow (`.moving-blue-border-btn`):** 2px animated blue gradient ring (`blue-gradient-shift` 4s), paper inner, blue glow; hover lifts 1px and intensifies the glow.
-- **Chip ("Chat With Ava"):** `bg-surface border-ink-black`, `mono-tag` uppercase bold, `px-3 py-1.5 rounded-xs`, 2px offset shadow, `hover:bg-canary-yellow`.
+- **Ink button (`components/ui/PlanButton`, the main action everywhere):** solid `bg-ink-black`, white sentence-case label in `font-sans` semibold, `tracking-[-0.01em]`, radius `0.625rem`, `shadow-button` (top inner highlight + soft drop). A canary icon tile sits inset 4px on the left; on hover or keyboard focus it sweeps across the whole button (300ms, ease-out-quint) and the label turns `on-accent`; active presses down 1px. Sizes: `md` `h-10 text-body-sm`, `lg` `h-12 text-body-md` (hero and service page heroes). On an ink surface pass `dark`: it inverts to `bg-white text-ink-black`. Native buttons reuse it through `inkButton()` + `InkButtonFace`.
+- **Outline button (`components/ui/Button`, the secondary action):** `h-12`, same radius and type as the ink button, `border-ink-black/25` on `bg-white`; hover darkens the border to full ink and nudges the trailing arrow. No glow, gradient or animated ring.
 - **Text link:** label + arrow icon, `hover:underline` (or `hover:text-ink-black` in nav/footer; dashed underline for mailto).
 
-### Eyebrow pill
+### Eyebrow
 
-`inline-flex gap-2 bg-paper-card border border-border-hairline rounded-pill px-4 py-1 shadow-sm` + 2×2 dot (canary with ink border, signal-green `animate-pulse`, or canary `animate-ping`) + `mono-tag uppercase tracking-widest font-semibold text-ink-charcoal`. Dark variant: black gradient pill with white text.
+A newspaper kicker (`components/ui/Eyebrow`, always this component): `font-sans text-body-md font-semibold`, underlined in canary (3px, 6px offset), colour inherited, `gap` 16px above the headline. Copy is 1–3 plain words in sentence case. No pill, dot, caps, tracking, or "A · B" chains.
 
 ### Highlight word
 
@@ -146,8 +142,7 @@ Inline box inside headings: `px-2 border border-ink-black rounded-sm shadow-offs
 - **About me (reference `docs/about-me.png`, content `docs/about-me.md`):** `#about`, white section, no eyebrow (`SectionHeader` eyebrow is optional). Bento of `rounded-2xl bg-surface-container-low` cards: lg `[photo ↕3][stat ↕2][bio ↕2]` / `[tech ⟷2]` (the companies marquee was cut; the client list shows in the hero and on the What I build closer). Photo card: 4×4 grid of empty `rounded-xl` tiles, wider than the card and radially masked, with the headshot (`/images/toki-osman.jpg`, 900px crop) as the centre 2×2 cell; greeting + contact links. Stat card: display-font "20+" (`clamp(4.5rem,9vw,7.5rem)`), fact chips, description at the bottom. Bio: testimonial-style quote over faint canary tiles. Tech: title on top, then a grid (4 columns, 8 from md) of white tiles, each a 28px brand logo over the name; the first 8 show, the other 14 fold behind a `FoldList` "Show all 22 tools" toggle. Logos are self-hosted SVGs in `public/logos/` from the dashboard-icons MCP catalogs (Dashboard Icons, Apache-2.0; Simple Icons, CC0; LobeHub, MIT), checked for scripts before use; Framer Motion uses the mark in `brand-icons`; Zustand has no logo in any catalog and shows the symbol "Zu".
 - **Case study (case-file stack):** `<ol>` of `rounded-3xl` cards in rotating tones (grey `surface-container-low` → sky blue: `signal-blue` 18% tint, `signal-blue/40` border → ink). Tab row: `CASE 0N` chip (ink, or canary on the dark card), mono client + tag, green outcome pill pushed right. Body `lg:grid-cols-12`: 5 cols h3 (`headline-md`), summary, quote as a soft bubble (`rounded-xl rounded-tl-xs`), service chips, "View Case Study →" (arrow nudges on card hover); 7 cols the image in a browser frame (traffic lights + mono URL bar), capped `max-w-xl` (sources are 512px), zooms 3% on card hover. From `lg` width **and** 56rem height the cards are `sticky` (top `6.5rem + i × 3.85rem`, one tab height, so earlier tabs stay readable as the next card slides over; soft upward shadow); smaller windows get plain stacked cards.
 - **Service ("What I build", references `docs/what-we-build-1.png`, `-2.png`):** white section, centred header with a canary highlight ("start to finish", short enough for one box at 375px). `md:grid-cols-2` of `rounded-2xl bg-surface-container-low` cards (no border): a fixed-height art area (`h-60 sm:h-64`, bottom mask fade) over a `body-lead` medium title and a `body-md` muted line. Art (`components/sections/ServiceArt.tsx`, HTML/CSS in tokens, decorative, lifts 4px on card hover): browser window with a mini of this site's hero + a Figma tab; realistic iPhone lock screen (titanium frame, side buttons, Dynamic Island, status bar, clock on a canary/blue wallpaper, frosted notifications with Zoho / Stripe / Calendar app icons; fixed hex colours, same in both themes); AI chat answering with a source file over a keyboard; video call with the "TO" tile, guest self-view and controls; and in the full-width closer, a dotted 3D globe on a canvas (`Globe.tsx`: ~620 Fibonacci dots + a 30° graticule on a tilted axis, depth-shaded, blue rim glow, soft highlight; one turn per 48s; canary home point with a pulse ring and arcs out to illustrated-avatar pins (`public/avatars/person-1…5.svg`: simple drawn people, not photos of real clients; the initial letter shows until an image loads), a dot travelling along each; pins hide behind the sphere; animates only on screen, still with reduced motion), cropped into the bottom-right (from `sm`), beside the client avatar stack.
-- **Offer (pricing), user-directed exception (reference `docs/image.png`):** the one place that leaves the rounded-square look. Section band `bg-surface-container`; cards `rounded-2xl p-2.5` (white, or `ink-black` for the featured offer) with an inset `rounded-xl` top panel (`surface-container-low`, or `primary-container` + a soft white radial highlight). Panel: sans offer name (h3) + `rounded-full` status pill (canary for "New", 14% signal-green tint with `signal-green-ink` for the featured offer), two-tone `headline-sm` title (ink, then muted), `headline-md` price with a muted "From", black "plan" button (`PlanButton`) and a bordered timeline card. Features below in two columns with `rounded-full` dot bullets and `body-sm` muted text. Patterns (`components/ui/Pattern.tsx`, SVG tile in currentColor, masked into a corner away from the text): Website dots (on-primary 25%, top-right), Web App blocks (checker of rounded squares, ink 10%, top-right), AI Upgrade waves (ink 22%, bottom-right of the left column), Custom diagonal lines (ink 14%, fading in from the right); they follow the theme via tokens. Layout: first two offers side by side at `lg`, further offers as a full-width card (features in an inset panel on the right), then the custom offer as a slim full-width card.
-- **Process bento (same exception, same family as the offers):** white band (so it reads apart from the grey pricing band above it); 4-column grid at `lg` (2 at `md`, 1 below) of `rounded-2xl` tiles, `surface-container-low` or `ink-black` with a soft radial highlight: Design & development (tall, browser mock switching the 3 homepage directions + `PlanButton` to `#pricing`), Updates (canary progress ring + stacked notification card), Hosting & deployment (dark, dot field, Build → Preview → Production pipeline + domain status + Redeploy), Get found on Google (self-typing search + result card on a faded 4rem grid), Web apps (canary chip with circuit traces), and a full-width How I use AI tile (step list + AI / Me cards). Tile titles `body-md` semibold sans, text `body-sm` muted.
+- **Process bento (user-directed exception):** white band; 4-column grid at `lg` (2 at `md`, 1 below) of `rounded-2xl` tiles, `surface-container-low` or `ink-black` with a soft radial highlight: Design & development (tall, browser mock switching the 3 homepage directions + `PlanButton` to `#all-services`), Updates (canary progress ring + stacked notification card), Hosting & deployment (dark, dot field, Build → Preview → Production pipeline + domain status + Redeploy), Get found on Google (self-typing search + result card on a faded 4rem grid), Web apps (canary chip with circuit traces), and a full-width How I use AI tile (step list + AI / Me cards). Tile titles `body-md` semibold sans, text `body-sm` muted.
 - **Testimonial (carousel, NOT RENDERED until real client quotes exist; `content/testimonials.ts` is placeholder), user-directed, reference `docs/testimonial.png`):** white band (the cards are ink); header with a `PlanButton` aside ("Book a free call"). Native horizontal scroll-snap track that starts at the container's left edge (inset `max(page-pad, (100% − container) / 2)`) and bleeds off the right edge of the viewport. Cards `rounded-2xl bg-ink-black`, 3rem white/6% grid texture + white corner glow: company wordmark (`headline-sm` bold) and mono "DELIVERED: …" tag (LinkedIn variant: "LinkedIn" chip + reactions / READ THREAD footer), semibold `body-md` quote in curly quotes, name + muted role. Dots in a white `rounded-full` pill (24px hit areas, `aria-current`) scroll to a card and follow manual scrolling; the track is focusable for arrow keys.
 - **Final CTA (closing slab, `docs/cta.md`):** `#contact`, a `rounded-3xl bg-ink-black` slab inside the container with the testimonial cards' 4rem white/5% grid (radially masked) and corner glow. `lg:grid-cols-12`: left 7 = live badge (green pulse, `CurrentMonth` fills the month), display h2 (40 → 56px, uppercase, green highlight box), lead, `PlanButton` booking (dark) + outline "See my work" link; right 5 = white `rounded-2xl` form card (`ContactForm`, client), always open (it started collapsed behind a "Prefer to write?" toggle; the user asked to keep it open). Fields: `bg-paper-card border-border-strong rounded-lg`, visible labels, errors in `#b91c1c` linked by `aria-describedby`; submit is a black button with a canary icon tile. Bottom: trust line, mono uppercase, canary dot separators, on a white/10 rule.
 - **Floating WhatsApp button (`components/layout/WhatsAppButton`):** fixed bottom-right (`1rem` / `sm:1.5rem`, safe-area aware), `z-40` under the navbar. White `rounded-2xl` tile, hairline border, `shadow-lg`, the WhatsApp logo in a 10% WhatsApp-green tile with a `signal-green` online dot. Hover/focus: lifts 2px, ink border, and a "Chat on WhatsApp" label slides out to the left (`max-width` transition, ease-out-quint). Opens `site.whatsapp` in a new tab with `site.whatsappButton.message` pre-filled.
@@ -162,7 +157,6 @@ Inline box inside headings: `px-2 border border-ink-black rounded-sm shadow-offs
 
 - **Tag:** `mono-tag bg-paper-subtle border-hairline px-2 py-1 rounded-xs text-ink-charcoal` (archive variant `py-0.5 text-ink-muted`).
 - **Status badge:** green tint `bg-signal-green/15 text-signal-green border-signal-green/30`; canary `bg-canary-yellow border-ink-black`; ink `bg-ink-black text-paper-card`.
-- **Status dot:** 1.5–2 size, green/canary/ink, `animate-pulse` or `animate-ping`.
 - **Tool chip:** `px-4 py-2 rounded-xs bg-paper-card border-hairline shadow-xs hover:border-ink-black hover:bg-white` + 16px brand icon + `body-sm font-medium`.
 
 ### Backgrounds

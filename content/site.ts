@@ -1,12 +1,12 @@
 export const site = {
   name: "TokiOsman",
   person: "Toki Osman",
-  jobTitle: "Full-Stack Developer",
+  jobTitle: "Software Engineer",
   url: "https://tokiosman.com",
   // DRAFT (from PRODUCT.md and docs/services.md): under ~60 and ~160 characters for search results
-  title: "Toki Osman — Next.js Developer for Websites, Web Apps & AI",
+  title: "Toki Osman — Software Engineer for SaaS, CRMs & Web Apps",
   description:
-    "I design, build and launch Next.js websites and web apps connected to your CRM, payments, bookings and AI. Websites from $1,500, with a fixed quote in 24 hours.",
+    "I design, build and maintain SaaS products, CRMs, business tools and complex web apps for small, mid-size and large companies. Fixed quote in 24 hours.",
   // The Cal.com event every "Book a call" CTA reads; components/BookingModal.tsx opens it as a modal.
   bookingUrl: "https://cal.com/tokiosman/project-call",
   email: "tokiosman@outlook.com",
