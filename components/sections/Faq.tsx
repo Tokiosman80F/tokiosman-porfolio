@@ -64,7 +64,7 @@ function Question({ item, open }: { item: FaqItem; open?: boolean }) {
 function AskCard() {
   const { contact } = faqSection;
   return (
-    <div className="relative overflow-hidden rounded-2xl bg-ink-black p-unit-6 bg-[radial-gradient(90%_70%_at_100%_0%,rgb(255_255_255/0.12),transparent_60%)]">
+    <div className="ink-card relative overflow-hidden rounded-2xl bg-ink-black p-unit-6 bg-[radial-gradient(90%_70%_at_100%_0%,rgb(255_255_255/0.12),transparent_60%)]">
       <Pattern kind="plus" id="faq-ask" className="text-on-primary opacity-25 [mask-image:radial-gradient(75%_100%_at_100%_0%,black,transparent)]" />
       <div className="relative flex items-center gap-unit-3">
         <Avatar className="size-11 border-white/20" />

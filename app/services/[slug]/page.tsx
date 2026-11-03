@@ -89,7 +89,7 @@ const ctaIcon = (cta: ServicePage["cta"]) => (cta.href === site.whatsapp ? Messa
 function PlanCard({ plan }: { plan: ServicePlan }) {
   const dark = plan.featured;
   return (
-    <article className={cn("flex flex-col rounded-2xl p-2.5", dark ? "bg-ink-black" : "bg-surface-container-low")}>
+    <article className={cn("flex flex-col rounded-2xl p-2.5", dark ? "ink-card bg-ink-black" : "bg-surface-container-low")}>
       <div className={cn("relative overflow-hidden rounded-xl p-unit-6", dark ? "bg-primary-container bg-[radial-gradient(120%_90%_at_0%_0%,rgb(255_255_255/0.14),transparent_55%)]" : "bg-white")}>
         <Pattern
           kind="dots"
@@ -198,7 +198,7 @@ export default async function ServicePageRoute({ params }: PageProps<"/services/
                 {p.explainer.flows.map((f, fi) => {
                   const dark = fi === p.explainer!.flows.length - 1;
                   return (
-                    <figure key={f.title} className={cn("rounded-2xl p-unit-6", dark ? "bg-ink-black" : "bg-surface-container-low")}>
+                    <figure key={f.title} className={cn("rounded-2xl p-unit-6", dark ? "ink-card bg-ink-black" : "bg-surface-container-low")}>
                       <figcaption>
                         <span className={cn("font-mono text-mono-tag tracking-widest uppercase", dark ? "text-on-primary-container" : "text-ink-muted")}>{f.label}</span>
                         <span className={cn("mt-1 block font-sans text-body-lead font-semibold", dark ? "text-on-primary" : "text-ink-black")}>{f.title}</span>
@@ -328,7 +328,7 @@ export default async function ServicePageRoute({ params }: PageProps<"/services/
               {p.compare.columns.map((col, i) => {
                 const mine = i === p.compare!.highlight;
                 return (
-                  <li key={col} className={cn("rounded-2xl p-unit-4", mine ? "order-first bg-ink-black text-on-primary" : "border border-border-hairline")}>
+                  <li key={col} className={cn("rounded-2xl p-unit-4", mine ? "ink-card order-first bg-ink-black text-on-primary" : "border border-border-hairline")}>
                     <h3 className={cn("font-sans text-body-md font-semibold", mine ? "text-on-primary" : "text-ink-black")}>{col}</h3>
                     <dl className="mt-unit-3 space-y-unit-2 font-sans text-body-sm">
                       {p.compare!.rows.map((r) => (
@@ -353,7 +353,7 @@ export default async function ServicePageRoute({ params }: PageProps<"/services/
                         scope="col"
                         className={cn(
                           "p-unit-4 font-sans text-body-md font-semibold",
-                          i === p.compare!.highlight ? "bg-ink-black text-on-primary" : "text-ink-black",
+                          i === p.compare!.highlight ? "ink-card bg-ink-black text-on-primary" : "text-ink-black",
                         )}
                       >
                         {c}
@@ -368,7 +368,7 @@ export default async function ServicePageRoute({ params }: PageProps<"/services/
                       {r.values.map((v, i) => (
                         <td
                           key={i}
-                          className={cn("p-unit-4", i === p.compare!.highlight ? "bg-ink-black font-medium text-on-primary" : "text-on-surface-variant")}
+                          className={cn("p-unit-4", i === p.compare!.highlight ? "ink-card bg-ink-black font-medium text-on-primary" : "text-on-surface-variant")}
                         >
                           {v}
                         </td>

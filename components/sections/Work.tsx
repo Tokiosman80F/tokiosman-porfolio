@@ -22,7 +22,7 @@ type Tone = { card: string; dark: boolean };
 export const tones: Tone[] = [
   { card: "border-border-hairline bg-surface-container-low", dark: false },
   { card: "border-signal-blue/40 bg-[color-mix(in_srgb,var(--color-signal-blue)_18%,var(--color-white))]", dark: false },
-  { card: "border-ink-black bg-ink-black", dark: true },
+  { card: "ink-card border-ink-black bg-ink-black", dark: true },
 ];
 
 // Stick only from lg width AND 56rem height: the last card sticks at ~14.2rem and is ~40rem tall, so it

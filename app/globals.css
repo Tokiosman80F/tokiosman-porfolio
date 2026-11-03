@@ -149,8 +149,8 @@
 /* ── Dark theme ──
    html[data-theme="dark"] (set before paint by the script in app/layout.tsx: saved choice, else the OS
    setting). Every colour token is swapped, so the markup needs no dark: variants. "white" and "ink-black"
-   trade places: the page goes dark and the ink cards (featured offer, dark tiles, contact card) turn into
-   light cards, keeping each text/surface pair readable. Two kinds of islands keep their light-mode ink:
+   trade places: the page goes dark, and ink cards marked .ink-card (dark tiles, contact card) turn the deep blue of
+   the Case 2 card. Two kinds of islands keep their light-mode ink:
    accent fills (canary, greens, blue: dark text stays on them) and .theme-light (logo tiles: brand logos
    are often black). */
 :root[data-theme="dark"] {
@@ -218,6 +218,33 @@
   --color-error: #b91c1c;
   --color-signal-green-on-primary: #22C55E;
   --color-black: #000000;
+}
+
+/* Ink cards in the dark theme: the same mix as the sky blue case study card (signal-blue 18% over the page colour).
+   Tokens are remapped rather than each card restyled, so everything inside keeps its light-theme pairing: "ink-black"
+   is the card, "white" and "on-primary" are light text and inverted buttons. */
+:root[data-theme="dark"] .ink-card {
+  --color-ink-black: color-mix(in srgb, var(--color-signal-blue) 18%, #121211);
+  --color-primary-container: color-mix(in srgb, var(--color-signal-blue) 26%, #121211);
+  --color-white: #F3F2ED;
+  --color-on-primary: #F3F2ED;
+  --color-on-primary-container: #B9C4D3;
+  --color-surface-tint: #8C98A8;
+  --color-signal-green-on-primary: #4ADE80;
+  --color-signal-green-ink: #157A3A; /* the "Recommended" badge: green text on its pale tint */
+  outline: 1px solid color-mix(in srgb, var(--color-signal-blue) 40%, transparent);
+  outline-offset: -1px;
+}
+/* A normal dark card sitting on an ink card (the contact form) */
+:root[data-theme="dark"] .ink-card-reset {
+  --color-ink-black: #F3F2ED;
+  --color-primary-container: #E9E8E3;
+  --color-white: #121211;
+  --color-on-primary: #121211;
+  --color-on-primary-container: #52514C;
+  --color-surface-tint: #8C8B86;
+  --color-signal-green-on-primary: #157A3A;
+  --color-signal-green-ink: #4ADE80;
 }
 
 @layer base {

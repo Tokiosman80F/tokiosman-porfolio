@@ -16,7 +16,7 @@ export default function FinalCta() {
   const { primary, secondary } = finalCta;
   return (
     <Section id="contact" border="none">
-      <div className="relative overflow-hidden rounded-3xl bg-ink-black text-on-primary">
+      <div className="ink-card relative overflow-hidden rounded-3xl bg-ink-black text-on-primary">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgb(255_255_255/0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgb(255_255_255/0.05)_1px,transparent_1px)] [mask-image:radial-gradient(80%_80%_at_0%_0%,black,transparent)] bg-[size:4rem_4rem]"
@@ -44,7 +44,7 @@ export default function FinalCta() {
             </div>
           </div>
 
-          <div className="lg:col-span-5">
+          <div className="ink-card-reset lg:col-span-5">
             <ContactForm crmReady={crmConfigured()} turnstileKey={turnstileSiteKey()} />
           </div>
         </div>

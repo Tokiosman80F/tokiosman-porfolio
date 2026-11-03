@@ -55,7 +55,7 @@ function Tile({ dark, className, children }: { dark?: boolean; className?: strin
       className={cn(
         "relative flex flex-col overflow-hidden rounded-2xl",
         dark
-          ? "bg-ink-black bg-[radial-gradient(90%_60%_at_0%_100%,rgb(255_255_255/0.12),transparent_60%)]"
+          ? "ink-card bg-ink-black bg-[radial-gradient(90%_60%_at_0%_100%,rgb(255_255_255/0.12),transparent_60%)]"
           : "bg-surface-container-low",
         className,
       )}
