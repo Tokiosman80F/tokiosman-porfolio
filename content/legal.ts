@@ -11,7 +11,7 @@ const updated = "2 November 2026";
 
 export const privacy: LegalDoc = {
   title: "Privacy Policy",
-  updated,
+  updated: "3 November 2026",
   intro: `This policy explains what personal data I collect through ${site.url.replace("https://", "")}, why, and what you can do about it. It's written to meet the standard of the EU and UK GDPR, wherever you are.`,
   sections: [
     {
@@ -29,7 +29,7 @@ export const privacy: LegalDoc = {
         "Client work: the details and account access I need to deliver your project, and payment and billing records.",
         "Technical data: your IP address and basic request details, which appear in server logs and are used for security.",
       ],
-      after: ["This site has no analytics, advertising or tracking tools."],
+      after: ["This site uses Vercel Web Analytics to count page visits. It doesn't use cookies, and I only see totals, such as which pages get visited and where visitors come from. The site has no advertising tools."],
     },
     {
       id: "why",
@@ -46,7 +46,7 @@ export const privacy: LegalDoc = {
       title: "Who else handles it",
       body: ["I use these services to run my work, and each one processes data only for its part of the job:"],
       list: [
-        "Vercel: hosts this site and keeps its server logs.",
+        "Vercel: hosts this site, keeps its server logs and counts page visits.",
         "Zoho CRM: stores contact form enquiries.",
         "Cal.com: runs booking and video calls.",
         "Microsoft (Outlook) and Google: email and calendars, which hold booking details and messages.",
@@ -78,7 +78,7 @@ export const privacy: LegalDoc = {
     {
       id: "cookies",
       title: "Cookies and local storage",
-      body: ["This site doesn't set cookies of its own, and it has no consent banner because it doesn't track you. It stores two small items in your browser, which are never sent to me:"],
+      body: ["This site doesn't set cookies of its own, and it has no consent banner because its analytics don't use cookies. It stores two small items in your browser, which are never sent to me:"],
       list: [
         "theme (local storage): remembers whether you chose the light or dark theme.",
         "loader-seen (session storage): stops the phone intro animation from replaying during your visit.",

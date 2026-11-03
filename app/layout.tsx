@@ -68,6 +68,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <style>{"[data-reveal] > * { opacity: 1 !important; } .splash { display: none !important; }"}</style>
         </noscript>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd).replace(/</g, "\\u003c") }} />
+        {/* Vercel Web Analytics, as its plain script: no package, since node_modules here is a shared junction. Served
+            by Vercel once Analytics is on for the project, so production only. */}
+        {process.env.NODE_ENV === "production" && <script defer src="/_vercel/insights/script.js" />}
       </head>
       <body className="font-body-md text-body-md text-on-surface antialiased bg-white max-md:pb-[calc(5.5rem+env(safe-area-inset-bottom))]">
         <SplashLoader />
