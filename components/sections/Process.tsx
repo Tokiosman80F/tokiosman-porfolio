@@ -1,3 +1,4 @@
+import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Section } from "@/components/ui/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { processSection } from "@/content/process";
@@ -10,12 +11,7 @@ export default function Process() {
   return (
     <Section id="process">
       <SectionHeader
-        eyebrow={
-          <div className="inline-flex items-center gap-unit-2 rounded-pill border border-ink-black bg-[linear-gradient(135deg,var(--color-ink-black)_80%,var(--color-border-strong)_100%)] px-unit-4 py-1 text-white shadow-sm">
-            <span aria-hidden className="size-2 rounded-pill border border-ink-black bg-canary-yellow" />
-            <span className="font-mono text-mono-tag font-semibold tracking-widest text-white uppercase">{processSection.eyebrow}</span>
-          </div>
-        }
+        eyebrow={<Eyebrow>{processSection.eyebrow}</Eyebrow>}
         title={processSection.title}
         titleClassName="normal-case"
         lead={processSection.lead}

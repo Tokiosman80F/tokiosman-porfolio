@@ -1,7 +1,7 @@
 // DRAFT copy for review: drawn from docs/services.md and the user's answers on how AI is used.
 
 export const processSection = {
-  eyebrow: "HOW IT WORKS",
+  eyebrow: "How it works",
   title: "From brief to launch, with you in the loop",
   lead: "You pick the design direction, I build it, you get a progress update every working day, and I handle the launch.",
 };

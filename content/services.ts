@@ -1,13 +1,13 @@
 import type { HighlightedText } from "@/components/ui/Highlight";
 
-// DRAFT copy for review, in the owner's voice: drawn from docs/services.md and the hero, no new claims.
+// DRAFT copy for review, in the owner's voice: the owner's positioning (2026-11-03) and docs/services.md.
 // Layout and illustrations follow docs/what-we-build-1.png and -2.png.
 
 export type ServiceId = "build" | "integrations" | "ai-seo" | "strategy" | "web";
 export type Service = { id: ServiceId; title: string; description: string };
 
 export const servicesSection = {
-  eyebrow: "Services · What I build",
+  eyebrow: "What I build",
   // "start to finish" stays short enough for one highlight box at 375px
   title: ["I take care of things from ", { highlight: "start to finish", color: "canary" }] satisfies HighlightedText,
   clientsLabel: "Clients I've built for",
@@ -15,14 +15,14 @@ export const servicesSection = {
 
 // The "every service" menu under the cards (ServiceMenu): service pages grouped by what the visitor needs.
 export const serviceMenu = {
-  eyebrow: "Every service · Fixed prices",
+  eyebrow: "Every service",
   title: "Pick what you need",
-  lead: "Build something new, add to the site you have, or keep it safe. Every service has its own page with the plans, the timeline and what's included.",
+  lead: "Build something new, add to what you have, or keep it running. Every service has its own page with the plans, the timeline and what's included.",
   detailsLabel: "See plans and details",
   groups: [
-    { title: "Build something new", slugs: ["nextjs-website-development", "web-app-development", "headless-wordpress-nextjs"] },
-    { title: "Add to your site", slugs: ["ai-chatbot-for-website", "crm-payments-automation"] },
-    { title: "Keep it safe", slugs: ["website-maintenance", "wordpress-malware-removal"] },
+    { title: "Build something new", slugs: ["web-app-development", "nextjs-website-development", "headless-wordpress-nextjs"] },
+    { title: "Add to what you have", slugs: ["crm-payments-automation", "ai-chatbot-for-website"] },
+    { title: "Keep it running", slugs: ["website-maintenance", "wordpress-malware-removal"] },
     { title: "Something else", slugs: ["custom-projects"] },
   ],
 };
@@ -30,13 +30,13 @@ export const serviceMenu = {
 export const services: Service[] = [
   {
     id: "build",
-    title: "Web and app design & development",
-    description: "From idea to wireframes to a live Next.js site or web app, designed and built by me.",
+    title: "SaaS, web app and website development",
+    description: "From idea to a live SaaS product, business tool or website, engineered and designed by me.",
   },
   {
     id: "integrations",
-    title: "CRM, payments & automation",
-    description: "Forms, bookings and Stripe payments wired into your CRM, so every lead lands in your pipeline.",
+    title: "CRMs, payments & automation",
+    description: "A CRM built around how you work, or forms, bookings and Stripe payments wired into the one you have.",
   },
   {
     id: "ai-seo",
@@ -50,17 +50,17 @@ export const services: Service[] = [
   },
   {
     id: "web",
-    title: "Anything and everything web",
-    description: "Deployment, hosting setup, domains, maintenance, revisions and everything in between.",
+    title: "Deployment and long-term maintenance",
+    description: "Deployment, hosting setup, domains and ongoing maintenance, so what I build keeps running after launch.",
   },
 ];
 
 // Text inside the decorative card illustrations (fictional examples).
 export const serviceArt = {
-  browserTabs: ["tokiosman. — I build websites", "Home — Figma"],
+  browserTabs: ["tokiosman. — I build software", "Home — Figma"],
   browserUrl: "tokiosman.com",
   browserNav: ["Services", "Work", "Pricing", "FAQ"],
-  browserEyebrow: "Next.js × CRM × AI",
+  browserEyebrow: "Software engineer with an eye for design",
   browserCta: { nav: "Book a call", primary: "Book a call", secondary: "See Pricing" },
   notifications: [
     { app: "Zoho CRM", text: "New lead from your contact form" },

@@ -40,7 +40,7 @@ export const caseStudiesLive = true;
 export const caseStudyPage = {
   back: "All case studies",
   scope: "What I did",
-  outcome: "Outcome",
+  outcome: "Where it stands",
   challenge: "The challenge",
   approach: "How I approached it",
   results: "At a glance",
@@ -59,10 +59,8 @@ export const caseStudyPage = {
 };
 
 export const workSection = {
-  // SEO: the h2 names what the section shows (case studies) and what was built (Next.js websites and
-  // web apps). DRAFT copy.
-  eyebrow: "CASE STUDIES · REAL CLIENT WORK",
-  title: "Case studies: Next.js websites and web apps",
+  // The h2 names what the section shows and what was built, in the buyer's words. DRAFT copy.
+  title: "Case studies: websites and web apps",
   lead: "Real client work, and exactly what I did on it.",
   aside: "LIVE PROJECTS",
   // Shown from two projects on (Work.tsx)
@@ -76,7 +74,6 @@ export const archivePage = {
     description: "Real client projects and exactly what I did on them: Next.js websites and web apps, from prototype to launch.",
   },
   back: "Home",
-  eyebrow: "CASE STUDIES · THE ARCHIVE",
   title: "Case studies",
   lead: "Real client work, and exactly what I did on it. Open a case file for the full story.",
   view: "View Case Study",

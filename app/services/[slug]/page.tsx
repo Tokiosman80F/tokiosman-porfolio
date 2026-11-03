@@ -156,7 +156,7 @@ export default async function ServicePageRoute({ params }: PageProps<"/services/
             </nav>
             <div className="grid grid-cols-1 items-center gap-unit-12 lg:grid-cols-12 lg:gap-unit-8">
               <div className="lg:col-span-6">
-                <Eyebrow className="mb-unit-6 py-1.5">{p.hero.eyebrow}</Eyebrow>
+                <Eyebrow className="mb-unit-4">{p.hero.eyebrow}</Eyebrow>
                 <h1 className="font-display text-display-hero-mobile leading-[1.05] font-bold text-balance text-ink-black md:text-[3.25rem]">{p.hero.title}</h1>
                 <p className="mt-unit-6 max-w-xl font-sans text-body-lead text-on-surface-variant">{p.hero.lead}</p>
                 <ul className="mt-unit-6 flex flex-wrap gap-unit-2">

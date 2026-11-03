@@ -10,7 +10,7 @@ export const about = {
   title: "One developer. Design to deployment.",
   photo: {
     src: "/images/toki-osman.jpg", // head-and-shoulders crop of docs/toki-osman-image.png
-    alt: "Toki Osman, full-stack developer",
+    alt: "Toki Osman, software engineer",
   },
   greeting: "Hi, I'm Toki 👋",
   linksLabel: "Connect with me",
@@ -25,13 +25,13 @@ export const about = {
     value: "20+",
     label: "Projects shipped",
     text: "Across 4 companies and my own freelance clients: from marketing sites to marketplaces, dashboards, and CRM tools. 3+ years. Built end to end.",
-    facts: ["3+ years", "4 companies", "200+ problems solved"],
+    facts: ["3+ years", "4 companies"],
   },
   bio: {
     label: "About me",
-    text: "I'm a full-stack developer who builds websites that do more than look good: they capture leads, take payments, and sync with your CRM. Clear communication, daily updates, no surprises.",
+    text: "I'm a software engineer with a designer's eye. I build SaaS products, business tools, CRMs and complex web apps, keep them running, and care as much about how they look as how they work. Clear communication, daily updates, no surprises.",
     name: "Toki Osman",
-    role: "Full-Stack Developer, Next.js & AI",
+    role: "Software Engineer, SaaS & Web Apps",
   },
   techTitle: "Technologies I use",
   tech: [

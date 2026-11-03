@@ -14,7 +14,7 @@ export type FooterColumn = { title: string; links: FooterLink[] };
 
 export const footer = {
   tagline:
-    "Full-stack developer building Next.js websites and web apps that capture leads, take payments, and sync with your CRM.",
+    "Software engineer building and maintaining SaaS products, business tools, CRMs and complex web apps.",
   location: "Working remotely (GMT+6) with clients worldwide",
   columns: [
     {
@@ -31,14 +31,14 @@ export const footer = {
     {
       title: "Services",
       links: [
-        { label: "Website Design & Development", href: "/services/nextjs-website-development" },
-        { label: "Web App + Dashboard", href: "/services/web-app-development" },
-        { label: "Headless WordPress", href: "/services/headless-wordpress-nextjs" },
-        { label: "WordPress Malware Removal", href: "/services/wordpress-malware-removal" },
-        { label: "AI Upgrade for Your Website", href: "/services/ai-chatbot-for-website" },
-        { label: "CRM & Payment Integrations", href: "/services/crm-payments-automation" },
-        { label: "Website Maintenance", href: "/services/website-maintenance" },
-        { label: "Custom Projects", href: "/services/custom-projects" },
+        { label: "Website design and development", href: "/services/nextjs-website-development" },
+        { label: "Web app and dashboard development", href: "/services/web-app-development" },
+        { label: "Headless WordPress with Next.js", href: "/services/headless-wordpress-nextjs" },
+        { label: "WordPress malware removal", href: "/services/wordpress-malware-removal" },
+        { label: "AI chatbot for your website", href: "/services/ai-chatbot-for-website" },
+        { label: "CRM, payments and automation", href: "/services/crm-payments-automation" },
+        { label: "Website maintenance", href: "/services/website-maintenance" },
+        { label: "Custom projects", href: "/services/custom-projects" },
       ],
     },
     {

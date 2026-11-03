@@ -6,15 +6,15 @@ import { site } from "./site";
 
 export const finalCta = {
   // "{month}" = the visitor's current month. Only show this while it's true (docs/cta.md).
-  badge: "Available for new projects · {month}",
+  badge: "Booking projects for {month}",
   title: ["Have a project in mind but ", { highlight: "unsure", color: "green" }, " where to start?"] satisfies HighlightedText,
   lead: "One free 30-minute call is all it takes. We'll talk through your goals, and I'll tell you what to build, how long it takes, and what it costs, with a fixed quote within 24 hours. No pressure, no obligation.",
   primary: { label: "Book a free 30-min call", href: site.bookingUrl },
   secondary: caseStudiesLive ? { label: "See my work", href: "/#work" } : { label: "See my services", href: "/#all-services" },
-  trust: ["Fixed price", "Direct with the developer", "Launch in 2–4 weeks"],
+  trust: ["Fixed price", "Direct with the developer", "Launch date agreed up front"],
 };
 
-export const projectTypes = ["Website", "Web app", "AI upgrade", "Custom"] as const;
+export const projectTypes = ["Website", "Web app", "AI chatbot", "Custom"] as const;
 
 export const contactForm = {
   heading: "Tell me about your project",

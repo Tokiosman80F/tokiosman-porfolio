@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight, Calendar, Clock } from "lucide-react";
 import { PlanButton } from "@/components/ui/PlanButton";
 import { renderRich, type RichText } from "@/components/ui/RichText";
+import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Section } from "@/components/ui/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { customOffer, offers, pricingSection, type CustomOffer, type Offer } from "@/content/pricing";
@@ -227,12 +228,7 @@ export default function Pricing() {
   return (
     <Section id="pricing" border="y" className="bg-surface-container">
       <SectionHeader
-        eyebrow={
-          <div className="inline-flex items-center gap-unit-2 font-mono text-mono-tag tracking-widest text-ink-muted uppercase">
-            <span aria-hidden className="size-2 rounded-pill bg-ink-black" />
-            <span className="font-semibold text-ink-charcoal">{pricingSection.eyebrow}</span>
-          </div>
-        }
+        eyebrow={<Eyebrow>{pricingSection.eyebrow}</Eyebrow>}
         title={pricingSection.title}
         lead={pricingSection.lead}
       />

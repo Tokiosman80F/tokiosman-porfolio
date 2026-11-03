@@ -1,18 +1,18 @@
 import { site } from "./site";
 
-// Source: docs/hero-content.md (case is set by CSS; the words are verbatim).
+// The owner's positioning (2026-11-03): a software engineer with strong UI taste (case is set by CSS).
 export const hero = {
-  //   keeps the dot with "developer" when the label wraps on phones
-  eyebrow: "Full-stack developer · Next.js × CRM × AI",
-  // Headline: "{prefix} [outcome], not just look good." The outcome box plays through these once, then rests
+  eyebrow: "Software engineer with an eye for design",
+  // Headline: "{prefix} [outcome] that work as well as they look." The outcome box plays through these once, then rests
   // on the first. Search engines and screen readers get `title` as one plain sentence.
-  title: "I build websites that close deals, not just look good.",
+  title: "I build SaaS products, custom tools, CRM systems and complex apps that work as well as they look.",
   headline: {
-    prefix: "I build websites that",
-    outcomes: ["close deals", "capture leads", "take payments", "book calls"],
-    suffix: ", not just look good.",
+    prefix: "I build",
+    // Each stays short enough for one highlight box at 375px.
+    outcomes: ["SaaS products", "custom tools", "CRM systems", "complex apps"],
+    suffix: " that work as well as they look.",
   },
-  lead: "Next.js sites and web apps connected to your CRM, payments, and bookings, so every visitor becomes a lead and every lead lands in your pipeline. Designed, built, and launched by me.",
+  lead: "I'm a software engineer with strong UI taste, so what I build is solid underneath and a pleasure to use. From small teams to large companies, I design, build and maintain it myself.",
   // The call is the main action (PRODUCT.md); pricing is the secondary path
   primary: { label: "Book a free 30-min call", href: site.bookingUrl },
   secondary: { label: "See Pricing", href: "#pricing" },
@@ -22,7 +22,7 @@ export const hero = {
   proof: [
     { value: "20+", label: "Projects shipped" },
     { value: "3+ yrs", label: "Building end to end" },
-    { value: "24h", label: "Reply with a fixed quote" },
+    { value: "24h", label: "Fixed quote after our call" },
   ],
   trustedBy: {
     label: "Clients & companies I've built for",
@@ -54,9 +54,9 @@ export const hero = {
       "Stripe payment received",
       "Deployed to production",
       "Security check passed",
-      "Lighthouse score 98",
+      "Speed check passed",
       "SEO audit complete",
-      "Mobile responsive: all breakpoints",
+      "Checked on phone and desktop",
       "SSL certificate active",
     ],
   },

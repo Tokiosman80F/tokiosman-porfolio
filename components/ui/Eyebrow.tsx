@@ -1,38 +1,8 @@
 import type { ComponentProps } from "react";
 import { cn } from "@/lib/utils";
 
-const dots = {
-  canary: "border border-ink-black bg-canary-yellow",
-  green: "bg-signal-green",
-  ink: "bg-ink-black",
-};
-const animations = { none: "", pulse: "animate-pulse" };
-
-type EyebrowProps = ComponentProps<"div"> & {
-  dot?: keyof typeof dots;
-  animate?: keyof typeof animations;
-};
-
-// Section kicker: paper pill with a status dot and a mono uppercase label. Hover: the dot turns into a
-// diamond (the logo dot's move).
-export function Eyebrow({ dot = "canary", animate = "none", className, children, ...props }: EyebrowProps) {
-  return (
-    <div
-      className={cn(
-        "group/eyebrow inline-flex items-center gap-unit-2 rounded-pill border border-border-hairline bg-paper-card px-unit-4 py-1 shadow-sm",
-        className,
-      )}
-      {...props}
-    >
-      <span
-        aria-hidden
-        className={cn(
-          "size-2 rounded-pill transition-[rotate,scale,border-radius] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/eyebrow:scale-125 group-hover/eyebrow:rotate-45 group-hover/eyebrow:rounded-[1px] motion-reduce:transition-none",
-          dots[dot],
-          animations[animate],
-        )}
-      />
-      <span className="font-mono text-mono-tag font-semibold tracking-widest text-balance text-ink-charcoal uppercase">{children}</span>
-    </div>
-  );
+// Section kicker, as newspapers set it: a few plain words in sentence case, underlined, sitting right above the
+// headline. No pill, dot, caps or tracking. The colour is inherited, so it works on light and ink sections alike.
+export function Eyebrow({ className, ...props }: ComponentProps<"div">) {
+  return <div className={cn("font-sans text-body-md font-semibold underline decoration-canary-yellow decoration-[3px] underline-offset-[6px]", className)} {...props} />;
 }

@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { ArrowRight, BadgeCheck, Clock, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Section } from "@/components/ui/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { projectHref, projects, workSection, type Project, type ProjectOutcomeIcon } from "@/content/projects";
@@ -135,7 +134,6 @@ export default function Work() {
   return (
     <Section id="work">
       <SectionHeader
-        eyebrow={<Eyebrow>{workSection.eyebrow}</Eyebrow>}
         title={workSection.title}
         lead={workSection.lead}
         aside={<div className="font-mono text-mono-meta text-ink-muted">{workSection.aside}</div>}

@@ -10,19 +10,17 @@ export type FaqItem = {
   question: string;
   answer: RichText;
   meta: string;
-  status: { label: string; tone: "green" | "ink" };
 };
 
 export const faqSection = {
-  eyebrow: "FREQUENTLY ASKED QUESTIONS",
+  eyebrow: "FAQ",
   title: [
     "Have Questions? Find ",
     { highlight: "Clear", color: "green", tilt: "left" },
     " ",
     { highlight: "Answers.", color: "blue", tilt: "right" },
   ] satisfies HighlightedText,
-  lead: "Everything you need to know about hiring me as your Next.js developer: pricing, timelines, communication, and what happens after launch.",
-  aside: "HOW I WORK // 2026",
+  lead: "Everything you need to know about hiring me as your software engineer: pricing, timelines, communication, and what happens after launch.",
   contact: {
     prompt: "Still have a question about your project?",
     email: { label: "Copy email address", copied: "Email copied", address: site.email },
@@ -33,22 +31,21 @@ export const faqs: FaqItem[] = [
   {
     index: "[ 01 ]",
     category: "SERVICES",
-    question: "What services do you offer as a freelance full-stack developer?",
+    question: "What services do you offer as a freelance software engineer?",
     answer: [
-      "I design and build custom ",
-      { strong: "Next.js websites" },
+      "I design, build and maintain ",
+      { strong: "SaaS products" },
       ", ",
-      { strong: "web apps with admin dashboards" },
+      { strong: "business tools and CRMs" },
       ", and ",
-      { strong: "AI integrations" },
-      " for existing websites, like chatbots trained on your own content. I also connect your site to the tools you already use, such as ",
+      { strong: "complex web apps with admin dashboards" },
+      ". I also build Next.js websites and AI integrations, like chatbots trained on your own content, and connect your systems to the tools you already use, such as ",
       { strong: "Zoho CRM" },
       ", ",
       { strong: "Stripe payments" },
-      ", booking systems, and email automation, so your website works as part of your sales process.",
+      ", booking systems, and email automation.",
     ],
-    meta: "SERVICES: WEBSITES · WEB APPS · AI",
-    status: { label: "● AVAILABLE", tone: "green" },
+    meta: "SERVICES: SAAS · TOOLS · CRMS · WEB APPS",
   },
   {
     index: "[ 02 ]",
@@ -59,28 +56,26 @@ export const faqs: FaqItem[] = [
       { strong: "$1,500" },
       ", and extra pages are $250 each. Web apps with dashboards start at ",
       { strong: "$4,500" },
-      ", and AI upgrades for existing websites start at ",
+      ", and AI chatbots for existing websites start at ",
       { strong: "$2,000" },
       ". Every project has a fixed price agreed before work starts, so there are no surprise invoices.",
     ],
     meta: "PRICING: FIXED SCOPE · FIXED PRICE",
-    status: { label: "● NO HIDDEN FEES", tone: "ink" },
   },
   {
     index: "[ 03 ]",
     category: "TIMELINE",
     question: "How long does it take to build a website or web app?",
     answer: [
-      "A website takes about ",
-      { strong: "2 weeks" },
-      " from strategy call to launch. A web app with a dashboard takes ",
+      "A website takes ",
+      { strong: "2–4 weeks" },
+      " from strategy call to launch, depending on the plan. A web app with a dashboard starts at ",
       { strong: "3–4 weeks" },
-      ", and an AI upgrade takes ",
+      ", and an AI chatbot at ",
       { strong: "2–3 weeks" },
       ". You'll get a clear timeline with milestones before we start.",
     ],
-    meta: "TIMELINE: 2–4 WEEKS",
-    status: { label: "● ON SCHEDULE", tone: "green" },
+    meta: "TIMELINE: DEPENDS ON THE PLAN",
   },
   {
     index: "[ 04 ]",
@@ -112,7 +107,6 @@ export const faqs: FaqItem[] = [
       ", and CI/CD pipelines. The result is a fast, SEO-friendly site that's easy to maintain and scale.",
     ],
     meta: "STACK: NEXT.JS · NODE.JS · TYPESCRIPT",
-    status: { label: "● PRODUCTION-READY", tone: "green" },
   },
   {
     index: "[ 05 ]",
@@ -122,7 +116,6 @@ export const faqs: FaqItem[] = [
       "I work remotely with clients worldwide and have worked with remote teams before. I work in GMT+6, which overlaps with European mornings and Asian business hours, and US clients wake up to finished work. You get a written progress update every working day, and I reply to messages within a few hours during my working day.",
     ],
     meta: "TIMEZONE: GMT+6 · DAILY UPDATES",
-    status: { label: "● REMOTE-READY", tone: "green" },
   },
   {
     index: "[ 06 ]",
@@ -132,7 +125,6 @@ export const faqs: FaqItem[] = [
       "Yes. You talk to me, the person writing your code, from the first call to launch. No account managers, no handoffs, no junior developers. We'll use whatever suits you best: email, Slack, or WhatsApp.",
     ],
     meta: "CONTACT: DIRECT WITH DEVELOPER",
-    status: { label: "● DIRECT ACCESS", tone: "green" },
   },
   {
     index: "[ 07 ]",
@@ -146,7 +138,6 @@ export const faqs: FaqItem[] = [
       ", and I share progress early so feedback comes before anything is finished. Hosting fees and AI usage fees (like OpenAI or Anthropic API costs) are paid directly by you, so you always own your accounts.",
     ],
     meta: "TERMS: 50% UPFRONT · 50% ON LAUNCH",
-    status: { label: "● TRANSPARENT", tone: "ink" },
   },
   {
     index: "[ 08 ]",
@@ -158,7 +149,6 @@ export const faqs: FaqItem[] = [
       ". For ongoing updates and maintenance, you can continue with a monthly care plan.",
     ],
     meta: "SUPPORT: POST-LAUNCH INCLUDED",
-    status: { label: "● INCLUDED", tone: "green" },
   },
   {
     index: "[ 09 ]",
@@ -168,7 +158,6 @@ export const faqs: FaqItem[] = [
       "Yes. I can add an AI assistant trained on your own content, such as FAQs, product pages, and PDFs, so it answers customers 24/7 with accurate, sourced answers. It works with Next.js, WordPress, Webflow, and most other platforms, and it can send leads straight to your CRM.",
     ],
     meta: "AI: ASSISTANT ON YOUR CONTENT · CRM HANDOFF",
-    status: { label: "● NEW SERVICE", tone: "green" },
   },
   {
     index: "[ 10 ]",
@@ -178,7 +167,6 @@ export const faqs: FaqItem[] = [
       "Yes. If you need a unique landing page, an integration, a Next.js upgrade, or something completely custom, tell me what you need and I'll send a clear quote within 24 hours.",
     ],
     meta: "SCOPE: CUSTOM QUOTES",
-    status: { label: "● LET'S TALK", tone: "ink" },
   },
 ];
 

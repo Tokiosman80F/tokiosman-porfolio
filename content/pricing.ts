@@ -1,13 +1,13 @@
 import type { RichText } from "@/components/ui/RichText";
 import { site } from "./site";
 
-// Source: docs/services.md (verbatim, except "Most popular" → "Recommended").
+// Source: docs/services.md, with web apps leading (the owner's main focus).
 
 export type Offer = {
   id: string;
   name: string;
   badge?: string;
-  /** Dark card (the recommended offer). */
+  /** Dark card (the main focus). */
   featured?: boolean;
   pricePrefix?: string;
   price: string;
@@ -25,7 +25,7 @@ export type Offer = {
 export type CustomOffer = Pick<Offer, "name" | "price" | "tagline" | "more">;
 
 export const pricingSection = {
-  eyebrow: "SERVICES · FIXED SCOPE · FIXED PRICE",
+  eyebrow: "Fixed scope, fixed price",
   title: "Services & Pricing",
   lead: "Clear scope, a fixed price and a launch date, agreed before any work starts.",
   addOnLabel: "Add-on",
@@ -42,12 +42,32 @@ const bookCall = { label: "Book a free call", href: site.bookingUrl };
 
 export const offers: Offer[] = [
   {
+    id: "web-app",
+    name: "Web App + Dashboard",
+    badge: "Main focus",
+    featured: true,
+    pricePrefix: "From",
+    price: "$4,500",
+    timeline: "3–4 weeks",
+    tagline: ["A SaaS product, tool or complex web app,", "with an admin dashboard to run it."],
+    features: [
+      "Discovery call and feature planning",
+      "User login and role-based access",
+      "Admin dashboard to manage your content and data",
+      "A content editor (CMS) so you can update pages yourself",
+      "AI and automation workflows (CRM, email, forms)",
+      "Payments and bookings if needed (Stripe)",
+      "Deployment + 30 days of post-launch support",
+    ],
+    cta: bookCall,
+    more: { label: "Compare all 3 web app plans", href: "/services/web-app-development" },
+  },
+  {
     id: "website",
     name: "Website",
-    badge: "Recommended",
-    featured: true,
+    pricePrefix: "From",
     price: "$1,500",
-    timeline: "2 weeks",
+    timeline: "2–4 weeks",
     tagline: ["A custom Next.js website,", "designed and built for you, ready to launch."],
     features: [
       "60-min strategy call to define your goals and audience",
@@ -62,27 +82,8 @@ export const offers: Offer[] = [
     more: { label: "Compare all 3 website plans", href: "/services/nextjs-website-development" },
   },
   {
-    id: "web-app",
-    name: "Web App + Dashboard",
-    pricePrefix: "From",
-    price: "$4,500",
-    timeline: "3–4 weeks",
-    tagline: ["A custom web app", "with an admin dashboard to run your business."],
-    features: [
-      "Discovery call and feature planning",
-      "User login and role-based access",
-      "Admin dashboard to manage your content and data",
-      "A content editor (CMS) so you can update pages yourself",
-      "AI and automation workflows (CRM, email, forms)",
-      "Payments and bookings if needed (Stripe)",
-      "Deployment + 30 days of post-launch support",
-    ],
-    cta: bookCall,
-    more: { label: "Compare all 3 web app plans", href: "/services/web-app-development" },
-  },
-  {
     id: "ai-upgrade",
-    name: "AI Upgrade for Your Website",
+    name: "AI chatbot for your website",
     badge: "New",
     pricePrefix: "From",
     price: "$2,000",

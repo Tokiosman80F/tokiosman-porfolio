@@ -1,5 +1,6 @@
 import { CalendarDays, Eye } from "lucide-react";
 import { CurrentMonth } from "@/components/layout/CurrentMonth";
+import { Eyebrow } from "@/components/ui/Eyebrow";
 import { renderHighlighted } from "@/components/ui/Highlight";
 import { PlanButton } from "@/components/ui/PlanButton";
 import { Section } from "@/components/ui/Section";
@@ -24,10 +25,9 @@ export default function FinalCta() {
 
         <div className="relative grid grid-cols-1 gap-unit-12 p-unit-6 sm:p-unit-12 lg:grid-cols-12 lg:items-center lg:gap-unit-16 lg:p-unit-16">
           <div className="lg:col-span-7">
-            <span className="inline-flex items-center gap-unit-2 rounded-full border border-white/15 bg-white/5 px-unit-3 py-1 font-mono text-mono-tag tracking-widest text-on-primary uppercase">
-              <span aria-hidden className="size-2 animate-pulse rounded-full bg-signal-green" />
+            <Eyebrow>
               <CurrentMonth template={finalCta.badge} />
-            </span>
+            </Eyebrow>
             <h2 className="mt-unit-6 font-display text-display-hero-mobile leading-[1.05] font-bold text-balance text-on-primary uppercase lg:text-[3.5rem]">
               {renderHighlighted(finalCta.title)}
             </h2>

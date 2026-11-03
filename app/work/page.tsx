@@ -7,7 +7,6 @@ import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
 import FinalCta from "@/components/sections/FinalCta";
 import { outcomeIcons, tones } from "@/components/sections/Work";
-import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Section } from "@/components/ui/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { archivePage as t, caseStudiesLive, projectHref, projects } from "@/content/projects";
@@ -41,7 +40,6 @@ export default function WorkArchivePage() {
             </Link>
           </nav>
           <SectionHeader
-            eyebrow={<Eyebrow>{t.eyebrow}</Eyebrow>}
             titleAs="h1"
             title={t.title}
             lead={t.lead}

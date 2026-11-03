@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 // Interactive half of ServiceMenu: the grouped list on the left, and (from lg) a large preview card on the
 // right that shows whichever service is pointed at or focused. Every row is a real link to its page, so
 // clicking, keyboard and crawlers work as normal; the preview only follows hover/focus. Below lg there's no
-// preview: each row carries its own summary and price instead. The illustrations are rendered on the server
+// preview: each row also carries its own summary. Every row shows its starting price. The illustrations are rendered on the server
 // and passed in as nodes.
 
 export type ShowcaseItem = {
@@ -22,8 +22,6 @@ export type ShowcaseItem = {
   icon: ReactNode;
   art: ReactNode;
 };
-
-const num = (i: number) => String(i + 1).padStart(2, "0");
 
 export function ServiceShowcase({ items, detailsLabel }: { items: ShowcaseItem[]; detailsLabel: string }) {
   const [active, setActive] = useState(0);
@@ -58,12 +56,9 @@ export function ServiceShowcase({ items, detailsLabel }: { items: ShowcaseItem[]
                         {it.icon}
                       </span>
                       <span className="min-w-0 flex-1">
-                        <span className="flex items-baseline gap-unit-2">
-                          <span aria-hidden className="hidden font-mono text-mono-tag text-ink-muted tabular-nums lg:inline">{num(i)}</span>
-                          <span className="font-sans text-body-md font-semibold text-ink-black">{it.name}</span>
-                        </span>
+                        <span className="block font-sans text-body-md font-semibold text-ink-black">{it.name}</span>
                         <span className="mt-0.5 block font-sans text-body-sm text-on-surface-variant lg:hidden">{it.summary}</span>
-                        <span className="mt-1 block font-mono text-mono-meta text-ink-black lg:hidden">{it.facts[0]}</span>
+                        <span className="mt-1 block font-mono text-mono-meta text-ink-black">{it.facts[0]}</span>
                       </span>
                       <span
                         aria-hidden

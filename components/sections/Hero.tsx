@@ -49,7 +49,7 @@ export default function Hero() {
       <HeroArt />
 
       <div className="relative flex flex-col items-center text-center">
-        <Eyebrow className="mb-unit-6 py-1.5">
+        <Eyebrow className="mb-unit-4">
           {hero.eyebrow}
         </Eyebrow>
         {/* Display scale: 40 → 64 (md). Balanced lines keep the widest one short, inside the illustration's valley */}
@@ -59,7 +59,7 @@ export default function Hero() {
             {headline.prefix} <RotatingOutcome outcomes={headline.outcomes} after={headline.suffix} />
           </span>
         </Heading>
-        <p className="mb-unit-8 max-w-2xl font-sans text-body-lead leading-relaxed text-on-surface-variant">{hero.lead}</p>
+        <p className="mb-unit-8 max-w-2xl font-sans text-body-lead leading-relaxed text-pretty text-on-surface-variant">{hero.lead}</p>
         <div className="flex flex-wrap items-center justify-center gap-unit-4">
           <Button href={primary.href} target="_blank" rel="noopener noreferrer" className="group">
             <CalendarDays aria-hidden className="size-6 shrink-0 transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-rotate-12 group-hover:scale-110 motion-reduce:transition-none" />
