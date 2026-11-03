@@ -2,6 +2,7 @@ import Image from "next/image";
 import { ArrowDown, CalendarDays } from "lucide-react";
 import { RedaxifyLogo } from "@/components/ui/brand-icons";
 import { Button } from "@/components/ui/Button";
+import { PlanButton } from "@/components/ui/PlanButton";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Heading } from "@/components/ui/Heading";
 import { Section } from "@/components/ui/Section";
@@ -60,15 +61,11 @@ export default function Hero() {
           </span>
         </Heading>
         <p className="mb-unit-8 max-w-2xl font-sans text-body-lead leading-relaxed text-pretty text-on-surface-variant">{hero.lead}</p>
-        <div className="flex flex-wrap items-center justify-center gap-unit-4">
-          <Button href={primary.href} target="_blank" rel="noopener noreferrer" className="group">
-            <CalendarDays aria-hidden className="size-6 shrink-0 transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-rotate-12 group-hover:scale-110 motion-reduce:transition-none" />
-            <span>{primary.label}</span>
-            <span className="sr-only">(opens in a new tab)</span>
-          </Button>
-          <Button variant="glow" href={secondary.href} className="group">
-            <span>{secondary.label}</span>
-            <ArrowDown aria-hidden className="size-6 shrink-0 transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-y-1 motion-reduce:transition-none" />
+        <div className="flex flex-wrap items-center justify-center gap-unit-3">
+          <PlanButton size="lg" href={primary.href} label={primary.label} icon={CalendarDays} external />
+          <Button href={secondary.href}>
+            {secondary.label}
+            <ArrowDown aria-hidden className="size-5 shrink-0 transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-y-0.5 motion-reduce:transition-none" />
           </Button>
         </div>
 

@@ -5,7 +5,7 @@ import Link from "next/link";
 import Script from "next/script";
 import { ArrowRight, CalendarDays } from "lucide-react";
 import { sendContact } from "@/app/actions/contact";
-import { PlanButton } from "@/components/ui/PlanButton";
+import { InkButtonFace, inkButton, PlanButton } from "@/components/ui/PlanButton";
 import { contactForm as c, projectTypes } from "@/content/final-cta";
 import {
   ELAPSED,
@@ -179,12 +179,9 @@ export function ContactForm({ crmReady, turnstileKey }: { crmReady: boolean; tur
         <button
           type="submit"
           disabled={pending}
-          className="tap-target inline-flex cursor-pointer items-center gap-unit-2 rounded-md border border-ink-black bg-ink-black py-1 pr-unit-3 pl-1 font-sans text-body-sm font-medium text-white transition-colors hover:bg-graphite-hover disabled:cursor-wait disabled:opacity-70"
+          className={cn(inkButton(), "cursor-pointer disabled:cursor-wait disabled:opacity-70")}
         >
-          <span aria-hidden className="flex size-7 items-center justify-center rounded-sm bg-canary-yellow text-ink-black">
-            <ArrowRight className="size-4" />
-          </span>
-          {pending ? c.sending : crmReady ? c.submit : c.submitEmail}
+          <InkButtonFace icon={ArrowRight} label={pending ? c.sending : crmReady ? c.submit : c.submitEmail} />
         </button>
 
         <div aria-live="polite">

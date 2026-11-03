@@ -6,7 +6,6 @@ import { MotionProvider } from "@/components/MotionProvider";
 import { site } from "@/content/site";
 import "./globals.css";
 
-
 // Variable fonts: no weight list, so every weight in use (500–700) is real, not browser-synthesized.
 const spaceGrotesk = Space_Grotesk({ variable: "--font-space-grotesk", subsets: ["latin"] });
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });

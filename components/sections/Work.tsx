@@ -145,9 +145,9 @@ export default function Work() {
       </ol>
       {projects.length > 1 && (
         <div className="mt-unit-12 text-center">
-          <Button variant="glow" href={workSection.cta.href} className="font-mono text-mono-meta tracking-wider text-ink-black">
-            <span>{workSection.cta.label}</span>
-            <ArrowRight aria-hidden className="size-6 shrink-0" />
+          <Button href={workSection.cta.href}>
+            {workSection.cta.label}
+            <ArrowRight aria-hidden className="size-5 shrink-0 transition-transform duration-300 group-hover:translate-x-0.5 motion-reduce:transition-none" />
           </Button>
         </div>
       )}

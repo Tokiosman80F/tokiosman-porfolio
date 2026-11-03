@@ -3,6 +3,7 @@
 import { useState, type ReactNode } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { InkButtonFace, inkButton } from "@/components/ui/PlanButton";
 import { cn } from "@/lib/utils";
 
 // Interactive half of ServiceMenu: the grouped list on the left, and (from lg) a large preview card on the
@@ -113,11 +114,8 @@ export function ServiceShowcase({ items, detailsLabel }: { items: ShowcaseItem[]
                   </div>
                 ))}
               </dl>
-              <span className="inline-flex shrink-0 items-center gap-unit-2 rounded-md border border-ink-black bg-ink-black py-1 pr-unit-3 pl-1 font-sans text-body-sm font-medium text-white">
-                <span className="flex size-7 items-center justify-center rounded-sm bg-canary-yellow text-on-accent transition-transform group-hover/preview:translate-x-0.5 motion-reduce:transition-none">
-                  <ArrowRight className="size-4" />
-                </span>
-                {detailsLabel}
+              <span className={cn(inkButton(), "self-auto")}>
+                <InkButtonFace icon={ArrowRight} label={detailsLabel} />
               </span>
             </div>
           </div>

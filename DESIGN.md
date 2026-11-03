@@ -37,15 +37,13 @@ Tokens live in `app/globals.css` `@theme`. `--color-*: initial` removes Tailwind
 | `signal-green-ink` | `#157A3A` | Green text and icons (outcomes, "verified", status labels) |
 | `signal-blue` | `#60A5FA` | Checks, avatar (with ink text), progress bars |
 | `highlight-green` | `#4ae176` | Highlight box fill |
-| `graphite` / `graphite-hover` | `#454545` / `#383838` | Primary button gradient start (idle / hover) |
+| `graphite` / `graphite-hover` | `#454545` / `#383838` | Client avatar tone in What I build (hover value unused) |
 
 Contrast rule: all real (non-mock) text meets WCAG AA. Text inside the decorative mock UIs (code, terminal, iMessage, Figma) keeps its imitation colors.
 
 ### Accent colors used as literals
 
-- **Primary button (ink gradient):** `bg-linear-135/srgb from-graphite to-black`, border `graphite`; hover `from-graphite-hover`.
 - **Dark theme:** `html[data-theme="dark"]` swaps every colour token in `app/globals.css` (no `dark:` variants in markup). Page `#121211`, cards `#1D1D1B`/`#242422`, text `#F3F2ED`, muted `#A3A29C`, hairlines `#30302D`. `white` and `ink-black` trade places, so ink surfaces (featured offer, dark tiles, contact card, ink case file) become light cards with dark text; the primary button becomes a light gradient. Islands keep light-mode ink: accent fills (canary, greens, blue, neon) keep dark text automatically; text that only overlaps a canary shape (nav chip, SVG tags) uses `on-accent` (#121212, never swapped); `.theme-light` keeps logo tiles light. Canary text on ink cards switches to `on-primary` in dark (`[html[data-theme=dark]_&]:text-on-primary`). Tokens added: `error` (#b91c1c / #F87171), `signal-green-on-primary` (green text on ink cards). Toggle: `ThemeToggle` in the navbar; first visit follows the OS; choice saved in localStorage; set before paint by an inline script (no flash). The Cal.com modal opens in the current theme.
-- **Glow button ring:** `linear-gradient(90deg, #1978e5, #38bdf8, #60a5fa, #00d2ff, #2563eb, #1978e5)`, glow `rgba(56,189,248,0.35)` → `0.65` on hover; inner `#FAFAF7` → `#FFFFFF`. The gradient is still at rest and travels only while hovered.
 - **Highlight boxes:** canary `#FDF175`, green `#4ae176`, blue `#60A5FA`, neon `rgb(59,255,111)`.
 - **Beam background:** green `#10b981 → #22C55E → #4ae176`, blue `#2563eb/#3b82f6 → #00d2ff → #60A5FA`, ink `#121212 → #454545`.
 - **Dark card:** `linear-gradient(135deg, #121212 0%, #121212 30%, #3f444e 100%)`.
@@ -60,7 +58,7 @@ All four are **variable fonts** (no weight list), so every weight is real.
 
 | Family | next/font variable | Tailwind family | Use |
 |---|---|---|---|
-| Space Grotesk | `--font-space-grotesk` | `font-display` | Display, headlines, buttons |
+| Space Grotesk | `--font-space-grotesk` | `font-display` | Display, headlines |
 | Inter | `--font-inter` | `font-sans` (default) | Body |
 | JetBrains Mono | `--font-jetbrains-mono` | `font-mono` | Tags, meta, prices, code |
 | Caveat | `--font-caveat` | `font-hand` | Sticky-note quote |
@@ -104,9 +102,9 @@ Legacy per-size family aliases (`font-headline-sm`, `font-body-md`, `font-mono-m
 
 - **Tier 0:** `bg-white` page.
 - **Tier 1 (cards):** `bg-paper-card border border-border-hairline shadow-sm`; interactive cards add `hover:border-ink-black`.
-- **Tier 2 (tactile):** `border-ink-black` + hard offset shadow: `shadow-offset-sm` (2px, small CTAs, highlights), `shadow-offset-md` (3px), `shadow-offset-lg` (4px: primary CTAs, paper sticky note, FAQ card hover). All `0` blur, ink color.
+- **Tier 2 (tactile):** `border-ink-black` + hard offset shadow: `shadow-offset-sm` (2px, small CTAs, highlights), `shadow-offset-md` (3px), `shadow-offset-lg` (4px: paper sticky note, FAQ card hover). All `0` blur, ink color.
 - **Sticky note (canary):** `shadow-note` (`3px 4px 12px rgb(0 0 0 / 0.08)`), rotated `-3deg`; paper note `+2deg`; both `hover:rotate-0`. Currently unused (the hero notes were removed in the landing redesign).
-- **Glow:** `shadow-glow` / `shadow-glow-hover`, blue ring buttons only.
+- **Button:** `shadow-button`, ink buttons only.
 - Tailwind `shadow-xs/sm/md/lg/inner` are used inside mock UIs.
 
 ## Shapes
@@ -118,17 +116,15 @@ Tailwind default radii plus one token. **Decision (Q3): keep the rounded-square 
 | `rounded-xs` | 0.125rem | Cards, tags, small buttons (near-square, the house default) |
 | `rounded-sm` | 0.25rem | Highlight boxes, sticky notes, mock panels |
 | `rounded-lg` | 0.5rem | Mock-UI windows |
-| `rounded-pill` | **0.75rem** | "Pills": avatars, primary CTAs (rounded rectangles, not circles) |
+| `rounded-pill` | **0.75rem** | "Pills": avatars (rounded rectangles, not circles) |
 | `rounded-full` | 9999px | Not used by the design; true circles only if a future design asks |
-| `.moving-blue-border-btn` | 9999px | Glow button (the one true pill) |
 
 ## Components (as implemented)
 
 ### Buttons (all are `<a>` links)
 
-- **Primary (ink gradient):** `bg-linear-135/srgb from-graphite to-black`, white text, border `graphite`, Space Grotesk semibold uppercase `tracking-tight`, offset ink shadow; `active:` translate 0.5 + `shadow-none` (press-in). Sizes: header `px-4 py-2 text-body-sm` + 2px shadow; hero `px-6 py-3 text-body-md` + 4px; pricing `px-6 py-3 text-body-sm rounded` + 3px. Hover: gradient start → `graphite-hover` (#383838) + 1px lift.
-- **Glow (`.moving-blue-border-btn`):** 2px animated blue gradient ring (`blue-gradient-shift` 4s), paper inner, blue glow; hover lifts 1px and intensifies the glow.
-- **Chip ("Chat With Ava"):** `bg-surface border-ink-black`, `mono-tag` uppercase bold, `px-3 py-1.5 rounded-xs`, 2px offset shadow, `hover:bg-canary-yellow`.
+- **Ink button (`components/ui/PlanButton`, the main action everywhere):** solid `bg-ink-black`, white sentence-case label in `font-sans` semibold, `tracking-[-0.01em]`, radius `0.625rem`, `shadow-button` (top inner highlight + soft drop). A canary icon tile sits inset 4px on the left; on hover or keyboard focus it sweeps across the whole button (300ms, ease-out-quint) and the label turns `on-accent`; active presses down 1px. Sizes: `md` `h-10 text-body-sm`, `lg` `h-12 text-body-md` (hero and service page heroes). On an ink surface pass `dark`: it inverts to `bg-white text-ink-black`. Native buttons reuse it through `inkButton()` + `InkButtonFace`.
+- **Outline button (`components/ui/Button`, the secondary action):** `h-12`, same radius and type as the ink button, `border-ink-black/25` on `bg-white`; hover darkens the border to full ink and nudges the trailing arrow. No glow, gradient or animated ring.
 - **Text link:** label + arrow icon, `hover:underline` (or `hover:text-ink-black` in nav/footer; dashed underline for mailto).
 
 ### Eyebrow

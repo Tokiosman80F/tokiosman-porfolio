@@ -52,8 +52,7 @@
   --shadow-offset-md: 3px 3px 0 var(--color-ink-black);
   --shadow-offset-lg: 4px 4px 0 var(--color-ink-black);
   --shadow-note: 3px 4px 12px rgb(0 0 0 / 0.08);
-  --shadow-glow: 0 0 12px rgb(56 189 248 / 0.35);
-  --shadow-glow-hover: 0 0 20px rgb(56 189 248 / 0.65);
+  --shadow-button: inset 0 1px 0 rgb(255 255 255 / 0.16), 0 1px 2px rgb(0 0 0 / 0.2), 0 6px 16px -6px rgb(0 0 0 / 0.35);
 
   --container-page: 1280px;
 
@@ -343,46 +342,6 @@
     height: max(100%, 44px);
     translate: -50% -50%;
   }
-}
-
-@keyframes blue-gradient-shift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-.moving-blue-border-btn {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 9999px;
-  padding: 2px;
-  background: linear-gradient(90deg, #1978e5, #38bdf8, #60a5fa, #00d2ff, #2563eb, #1978e5);
-  background-size: 300% 300%;
-  /* Still at rest; the gradient only travels while hovered (one moving thing in the hero: the outcome ticker) */
-  box-shadow: var(--shadow-glow);
-  transition: box-shadow 0.25s ease, translate 0.25s ease;
-  text-decoration: none;
-}
-.moving-blue-border-btn:hover {
-  box-shadow: var(--shadow-glow-hover);
-  translate: 0 -1px;
-  animation: blue-gradient-shift 4s ease infinite;
-}
-.moving-blue-border-btn-inner {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  width: 100%;
-  height: 100%;
-  border-radius: 9999px;
-  background: var(--color-paper-card);
-  color: var(--color-ink-black);
-  transition: background 0.2s ease;
-}
-.moving-blue-border-btn:hover .moving-blue-border-btn-inner {
-  background: var(--color-white);
 }
 
 @media (prefers-reduced-motion: reduce) {

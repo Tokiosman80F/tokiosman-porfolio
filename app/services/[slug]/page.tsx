@@ -166,19 +166,11 @@ export default async function ServicePageRoute({ params }: PageProps<"/services/
                     </li>
                   ))}
                 </ul>
-                <div className="mt-unit-8 flex flex-wrap items-center gap-unit-4">
-                  <Button href={p.cta.href} target="_blank" rel="noopener noreferrer" className="group">
-                    {p.cta.href === site.whatsapp ? (
-                      <MessageCircle aria-hidden className="size-6 shrink-0 transition-transform duration-300 group-hover:-rotate-12 motion-reduce:transition-none" />
-                    ) : (
-                      <CalendarDays aria-hidden className="size-6 shrink-0 transition-transform duration-300 group-hover:-rotate-12 motion-reduce:transition-none" />
-                    )}
-                    <span>{p.cta.label}</span>
-                    <span className="sr-only">(opens in a new tab)</span>
-                  </Button>
-                  <Button variant="glow" href="#plans" className="group">
-                    <span>See the plans</span>
-                    <ArrowDown aria-hidden className="size-6 shrink-0 transition-transform duration-300 group-hover:translate-y-1 motion-reduce:transition-none" />
+                <div className="mt-unit-8 flex flex-wrap items-center gap-unit-3">
+                  <PlanButton size="lg" href={p.cta.href} label={p.cta.label} icon={ctaIcon(p.cta)} external />
+                  <Button href="#plans">
+                    See the plans
+                    <ArrowDown aria-hidden className="size-5 shrink-0 transition-transform duration-300 group-hover:translate-y-0.5 motion-reduce:transition-none" />
                   </Button>
                 </div>
               </div>
