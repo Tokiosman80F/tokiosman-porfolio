@@ -230,7 +230,12 @@ export default async function BlogPostPage({ params }: PageProps<"/blogs/[slug]"
 
           <Section border="none">
             <div className="mx-auto max-w-3xl">
-              <nav aria-label={t.toc} className="rounded-2xl bg-surface-container-low p-unit-6">
+              <nav aria-label={t.toc} className="relative isolate overflow-hidden rounded-2xl border border-border-hairline bg-surface-container-low p-unit-6">
+                {/* The About section's faint grid, fading out from the top right */}
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_right,var(--color-border-strong)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-border-strong)_1px,transparent_1px)] [mask-image:radial-gradient(70%_90%_at_100%_0%,black,transparent)] bg-[size:2rem_2rem]"
+                />
                 <p className="font-mono text-mono-tag tracking-widest text-ink-muted uppercase">{t.toc}</p>
                 <ol className="mt-unit-3 space-y-unit-2 font-sans text-body-md">
                   {sections.map((s) => (
