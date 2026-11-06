@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowDown, ArrowLeft, ArrowRight } from "lucide-react";
 import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
 import FinalCta from "@/components/sections/FinalCta";
+import ViewCount from "@/components/ViewCount";
 import { Section } from "@/components/ui/Section";
-import { bannerSize, bannerSrc, blogHref, blogPage as t, formatDate, posts, readingMinutes, type BlogBlock, type BlogImage } from "@/content/blog";
+import { bannerSize, bannerSrc, blogHref, blogPage as t, formatDate, posts, readingMinutes, type BlogBlock, type BlogDiagram, type BlogImage } from "@/content/blog";
 import { site } from "@/content/site";
 
 // Blog post: title and meta, the cover, a contents list built from the h2s, the body blocks in a reading
@@ -58,6 +59,52 @@ function Figure({ image }: { image: BlogImage }) {
   );
 }
 
+// A labelled arrow pointing down: one link in the diagram
+function Connector({ label }: { label: string }) {
+  return (
+    <div className="flex flex-col items-center py-unit-2 text-ink-muted" aria-hidden>
+      <span className="h-unit-3 w-px bg-border-strong" />
+      <span className="my-1 rounded-md border border-border-hairline bg-white px-unit-2 py-0.5 font-mono text-mono-tag tracking-wider uppercase">{label}</span>
+      <ArrowDown className="size-4" />
+    </div>
+  );
+}
+
+function Diagram({ diagram: d }: { diagram: BlogDiagram }) {
+  return (
+    <figure className="rounded-2xl border border-border-hairline bg-surface-container-low p-unit-4 sm:p-unit-6">
+      <div className="grid gap-unit-4 sm:grid-cols-2">
+        {d.sources.map((s) => (
+          <div key={s.title} className="flex flex-col">
+            <div className="flex-1 rounded-xl border border-ink-black bg-white p-unit-4 shadow-offset-sm">
+              <p className="font-mono text-mono-tag tracking-wider text-ink-muted uppercase">{s.kicker}</p>
+              <p className="mt-1 font-display text-headline-sm font-bold text-ink-black">{s.title}</p>
+              <p className="mt-1 font-sans text-body-sm text-on-surface-variant">{s.text}</p>
+            </div>
+            <Connector label={s.link} />
+          </div>
+        ))}
+      </div>
+      <div className="ink-card rounded-xl border border-ink-black bg-ink-black p-unit-4 text-on-primary sm:p-unit-6">
+        <p className="font-mono text-mono-tag tracking-wider text-on-primary-container uppercase">{d.hub.kicker}</p>
+        <p className="mt-1 font-display text-headline-sm font-bold">{d.hub.title}</p>
+        <p className="mt-1 font-sans text-body-sm text-on-primary-container">{d.hub.text}</p>
+        <ul aria-label="What the service holds" className="mt-unit-3 flex flex-wrap gap-unit-2">
+          {d.hub.items.map((i) => (
+            <li key={i} className="rounded-md bg-canary-yellow px-unit-2 py-1 font-mono text-mono-tag text-on-accent uppercase">{i}</li>
+          ))}
+        </ul>
+      </div>
+      <Connector label={d.output.link} />
+      <div className="mx-auto max-w-sm rounded-xl border border-ink-black bg-canary-yellow p-unit-4 text-center text-on-accent shadow-offset-sm">
+        <p className="font-display text-headline-sm font-bold">{d.output.title}</p>
+        <p className="mt-1 font-sans text-body-sm">{d.output.text}</p>
+      </div>
+      <figcaption className="mt-unit-4 font-sans text-body-sm text-ink-muted">{d.caption}</figcaption>
+    </figure>
+  );
+}
+
 function Block({ block: b }: { block: BlogBlock }) {
   switch (b.type) {
     case "h2":
@@ -90,6 +137,8 @@ function Block({ block: b }: { block: BlogBlock }) {
           <p className="mt-unit-2 font-display text-headline-sm font-bold">{b.text}</p>
         </aside>
       );
+    case "diagram":
+      return <Diagram diagram={b.diagram} />;
     case "table":
       return (
         <div className="overflow-x-auto rounded-2xl border border-border-hairline">
@@ -171,6 +220,7 @@ export default async function BlogPostPage({ params }: PageProps<"/blogs/[slug]"
               <p className="mt-unit-6 font-sans text-body-lead text-on-surface-variant">{p.description}</p>
               <p className="mt-unit-6 font-mono text-mono-meta text-ink-muted uppercase">
                 {site.person} · <time dateTime={p.date}>{formatDate(p.date)}</time> · {readingMinutes(p)} {t.minRead}
+                <ViewCount slug={p.slug} />
               </p>
               <div className="mt-unit-12">
                 <Image src={bannerSrc(p)} alt={p.banner.title} {...bannerSize} priority unoptimized className="w-full rounded-2xl border border-border-hairline" />
@@ -180,7 +230,12 @@ export default async function BlogPostPage({ params }: PageProps<"/blogs/[slug]"
 
           <Section border="none">
             <div className="mx-auto max-w-3xl">
-              <nav aria-label={t.toc} className="rounded-2xl bg-surface-container-low p-unit-6">
+              <nav aria-label={t.toc} className="relative isolate overflow-hidden rounded-2xl border border-border-hairline bg-surface-container-low p-unit-6">
+                {/* The About section's faint grid, fading out from the top right */}
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_right,var(--color-border-strong)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-border-strong)_1px,transparent_1px)] [mask-image:radial-gradient(70%_90%_at_100%_0%,black,transparent)] bg-[size:2rem_2rem]"
+                />
                 <p className="font-mono text-mono-tag tracking-widest text-ink-muted uppercase">{t.toc}</p>
                 <ol className="mt-unit-3 space-y-unit-2 font-sans text-body-md">
                   {sections.map((s) => (
