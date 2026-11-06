@@ -15,7 +15,16 @@ export type BlogBlock =
   | { type: "ul" | "ol"; items: string[] }
   | { type: "image"; image: BlogImage }
   | { type: "callout"; title: string; text: string }
+  | { type: "diagram"; diagram: BlogDiagram }
   | { type: "table"; caption: string; head: string[]; rows: string[][] };
+
+/** Fan-in diagram: each source links down into one hub, which drives one output */
+export type BlogDiagram = {
+  caption: string;
+  sources: { kicker: string; title: string; text: string; link: string }[];
+  hub: { kicker: string; title: string; text: string; items: string[] };
+  output: { link: string; title: string; text: string };
+};
 
 export type BlogPost = {
   slug: string;
@@ -81,7 +90,281 @@ const images = {
   },
 } satisfies Record<string, BlogImage>;
 
+// Monk Mode Blocker: my own screenshots of my own MIT-licensed app
+const monkRepo = "https://github.com/Tokiosman80F/monk-mode";
+const monkCredit = { author: "Toki Osman", license: "MIT", href: monkRepo };
+const monk = {
+  demo: {
+    src: "/images/blog/monk-mode/demo.gif",
+    alt: "Monk Mode Blocker in use: adding a task, starting a focus session and checking the site limits",
+    width: 880,
+    height: 608,
+    caption: "Adding a task, starting a focus session and checking the limits.",
+    credit: monkCredit,
+  },
+  today: {
+    src: "/images/blog/monk-mode/today.png",
+    alt: "The Today screen with tasks, their priorities, planned times and subtasks",
+    width: 1100,
+    height: 760,
+    caption: "Today's tasks with priorities, times and subtasks.",
+    credit: monkCredit,
+  },
+  limits: {
+    src: "/images/blog/monk-mode/limits.png",
+    alt: "The Limits screen listing each site with its daily limit and the time left today",
+    width: 1100,
+    height: 760,
+    caption: "Each site with its time left today.",
+    credit: monkCredit,
+  },
+  blockPage: {
+    src: "/images/blog/monk-mode/block-page.png",
+    alt: "The page Monk Mode Blocker shows in the browser when a site is blocked",
+    width: 1100,
+    height: 700,
+    caption: "The page shown on a blocked site.",
+    credit: monkCredit,
+  },
+  focus: {
+    src: "/images/blog/monk-mode/focus.png",
+    alt: "A focus session in progress, showing the time left and when it ends",
+    width: 1100,
+    height: 760,
+    caption: "A focus session showing the time left and when it ends.",
+    credit: monkCredit,
+  },
+  rewards: {
+    src: "/images/blog/monk-mode/rewards.png",
+    alt: "The rewards screen with the current level, XP progress and earned badges",
+    width: 1100,
+    height: 760,
+    caption: "Level, XP and badges.",
+    credit: monkCredit,
+  },
+} satisfies Record<string, BlogImage>;
+
 export const posts: BlogPost[] = [
+  {
+    slug: "building-monk-mode-blocker",
+    title: "I built a free website blocker I can't switch off on a bad day",
+    description:
+      "How Monk Mode Blocker came about, who it's for, how it compares to Cold Turkey and Freedom, how it works under the hood, and how to install it.",
+    date: "2026-11-06",
+    tags: ["Productivity", "Open source", "Windows", "Rust", "Tauri"],
+    banner: { title: "A free website blocker I can't switch off", highlight: "can't switch off", flow: ["Extension", "Service", "Hosts file", "Focus"] },
+    body: [
+      { type: "image", image: monk.demo },
+      {
+        type: "p",
+        text: "For the next three months I'm doing \"monk mode\": twelve hours of study a day. Three hours of React, six hours building real projects, two hours of a marketing course, and one hour of slack for everything else.",
+      },
+      {
+        type: "p",
+        text: "The plan was simple. The hard part was the ten seconds between finishing a chapter and finding myself forty minutes deep in YouTube Shorts.",
+      },
+      {
+        type: "p",
+        text: "This post is about the tool I built to fix that: Monk Mode Blocker, a free and open source app for Windows.",
+      },
+
+      { type: "h2", text: "Where the idea came from" },
+      { type: "p", text: "On my phone the problem was already solved. I use Kahf Guard, which does three things well:" },
+      {
+        type: "ol",
+        items: [
+          "It filters sites at the DNS level, so a blocked site is blocked in every app.",
+          "It blocks Reels and Shorts inside apps, while leaving the rest usable.",
+          "It has strict uninstall protection, so I can't remove it in a weak moment.",
+        ],
+      },
+      {
+        type: "p",
+        text: "The third one is the important part. Every blocker works on a good day. What matters is whether it still works at 11 PM when you've talked yourself into \"just ten minutes\".",
+      },
+      {
+        type: "p",
+        text: "On my laptop, nothing free did all three. Browser extensions can be turned off in two clicks. Good desktop blockers mostly cost money, and the best known one, Cold Turkey, charges for the features I needed. So I wrote down exactly what I wanted, copied the ideas that make Kahf Guard work, and built it for the desktop:",
+      },
+      {
+        type: "table",
+        caption: "How each Kahf Guard idea maps to Monk Mode Blocker on the desktop",
+        head: ["On the phone (Kahf Guard)", "On the desktop (Monk Mode Blocker)"],
+        rows: [
+          ["A DNS filter answers \"blocked\"", "The hosts file points blocked sites nowhere, in every browser and app"],
+          ["Reels and Shorts blocked in apps", "A browser extension blocks /shorts and /reels pages"],
+          ["Screen time limits", "The extension measures real time on each site"],
+          ["Uninstall protection", "A commitment lock and a Windows Service that won't stop or uninstall"],
+        ],
+      },
+
+      { type: "h2", text: "Who it's for" },
+      { type: "p", text: "Monk Mode Blocker is for you if:" },
+      {
+        type: "ul",
+        items: [
+          "You're studying or building something for weeks at a time, and want the next three months to look different from the last three.",
+          "You don't want to quit the internet. You need YouTube for tutorials, but not the recommendations after the tutorial.",
+          "You know you'll try to undo it. If your problem is the moment you decide to turn the blocker off, you need one that says no.",
+          "You want something free that you can inspect. It's MIT licensed, and every rule it enforces is in the code.",
+        ],
+      },
+      {
+        type: "p",
+        text: "It's probably not for you if you're on a Mac or Linux (it's Windows only for now), or if you want blocking that syncs across your phone and laptop.",
+      },
+
+      { type: "h2", text: "What it does" },
+      { type: "image", image: monk.today },
+      {
+        type: "p",
+        text: "A daily limit for each site. YouTube gets 30 minutes a day, because I learn from it. Facebook, Instagram and Messenger get 10 minutes each. Time only counts while the site is the active tab in front of you, not while it sits in the background. When a site runs out, it's closed until midnight, everywhere.",
+      },
+      { type: "image", image: monk.limits },
+      { type: "p", text: "Always blocked sites. TikTok is blocked from the minute you install. You can add more." },
+      {
+        type: "p",
+        text: "Shorts and Reels are always closed. Even with YouTube time left, youtube.com/shorts sends you to a block page, and the Shorts shelves are hidden on the home page. Normal videos still play.",
+      },
+      { type: "image", image: monk.blockPage },
+      {
+        type: "p",
+        text: "Today's tasks. Each task gets a priority (high, medium or low) and a total time, like 3h. Then you split it into subtasks with their own times. As you work, each task shows the time spent against the time you planned, like 1h 40m / 3h.",
+      },
+      {
+        type: "p",
+        text: "Focus sessions. Click Start focus and every site with a limit closes for 50 minutes. The app shows when the session ends, a small timer stays in the corner of your screen, and a chime plays when it's over. After the break, Start focus carries on with the same task.",
+      },
+      { type: "image", image: monk.focus },
+      {
+        type: "p",
+        text: "XP, levels and badges. You get 1 XP for each minute of focus and up to 50 for a finished task. You never lose XP for a slip. The point is to reward the work, not to punish you for being human.",
+      },
+      { type: "image", image: monk.rewards },
+      {
+        type: "p",
+        text: "A commitment lock. You pick an end date and type \"I commit to monk mode\". Until that date you can only make the rules stricter. You can add sites and lower limits, but you can't remove a site, raise a limit, stop the service or uninstall the app.",
+      },
+
+      { type: "h2", text: "How it compares" },
+      { type: "p", text: "There are good tools already. Here's how they differ from Monk Mode Blocker:" },
+      {
+        type: "table",
+        caption: "Monk Mode Blocker compared with other focus and blocking tools",
+        head: ["Tool", "What it is", "Blocks outside the browser", "Hard to undo", "Price"],
+        rows: [
+          ["Monk Mode Blocker", "Windows app, service and extension", "Yes, through the hosts file", "Yes: a lock, plus a service that won't stop", "Free, open source"],
+          ["Cold Turkey Blocker", "Desktop blocker for Windows and Mac", "Yes, and it can block apps", "Yes, in the paid version", "Free basic version, paid Pro"],
+          ["Freedom", "Blocker that syncs across devices", "Yes", "A \"locked mode\"", "Paid subscription"],
+          ["LeechBlock NG", "Browser extension", "No", "Partly: you can delay changes", "Free, open source"],
+          ["StayFocusd", "Chrome extension with time limits", "No", "Partly", "Free"],
+          ["Forest", "Focus timer where a tree grows", "No, it's a timer", "No", "Paid apps, free extension"],
+        ],
+      },
+      {
+        type: "p",
+        text: "Monk Mode Blocker sits between them. It has the stubbornness of Cold Turkey and the price of an extension, plus three things I couldn't find together anywhere else:",
+      },
+      {
+        type: "ul",
+        items: [
+          "a separate limit for each site",
+          "Shorts and Reels blocked while normal videos keep working",
+          "a task list with time planned and time spent",
+        ],
+      },
+
+      { type: "h2", text: "How it actually works" },
+      { type: "p", text: "The app is three programs that each do one job:" },
+      {
+        type: "diagram",
+        diagram: {
+          caption: "The extension and the app only ask. The service decides, and it alone writes the hosts file.",
+          sources: [
+            { kicker: "In every browser", title: "Browser extension", text: "Time on the active tab, Shorts and Reels rules", link: "WebSocket" },
+            { kicker: "In the tray", title: "Monk Mode app", text: "Tasks, focus sessions, limits, the timer", link: "Named pipe" },
+          ],
+          hub: {
+            kicker: "Windows Service · Rust · system account",
+            title: "Monk Mode service",
+            text: "Holds every rule, counts every second, and refuses anything a lock forbids.",
+            items: ["Rules", "Limits", "Lock", "SQLite"],
+          },
+          output: { link: "Every 5 s", title: "Hosts file", text: "Blocked sites point nowhere, in every browser and app" },
+        },
+      },
+      {
+        type: "p",
+        text: "The service is the boss. It's a Windows Service written in Rust, and it runs as the system account. It holds every rule, counts every second, and keeps everything in a small SQLite database. Every five seconds it checks the hosts file and puts its block back if anything changed. If you edit the hosts file by hand, your change lasts about five seconds.",
+      },
+      {
+        type: "p",
+        text: "The hosts file does the blocking. Windows checks the hosts file before it looks up any site. Pointing youtube.com at 0.0.0.0 makes it unreachable in Chrome, Edge, Firefox and every other app, with nothing to install in each one. It works at the domain level, so it can't tell youtube.com/watch from youtube.com/shorts.",
+      },
+      {
+        type: "p",
+        text: "The extension handles what the hosts file can't. It reports which tab is active, so time only counts while you're looking at a site. It also redirects pages like /shorts and /reels to the block page. If a browser runs for more than 30 seconds without the extension, the service assumes you're trying to dodge it and closes your sites with limits in that browser.",
+      },
+      {
+        type: "p",
+        text: "The app is just a window onto the service. It's built with Tauri, so it's a small Rust program with a React interface rather than a full Electron browser. It sends requests to the service through a named pipe, and the service checks every one. When the app asks to raise YouTube's limit during a lock, the service refuses, no matter what the app says. Closing the app changes nothing, and if you kill it, the service starts it again.",
+      },
+      {
+        type: "p",
+        text: "The lock is kept twice. The lock's end date is stored in the database and as a signed copy in the Windows registry. Deleting one copy doesn't help, because the service trusts the later of the two valid dates and repairs the other. It also remembers the latest time it has seen, so turning the clock back doesn't shorten a lock.",
+      },
+      {
+        type: "p",
+        text: "It's honest about its limits. An admin who boots into Safe Mode or reinstalls Windows can get around it. So can someone who moves the clock forward. The goal was never to make quitting impossible, just slow and annoying enough that the urge passes first.",
+      },
+
+      { type: "h2", text: "How to install it" },
+      { type: "p", text: "You need Windows 10 or 11 (64-bit) and Chrome, Edge or Brave." },
+      {
+        type: "ol",
+        items: [
+          "Download the installer from the project's GitHub page (github.com/Tokiosman80F/monk-mode), or build it yourself from source.",
+          "Run it and approve the admin prompt. This installs the background service, and TikTok is blocked from that moment.",
+          "Follow the setup wizard. It checks the service and shows you your starting limits.",
+          "Add the extension to every browser you use: open chrome://extensions (or edge://extensions in Edge), turn on Developer mode, click Load unpacked, choose C:\\Program Files\\Monk Mode\\extension, then turn on Allow in Incognito.",
+          "Set your limits on the Limits screen, add today's tasks, and press Start focus.",
+        ],
+      },
+      {
+        type: "p",
+        text: "When you're ready, start a short lock first, maybe a week. There's no undo, which is the point.",
+      },
+      {
+        type: "callout",
+        title: "Before you install",
+        text: "Windows may warn about the installer because it isn't code-signed yet, and some antivirus tools are wary of anything that edits the hosts file. Only install a copy you built or downloaded from the project's own GitHub page.",
+      },
+
+      { type: "h2", text: "What I learned building it" },
+      {
+        type: "ul",
+        items: [
+          "Write down the rules before writing code. The whole app grew from a one-page spec of what the lock allows and forbids. Every one of those rules has a test.",
+          "The hardest bugs were Windows bugs, not logic bugs. One example is the service ignoring a stop request during a lock. That needed a different approach from the one the documentation suggests, because the library ends the service on any stop request, even a refused one.",
+          "Keep it simple. I added an Eisenhower Matrix for sorting tasks, used it for a day, and took it out again. A list sorted by priority, with times, was all I needed.",
+          "Reward the work, not the absence of failure. XP only goes up. A bad hour costs you nothing except the XP you didn't earn.",
+        ],
+      },
+
+      { type: "h2", text: "Try it, or help build it" },
+      {
+        type: "p",
+        text: "Monk Mode Blocker is free and MIT licensed. The code and the list of manual tests are on GitHub. Issues and pull requests are welcome, especially from anyone who wants to bring it to macOS.",
+      },
+      { type: "p", text: "Day 12 of 92. Back to work." },
+    ],
+    cta: {
+      title: "Get Monk Mode Blocker",
+      text: "Free and open source for Windows 10 and 11. Download the installer, read the code, or open an issue.",
+      label: "Open the project on GitHub",
+      href: monkRepo,
+    },
+  },
   {
     slug: "headless-cms-nextjs-vs-wordpress",
     title: "What is a headless CMS with Next.js, and how is it better than traditional WordPress?",
