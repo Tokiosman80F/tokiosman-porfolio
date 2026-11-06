@@ -6,6 +6,7 @@ import { ArrowDown, ArrowLeft, ArrowRight } from "lucide-react";
 import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
 import FinalCta from "@/components/sections/FinalCta";
+import ViewCount from "@/components/ViewCount";
 import { Section } from "@/components/ui/Section";
 import { bannerSize, bannerSrc, blogHref, blogPage as t, formatDate, posts, readingMinutes, type BlogBlock, type BlogDiagram, type BlogImage } from "@/content/blog";
 import { site } from "@/content/site";
@@ -219,6 +220,7 @@ export default async function BlogPostPage({ params }: PageProps<"/blogs/[slug]"
               <p className="mt-unit-6 font-sans text-body-lead text-on-surface-variant">{p.description}</p>
               <p className="mt-unit-6 font-mono text-mono-meta text-ink-muted uppercase">
                 {site.person} · <time dateTime={p.date}>{formatDate(p.date)}</time> · {readingMinutes(p)} {t.minRead}
+                <ViewCount slug={p.slug} />
               </p>
               <div className="mt-unit-12">
                 <Image src={bannerSrc(p)} alt={p.banner.title} {...bannerSize} priority unoptimized className="w-full rounded-2xl border border-border-hairline" />
