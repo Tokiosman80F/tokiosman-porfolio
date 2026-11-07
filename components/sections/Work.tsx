@@ -139,7 +139,7 @@ export default function Work() {
         aside={<div className="font-mono text-mono-meta text-ink-muted">{workSection.aside}</div>}
       />
       <ol className="space-y-unit-6 lg:space-y-unit-16">
-        {projects.map((p, i) => (
+        {projects.filter((p) => !p.kind).map((p, i) => (
           <CaseFile key={p.client} project={p} index={i} />
         ))}
       </ol>

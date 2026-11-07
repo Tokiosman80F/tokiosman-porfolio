@@ -224,7 +224,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
                   ) : null}
                   {p.liveUrl && (
                     <a href={p.liveUrl} target="_blank" rel="noopener" className="tap-target inline-flex items-center gap-unit-2 font-sans text-body-md font-semibold text-ink-black hover:underline">
-                      {t.live}
+                      {p.liveLabel ?? t.live}
                       <ArrowUpRight aria-hidden className="size-5" />
                       <span className="sr-only"> (opens in a new tab)</span>
                     </a>

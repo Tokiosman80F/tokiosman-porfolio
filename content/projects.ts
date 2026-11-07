@@ -30,6 +30,10 @@ export type Project = {
   /** Heading for the highlights; defaults to caseStudyPage.highlights. */
   highlightsTitle?: string;
   liveUrl?: string;
+  /** Label for the liveUrl link; defaults to caseStudyPage.live. */
+  liveLabel?: string;
+  /** Own open source / hobby work: shown in its own /work tab, left out of the home page's client deck. */
+  kind?: "open-source";
 };
 
 export const projectHref = (p: Project) => `/work/${p.slug}`;
@@ -77,6 +81,7 @@ export const archivePage = {
   title: "Case studies",
   lead: "Real client work, and exactly what I did on it. Open a case file for the full story.",
   view: "View Case Study",
+  tabs: { client: "Client work", openSource: "Open source & hobby projects" },
 };
 
 export const projects: Project[] = [
@@ -202,5 +207,41 @@ export const projects: Project[] = [
       },
     ],
     liveUrl: "https://redaxify.com/",
+  },
+  {
+    // From the owner's own article (content/blog.ts, building-monk-mode-blocker) and screenshots of their MIT app.
+    kind: "open-source",
+    slug: "monk-mode",
+    client: "Monk Mode Blocker",
+    tag: "OPEN SOURCE · MIT",
+    tagLabel: "License",
+    title: "A free, open source focus app and site blocker for Windows",
+    summary:
+      "I built Monk Mode Blocker for my own three-month monk mode: a Windows app, service and browser extension that blocks distracting sites, limits daily time on others, and locks the rules so I can only make them stricter.",
+    services: ["DESKTOP APP", "WINDOWS SERVICE", "BROWSER EXTENSION", "OPEN SOURCE"],
+    outcome: { label: "Free on GitHub", icon: "verified" },
+    image: {
+      src: "/images/blog/monk-mode/today.png",
+      alt: "The Today screen with tasks, their priorities, planned times and subtasks",
+      width: 1100,
+      height: 760,
+    },
+    gallery: [
+      { src: "/images/blog/monk-mode/limits.png", alt: "The Limits screen listing each site with its daily limit and the time left today", width: 1100, height: 760 },
+      { src: "/images/blog/monk-mode/focus.png", alt: "A focus session in progress, showing the time left and when it ends", width: 1100, height: 760 },
+      { src: "/images/blog/monk-mode/block-page.png", alt: "The page Monk Mode Blocker shows in the browser when a site is blocked", width: 1100, height: 700 },
+      { src: "/images/blog/monk-mode/rewards.png", alt: "The rewards screen with the current level, XP progress and earned badges", width: 1100, height: 760 },
+    ],
+    challenge:
+      "Twelve hours of study a day only works if distractions can't win. Browser extensions are easy to switch off, and the tools that can't be switched off cost money. I wanted something stubborn, free and open source on the desktop.",
+    highlightsTitle: "What the app does",
+    highlights: [
+      { title: "Tasks and focus sessions", text: "Plan the day with priorities, times and subtasks, then start a focus session that shows the time left and when it ends." },
+      { title: "Daily site limits", text: "Each site gets a daily limit, and the app shows how much time is left today." },
+      { title: "Blocking that holds", text: "Sites are blocked through the hosts file by a Windows service, with a block page in the browser." },
+      { title: "A commitment lock", text: "Pick an end date and type \"I commit to monk mode\". Until then you can only make the rules stricter." },
+    ],
+    liveUrl: "https://github.com/Tokiosman80F/monk-mode",
+    liveLabel: "View on GitHub",
   },
 ];

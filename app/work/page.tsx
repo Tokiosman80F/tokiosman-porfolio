@@ -9,6 +9,7 @@ import FinalCta from "@/components/sections/FinalCta";
 import { outcomeIcons, tones } from "@/components/sections/Work";
 import { Section } from "@/components/ui/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { WorkTabs } from "@/components/sections/WorkTabs";
 import { archivePage as t, caseStudiesLive, projectHref, projects } from "@/content/projects";
 import { site } from "@/content/site";
 import { cn } from "@/lib/utils";
@@ -26,27 +27,11 @@ export const metadata: Metadata = {
 
 const num = (i: number) => String(i + 1).padStart(2, "0");
 
-export default function WorkArchivePage() {
-  if (!caseStudiesLive) notFound();
-  return (
-    <>
-      <Header />
-      <main className="w-full bg-white">
-        <Section className="pt-28 lg:pt-36">
-          <nav aria-label="Breadcrumb" className="mb-unit-6 font-mono text-mono-meta tracking-wider uppercase">
-            <Link href="/" className="tap-target group inline-flex items-center gap-unit-2 text-ink-black hover:underline">
-              <ArrowLeft aria-hidden className="size-4 transition-transform group-hover:-translate-x-0.5 motion-reduce:transition-none" />
-              {t.back}
-            </Link>
-          </nav>
-          <SectionHeader
-            titleAs="h1"
-            title={t.title}
-            lead={t.lead}
-            aside={<div className="font-mono text-mono-meta text-ink-muted">{num(projects.length - 1)} CASE FILES</div>}
-          />
+// Numbered by position in projects, so CASE 03 here is Case 03 on its own page
+const list = (items: typeof projects) => (
           <ol className="grid grid-cols-1 gap-unit-6 md:grid-cols-2 lg:grid-cols-3">
-            {projects.map((p, i) => {
+            {items.map((p) => {
+              const i = projects.indexOf(p);
               const { card, dark } = tones[i % tones.length];
               const OutcomeIcon = outcomeIcons[p.outcome.icon];
               const muted = dark ? "text-on-primary-container" : "text-on-surface-variant";
@@ -102,6 +87,33 @@ export default function WorkArchivePage() {
               );
             })}
           </ol>
+);
+
+export default function WorkArchivePage() {
+  if (!caseStudiesLive) notFound();
+  return (
+    <>
+      <Header />
+      <main className="w-full bg-white">
+        <Section className="pt-28 lg:pt-36">
+          <nav aria-label="Breadcrumb" className="mb-unit-6 font-mono text-mono-meta tracking-wider uppercase">
+            <Link href="/" className="tap-target group inline-flex items-center gap-unit-2 text-ink-black hover:underline">
+              <ArrowLeft aria-hidden className="size-4 transition-transform group-hover:-translate-x-0.5 motion-reduce:transition-none" />
+              {t.back}
+            </Link>
+          </nav>
+          <SectionHeader
+            titleAs="h1"
+            title={t.title}
+            lead={t.lead}
+            aside={<div className="font-mono text-mono-meta text-ink-muted">{num(projects.length - 1)} CASE FILES</div>}
+          />
+<WorkTabs
+            tabs={[
+              { id: "client", label: t.tabs.client, panel: list(projects.filter((p) => !p.kind)) },
+              { id: "open-source", label: t.tabs.openSource, panel: list(projects.filter((p) => p.kind === "open-source")) },
+            ]}
+          />
         </Section>
         <FinalCta />
       </main>
