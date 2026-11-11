@@ -1,7 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { icons as serviceIcons } from "@/components/sections/ServiceMenu";
 import type { NavLink } from "@/content/navigation";
+import { servicePageHref, servicePages } from "@/content/service-pages";
+import { serviceMenu } from "@/content/services";
 import { cn } from "@/lib/utils";
 
 // Desktop nav links in an inset tray, with a canary highlight chip (ink edge, the site's highlight-box
@@ -75,6 +78,53 @@ export function useActiveSection(links: NavLink[]) {
   return active;
 }
 
+// Hover/focus panel under the "Services" link: the same groups and pages as ServiceMenu (#all-services),
+// condensed into a dropdown. Flush against the link (no margin) with the visual gap as inner padding, so the
+// pointer stays over the (invisible-until-hovered) panel the whole way down from the link to its contents.
+function ServicesMenu() {
+  return (
+    <div className="invisible absolute top-full left-1/2 z-50 w-[56rem] max-w-[90vw] -translate-x-1/2 pt-5 opacity-0 transition-opacity duration-200 group-hover/services:visible group-hover/services:opacity-100 group-focus-within/services:visible group-focus-within/services:opacity-100">
+      <div className="grid grid-cols-[12rem_1fr] gap-unit-6 rounded-2xl border border-border-hairline bg-white p-unit-6 shadow-lg">
+        <div>
+          <p className="font-sans text-body-md font-semibold text-ink-black">{serviceMenu.title}</p>
+          <p className="mt-unit-2 font-sans text-body-sm text-ink-muted">{serviceMenu.lead}</p>
+          <a
+            href="/#all-services"
+            className="mt-unit-4 inline-block font-mono text-mono-meta tracking-wider text-ink-black underline decoration-canary-yellow decoration-2 underline-offset-4"
+          >
+            {serviceMenu.detailsLabel} →
+          </a>
+        </div>
+        <div className="grid grid-cols-2 gap-x-unit-6 gap-y-unit-4">
+          {serviceMenu.groups.map((group) => (
+            <div key={group.title}>
+              <p className="font-mono text-mono-meta tracking-wider text-ink-muted">{group.title}</p>
+              <ul className="mt-unit-2 space-y-0.5">
+                {group.slugs.flatMap((slug) => {
+                  const page = servicePages.find((p) => p.slug === slug);
+                  if (!page) return [];
+                  const Icon = serviceIcons[slug];
+                  return (
+                    <li key={slug}>
+                      <a
+                        href={servicePageHref(page)}
+                        className="flex items-center gap-2 rounded-lg px-unit-2 py-1.5 font-sans text-body-sm text-ink-black transition-colors hover:bg-surface-container-low"
+                      >
+                        {Icon && <Icon className="size-5 shrink-0" />}
+                        <span>{page.name}</span>
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function NavLinks({ links }: { links: NavLink[] }) {
   const active = useActiveSection(links);
   const [chip, setChip] = useState<Chip>({ left: 0, width: 0, visible: false, slide: false });
@@ -128,8 +178,9 @@ export function NavLinks({ links }: { links: NavLink[] }) {
       />
       {links.map(({ label, href }) => {
         const current = href === active;
+        const isServices = href === "/#services";
         return (
-          <li key={href} className="relative">
+          <li key={href} className={cn("relative", isServices && "group/services")}>
             <a
               href={href}
               aria-current={current ? "true" : undefined}
@@ -140,6 +191,7 @@ export function NavLinks({ links }: { links: NavLink[] }) {
             >
               {label}
             </a>
+            {isServices && <ServicesMenu />}
           </li>
         );
       })}

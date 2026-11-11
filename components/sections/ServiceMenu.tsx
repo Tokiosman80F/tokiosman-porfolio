@@ -23,7 +23,7 @@ const svg = (children: ReactNode): Art =>
     );
   };
 
-const icons: Record<string, Art> = {
+export const icons: Record<string, Art> = {
   // browser window with a hero block and a button
   "nextjs-website-development": svg(
     <>
